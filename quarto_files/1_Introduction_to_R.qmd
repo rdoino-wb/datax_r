@@ -158,9 +158,21 @@ It’s good practice to use lowercase and hyphens (-) instead of spaces when nam
 
 2. Open RStudio. 
 
-3. Create a Project
+3. Create a Project:
   - Click File > New Project.
   - You can call the project as you want.
   - Place it in the right directory! You can browse the `r_training` folder which is placed in your desktop. 
   
-4. 
+4. Create a Script:
+  - On the top left, you'll find a blank page to open a new script. 
+  - Save the script using the `r emo::ji("save")` icon in the same bar. 
+
+5. Run the following command on your console 
+
+``` {r first_command, echo = F, eval = F}
+library(usethis)
+use_course(
+  url = "https://github.com/rdoino-wb/datax_r/archive"
+)
+```
+  
