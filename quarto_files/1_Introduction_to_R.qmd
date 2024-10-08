@@ -171,8 +171,9 @@ It’s good practice to use lowercase and hyphens (-) instead of spaces when nam
 
 ``` {r first_command, echo = F, eval = F}
 library(usethis)
+
 use_course(
-  url = "https://github.com/rdoino-wb/datax_r/archive"
+  url = "https://github.com/rdoino-wb/datax_r/tree/main/archive"
 )
 ```
   
