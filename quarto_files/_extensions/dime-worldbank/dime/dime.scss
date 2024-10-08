@@ -6,6 +6,14 @@
 // fonts
 $font-family-sans-serif: 'Lato', sans-serif !default;
 
+/* CSS to apply background image to the first slide (before title) */
+.reveal .slides section:nth-child(1) {
+  background-image: url('rrf24_intro.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 // headings
 $presentation-heading-font: 'Lato', sans-serif  !default;
 $presentation-heading-color: #07202E !default;
@@ -147,14 +155,15 @@ section.has-dark-background a, section.has-dark-background a:hover {
 }
 
 .slide-logo {
-  padding-right: 1vw;
-  padding-bottom: 5px;
-  height: 100%;
-  width: auto;
-  max-width: max(60px, 10vw);
-  max-height: max(60px, 10vh);
+  display: block !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 10px !important;
+  max-height: 8% !important;
+  height: 100% !important;
+  width: auto !important;
+  color: $body-color !important;
 }
-
 
 .slide-number, .reveal.has-logo .slide-number {
   bottom: 10px !important;
@@ -189,3 +198,122 @@ section.has-dark-background a, section.has-dark-background a:hover {
     font-size: $math-fontsize !important;
 }
 
+/* Two-column layout (slightly wider for aspect ration) */
+.left-column {
+  color: #777;
+  width: 25%;
+  height: 92%;
+  float: left;
+}
+
+.left-column h2:last-of-type, .left-column h3:last-child {
+  color: #000;
+}
+
+/* slightly thiner to suppor aspect ration */
+.right-column {
+  width: 70%;
+  float: right;
+  padding-top: 1em;
+}
+
+/* Two-column layout (wide left col) */
+.left-wide {
+  width: 70%;
+  float: left;
+}
+
+.right-thin {
+  width: 25%;
+  float: right;
+}
+
+/* Two-column layout (wide left col) */
+.right-wide {
+  width: 70%;
+  float: right;
+}
+
+.left-thin {
+  width: 25%;
+  float: left;
+}
+
+.right-60 {
+  width: 58%;
+  float: right;
+}
+
+.left-40 {
+  width: 40%;
+  float: left;
+}
+
+.pull-left {
+  float: left;
+  width: 48%;
+}
+
+.pull-left-narrow {
+  float: left;
+  width: 20%;
+}
+
+.pull-right {
+  float: right;
+  width: 48%;
+}
+
+.pull-right-wide {
+  float: right;
+  width: 80%;
+}
+
+.align-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+}
+
+.align-bottom-with-padding {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+    padding-top: 45px; /* Adjust this value as needed */
+    margin-left: 0px; /* Adjust this value as needed */
+}
+
+.incremental * {
+    display: none;
+}
+
+.incremental *.visible {
+    display: block;
+}
+
+.image-column img {
+  width: 32%; /* Adjust the width as needed */
+  display: block; /* Remove unwanted space below the image */
+  margin: 0 auto; /* Center image in its column */
+}
+.text-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center text vertically */
+  justify-content: flex-start; /* Align text to the left */
+  padding-top: 15px; /* Adjust this value as needed */
+  margin-left: 0px; /* Adjust this value as needed */
+}
+.columns > span:not(:last-child) {
+  margin-bottom: 20px; /* Adjust space between rows */
+}
+
+.code-scroll {
+    align-items: center;
+    max-height: 120vh; /* Sets the height to be as long as the viewport */
+    overflow-y: auto; /* Allows for scrolling if the content is longer than the viewport */
+    margin: 100px auto 0 auto; /* Centers the block horizontally */
+    width: 100%; /* Adjusts the width of the code block */
+}

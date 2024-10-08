@@ -1,0 +1,166 @@
+---
+title: "Introduction to `R`: the basics"
+subtitle: "`R` Training"
+institute: The World Bank Group - DataTax
+date: today
+date-format: "dddd, [the] D[<sup style='font-size:65%;font-style:italic;'>th</sup>] [of] MMMM, YYYY"
+format:
+  dime-revealjs:
+    # Output file
+    output-file: index.html
+    # Table of Contents
+    toc: true
+    toc_float: false
+    toc-depth: 2
+    toc-location: left
+    toc-title: "Agenda"
+    # Generate a self contained file
+    self-contained: true
+    self-contained-math: true
+    # Turn preview links within the presentation off (all links open in a new tab)
+    preview-links: true
+    auto-animate: true
+    # Logo and footer options
+    logo: "logos/WB-DEC-Impact-horizontal-`R`GB-high.png"
+    footer: "Code available on [GitHub](https://github.com/rdoino-wb/data_analysis_DataTable)."
+---
+
+```{r set-up}
+
+library(emo)
+
+```
+
+# Introduction to `R`
+
+------------------------------------------------------------------------
+
+### What is `R`? {.unlisted}
+
+-   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
+
+------------------------------------------------------------------------
+
+### What is `R`?
+
+-   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
+
+### Why `R`?
+
+------------------------------------------------------------------------
+
+### What is `R`? {.unlisted}
+
+-   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
+
+### Why `R`? {.unlisted}
+
+1.  **Flexible and Powerful** `R` can handle almost any data-related task, from basic data cleaning and visualization to advanced econometrics, machine learning, spatial analysis, and even web scraping.
+
+::: center
+![](images/base.png){height="auto" width="auto"}
+:::
+
+------------------------------------------------------------------------
+
+### What is `R`? {.unlisted}
+
+-   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
+
+### Why `R`? {.unlisted}
+
+2.  **Free and Open Source**
+
+    `R` is open source and free to use. Its open-source nature means that anyone can contribute, ensuring a constantly growing and improving ecosystem of tools.
+
+::: center
+![](images/open_source.png){width="25%" fig-align="center"}
+:::
+
+------------------------------------------------------------------------
+
+### What is `R`? {.unlisted}
+
+-   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
+
+### Why `R`? {.unlisted}
+
+3.  **Growing Fast in Popularity**
+
+    `R` has been growing rapidly in popularity!
+
+::: center
+![Source: [PYPL Index](https://pypl.github.io/PYPL.html)](images/ranking_r.png){width="50%"}
+:::
+
+------------------------------------------------------------------------
+
+### What is `R`? {.unlisted}
+
+-   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
+
+### Why `R`? {.unlisted}
+
+4.  **User-friendly**
+
+    It offers an Integrated Development Environment (IDE) to work with `R`
+
+::: center
+![](images/R_vs_RStudio_1.png){width="80%" fig-align="center"}
+:::
+
+# Introduction to `RStudio`
+
+------------------------------------------------------------------------
+
+## Time to start your `RStudio`!
+
+![](images/rstudio.png){width="60%" fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Let's start with a good practice!
+-	When starting a new data analysis in R, it’s important to organize your work by having a folder structure for:
+
+. . . 
+
+- `r emo::ji("folder")` `r_training`
+    - `r emo::ji("folder")` `scripts/` (your code)
+    - `r emo::ji("folder")` `data/` (the datasets you’re using)
+    - `r emo::ji("folder")` `outputs/` (results like plots, tables, etc.)
+	  
+```{mermaid}
+%%| fig-align: center
+
+graph TD;
+    A[r_training] --> B[scripts];
+    A --> C[data];
+    A --> D[outputs];
+```    
+
+. . . 
+
+:::{.callout-note}
+It’s good practice to use lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R. This keeps everything consistent and easier to manage.
+:::
+
+------------------------------------------------------------------------
+
+## RStudio makes our lifes easier
+
+
+
+------------------------------------------------------------------------
+
+## Exercise 1: 
+
+1. Create a folder called `r_training` on your desktop.
+
+2. Open RStudio. 
+
+3. Create a Project
+  - Click File > New Project.
+  - You can call the project as you want.
+  - Place it in the right directory! You can browse the `r_training` folder which is placed in your desktop. 
+  
+4. 

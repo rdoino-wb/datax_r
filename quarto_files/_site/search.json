@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html#time-to-start-your-rstudio",
+    "href": "index.html#time-to-start-your-rstudio",
+    "title": "Introduction to R: the basics",
+    "section": "Time to start your RStudio!",
+    "text": "Time to start your RStudio!"
+  },
+  {
+    "objectID": "index.html#lets-start-with-a-good-practice",
+    "href": "index.html#lets-start-with-a-good-practice",
+    "title": "Introduction to R: the basics",
+    "section": "Let’s start with a good practice!",
+    "text": "Let’s start with a good practice!\n\nWhen starting a new data analysis in R, it’s important to organize your work by having a folder structure for:\n\n\n\n📁 r_training\n\n📁 scripts/ (your code)\n📂 data/ (the datasets you’re using)\n📁 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nIt’s good practice to use lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R. This keeps everything consistent and easier to manage.\n\n\n\n\n\n\n\nCode available on GitHub."
+  }
+]
