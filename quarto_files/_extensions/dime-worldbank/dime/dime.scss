@@ -44,6 +44,15 @@ $math-fontsize: 80%;
   line-height: 1.2em;
 }
 
+.fixed-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%; /* Adjust width as needed */
+  height: 40%; /* Adjust height as needed */
+}
+
 .reveal .slide-number a {
   color: $link-color;
 }

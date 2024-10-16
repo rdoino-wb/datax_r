@@ -11,7 +11,7 @@ format:
     # Table of Contents
     toc: true
     toc_float: false
-    toc-depth: 2
+    toc-depth: 1
     toc-location: left
     toc-title: "Agenda"
     # Generate a self contained file
@@ -109,13 +109,114 @@ library(emo)
 ![](images/R_vs_RStudio_1.png){width="80%" fig-align="center"}
 :::
 
+------------------------------------------------------------------------
+
+## Coding is a journey, and this is likely where `we all began`.
+
+:::: {columns}
+
+::: {.column width="60%" fig-align="center"}
+::: {.incremental}
+- Excel is widely used for reporting results as it's user-friendly and easy to learn.
+- Prone to manual errors.
+- Not ideal for large datasets or complex analyses.
+- Lacks tools for reproducible workflows.
+:::
+:::
+
+::: {.column width="40%" fig-align="center"}
+![](images/excel.png){width="80%"}
+::: 
+
+::::
+
+![](images/trash_1.png){class="fixed-bottom"}
+
+------------------------------------------------------------------------
+
+## Coding is a journey, and this is likely where `we all went`.
+
+:::: {columns}
+
+::: {.column width="60%" fig-align="center"}
+::: {.incremental}
+- Stata is widely used in economics.
+- Easier to learn than most programming languages.
+- Less flexible for custom programming.
+- Expensive!
+:::
+:::
+
+::: {.column width="40%" fig-align="center"}
+![](images/stata.png){width="80%"}
+::: 
+
+::::
+
+![](images/trash_2.png){class="fixed-bottom"}
+
+------------------------------------------------------------------------
+
+## Coding is a journey, and this is likely where `we all want to end up`.
+
+:::: {columns}
+
+::: {.column width="60%" fig-align="center"}
+::: {.incremental}
+- R is free and open source.
+- It allows us to work on multiple datasets simultaneously (no more `keep`, `preserve`, `restore` hackery).
+- R is highly flexible and powerful for data analysis.
+:::
+:::
+
+::: {.column width="40%" fig-align="center"}
+![](images/r.png){width="80%"}
+::: 
+
+::::
+
+![](images/trash_3.png){class="fixed-bottom"}
+
 # Introduction to `RStudio`
 
 ------------------------------------------------------------------------
 
 ## Time to start your `RStudio`!
 
+. . . 
+
+If you haven't downloaded it yet, then follow these steps
+
+### Step 1: Download R
+- Go to the **Comprehensive R Archive Network (CRAN)**:  
+  [https://cloud.r-project.org](https://cloud.r-project.org)
+
+:::{.callout-tip}
+R is updated regularly (1 major version/year, 2-3 minor releases). It’s a good idea to keep R up-to-date, but note that upgrading to a major version will require reinstalling your packages.
+:::
+
+### Step 2: Download RStudio
+- RStudio is the **Integrated Development Environment (IDE)** for R programming.
+- Download it here:  
+  [http://www.rstudio.com/download](http://www.rstudio.com/download)
+
+------------------------------------------------------------------------
+
+## Time to start your `RStudio`!
+
 ![](images/rstudio.png){width="60%" fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Time to start your `RStudio`!
+
+- **Prevents .RData clutter**:  
+   Disabling automatic loading and saving of `.RData` ensures your workspace starts fresh, preventing old or unwanted data from cluttering your environment.
+  
+- **Saves workspace history**:  
+   Enables you to track the commands you’ve run, even without saving `.RData`, making it easier to retrace your steps in the console.
+
+![](images/clean_rstudio.png){width="auto" fig-align="center"}
 
 ------------------------------------------------------------------------
 
@@ -144,36 +245,67 @@ graph TD;
 It’s good practice to use lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R. This keeps everything consistent and easier to manage.
 :::
 
+----
+
+## Are we all familiar with the concept of folder paths?
+
+. . . 
+
+-	A path is the address that tells a software where to find a file or folder on your computer.
+-	Just like you need directions to get to a friend’s house, R needs a path to find your files.
+
+. . . 
+
+**Two Types of Paths:**
+
+1.	*Absolute Path*: `/Users/yourname/Desktop/r_training`
+2.	*Relative Path*: `r_training/scripts`
+
+. . . 
+
+![](images/paths.png){fig-align="center" width="70%"}
+
 ------------------------------------------------------------------------
 
 ## RStudio makes our lifes easier
 
+`R` doesn’t automatically know where your files and folders are located. By using a project, you create a shortcut that tells R exactly where to find everything, making it easier to manage and run your analysis without manually setting file paths.
 
+![](images/project.png){width="auto" fig-align="center"}
 
 ------------------------------------------------------------------------
 
-## Exercise 1: 
+## Exercise 1 (`r emo::ji("clock")` 5 mins): {background-color="#52bdff"}
 
-1. Create a folder called `r_training` on your desktop.
+1. **Create a folder called `r_training` on your desktop.**
 
-2. Open RStudio. 
+2. **Open RStudio**.
 
-3. Create a Project:
-  - Click File > New Project.
-  - You can call the project as you want.
-  - Place it in the right directory! You can browse the `r_training` folder which is placed in your desktop. 
-  
-4. Create a Script:
-  - On the top left, you'll find a blank page to open a new script. 
-  - Save the script using the `r emo::ji("save")` icon in the same bar. 
+3. **Create a Project**:
+   - Go to `File > New Project`.
+   - Make sure to place it in the correct directory by browsing to the `r_training` folder on your desktop.
 
-5. Run the following command on your console 
+4. **Create a Script**:
+   - Click the blank page icon in the top-left corner to open a new script.
+   - Save the script by clicking the `r emo::ji("save")` icon in the toolbar.
 
-``` {r first_command, echo = F, eval = F}
-library(usethis)
+# Introduction to the Script 
 
-use_course(
-  url = "https://github.com/rdoino-wb/datax_r/tree/main/archive"
-)
-```
-  
+------------------------------------------------------------------------
+
+### The script helps us keep track of our work—it’s our canvas for building and documenting the entire analysis
+
+:::: {columns}
+
+::: {.column width="35%"}
+- **`Cmd/Ctrl + Enter`**: Run the current line or selected section of your code.
+- **`Cmd/Ctrl + Shift + S`**: Run the entire script.
+- **Console**: What happens in the console stays in the console (temporary actions unless saved).
+- **Math**: R can also handle math operations—just like a calculator!
+:::
+
+::: {.column width="65%"}
+![](images/script.gif){fig-align="center"}
+:::
+
+::::

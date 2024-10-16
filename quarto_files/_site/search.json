@@ -1,16 +1,72 @@
 [
   {
+    "objectID": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-began.",
+    "href": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-began.",
+    "title": "Introduction to R: the basics",
+    "section": "Coding is a journey, and this is likely where we all began.",
+    "text": "Coding is a journey, and this is likely where we all began.\n\n\n\n\nExcel is widely used for reporting results as it’s user-friendly and easy to learn.\nProne to manual errors.\nNot ideal for large datasets or complex analyses.\nLacks tools for reproducible workflows."
+  },
+  {
+    "objectID": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-went.",
+    "href": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-went.",
+    "title": "Introduction to R: the basics",
+    "section": "Coding is a journey, and this is likely where we all went.",
+    "text": "Coding is a journey, and this is likely where we all went.\n\n\n\n\nStata is widely used in economics.\nEasier to learn than most programming languages.\nLess flexible for custom programming.\nExpensive!"
+  },
+  {
+    "objectID": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-want-to-end-up.",
+    "href": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-want-to-end-up.",
+    "title": "Introduction to R: the basics",
+    "section": "Coding is a journey, and this is likely where we all want to end up.",
+    "text": "Coding is a journey, and this is likely where we all want to end up.\n\n\n\n\nR is free and open source.\nIt allows us to work on multiple datasets simultaneously (no more keep, preserve, restore hackery).\nR is highly flexible and powerful for data analysis."
+  },
+  {
     "objectID": "index.html#time-to-start-your-rstudio",
     "href": "index.html#time-to-start-your-rstudio",
     "title": "Introduction to R: the basics",
     "section": "Time to start your RStudio!",
+    "text": "Time to start your RStudio!\n\nIf you haven’t downloaded it yet, then follow these steps\nStep 1: Download R\n\nGo to the Comprehensive R Archive Network (CRAN):\nhttps://cloud.r-project.org\n\n\n\n\n\n\n\nTip\n\n\nR is updated regularly (1 major version/year, 2-3 minor releases). It’s a good idea to keep R up-to-date, but note that upgrading to a major version will require reinstalling your packages.\n\n\n\nStep 2: Download RStudio\n\nRStudio is the Integrated Development Environment (IDE) for R programming.\nDownload it here:\nhttp://www.rstudio.com/download"
+  },
+  {
+    "objectID": "index.html#time-to-start-your-rstudio-1",
+    "href": "index.html#time-to-start-your-rstudio-1",
+    "title": "Introduction to R: the basics",
+    "section": "Time to start your RStudio!",
     "text": "Time to start your RStudio!"
+  },
+  {
+    "objectID": "index.html#time-to-start-your-rstudio-2",
+    "href": "index.html#time-to-start-your-rstudio-2",
+    "title": "Introduction to R: the basics",
+    "section": "Time to start your RStudio!",
+    "text": "Time to start your RStudio!\n\nPrevents .RData clutter:\nDisabling automatic loading and saving of .RData ensures your workspace starts fresh, preventing old or unwanted data from cluttering your environment.\nSaves workspace history:\nEnables you to track the commands you’ve run, even without saving .RData, making it easier to retrace your steps in the console."
   },
   {
     "objectID": "index.html#lets-start-with-a-good-practice",
     "href": "index.html#lets-start-with-a-good-practice",
     "title": "Introduction to R: the basics",
     "section": "Let’s start with a good practice!",
-    "text": "Let’s start with a good practice!\n\nWhen starting a new data analysis in R, it’s important to organize your work by having a folder structure for:\n\n\n\n📁 r_training\n\n📁 scripts/ (your code)\n📂 data/ (the datasets you’re using)\n📁 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nIt’s good practice to use lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R. This keeps everything consistent and easier to manage.\n\n\n\n\n\n\n\nCode available on GitHub."
+    "text": "Let’s start with a good practice!\n\nWhen starting a new data analysis in R, it’s important to organize your work by having a folder structure for:\n\n\n\n📁 r_training\n\n📁 scripts/ (your code)\n📂 data/ (the datasets you’re using)\n📂 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nIt’s good practice to use lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R. This keeps everything consistent and easier to manage."
+  },
+  {
+    "objectID": "index.html#are-we-all-familiar-with-the-concept-of-folder-paths",
+    "href": "index.html#are-we-all-familiar-with-the-concept-of-folder-paths",
+    "title": "Introduction to R: the basics",
+    "section": "Are we all familiar with the concept of folder paths?",
+    "text": "Are we all familiar with the concept of folder paths?\n\n\nA path is the address that tells a software where to find a file or folder on your computer.\nJust like you need directions to get to a friend’s house, R needs a path to find your files.\n\n\n\nTwo Types of Paths:\n\nAbsolute Path: /Users/yourname/Desktop/r_training\nRelative Path: r_training/scripts"
+  },
+  {
+    "objectID": "index.html#rstudio-makes-our-lifes-easier",
+    "href": "index.html#rstudio-makes-our-lifes-easier",
+    "title": "Introduction to R: the basics",
+    "section": "RStudio makes our lifes easier",
+    "text": "RStudio makes our lifes easier\nR doesn’t automatically know where your files and folders are located. By using a project, you create a shortcut that tells R exactly where to find everything, making it easier to manage and run your analysis without manually setting file paths."
+  },
+  {
+    "objectID": "index.html#exercise-1-5-mins",
+    "href": "index.html#exercise-1-5-mins",
+    "title": "Introduction to R: the basics",
+    "section": "Exercise 1 (🕟 5 mins):",
+    "text": "Exercise 1 (🕟 5 mins):\n\nCreate a folder called r_training on your desktop.\nOpen RStudio.\nCreate a Project:\n\nGo to File &gt; New Project.\nMake sure to place it in the correct directory by browsing to the r_training folder on your desktop.\n\nCreate a Script:\n\nClick the blank page icon in the top-left corner to open a new script.\nSave the script by clicking the 💾 icon in the toolbar."
   }
 ]

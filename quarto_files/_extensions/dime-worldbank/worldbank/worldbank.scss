@@ -40,6 +40,15 @@ $math-fontsize: 80%;
   color: $link-color;
 }
 
+.fixed-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%; /* Adjust width as needed */
+  height: 40%; /* Adjust height as needed */
+}
+
 #title-slide {
   text-align: left;
   
