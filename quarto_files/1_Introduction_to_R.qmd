@@ -37,73 +37,31 @@ library(emo)
 
 ### What is `R`? {.unlisted}
 
--   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
+-   `R` is an [**object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **data visualization**.
 
 ------------------------------------------------------------------------
-
-### What is `R`?
-
--   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
-
-### Why `R`?
-
-------------------------------------------------------------------------
-
-### What is `R`? {.unlisted}
-
--   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
 
 ### Why `R`? {.unlisted}
 
-1.  **Flexible and Powerful** `R` can handle almost any data-related task, from basic data cleaning and visualization to advanced econometrics, machine learning, spatial analysis, and even web scraping.
+1.  **Flexible and Powerful**: `R` can handle almost any data-related task, from basic data cleaning and visualization to advanced econometrics, machine learning, spatial analysis, and web scraping.
 
 ::: center
 ![](images/base.png){height="auto" width="auto"}
 :::
 
-------------------------------------------------------------------------
-
-### What is `R`? {.unlisted}
-
--   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
-
-### Why `R`? {.unlisted}
-
-2.  **Free and Open Source**
-
-    `R` is open source and free to use. Its open-source nature means that anyone can contribute, ensuring a constantly growing and improving ecosystem of tools.
+2.  **Free and Open Source**: `R` is open source and free to use. Its open-source nature allows anyone to contribute, ensuring a constantly growing and improving ecosystem of tools.
 
 ::: center
 ![](images/open_source.png){width="25%" fig-align="center"}
 :::
 
-------------------------------------------------------------------------
-
-### What is `R`? {.unlisted}
-
--   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
-
-### Why `R`? {.unlisted}
-
-3.  **Growing Fast in Popularity**
-
-    `R` has been growing rapidly in popularity!
+3.  **Growing Popularity**: `R` has been growing rapidly in popularity.
 
 ::: center
 ![Source: [PYPL Index](https://pypl.github.io/PYPL.html)](images/ranking_r.png){width="50%"}
 :::
 
-------------------------------------------------------------------------
-
-### What is `R`? {.unlisted}
-
--   `R` is a [**Object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **graphic visualization**.
-
-### Why `R`? {.unlisted}
-
-4.  **User-friendly**
-
-    It offers an Integrated Development Environment (IDE) to work with `R`
+4.  **User-friendly**: `R` offers an Integrated Development Environment (IDE) through RStudio, making it more accessible for new users.
 
 ::: center
 ![](images/R_vs_RStudio_1.png){width="80%" fig-align="center"}
@@ -111,22 +69,21 @@ library(emo)
 
 ------------------------------------------------------------------------
 
-## Coding is a journey, and this is likely where `we all began`.
+## Coding is a Journey
 
 :::: {columns}
 
 ::: {.column width="60%" fig-align="center"}
 ::: {.incremental}
-- Excel is widely used for reporting results as it's user-friendly and easy to learn.
-- Prone to manual errors.
-- Not ideal for large datasets or complex analyses.
-- Lacks tools for reproducible workflows.
+- Excel is widely used for reporting results due to its user-friendliness and ease of learning.
+- However, it's prone to manual errors and isn't ideal for large datasets or complex analyses.
+- It lacks tools for reproducible workflows.
 :::
 :::
 
 ::: {.column width="40%" fig-align="center"}
 ![](images/excel.png){width="80%"}
-::: 
+:::
 
 ::::
 
@@ -134,22 +91,19 @@ library(emo)
 
 ------------------------------------------------------------------------
 
-## Coding is a journey, and this is likely where `we all went`.
-
 :::: {columns}
 
 ::: {.column width="60%" fig-align="center"}
 ::: {.incremental}
 - Stata is widely used in economics.
-- Easier to learn than most programming languages.
-- Less flexible for custom programming.
-- Expensive!
+- Easier to learn than most programming languages but lacks flexibility for custom programming.
+- It can also be expensive.
 :::
 :::
 
 ::: {.column width="40%" fig-align="center"}
 ![](images/stata.png){width="80%"}
-::: 
+:::
 
 ::::
 
@@ -157,21 +111,19 @@ library(emo)
 
 ------------------------------------------------------------------------
 
-## Coding is a journey, and this is likely where `we all want to end up`.
-
 :::: {columns}
 
 ::: {.column width="60%" fig-align="center"}
 ::: {.incremental}
 - R is free and open source.
-- It allows us to work on multiple datasets simultaneously (no more `keep`, `preserve`, `restore` hackery).
-- R is highly flexible and powerful for data analysis.
+- It allows multiple datasets to be managed simultaneously, unlike the `keep`, `preserve`, `restore` hackery in other software.
+- Highly flexible and powerful for data analysis.
 :::
 :::
 
 ::: {.column width="40%" fig-align="center"}
 ![](images/r.png){width="80%"}
-::: 
+:::
 
 ::::
 
@@ -181,55 +133,42 @@ library(emo)
 
 ------------------------------------------------------------------------
 
-## Time to start your `RStudio`!
+## Getting Started with `RStudio`
 
-. . . 
-
-If you haven't downloaded it yet, then follow these steps
+If you haven't downloaded it yet, follow these steps:
 
 ### Step 1: Download R
-- Go to the **Comprehensive R Archive Network (CRAN)**:  
-  [https://cloud.r-project.org](https://cloud.r-project.org)
+- Go to the **Comprehensive R Archive Network (CRAN)**: [https://cloud.r-project.org](https://cloud.r-project.org)
 
 :::{.callout-tip}
-R is updated regularly (1 major version/year, 2-3 minor releases). It’s a good idea to keep R up-to-date, but note that upgrading to a major version will require reinstalling your packages.
+R is updated regularly (1 major version/year, 2-3 minor releases). Keeping R up-to-date is recommended, but upgrading to a major version requires reinstalling your packages.
 :::
 
 ### Step 2: Download RStudio
 - RStudio is the **Integrated Development Environment (IDE)** for R programming.
-- Download it here:  
-  [http://www.rstudio.com/download](http://www.rstudio.com/download)
+- Download it here: [http://www.rstudio.com/download](http://www.rstudio.com/download)
 
 ------------------------------------------------------------------------
 
-## Time to start your `RStudio`!
+## Setting Up RStudio
 
-![](images/rstudio.png){width="60%" fig-align="center"}
+- **Avoid .RData Clutter**: Disable automatic loading and saving of `.RData` to start with a clean workspace.
 
-------------------------------------------------------------------------
-
-## Time to start your `RStudio`!
-
-- **Prevents .RData clutter**:  
-   Disabling automatic loading and saving of `.RData` ensures your workspace starts fresh, preventing old or unwanted data from cluttering your environment.
-  
-- **Saves workspace history**:  
-   Enables you to track the commands you’ve run, even without saving `.RData`, making it easier to retrace your steps in the console.
+- **Save Your Workspace History**: Keeping a history helps you track your commands without needing to save `.RData` files.
 
 ![](images/clean_rstudio.png){width="auto" fig-align="center"}
 
 ------------------------------------------------------------------------
 
-## Let's start with a good practice!
--	When starting a new data analysis in R, it’s important to organize your work by having a folder structure for:
+## Good Practice in Project Organization
 
-. . . 
+- When starting a new analysis, organize your work by creating a structured folder system:
 
 - `r emo::ji("folder")` `r_training`
-    - `r emo::ji("folder")` `scripts/` (your code)
-    - `r emo::ji("folder")` `data/` (the datasets you’re using)
-    - `r emo::ji("folder")` `outputs/` (results like plots, tables, etc.)
-	  
+  - `r emo::ji("folder")` `scripts/` (code)
+  - `r emo::ji("folder")` `data/` (datasets)
+  - `r emo::ji("folder")` `outputs/` (results like plots, tables, etc.)
+
 ```{mermaid}
 %%| fig-align: center
 
@@ -239,43 +178,34 @@ graph TD;
     A --> D[outputs];
 ```    
 
-. . . 
-
 :::{.callout-note}
-It’s good practice to use lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R. This keeps everything consistent and easier to manage.
+Use lowercase and hyphens (`-`) instead of spaces when naming folders, files, and objects in R to maintain consistency and ease management.
 :::
 
 ----
 
-## Are we all familiar with the concept of folder paths?
+## Understanding Folder Paths
 
-. . . 
-
--	A path is the address that tells a software where to find a file or folder on your computer.
--	Just like you need directions to get to a friend’s house, R needs a path to find your files.
-
-. . . 
+- A path is an address that tells a software where to find a file or folder on your computer.
 
 **Two Types of Paths:**
 
-1.	*Absolute Path*: `/Users/yourname/Desktop/r_training`
-2.	*Relative Path*: `r_training/scripts`
-
-. . . 
+1. **Absolute Path**: `/Users/yourname/Desktop/r_training`
+2. **Relative Path**: `r_training/scripts`
 
 ![](images/paths.png){fig-align="center" width="70%"}
 
 ------------------------------------------------------------------------
 
-## RStudio makes our lifes easier
+## The Advantage of Using Projects
 
-`R` doesn’t automatically know where your files and folders are located. By using a project, you create a shortcut that tells R exactly where to find everything, making it easier to manage and run your analysis without manually setting file paths.
+`R` doesn’t automatically know where your files are. Using an RStudio project creates a shortcut that tells `R` where to find everything, making your workflow smoother.
 
 ![](images/project.png){width="auto" fig-align="center"}
 
 ------------------------------------------------------------------------
 
-## Exercise 1 (`r emo::ji("clock")` 5 mins): {background-color="#52bdff"}
+## Exercise 1 (`r emo::ji("clock")` 5 mins):
 
 1. **Create a folder called `r_training` on your desktop.**
 
@@ -283,25 +213,24 @@ It’s good practice to use lowercase and hyphens (-) instead of spaces when nam
 
 3. **Create a Project**:
    - Go to `File > New Project`.
-   - Make sure to place it in the correct directory by browsing to the `r_training` folder on your desktop.
+   - Browse to the `r_training` folder on your desktop.
 
 4. **Create a Script**:
    - Click the blank page icon in the top-left corner to open a new script.
-   - Save the script by clicking the `r emo::ji("save")` icon in the toolbar.
+   - Save it by clicking the `r emo::ji("save")` icon in the toolbar.
 
-# Introduction to the Script 
+# Introduction to the Script
 
 ------------------------------------------------------------------------
 
-### The script helps us keep track of our work—it’s our canvas for building and documenting the entire analysis
+### The Script: Your Coding Canvas
 
 :::: {columns}
 
 ::: {.column width="35%"}
 - **`Cmd/Ctrl + Enter`**: Run the current line or selected section of your code.
 - **`Cmd/Ctrl + Shift + S`**: Run the entire script.
-- **Console**: What happens in the console stays in the console (temporary actions unless saved).
-- **Math**: R can also handle math operations—just like a calculator!
+- **Console**: The console is for temporary actions unless saved in your script.
 :::
 
 ::: {.column width="65%"}
@@ -309,3 +238,230 @@ It’s good practice to use lowercase and hyphens (-) instead of spaces when nam
 :::
 
 ::::
+
+# Using R as a Calculator
+
+------------------------------------------------------------------------
+
+## Basic Math Operations
+
+A simple sum:
+
+```{r math1, echo = TRUE, eval = TRUE}
+99 + 1
+```
+
+. . . 
+
+More complex calculations:
+
+```{r math2, echo = TRUE, eval = TRUE}
+99 + 1 * 2
+```
+
+. . . 
+
+Following mathematical rules:
+
+```{r math3, echo = TRUE, eval = TRUE}
+(99 + 1) * 2
+```
+
+. . . 
+
+Scientific notation:
+
+```{r math4, echo = TRUE, eval = TRUE}
+2 / 100000
+```
+
+```{r math5, echo = TRUE, eval = TRUE}
+5e3
+```
+
+------------------------------------------------------------------------
+
+## Overview of Data Types
+
+- **Numeric values** : numbers, as shown in previous examples. 
+
+. . . 
+
+- **Character Values** : Always quoted, e.g., "text".
+
+. . . 
+
+- **Logical Values** : Also known as Boolean, representing `TRUE` or `FALSE`
+
+```{r operators, echo = TRUE, eval = TRUE}
+10  > 9
+10 == 9
+10 != 9
+10 > 9 & 9 < 10
+10 > 9 | 9 > 10
+9 %in% 1:10
+```
+
+------------------------------------------------------------------------
+
+## Importance of Assigning Results to Objects
+
+In R, it's important to assign results to objects to store the values and use them later in your analysis. Think of an object as a named storage location for your data or calculations. 
+
+. . . 
+
+Consider this calculation:
+
+
+```{r math6, echo = TRUE, eval = TRUE}
+sum_result = 99 + 1
+```
+
+. . .
+
+Here, we assign the result of 99 + 1 to an object called sum_result using the assignment operator `=` (some people use <- ... the community discuss about this [here](https://www.separatinghyperplanes.com/2018/02/why-you-should-use-and-never.html) and [here](https://github.com/geocompx/geocompr/issues/319#issuecomment-427376764)). 
+
+. . . 
+
+Now, whenever you need the value, you can just use sum_result instead of retyping 99 + 1.
+
+. . . 
+
+::: {.callout-note}
+In coding, it's good practice to use only lower case and "_" or "." for names (`snake_case`). 
+:::
+
+------------------------------------------------------------------------
+
+## Mathematical Functions
+
+In economics, we frequently use logarithms:
+
+```{r math7, echo = TRUE, eval = TRUE}
+log(1)
+```
+
+. . . 
+
+*R has a large collection of built-in functions, called like this:*
+
+::: center
+`function_name(argument1 = value1, argument2 = value2, ...)`
+::: 
+
+. . . 
+
+For example, if you want to calculate the natural logarithm of a number...
+
+```{r math8, echo = TRUE, eval = TRUE}
+log(10)
+```
+
+. . . 
+
+Arguments can also have names, which makes it easy to understand what each input does. 
+
+```{r math9, echo = TRUE, eval = TRUE}
+round(3.14159, digits = 2)
+```
+
+# Functions in R and beyond
+
+## Functions Are Our Tool Box `r emo::ji("toolbox")`
+
+::: {.columns}
+
+::: {.column width="15%"}
+**help()**
+:::
+
+::: {.column width="85%"}
+
+The `help()` function is like R's built-in manual. Whenever you're unsure about how a function works or what arguments it accepts, you can use `help()` to get detailed information.
+
+- **Example**: To learn about the `mean()` function, type `help(mean)` or simply `?mean` in the R console. 
+
+![](images/help.png){height="auto" width="auto"}
+
+:::
+
+:::
+
+----
+
+## Functions Are Our Tool Box `r emo::ji("toolbox")`
+
+::: {.columns}
+
+::: {.column width="15%"}
+
+**help()**
+
+**example()**
+
+:::
+
+::: {.column width="85%"}
+
+While `help()` provides information about a function, `example()` shows you how to use it with real code snippets.
+
+- **Example**: Type `example(sum)` in the R console to see various ways to use the `sum()` function for creating graphs.
+
+``` {r example}
+example(sum)
+```
+
+:::
+
+:::
+
+----
+
+## Functions Are Our Tool Box `r emo::ji("toolbox")`
+
+::: {.columns}
+
+::: {.column width="15%"}
+
+**help()**
+
+**example()**
+
+**library()**
+
+:::
+
+::: {.column width="85%"}
+
+R's functionality can be extended with packages—collections of functions and datasets created by the community.
+
+- **Installing Packages**: Before using a package, install it using `install.packages("packageName")`.
+- **Loading Packages**: Use `library(packageName)` to load the package into your session.
+- **Example**: To use the `ggplot2` package for advanced plotting:
+
+```r
+install.packages("ggplot2")   # Install (only needed once)
+library(ggplot2)              # Load the package
+```
+:::
+
+:::
+
+------------------------------------------------------------------------
+
+## Exercise 1 (`r emo::ji("clock")` 10 mins):
+
+1. **Creating a Sequence:**
+   - Create a sequence of numbers that are multiples of 5, starting from 5 and ending at 50. 
+   - *Hint*: Use the `seq()` function.
+
+2. **Compute the Mean:**
+   - Calculate the mean of the sequence you created in step 2.
+   
+3. **Logical Test and Conditional Computation:**
+   - Check if all elements in your sequence are greater than zero.
+   - Then compute the mean around this new object with only logical elements.  
+
+4. **Adding Comments:**
+   - Add comments to your code to explain what each step is doing.
+   - *Hint*: Use `#` at the beginning of a line to make it a comment.

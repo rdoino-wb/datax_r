@@ -1,72 +1,156 @@
 [
   {
-    "objectID": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-began.",
-    "href": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-began.",
+    "objectID": "index.html#coding-is-a-journey",
+    "href": "index.html#coding-is-a-journey",
     "title": "Introduction to R: the basics",
-    "section": "Coding is a journey, and this is likely where we all began.",
-    "text": "Coding is a journey, and this is likely where we all began.\n\n\n\n\nExcel is widely used for reporting results as it’s user-friendly and easy to learn.\nProne to manual errors.\nNot ideal for large datasets or complex analyses.\nLacks tools for reproducible workflows."
+    "section": "Coding is a Journey",
+    "text": "Coding is a Journey\n\n\n\n\nExcel is widely used for reporting results due to its user-friendliness and ease of learning.\nHowever, it’s prone to manual errors and isn’t ideal for large datasets or complex analyses.\nIt lacks tools for reproducible workflows."
   },
   {
-    "objectID": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-went.",
-    "href": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-went.",
+    "objectID": "index.html#getting-started-with-rstudio",
+    "href": "index.html#getting-started-with-rstudio",
     "title": "Introduction to R: the basics",
-    "section": "Coding is a journey, and this is likely where we all went.",
-    "text": "Coding is a journey, and this is likely where we all went.\n\n\n\n\nStata is widely used in economics.\nEasier to learn than most programming languages.\nLess flexible for custom programming.\nExpensive!"
+    "section": "Getting Started with RStudio",
+    "text": "Getting Started with RStudio\nIf you haven’t downloaded it yet, follow these steps:\nStep 1: Download R\n\nGo to the Comprehensive R Archive Network (CRAN): https://cloud.r-project.org\n\n\n\n\n\n\n\nTip\n\n\nR is updated regularly (1 major version/year, 2-3 minor releases). Keeping R up-to-date is recommended, but upgrading to a major version requires reinstalling your packages.\n\n\n\nStep 2: Download RStudio\n\nRStudio is the Integrated Development Environment (IDE) for R programming.\nDownload it here: http://www.rstudio.com/download"
   },
   {
-    "objectID": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-want-to-end-up.",
-    "href": "index.html#coding-is-a-journey-and-this-is-likely-where-we-all-want-to-end-up.",
+    "objectID": "index.html#setting-up-rstudio",
+    "href": "index.html#setting-up-rstudio",
     "title": "Introduction to R: the basics",
-    "section": "Coding is a journey, and this is likely where we all want to end up.",
-    "text": "Coding is a journey, and this is likely where we all want to end up.\n\n\n\n\nR is free and open source.\nIt allows us to work on multiple datasets simultaneously (no more keep, preserve, restore hackery).\nR is highly flexible and powerful for data analysis."
+    "section": "Setting Up RStudio",
+    "text": "Setting Up RStudio\n\nAvoid .RData Clutter: Disable automatic loading and saving of .RData to start with a clean workspace.\nSave Your Workspace History: Keeping a history helps you track your commands without needing to save .RData files."
   },
   {
-    "objectID": "index.html#time-to-start-your-rstudio",
-    "href": "index.html#time-to-start-your-rstudio",
+    "objectID": "index.html#good-practice-in-project-organization",
+    "href": "index.html#good-practice-in-project-organization",
     "title": "Introduction to R: the basics",
-    "section": "Time to start your RStudio!",
-    "text": "Time to start your RStudio!\n\nIf you haven’t downloaded it yet, then follow these steps\nStep 1: Download R\n\nGo to the Comprehensive R Archive Network (CRAN):\nhttps://cloud.r-project.org\n\n\n\n\n\n\n\nTip\n\n\nR is updated regularly (1 major version/year, 2-3 minor releases). It’s a good idea to keep R up-to-date, but note that upgrading to a major version will require reinstalling your packages.\n\n\n\nStep 2: Download RStudio\n\nRStudio is the Integrated Development Environment (IDE) for R programming.\nDownload it here:\nhttp://www.rstudio.com/download"
+    "section": "Good Practice in Project Organization",
+    "text": "Good Practice in Project Organization\n\nWhen starting a new analysis, organize your work by creating a structured folder system:\n📁 r_training\n\n📂 scripts/ (code)\n📂 data/ (datasets)\n📂 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nUse lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R to maintain consistency and ease management."
   },
   {
-    "objectID": "index.html#time-to-start-your-rstudio-1",
-    "href": "index.html#time-to-start-your-rstudio-1",
+    "objectID": "index.html#understanding-folder-paths",
+    "href": "index.html#understanding-folder-paths",
     "title": "Introduction to R: the basics",
-    "section": "Time to start your RStudio!",
-    "text": "Time to start your RStudio!"
+    "section": "Understanding Folder Paths",
+    "text": "Understanding Folder Paths\n\nA path is an address that tells a software where to find a file or folder on your computer.\n\nTwo Types of Paths:\n\nAbsolute Path: /Users/yourname/Desktop/r_training\nRelative Path: r_training/scripts"
   },
   {
-    "objectID": "index.html#time-to-start-your-rstudio-2",
-    "href": "index.html#time-to-start-your-rstudio-2",
+    "objectID": "index.html#the-advantage-of-using-projects",
+    "href": "index.html#the-advantage-of-using-projects",
     "title": "Introduction to R: the basics",
-    "section": "Time to start your RStudio!",
-    "text": "Time to start your RStudio!\n\nPrevents .RData clutter:\nDisabling automatic loading and saving of .RData ensures your workspace starts fresh, preventing old or unwanted data from cluttering your environment.\nSaves workspace history:\nEnables you to track the commands you’ve run, even without saving .RData, making it easier to retrace your steps in the console."
-  },
-  {
-    "objectID": "index.html#lets-start-with-a-good-practice",
-    "href": "index.html#lets-start-with-a-good-practice",
-    "title": "Introduction to R: the basics",
-    "section": "Let’s start with a good practice!",
-    "text": "Let’s start with a good practice!\n\nWhen starting a new data analysis in R, it’s important to organize your work by having a folder structure for:\n\n\n\n📁 r_training\n\n📁 scripts/ (your code)\n📂 data/ (the datasets you’re using)\n📂 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nIt’s good practice to use lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R. This keeps everything consistent and easier to manage."
-  },
-  {
-    "objectID": "index.html#are-we-all-familiar-with-the-concept-of-folder-paths",
-    "href": "index.html#are-we-all-familiar-with-the-concept-of-folder-paths",
-    "title": "Introduction to R: the basics",
-    "section": "Are we all familiar with the concept of folder paths?",
-    "text": "Are we all familiar with the concept of folder paths?\n\n\nA path is the address that tells a software where to find a file or folder on your computer.\nJust like you need directions to get to a friend’s house, R needs a path to find your files.\n\n\n\nTwo Types of Paths:\n\nAbsolute Path: /Users/yourname/Desktop/r_training\nRelative Path: r_training/scripts"
-  },
-  {
-    "objectID": "index.html#rstudio-makes-our-lifes-easier",
-    "href": "index.html#rstudio-makes-our-lifes-easier",
-    "title": "Introduction to R: the basics",
-    "section": "RStudio makes our lifes easier",
-    "text": "RStudio makes our lifes easier\nR doesn’t automatically know where your files and folders are located. By using a project, you create a shortcut that tells R exactly where to find everything, making it easier to manage and run your analysis without manually setting file paths."
+    "section": "The Advantage of Using Projects",
+    "text": "The Advantage of Using Projects\nR doesn’t automatically know where your files are. Using an RStudio project creates a shortcut that tells R where to find everything, making your workflow smoother."
   },
   {
     "objectID": "index.html#exercise-1-5-mins",
     "href": "index.html#exercise-1-5-mins",
     "title": "Introduction to R: the basics",
-    "section": "Exercise 1 (🕟 5 mins):",
-    "text": "Exercise 1 (🕟 5 mins):\n\nCreate a folder called r_training on your desktop.\nOpen RStudio.\nCreate a Project:\n\nGo to File &gt; New Project.\nMake sure to place it in the correct directory by browsing to the r_training folder on your desktop.\n\nCreate a Script:\n\nClick the blank page icon in the top-left corner to open a new script.\nSave the script by clicking the 💾 icon in the toolbar."
+    "section": "Exercise 1 (🕛 5 mins):",
+    "text": "Exercise 1 (🕛 5 mins):\n\nCreate a folder called r_training on your desktop.\nOpen RStudio.\nCreate a Project:\n\nGo to File &gt; New Project.\nBrowse to the r_training folder on your desktop.\n\nCreate a Script:\n\nClick the blank page icon in the top-left corner to open a new script.\nSave it by clicking the 💾 icon in the toolbar."
+  },
+  {
+    "objectID": "index.html#basic-math-operations",
+    "href": "index.html#basic-math-operations",
+    "title": "Introduction to R: the basics",
+    "section": "Basic Math Operations",
+    "text": "Basic Math Operations\nA simple sum:\n\n99 + 1\n\n[1] 100\n\n\n\nMore complex calculations:\n\n99 + 1 * 2\n\n[1] 101\n\n\n\n\nFollowing mathematical rules:\n\n(99 + 1) * 2\n\n[1] 200\n\n\n\n\nScientific notation:\n\n2 / 100000\n\n[1] 2e-05\n\n\n\n5e3\n\n[1] 5000"
+  },
+  {
+    "objectID": "index.html#overview-of-data-types",
+    "href": "index.html#overview-of-data-types",
+    "title": "Introduction to R: the basics",
+    "section": "Overview of Data Types",
+    "text": "Overview of Data Types\n\nNumeric values : numbers, as shown in previous examples.\n\n\n\nCharacter Values : Always quoted, e.g., “text”.\n\n\n\n\nLogical Values : Also known as Boolean, representing TRUE or FALSE\n\n\n10  &gt; 9\n\n[1] TRUE\n\n10 == 9\n\n[1] FALSE\n\n10 != 9\n\n[1] TRUE\n\n10 &gt; 9 & 9 &lt; 10\n\n[1] TRUE\n\n10 &gt; 9 | 9 &gt; 10\n\n[1] TRUE\n\n9 %in% 1:10\n\n[1] TRUE"
+  },
+  {
+    "objectID": "index.html#importance-of-assigning-results-to-objects",
+    "href": "index.html#importance-of-assigning-results-to-objects",
+    "title": "Introduction to R: the basics",
+    "section": "Importance of Assigning Results to Objects",
+    "text": "Importance of Assigning Results to Objects\nIn R, it’s important to assign results to objects to store the values and use them later in your analysis. Think of an object as a named storage location for your data or calculations.\n\nConsider this calculation:\n\nsum_result = 99 + 1\n\n\n\nHere, we assign the result of 99 + 1 to an object called sum_result using the assignment operator = (some people use &lt;- … the community discuss about this here and here).\n\n\nNow, whenever you need the value, you can just use sum_result instead of retyping 99 + 1.\n\n\n\n\n\n\n\n\nNote\n\n\nIn coding, it’s good practice to use only lower case and “_” or “.” for names (snake_case)."
+  },
+  {
+    "objectID": "index.html#mathematical-functions",
+    "href": "index.html#mathematical-functions",
+    "title": "Introduction to R: the basics",
+    "section": "Mathematical Functions",
+    "text": "Mathematical Functions\nIn economics, we frequently use logarithms:\n\nlog(1)\n\n[1] 0\n\n\n\nR has a large collection of built-in functions, called like this:\n\nfunction_name(argument1 = value1, argument2 = value2, ...)\n\n\n\nFor example, if you want to calculate the natural logarithm of a number…\n\nlog(10)\n\n[1] 2.302585\n\n\n\n\nArguments can also have names, which makes it easy to understand what each input does.\n\nround(3.14159, digits = 2)\n\n[1] 3.14"
+  },
+  {
+    "objectID": "index.html#functions-are-our-tool-box",
+    "href": "index.html#functions-are-our-tool-box",
+    "title": "Introduction to R: the basics",
+    "section": "Functions Are Our Tool Box 🧰",
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\n\nThe help() function is like R’s built-in manual. Whenever you’re unsure about how a function works or what arguments it accepts, you can use help() to get detailed information.\n\nExample: To learn about the mean() function, type help(mean) or simply ?mean in the R console."
+  },
+  {
+    "objectID": "index.html#functions-are-our-tool-box-1",
+    "href": "index.html#functions-are-our-tool-box-1",
+    "title": "Introduction to R: the basics",
+    "section": "Functions Are Our Tool Box 🧰",
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\nexample()\n\nWhile help() provides information about a function, example() shows you how to use it with real code snippets.\n\nExample: Type example(sum) in the R console to see various ways to use the sum() function for creating graphs.\n\n\n\n\nsum&gt; ## Pass a vector to sum, and it will add the elements together.\nsum&gt; sum(1:5)\n[1] 15\n\nsum&gt; ## Pass several numbers to sum, and it also adds the elements.\nsum&gt; sum(1, 2, 3, 4, 5)\n[1] 15\n\nsum&gt; ## In fact, you can pass vectors into several arguments, and everything gets added.\nsum&gt; sum(1:2, 3:5)\n[1] 15\n\nsum&gt; ## If there are missing values, the sum is unknown, i.e., also missing, ....\nsum&gt; sum(1:5, NA)\n[1] NA\n\nsum&gt; ## ... unless  we exclude missing values explicitly:\nsum&gt; sum(1:5, NA, na.rm = TRUE)\n[1] 15"
+  },
+  {
+    "objectID": "index.html#functions-are-our-tool-box-2",
+    "href": "index.html#functions-are-our-tool-box-2",
+    "title": "Introduction to R: the basics",
+    "section": "Functions Are Our Tool Box 🧰",
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\nexample()\nlibrary()\n\nR’s functionality can be extended with packages—collections of functions and datasets created by the community.\n\nInstalling Packages: Before using a package, install it using install.packages(\"packageName\").\nLoading Packages: Use library(packageName) to load the package into your session.\nExample: To use the ggplot2 package for advanced plotting:\n\ninstall.packages(\"ggplot2\")   # Install (only needed once)\nlibrary(ggplot2)              # Load the package"
+  },
+  {
+    "objectID": "index.html#exercise-1-10-mins",
+    "href": "index.html#exercise-1-10-mins",
+    "title": "Introduction to R: the basics",
+    "section": "Exercise 1 (🕠 10 mins):",
+    "text": "Exercise 1 (🕠 10 mins):\n\nCreating a Sequence:\n\nCreate a sequence of numbers that are multiples of 5, starting from 5 and ending at 50.\nHint: Use the seq() function.\n\nCompute the Mean:\n\nCalculate the mean of the sequence you created in step 2.\n\nLogical Test and Conditional Computation:\n\nCheck if all elements in your sequence are greater than zero.\nThen compute the mean around this new object with only logical elements.\n\nAdding Comments:\n\nAdd comments to your code to explain what each step is doing.\nHint: Use # at the beginning of a line to make it a comment.\n\n\n\n\n\n\nCode available on GitHub."
+  },
+  {
+    "objectID": "index.html#preparing-data-for-r-general-concepts-and-best-practices",
+    "href": "index.html#preparing-data-for-r-general-concepts-and-best-practices",
+    "title": "Data Transformation: importing, transforming, and writing",
+    "section": "Preparing Data for R: General Concepts and Best Practices",
+    "text": "Preparing Data for R: General Concepts and Best Practices\n\n\nDocument Types organizations extensively rely on spreadsheets (read)\n\nCommon data formats include:\n\nSpreadsheets (.csv, .xlsx, xls…): Standard for structured data.\nDTA (.dta): Used for data from STATA.\n\n\nSpreadsheets\n\nCSV is generally preferable:\n\nEasier to import and process.\nMore compatible across different systems and software and much lighter.\n\n\n\n\n\n\n\n\n\n\n\nAdvanced\n\n\nThe Apache Arrow format is designed to handle large data sets efficiently, making it suitable for big data analysis. Arrow files offer faster read/write operations compared to traditional formats."
+  },
+  {
+    "objectID": "index.html#importing-data-into-r",
+    "href": "index.html#importing-data-into-r",
+    "title": "Data Transformation: importing, transforming, and writing",
+    "section": "Importing Data into R",
+    "text": "Importing Data into R\n\nMain Import Methods\n\nThe library readxl provides some useful functions\n\nread_xls() for XLS files (.xls).\nread_xlsx() for Excel files (.xlsx).\nread_csv() CSV files (.csv).\nread_parquet() for .dta files, using the haven package.\nreadRDS() for .RDS files.\n\n\n\n\n\nExample: Importing an .xlsx File\n\nTo import an Excel file, you’ll need to load the readxl package\n\n\n\n# Install the package if necessary\ninstall.packages(\"readxl\")\n\n# Load the readxl package\nlibrary(readxl)\n\n# Importing data from an .xlsx file\ndata &lt;- read_excel(\"data_tax.xlsx\")"
+  },
+  {
+    "objectID": "index.html#practical-steps-right-after-importing-data",
+    "href": "index.html#practical-steps-right-after-importing-data",
+    "title": "Data Transformation: importing, transforming, and writing",
+    "section": "Practical Steps Right After Importing Data",
+    "text": "Practical Steps Right After Importing Data\n\nOnce data is imported, we first want to take a look at it 👀\n\n\n# print the first 5 rows\nhead(data)\n\n# A tibble: 6 × 7\n  `Taxpayer ID` Name       `Tax Filing Year` `Taxable Income` `Tax Paid` Region\n  &lt;chr&gt;         &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; \n1 TX001         John Doe                2020            89854       8985 North \n2 TX001         John Doe                2021            65289       6528 North \n3 TX001         John Doe                2022            87053       8705 North \n4 TX001         John Doe                2023            58685       5868 North \n5 TX002         Jane Smith              2020            97152       9715 South \n6 TX002         Jane Smith              2021            62035       6203 South \n# ℹ 1 more variable: `Payment Date` &lt;dttm&gt;\n\n# open the entire dataset \nView(data)\n\n# we can mix them together\nView(head(data))\n\n\n\n\n\n\n\n\nNote\n\n\nYou might also notice that the Taxpayer ID and Full Name columns are surrounded by back-ticks. This is because they contain spaces, which breaks R’s standard naming rules, making them non-syntactic names. To refer to these variables in R, you need to enclose them in back-ticks."
+  },
+  {
+    "objectID": "index.html#practical-steps-right-after-importing-data-1",
+    "href": "index.html#practical-steps-right-after-importing-data-1",
+    "title": "Data Transformation: importing, transforming, and writing",
+    "section": "Practical Steps Right After Importing Data",
+    "text": "Practical Steps Right After Importing Data\n\nLet’s get a snapshot of the data structure and content:\n\n\n# Install the package if necessary\n# install.packages(\"dplyr\")\n\n# Load the dplyr package\nlibrary(dplyr)\n\n# Get an overview of the data\nglimpse(data)\n\nRows: 40\nColumns: 7\n$ `Taxpayer ID`     &lt;chr&gt; \"TX001\", \"TX001\", \"TX001\", \"TX001\", \"TX002\", \"TX002\"…\n$ Name              &lt;chr&gt; \"John Doe\", \"John Doe\", \"John Doe\", \"John Doe\", \"Jan…\n$ `Tax Filing Year` &lt;dbl&gt; 2020, 2021, 2022, 2023, 2020, 2021, 2022, 2023, 2020…\n$ `Taxable Income`  &lt;dbl&gt; 89854, 65289, 87053, 58685, 97152, 62035, 60378, 876…\n$ `Tax Paid`        &lt;dbl&gt; 8985, 6528, 8705, 5868, 9715, 6203, 6037, 8768, 9368…\n$ Region            &lt;chr&gt; \"North\", \"North\", \"North\", \"North\", \"South\", \"South\"…\n$ `Payment Date`    &lt;dttm&gt; 2020-01-31, 2021-12-31, 2022-01-31, 2023-04-30, 202…"
+  },
+  {
+    "objectID": "index.html#practical-steps-right-after-importing-data-2",
+    "href": "index.html#practical-steps-right-after-importing-data-2",
+    "title": "Data Transformation: importing, transforming, and writing",
+    "section": "Practical Steps Right After Importing Data",
+    "text": "Practical Steps Right After Importing Data\n\nNow, we’ll make sure that our variable names follow snake_case convention 😎\n\n\nOption 1: Rename columns manually:\n\n\n# We can rename columns one by one\ndata = rename(\n  data, \n  tax_payer_id    = `Taxpayer ID`,\n  name            = `Name`\n  ...\n  )\n\n\n\nOption 2: Automatically convert all column names to snake_case using janitor:\n\n\n# Install the package if necessary\n# install.packages(\"janitor\")\n\n# Load the janitor package\nlibrary(janitor)\n\n# transform in snake_case all the var names\ndata = clean_names(data)\n\n# take a look\nnames(data)\n\n[1] \"taxpayer_id\"     \"name\"            \"tax_filing_year\" \"taxable_income\" \n[5] \"tax_paid\"        \"region\"          \"payment_date\""
+  },
+  {
+    "objectID": "index.html#exercise-1",
+    "href": "index.html#exercise-1",
+    "title": "Data Transformation: importing, transforming, and writing",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nYou can find the exercise in the folder “Exercises/Exercise_1.R”\n −+ 10:00 \n\n# Exercise: Data Import and Initial Cleaning ----\n\n# Step 1: Setting Up\n\n# List of required packages\npackages = c(\n  \"readxl\",      # For reading Excel files\n  \"dplyr\",       # For data manipulation\n  \"tidyverse\",   # For general data handling and visualization\n  \"data.table\",  # For fast data import and manipulation\n  \"here\",        # For file path management\n  \"haven\",       # For importing Stata files\n  \"janitor\"      # For cleaning column names\n)\n\n# Install pacman if not already installed\nif (!require(\"pacman\")) install.packages(\"pacman\")\n\n# Load the packages with pacman\npacman::p_load(packages, character.only = TRUE, install = TRUE)\n\n# Step 2: Loading and Inspecting Data ----\n\n# 1. Firm Characteristics Data set\n# Hint: Use an appropriate function to load a CSV file.\n# Objective: Load \"firm_characteristics.csv\" and check the first few rows.\n\n# Hint: After loading, apply a function from `janitor` to clean column names.\n\n# 2. VAT Declarations Data set\n# Hint: Use a function that can read Stata (.dta) files.\n# Objective: Load \"vat_declarations.dta\" and check the first few rows.\n\n# Hint: Review the column names to see if they need cleaning.\n\n# 3. CIT Declarations Data set\n# Hint: Use a function that can read Excel files and specify the sheet.\n# Objective: Load \"cit_declarations.xlsx\" from the second sheet and check the first few rows.\n\n# Reflection (BONUS) \n# After completing each step, ensure column names are consistent across files."
+  },
+  {
+    "objectID": "index.html#exercise-1-solutions",
+    "href": "index.html#exercise-1-solutions",
+    "title": "Data Transformation: importing, transforming, and writing",
+    "section": "Exercise 1 (Solutions)",
+    "text": "Exercise 1 (Solutions)\n\n# Pre-requisites ----\n\n# List of required packages\npackages = c(\n  \"readxl\",\n  \"dplyr\",\n  \"tidyverse\",\n  \"data.table\",\n  \"here\",\n  \"haven\",\n  \"janitor\" # Added janitor for clean_names() function\n)\n\n# Install pacman if not already installed\nif (!require(\"pacman\")) install.packages(\"pacman\")\n\n# Load the packages with pacman\npacman::p_load(packages, character.only = TRUE, install = TRUE)\n\n# Import the Data ----\n\n# FIRMS CHARACTERISTICS\n\n# Load the firm-level characteristics (firm_characteristics.csv)\ndt_firms = fread(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"firm_characteristics.csv\"))\n\n# Display the first 5 rows\nhead(dt_firms)\n\n# Clean column names to make them consistent\ndt_firms = clean_names(dt_firms)\n\n# VAT DECLARATIONS\n\n# Load the VAT panel data (vat_declarations.dta)\npanel_vat = read_dta(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"vat_declarations.dta\"))\n\n# Display the first 5 rows\nhead(panel_vat)\n\n# Column names look fine, but the bonus question requires us to change firm_id\npanel_vat = rename(panel_vat, firm_id = id_firm)\n\n# CIT DECLARATIONS\n\n# Load the CIT panel data (cit_declarations.xlsx)\npanel_cit = read_xlsx(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"cit_declarations.xlsx\"), sheet = 2)\n\n# Display the first 5 rows\nhead(panel_cit)\n\n# Column names look consistent, so no need for further cleaning"
   }
 ]

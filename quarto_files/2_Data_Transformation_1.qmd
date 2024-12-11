@@ -1,0 +1,293 @@
+---
+title: "Data Transformation: importing, transforming, and writing"
+subtitle: "`R` Training"
+institute: The World Bank Group - DataTax
+date: today
+date-format: "dddd, [the] D[<sup style='font-size:65%;font-style:italic;'>th</sup>] [of] MMMM, YYYY"
+format:
+  dime-revealjs:
+    # Output file
+    output-file: index.html
+    # Table of Contents
+    toc: true
+    toc_float: false
+    toc-depth: 1
+    toc-location: left
+    toc-title: "Agenda"
+    # Generate a self contained file
+    self-contained: true
+    self-contained-math: true
+    # Turn preview links within the presentation off (all links open in a new tab)
+    preview-links: true
+    auto-animate: true
+    # Logo and footer options
+    logo: "logos/WB-DEC-Impact-horizontal-`R`GB-high.png"
+    footer: "Code available on [GitHub](https://github.com/rdoino-wb/data_analysis_DataTable)."
+---
+
+```{r set-up}
+
+library(emo)
+library(countdown)
+
+# Load the readxl package
+library(readxl)
+library(dplyr)
+
+# Importing data from an .xlsx file
+data <- read_excel("data_tax.xlsx")
+
+```
+
+# Import
+
+## Preparing Data for R: General Concepts and Best Practices
+
+::: {.incremental}
+
+- **Document Types** organizations extensively rely on spreadsheets ([read](https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375989#abstract))
+  - Common data formats include:
+    - **Spreadsheets** (.csv, .xlsx, xls...): Standard for structured data.
+    - **DTA** (.dta): Used for data from STATA.
+
+- **Spreadsheets**  
+  - **CSV** is generally preferable:
+    - Easier to import and process.
+    - More compatible across different systems and software and **much lighter**.
+
+:::
+
+. . . 
+
+::: {.callout-caution collapse="true"}
+# Advanced 
+The [Apache Arrow](https://arrow.apache.org/) format is designed to handle large data sets efficiently, making it suitable for big data analysis. Arrow files offer faster read/write operations compared to traditional formats.
+:::
+
+---
+
+## Importing Data into R
+
+- **Main Import Methods**  
+  - The library [readxl](https://readxl.tidyverse.org/) provides some useful functions
+    - **read_xls()** for XLS files (*.xls*).
+    - **read_xlsx()** for Excel files (*.xlsx*).
+    - **read_csv()** CSV files (*.csv*).
+    - **read_parquet()** for *.dta* files, using the [haven](https://haven.tidyverse.org/) package.
+    - **readRDS()** for *.RDS* files.
+
+. . . 
+
+- **Example: Importing an .xlsx File**  
+  - To import an Excel file, you’ll need to load the `readxl` package
+
+```{r import, echo = T, eval = F}
+# Install the package if necessary
+install.packages("readxl")
+
+# Load the readxl package
+library(readxl)
+
+# Importing data from an .xlsx file
+data <- read_excel("data_tax.xlsx")
+```
+
+---
+
+## Practical Steps Right After Importing Data
+
+1. Once data is imported, we first want to take a look at it `r emo::ji("eyes")`
+  
+```{r look, echo = T, eval = T}
+
+# print the first 5 rows
+head(data)
+
+# open the entire dataset 
+View(data)
+
+# we can mix them together
+View(head(data))
+
+```
+
+. . . 
+
+::: {.callout-note}
+You might also notice that the Taxpayer ID and Full Name columns are surrounded by back-ticks. This is because they contain spaces, which breaks R’s standard naming rules, making them non-syntactic names. To refer to these variables in R, you need to enclose them in back-ticks.
+:::
+
+---
+
+## Practical Steps Right After Importing Data
+
+2. Let's get a snapshot of the data structure and content: 
+
+```{r snapshot, echo = T, eval = T}
+
+# Install the package if necessary
+# install.packages("dplyr")
+
+# Load the dplyr package
+library(dplyr)
+
+# Get an overview of the data
+glimpse(data)
+
+```
+---
+
+## Practical Steps Right After Importing Data
+
+3.	Now, we’ll make sure that our variable names follow snake_case convention `r emo::ji("sunglasses")`
+
+- Option 1: Rename columns manually:
+  
+```{r rename1, echo = T, eval = F}
+
+# We can rename columns one by one
+data = rename(
+  data, 
+  tax_payer_id    = `Taxpayer ID`,
+  name            = `Name`
+  ...
+  )
+
+```
+
+. . . 
+
+-	Option 2: Automatically convert all column names to snake_case using janitor:
+	
+```{r rename2, echo = T, eval = T}
+
+# Install the package if necessary
+# install.packages("janitor")
+
+# Load the janitor package
+library(janitor)
+
+# transform in snake_case all the var names
+data = clean_names(data)
+
+# take a look
+names(data)
+
+```
+
+---
+
+## Exercise 1 
+
+You can find the exercise in the folder "Exercises/Exercise_1.R"
+
+`r countdown::countdown(minutes = 10, seconds = 0, top = 10)`
+
+```{r exercise1, echo = T, eval = F}
+
+# Exercise: Data Import and Initial Cleaning ----
+
+# Step 1: Setting Up
+
+# List of required packages
+packages = c(
+  "readxl",      # For reading Excel files
+  "dplyr",       # For data manipulation
+  "tidyverse",   # For general data handling and visualization
+  "data.table",  # For fast data import and manipulation
+  "here",        # For file path management
+  "haven",       # For importing Stata files
+  "janitor"      # For cleaning column names
+)
+
+# Install pacman if not already installed
+if (!require("pacman")) install.packages("pacman")
+
+# Load the packages with pacman
+pacman::p_load(packages, character.only = TRUE, install = TRUE)
+
+# Step 2: Loading and Inspecting Data ----
+
+# 1. Firm Characteristics Data set
+# Hint: Use an appropriate function to load a CSV file.
+# Objective: Load "firm_characteristics.csv" and check the first few rows.
+
+# Hint: After loading, apply a function from `janitor` to clean column names.
+
+# 2. VAT Declarations Data set
+# Hint: Use a function that can read Stata (.dta) files.
+# Objective: Load "vat_declarations.dta" and check the first few rows.
+
+# Hint: Review the column names to see if they need cleaning.
+
+# 3. CIT Declarations Data set
+# Hint: Use a function that can read Excel files and specify the sheet.
+# Objective: Load "cit_declarations.xlsx" from the second sheet and check the first few rows.
+
+# Reflection (BONUS) 
+# After completing each step, ensure column names are consistent across files.
+
+```
+---
+
+## Exercise 1 (Solutions)
+
+```{r solutions1, echo = T, eval = F}
+
+# Pre-requisites ----
+
+# List of required packages
+packages = c(
+  "readxl",
+  "dplyr",
+  "tidyverse",
+  "data.table",
+  "here",
+  "haven",
+  "janitor" # Added janitor for clean_names() function
+)
+
+# Install pacman if not already installed
+if (!require("pacman")) install.packages("pacman")
+
+# Load the packages with pacman
+pacman::p_load(packages, character.only = TRUE, install = TRUE)
+
+# Import the Data ----
+
+# FIRMS CHARACTERISTICS
+
+# Load the firm-level characteristics (firm_characteristics.csv)
+dt_firms = fread(here("quarto_files", "Solutions", "Data", "Raw", "firm_characteristics.csv"))
+
+# Display the first 5 rows
+head(dt_firms)
+
+# Clean column names to make them consistent
+dt_firms = clean_names(dt_firms)
+
+# VAT DECLARATIONS
+
+# Load the VAT panel data (vat_declarations.dta)
+panel_vat = read_dta(here("quarto_files", "Solutions", "Data", "Raw", "vat_declarations.dta"))
+
+# Display the first 5 rows
+head(panel_vat)
+
+# Column names look fine, but the bonus question requires us to change firm_id
+panel_vat = rename(panel_vat, firm_id = id_firm)
+
+# CIT DECLARATIONS
+
+# Load the CIT panel data (cit_declarations.xlsx)
+panel_cit = read_xlsx(here("quarto_files", "Solutions", "Data", "Raw", "cit_declarations.xlsx"), sheet = 2)
+
+# Display the first 5 rows
+head(panel_cit)
+
+# Column names look consistent, so no need for further cleaning
+
+```
+
+# Transform 
+
