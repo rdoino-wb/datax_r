@@ -1,15 +1,19 @@
 ---
-title: "Data Transformation: importing, transforming, and writing"
+title: "Data Importing and Writing"
 subtitle: "`R` Training"
 institute: The World Bank Group - DataTax
 date: today
+author: ""
 date-format: "dddd, [the] D[<sup style='font-size:65%;font-style:italic;'>th</sup>] [of] MMMM, YYYY"
+knitr:
+  opts_chunk:
+    dev: 'png'
 format:
   dime-revealjs:
     # Output file
     output-file: index.html
     # Table of Contents
-    toc: true
+    toc: false
     toc_float: false
     toc-depth: 1
     toc-location: left
@@ -21,7 +25,7 @@ format:
     preview-links: true
     auto-animate: true
     # Logo and footer options
-    logo: "logos/WB-DEC-Impact-horizontal-`R`GB-high.png"
+    logo: "logos/WB-DEC-Impact-horizontal-RGB-high.png"
     footer: "Code available on [GitHub](https://github.com/rdoino-wb/data_analysis_DataTable)."
 ---
 
@@ -104,10 +108,10 @@ data <- read_excel("data_tax.xlsx")
 head(data)
 
 # open the entire dataset 
-View(data)
+# View(data)
 
 # we can mix them together
-View(head(data))
+# View(head(data))
 
 ```
 
@@ -179,7 +183,7 @@ names(data)
 
 ## Exercise 1 
 
-You can find the exercise in the folder "Exercises/Exercise_1.R"
+You can find the exercise in the folder "Exercises/Import_and_Export.R"
 
 `r countdown::countdown(minutes = 10, seconds = 0, top = 10)`
 
@@ -289,5 +293,123 @@ head(panel_cit)
 
 ```
 
-# Transform 
+# Writing Data in R
 
+## Writing in .csv Format is (Almost) Always a Good Choice
+
+- For most cases, writing data in .csv format is a reliable and widely compatible option.
+
+- I recommend using the `fwrite` function from the `data.table` package for its speed and efficiency.
+
+. . .  
+
+- Below, we save various datasets into the Intermediate folder using fwrite:
+
+```{r write, echo = T, eval = F}
+
+# Write the VAT Data
+fwrite(panel_vat, here("quarto_files", "Solutions", "Data", "Intermediate", "panel_vat.csv"))
+
+# Write the CIT Declarations
+fwrite(panel_cit, here("quarto_files", "Solutions", "Data", "Intermediate", "panel_cit.csv"))
+       
+# Write the Firm Characteristics
+fwrite(dt_firms, here("quarto_files", "Solutions", "Data", "Intermediate", "dt_firms.csv"))
+       
+```    
+
+## There other options to write data
+
+- Writing .rds Files (For R Objects)
+
+	-	The .rds format is specifically designed for saving R objects. It is useful for saving intermediate results, objects, or data.
+	-	We’ll explore this format in more detail later, but here’s a quick example:
+  
+```{r write_rds, echo = T, eval = F}
+
+# Example
+base::saveRDS(data, "data_tax.rds")
+       
+```    
+
+. . .
+
+  - Writing .xlsx Files (For Excel Compatibility): To save data in Excel format (.xlsx), use the writexl package. It is lightweight and doesn’t require external dependencies.
+
+```{r write_xlsx, echo = T, eval = F}
+
+# Example
+writexl::write_xlsx(data, "data_tax.xlsx")
+       
+```  
+  
+. . . 
+
+  - Writing .parquet Files (For Large Datasets): The .parquet format is a columnar storage format that is highly efficient for both reading and writing large datasets (typically >1GB).
+
+```{r write_parquet, echo = T, eval = F}
+
+# Example
+arrow::writea_parquet(data, "data_tax.parquet")
+
+# Reading parquet files
+arrow::read_parquet("data_tax.parquet")
+       
+```  
+
+---
+
+## To Sum Up
+
+![](images/write_import.png){fig-align="center"}
+
+---
+
+## Exercise 2 
+
+You can find the exercise in the folder "Exercises/Import_and_Export.R"
+
+`r countdown::countdown(minutes = 5, seconds = 0, top = 10)`
+
+```{r exercise2, echo = T, eval = F}
+
+# Exercise 2: Write the Data ----
+
+# FIRMS CHARACTERISTICS
+
+# Write the firm-level characteristics (firm_characteristics.format)
+# Don't forget to put in the right folder and pick the best format
+
+
+# VAT DECLARATIONS
+
+# Write the VAT panel data (vat_declarations.format)
+
+
+# CIT DECLARATIONS
+
+# Write the CIT panel data (cit_declarations.format)
+
+```
+---
+
+## Exercise 2 (Solutions)
+
+```{r solutions2, echo = T, eval = F}
+
+# Exercise 2: Write the Data ----
+
+# FIRMS CHARACTERISTICS
+fwrite(dt_firms, here("quarto_files", "Solutions", "Data", "Intermediate", "dt_firms.csv")
+
+# VAT DECLARATIONS
+
+# Write the VAT panel data (vat_declarations.format)
+fwrite(panel_vat, here("quarto_files", "Solutions", "Data", "Intermediate", "panel_vat.csv"))
+
+# CIT DECLARATIONS
+
+# Write the CIT panel data 
+fwrite(panel_cit, here("quarto_files", "Solutions", "Data", "Intermediate", "panel_cit.csv"))
+
+```

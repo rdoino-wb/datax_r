@@ -3,6 +3,7 @@ title: "Introduction to `R`: the basics"
 subtitle: "`R` Training"
 institute: The World Bank Group - DataTax
 date: today
+author: ""
 date-format: "dddd, [the] D[<sup style='font-size:65%;font-style:italic;'>th</sup>] [of] MMMM, YYYY"
 format:
   dime-revealjs:
@@ -21,7 +22,7 @@ format:
     preview-links: true
     auto-animate: true
     # Logo and footer options
-    logo: "logos/WB-DEC-Impact-horizontal-`R`GB-high.png"
+    logo: "logos/WB-DEC-Impact-horizontal-RGB-high.png"
     footer: "Code available on [GitHub](https://github.com/rdoino-wb/data_analysis_DataTable)."
 ---
 

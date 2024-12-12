@@ -25,7 +25,7 @@
     "href": "index.html#good-practice-in-project-organization",
     "title": "Introduction to R: the basics",
     "section": "Good Practice in Project Organization",
-    "text": "Good Practice in Project Organization\n\nWhen starting a new analysis, organize your work by creating a structured folder system:\n📁 r_training\n\n📂 scripts/ (code)\n📂 data/ (datasets)\n📂 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nUse lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R to maintain consistency and ease management."
+    "text": "Good Practice in Project Organization\n\nWhen starting a new analysis, organize your work by creating a structured folder system:\n📂 r_training\n\n📂 scripts/ (code)\n📁 data/ (datasets)\n📁 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nUse lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R to maintain consistency and ease management."
   },
   {
     "objectID": "index.html#understanding-folder-paths",
@@ -45,8 +45,8 @@
     "objectID": "index.html#exercise-1-5-mins",
     "href": "index.html#exercise-1-5-mins",
     "title": "Introduction to R: the basics",
-    "section": "Exercise 1 (🕛 5 mins):",
-    "text": "Exercise 1 (🕛 5 mins):\n\nCreate a folder called r_training on your desktop.\nOpen RStudio.\nCreate a Project:\n\nGo to File &gt; New Project.\nBrowse to the r_training folder on your desktop.\n\nCreate a Script:\n\nClick the blank page icon in the top-left corner to open a new script.\nSave it by clicking the 💾 icon in the toolbar."
+    "section": "Exercise 1 (🕣 5 mins):",
+    "text": "Exercise 1 (🕣 5 mins):\n\nCreate a folder called r_training on your desktop.\nOpen RStudio.\nCreate a Project:\n\nGo to File &gt; New Project.\nBrowse to the r_training folder on your desktop.\n\nCreate a Script:\n\nClick the blank page icon in the top-left corner to open a new script.\nSave it by clicking the 💾 icon in the toolbar."
   },
   {
     "objectID": "index.html#basic-math-operations",
@@ -101,56 +101,98 @@
     "objectID": "index.html#exercise-1-10-mins",
     "href": "index.html#exercise-1-10-mins",
     "title": "Introduction to R: the basics",
-    "section": "Exercise 1 (🕠 10 mins):",
-    "text": "Exercise 1 (🕠 10 mins):\n\nCreating a Sequence:\n\nCreate a sequence of numbers that are multiples of 5, starting from 5 and ending at 50.\nHint: Use the seq() function.\n\nCompute the Mean:\n\nCalculate the mean of the sequence you created in step 2.\n\nLogical Test and Conditional Computation:\n\nCheck if all elements in your sequence are greater than zero.\nThen compute the mean around this new object with only logical elements.\n\nAdding Comments:\n\nAdd comments to your code to explain what each step is doing.\nHint: Use # at the beginning of a line to make it a comment.\n\n\n\n\n\n\nCode available on GitHub."
+    "section": "Exercise 1 (🕗 10 mins):",
+    "text": "Exercise 1 (🕗 10 mins):\n\nCreating a Sequence:\n\nCreate a sequence of numbers that are multiples of 5, starting from 5 and ending at 50.\nHint: Use the seq() function.\n\nCompute the Mean:\n\nCalculate the mean of the sequence you created in step 2.\n\nLogical Test and Conditional Computation:\n\nCheck if all elements in your sequence are greater than zero.\nThen compute the mean around this new object with only logical elements.\n\nAdding Comments:\n\nAdd comments to your code to explain what each step is doing.\nHint: Use # at the beginning of a line to make it a comment.\n\n\n\n\n\n\nCode available on GitHub."
   },
   {
     "objectID": "index.html#preparing-data-for-r-general-concepts-and-best-practices",
     "href": "index.html#preparing-data-for-r-general-concepts-and-best-practices",
-    "title": "Data Transformation: importing, transforming, and writing",
+    "title": "Data Importing and Writing",
     "section": "Preparing Data for R: General Concepts and Best Practices",
     "text": "Preparing Data for R: General Concepts and Best Practices\n\n\nDocument Types organizations extensively rely on spreadsheets (read)\n\nCommon data formats include:\n\nSpreadsheets (.csv, .xlsx, xls…): Standard for structured data.\nDTA (.dta): Used for data from STATA.\n\n\nSpreadsheets\n\nCSV is generally preferable:\n\nEasier to import and process.\nMore compatible across different systems and software and much lighter.\n\n\n\n\n\n\n\n\n\n\n\nAdvanced\n\n\nThe Apache Arrow format is designed to handle large data sets efficiently, making it suitable for big data analysis. Arrow files offer faster read/write operations compared to traditional formats."
   },
   {
     "objectID": "index.html#importing-data-into-r",
     "href": "index.html#importing-data-into-r",
-    "title": "Data Transformation: importing, transforming, and writing",
+    "title": "Data Importing and Writing",
     "section": "Importing Data into R",
     "text": "Importing Data into R\n\nMain Import Methods\n\nThe library readxl provides some useful functions\n\nread_xls() for XLS files (.xls).\nread_xlsx() for Excel files (.xlsx).\nread_csv() CSV files (.csv).\nread_parquet() for .dta files, using the haven package.\nreadRDS() for .RDS files.\n\n\n\n\n\nExample: Importing an .xlsx File\n\nTo import an Excel file, you’ll need to load the readxl package\n\n\n\n# Install the package if necessary\ninstall.packages(\"readxl\")\n\n# Load the readxl package\nlibrary(readxl)\n\n# Importing data from an .xlsx file\ndata &lt;- read_excel(\"data_tax.xlsx\")"
   },
   {
     "objectID": "index.html#practical-steps-right-after-importing-data",
     "href": "index.html#practical-steps-right-after-importing-data",
-    "title": "Data Transformation: importing, transforming, and writing",
+    "title": "Data Importing and Writing",
     "section": "Practical Steps Right After Importing Data",
-    "text": "Practical Steps Right After Importing Data\n\nOnce data is imported, we first want to take a look at it 👀\n\n\n# print the first 5 rows\nhead(data)\n\n# A tibble: 6 × 7\n  `Taxpayer ID` Name       `Tax Filing Year` `Taxable Income` `Tax Paid` Region\n  &lt;chr&gt;         &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; \n1 TX001         John Doe                2020            89854       8985 North \n2 TX001         John Doe                2021            65289       6528 North \n3 TX001         John Doe                2022            87053       8705 North \n4 TX001         John Doe                2023            58685       5868 North \n5 TX002         Jane Smith              2020            97152       9715 South \n6 TX002         Jane Smith              2021            62035       6203 South \n# ℹ 1 more variable: `Payment Date` &lt;dttm&gt;\n\n# open the entire dataset \nView(data)\n\n# we can mix them together\nView(head(data))\n\n\n\n\n\n\n\n\nNote\n\n\nYou might also notice that the Taxpayer ID and Full Name columns are surrounded by back-ticks. This is because they contain spaces, which breaks R’s standard naming rules, making them non-syntactic names. To refer to these variables in R, you need to enclose them in back-ticks."
+    "text": "Practical Steps Right After Importing Data\n\nOnce data is imported, we first want to take a look at it 👀\n\n\n# print the first 5 rows\nhead(data)\n\n# A tibble: 6 × 7\n  `Taxpayer ID` Name       `Tax Filing Year` `Taxable Income` `Tax Paid` Region\n  &lt;chr&gt;         &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; \n1 TX001         John Doe                2020            89854       8985 North \n2 TX001         John Doe                2021            65289       6528 North \n3 TX001         John Doe                2022            87053       8705 North \n4 TX001         John Doe                2023            58685       5868 North \n5 TX002         Jane Smith              2020            97152       9715 South \n6 TX002         Jane Smith              2021            62035       6203 South \n# ℹ 1 more variable: `Payment Date` &lt;dttm&gt;\n\n# open the entire dataset \n# View(data)\n\n# we can mix them together\n# View(head(data))\n\n\n\n\n\n\n\n\nNote\n\n\nYou might also notice that the Taxpayer ID and Full Name columns are surrounded by back-ticks. This is because they contain spaces, which breaks R’s standard naming rules, making them non-syntactic names. To refer to these variables in R, you need to enclose them in back-ticks."
   },
   {
     "objectID": "index.html#practical-steps-right-after-importing-data-1",
     "href": "index.html#practical-steps-right-after-importing-data-1",
-    "title": "Data Transformation: importing, transforming, and writing",
+    "title": "Data Importing and Writing",
     "section": "Practical Steps Right After Importing Data",
     "text": "Practical Steps Right After Importing Data\n\nLet’s get a snapshot of the data structure and content:\n\n\n# Install the package if necessary\n# install.packages(\"dplyr\")\n\n# Load the dplyr package\nlibrary(dplyr)\n\n# Get an overview of the data\nglimpse(data)\n\nRows: 40\nColumns: 7\n$ `Taxpayer ID`     &lt;chr&gt; \"TX001\", \"TX001\", \"TX001\", \"TX001\", \"TX002\", \"TX002\"…\n$ Name              &lt;chr&gt; \"John Doe\", \"John Doe\", \"John Doe\", \"John Doe\", \"Jan…\n$ `Tax Filing Year` &lt;dbl&gt; 2020, 2021, 2022, 2023, 2020, 2021, 2022, 2023, 2020…\n$ `Taxable Income`  &lt;dbl&gt; 89854, 65289, 87053, 58685, 97152, 62035, 60378, 876…\n$ `Tax Paid`        &lt;dbl&gt; 8985, 6528, 8705, 5868, 9715, 6203, 6037, 8768, 9368…\n$ Region            &lt;chr&gt; \"North\", \"North\", \"North\", \"North\", \"South\", \"South\"…\n$ `Payment Date`    &lt;dttm&gt; 2020-01-31, 2021-12-31, 2022-01-31, 2023-04-30, 202…"
   },
   {
     "objectID": "index.html#practical-steps-right-after-importing-data-2",
     "href": "index.html#practical-steps-right-after-importing-data-2",
-    "title": "Data Transformation: importing, transforming, and writing",
+    "title": "Data Importing and Writing",
     "section": "Practical Steps Right After Importing Data",
     "text": "Practical Steps Right After Importing Data\n\nNow, we’ll make sure that our variable names follow snake_case convention 😎\n\n\nOption 1: Rename columns manually:\n\n\n# We can rename columns one by one\ndata = rename(\n  data, \n  tax_payer_id    = `Taxpayer ID`,\n  name            = `Name`\n  ...\n  )\n\n\n\nOption 2: Automatically convert all column names to snake_case using janitor:\n\n\n# Install the package if necessary\n# install.packages(\"janitor\")\n\n# Load the janitor package\nlibrary(janitor)\n\n# transform in snake_case all the var names\ndata = clean_names(data)\n\n# take a look\nnames(data)\n\n[1] \"taxpayer_id\"     \"name\"            \"tax_filing_year\" \"taxable_income\" \n[5] \"tax_paid\"        \"region\"          \"payment_date\""
   },
   {
     "objectID": "index.html#exercise-1",
     "href": "index.html#exercise-1",
-    "title": "Data Transformation: importing, transforming, and writing",
+    "title": "Data Importing and Writing",
     "section": "Exercise 1",
-    "text": "Exercise 1\nYou can find the exercise in the folder “Exercises/Exercise_1.R”\n −+ 10:00 \n\n# Exercise: Data Import and Initial Cleaning ----\n\n# Step 1: Setting Up\n\n# List of required packages\npackages = c(\n  \"readxl\",      # For reading Excel files\n  \"dplyr\",       # For data manipulation\n  \"tidyverse\",   # For general data handling and visualization\n  \"data.table\",  # For fast data import and manipulation\n  \"here\",        # For file path management\n  \"haven\",       # For importing Stata files\n  \"janitor\"      # For cleaning column names\n)\n\n# Install pacman if not already installed\nif (!require(\"pacman\")) install.packages(\"pacman\")\n\n# Load the packages with pacman\npacman::p_load(packages, character.only = TRUE, install = TRUE)\n\n# Step 2: Loading and Inspecting Data ----\n\n# 1. Firm Characteristics Data set\n# Hint: Use an appropriate function to load a CSV file.\n# Objective: Load \"firm_characteristics.csv\" and check the first few rows.\n\n# Hint: After loading, apply a function from `janitor` to clean column names.\n\n# 2. VAT Declarations Data set\n# Hint: Use a function that can read Stata (.dta) files.\n# Objective: Load \"vat_declarations.dta\" and check the first few rows.\n\n# Hint: Review the column names to see if they need cleaning.\n\n# 3. CIT Declarations Data set\n# Hint: Use a function that can read Excel files and specify the sheet.\n# Objective: Load \"cit_declarations.xlsx\" from the second sheet and check the first few rows.\n\n# Reflection (BONUS) \n# After completing each step, ensure column names are consistent across files."
+    "text": "Exercise 1\nYou can find the exercise in the folder “Exercises/Import_and_Export.R”\n −+ 10:00 \n\n# Exercise: Data Import and Initial Cleaning ----\n\n# Step 1: Setting Up\n\n# List of required packages\npackages = c(\n  \"readxl\",      # For reading Excel files\n  \"dplyr\",       # For data manipulation\n  \"tidyverse\",   # For general data handling and visualization\n  \"data.table\",  # For fast data import and manipulation\n  \"here\",        # For file path management\n  \"haven\",       # For importing Stata files\n  \"janitor\"      # For cleaning column names\n)\n\n# Install pacman if not already installed\nif (!require(\"pacman\")) install.packages(\"pacman\")\n\n# Load the packages with pacman\npacman::p_load(packages, character.only = TRUE, install = TRUE)\n\n# Step 2: Loading and Inspecting Data ----\n\n# 1. Firm Characteristics Data set\n# Hint: Use an appropriate function to load a CSV file.\n# Objective: Load \"firm_characteristics.csv\" and check the first few rows.\n\n# Hint: After loading, apply a function from `janitor` to clean column names.\n\n# 2. VAT Declarations Data set\n# Hint: Use a function that can read Stata (.dta) files.\n# Objective: Load \"vat_declarations.dta\" and check the first few rows.\n\n# Hint: Review the column names to see if they need cleaning.\n\n# 3. CIT Declarations Data set\n# Hint: Use a function that can read Excel files and specify the sheet.\n# Objective: Load \"cit_declarations.xlsx\" from the second sheet and check the first few rows.\n\n# Reflection (BONUS) \n# After completing each step, ensure column names are consistent across files."
   },
   {
     "objectID": "index.html#exercise-1-solutions",
     "href": "index.html#exercise-1-solutions",
-    "title": "Data Transformation: importing, transforming, and writing",
+    "title": "Data Importing and Writing",
     "section": "Exercise 1 (Solutions)",
     "text": "Exercise 1 (Solutions)\n\n# Pre-requisites ----\n\n# List of required packages\npackages = c(\n  \"readxl\",\n  \"dplyr\",\n  \"tidyverse\",\n  \"data.table\",\n  \"here\",\n  \"haven\",\n  \"janitor\" # Added janitor for clean_names() function\n)\n\n# Install pacman if not already installed\nif (!require(\"pacman\")) install.packages(\"pacman\")\n\n# Load the packages with pacman\npacman::p_load(packages, character.only = TRUE, install = TRUE)\n\n# Import the Data ----\n\n# FIRMS CHARACTERISTICS\n\n# Load the firm-level characteristics (firm_characteristics.csv)\ndt_firms = fread(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"firm_characteristics.csv\"))\n\n# Display the first 5 rows\nhead(dt_firms)\n\n# Clean column names to make them consistent\ndt_firms = clean_names(dt_firms)\n\n# VAT DECLARATIONS\n\n# Load the VAT panel data (vat_declarations.dta)\npanel_vat = read_dta(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"vat_declarations.dta\"))\n\n# Display the first 5 rows\nhead(panel_vat)\n\n# Column names look fine, but the bonus question requires us to change firm_id\npanel_vat = rename(panel_vat, firm_id = id_firm)\n\n# CIT DECLARATIONS\n\n# Load the CIT panel data (cit_declarations.xlsx)\npanel_cit = read_xlsx(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"cit_declarations.xlsx\"), sheet = 2)\n\n# Display the first 5 rows\nhead(panel_cit)\n\n# Column names look consistent, so no need for further cleaning"
+  },
+  {
+    "objectID": "index.html#writing-in-.csv-format-is-almost-ever-a-good-choice",
+    "href": "index.html#writing-in-.csv-format-is-almost-ever-a-good-choice",
+    "title": "Data Importing and Writing",
+    "section": "Writing in .csv format is (almost) ever a good choice",
+    "text": "Writing in .csv format is (almost) ever a good choice\n\nI suggest you to use the fwrite function from the data.table package.\n\n\n\nNow, we can write the data to a .csv file into Intermediate folder:\n\n\n# Write the VAT Data\nfwrite(panel_vat, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_vat.csv\"))\n\n# Write the CIT Declarations\nfwrite(panel_cit, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_cit.csv\"))\n       \n# Write the Firm Characteristics\nfwrite(dt_firms, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"dt_firms.csv\"))"
+  },
+  {
+    "objectID": "index.html#there-other-options-to-write-data",
+    "href": "index.html#there-other-options-to-write-data",
+    "title": "Data Importing and Writing",
+    "section": "There other options to write data",
+    "text": "There other options to write data\n\nWriting .rds Files (For R Objects)\n\nThe .rds format is specifically designed for saving R objects. It is useful for saving intermediate results, objects, or data.\nWe’ll explore this format in more detail later, but here’s a quick example:\n\n\n\n# Example\nbase::saveRDS(data, \"data_tax.rds\")\n\n\n\nWriting .xlsx Files (For Excel Compatibility): To save data in Excel format (.xlsx), use the writexl package. It is lightweight and doesn’t require external dependencies.\n\n\n# Example\nwritexl::write_xlsx(data, \"data_tax.xlsx\")\n\n\n\n\nWriting .parquet Files (For Large Datasets): The .parquet format is a columnar storage format that is highly efficient for both reading and writing large datasets (typically &gt;1GB).\n\n\n# Example\narrow::writea_parquet(data, \"data_tax.parquet\")\n\n# Reading parquet files\narrow::read_parquet(\"data_tax.parquet\")"
+  },
+  {
+    "objectID": "index.html#writing-in-.csv-format-is-almost-always-a-good-choice",
+    "href": "index.html#writing-in-.csv-format-is-almost-always-a-good-choice",
+    "title": "Data Importing and Writing",
+    "section": "Writing in .csv Format is (Almost) Always a Good Choice",
+    "text": "Writing in .csv Format is (Almost) Always a Good Choice\n\nFor most cases, writing data in .csv format is a reliable and widely compatible option.\nI recommend using the fwrite function from the data.table package for its speed and efficiency.\n\n\n\nBelow, we save various datasets into the Intermediate folder using fwrite:\n\n\n# Write the VAT Data\nfwrite(panel_vat, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_vat.csv\"))\n\n# Write the CIT Declarations\nfwrite(panel_cit, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_cit.csv\"))\n       \n# Write the Firm Characteristics\nfwrite(dt_firms, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"dt_firms.csv\"))"
+  },
+  {
+    "objectID": "index.html#to-sum-up",
+    "href": "index.html#to-sum-up",
+    "title": "Data Importing and Writing",
+    "section": "To Sum Up",
+    "text": "To Sum Up"
+  },
+  {
+    "objectID": "index.html#exercise-2",
+    "href": "index.html#exercise-2",
+    "title": "Data Importing and Writing",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nYou can find the exercise in the folder “Exercises/Import_and_Export.R”\n −+ 05:00 \n\n# Exercise 2: Write the Data ----\n\n# FIRMS CHARACTERISTICS\n\n# Write the firm-level characteristics (firm_characteristics.format)\n# Don't forget to put in the right folder and pick the best format\n\n\n# VAT DECLARATIONS\n\n# Write the VAT panel data (vat_declarations.format)\n\n\n# CIT DECLARATIONS\n\n# Write the CIT panel data (cit_declarations.format)"
+  },
+  {
+    "objectID": "index.html#exercise-1-solutions-1",
+    "href": "index.html#exercise-1-solutions-1",
+    "title": "Data Importing and Writing",
+    "section": "Exercise 1 (Solutions)",
+    "text": "Exercise 1 (Solutions)\n\n# Exercise 2: Write the Data ----\n\n# FIRMS CHARACTERISTICS\nfwrite(dt_firms, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"dt_firms.csv\")\n\n# VAT DECLARATIONS\n\n# Write the VAT panel data (vat_declarations.format)\nfwrite(panel_vat, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_vat.csv\"))\n\n# CIT DECLARATIONS\n\n# Write the CIT panel data \nfwrite(panel_cit, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_cit.csv\"))\n\n\n\n\n\nCode available on GitHub."
   }
 ]
