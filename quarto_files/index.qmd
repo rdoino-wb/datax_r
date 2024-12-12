@@ -1,31 +1,18 @@
 ---
 title: "Welcome to the DataTax R Course"
 format: 
-  html:
-    allow-html: true
+  html
 ---
-
-<div style="text-align: center; padding: 20px;">
-  <img src="logos/WB-DEC-Impact-horizontal-RGB-high.png" alt="DataTax Logo" style="width: 200px; border-radius: 10px;">
-</div>
 
 # Welcome to the DataTax R Course
 
-Dive into the world of **R programming** and its applications in tax data analytics! This course is designed to help you master data import/export, manipulation, visualization, and modeling techniques.
+Dive into the world of **R programming** and its applications in tax data analytics!
 
 ---
 
 ## 📚 Explore the Course Content
 
-<section style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-  <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; width: 200px; text-align: center;">
-    <a href="1_Introduction_to_R.qmd" style="text-decoration: none; color: #007bff;">
-      <strong>Introduction to R</strong>
-    </a>
-  </div>
-  <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; width: 200px; text-align: center;">
-    <a href="2_import_export.qmd" style="text-decoration: none; color: #007bff;">
-      <strong>Data Import/Export</strong>
-    </a>
-  </div>
-</section>
+Navigate through the course slide decks:
+
+- [Introduction to R](1_Introduction_to_R.qmd)
+- [Data Import/Export](2_import_export.qmd)

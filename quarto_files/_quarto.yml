@@ -4,21 +4,22 @@ project:
 website:
   title: "DataTax R Course"
   navbar:
+    search: true
     left:
       - text: "Home"
-        href: index.qmd
+        href: index.html  # Ensure this points to `.html` not `.qmd`
       - text: "Slides"
         menu:
           - text: "Introduction to R"
-            href: 1_Introduction_to_R.qmd
+            href: 1_introduction_to_r.html  # `.html` for web link
           - text: "Data Import/Export"
-            href: 2_import_export.qmd
-    right:
-      - text: ""
+            href: 2_import_export.html 
+
 format:
   html:
-    allow-html: true
+    include-in-header: styles.css  # Assuming you have styles.css in your project directory
     theme: flatly
+    allow-html: true
 
 title: "DataTax R Course"
 author: "DataTax (Ruggero Doino, Thiago Scott)"

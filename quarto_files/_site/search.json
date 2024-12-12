@@ -105,11 +105,18 @@
     "text": "Further Resources for SQL\n\nTake a look at this extensive list of free resources\nGreat Graduate-level course taught by Grant R. McDermott\nRStudio’s Databases using R is an excellent resource that covers a lot.\nJuan Mayorga’s tutorial, Getting Global Fishing Watch Data from Google Big Query using R, offers a hands-on guide to accessing data and highlights why learning SQL is valuable beyond just using the dplyr translation.\nFor a concise introduction to SQL, Julia Evans’ Become A Select Star is a highly recommended resource.\nGoogle’s official BigQuery documentation provides a deep dive into SQL functions, syntax, and specialized operations, such as handling datetime and JSON objects.\nPlatforms like W3Schools and Codecademy offer numerous free and paid SQL tutorials and courses to enhance your skills."
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to the DataTax R Course",
+    "section": "",
+    "text": "Dive into the world of R programming and its applications in tax data analytics!\n\n\n\nNavigate through the course slide decks:\n\nIntroduction to R\nData Import/Export"
+  },
+  {
     "objectID": "index.html#explore-the-course-content",
     "href": "index.html#explore-the-course-content",
     "title": "Welcome to the DataTax R Course",
-    "section": "📚 Explore the Course Content",
-    "text": "📚 Explore the Course Content\n\n\n&lt;a href=\"1_Introduction_to_R.qmd\" style=\"text-decoration: none; color: #007bff;\"&gt;\n  &lt;strong&gt;Introduction to R&lt;/strong&gt;\n&lt;/a&gt;\n\n\n&lt;a href=\"2_import_export.qmd\" style=\"text-decoration: none; color: #007bff;\"&gt;\n  &lt;strong&gt;Data Import/Export&lt;/strong&gt;\n&lt;/a&gt;"
+    "section": "",
+    "text": "Navigate through the course slide decks:\n\nIntroduction to R\nData Import/Export"
   },
   {
     "objectID": "1_introduction_to_r.html#coding-is-a-journey",
@@ -137,7 +144,7 @@
     "href": "1_introduction_to_r.html#good-practice-in-project-organization",
     "title": "Introduction to R: the basics",
     "section": "Good Practice in Project Organization",
-    "text": "Good Practice in Project Organization\n\nWhen starting a new analysis, organize your work by creating a structured folder system:\n📁 r_training\n\n📂 scripts/ (code)\n📂 data/ (datasets)\n📂 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nUse lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R to maintain consistency and ease management."
+    "text": "Good Practice in Project Organization\n\nWhen starting a new analysis, organize your work by creating a structured folder system:\n📁 r_training\n\n📂 scripts/ (code)\n📁 data/ (datasets)\n📁 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nUse lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R to maintain consistency and ease management."
   },
   {
     "objectID": "1_introduction_to_r.html#understanding-folder-paths",
@@ -157,8 +164,8 @@
     "objectID": "1_introduction_to_r.html#exercise-1-5-mins",
     "href": "1_introduction_to_r.html#exercise-1-5-mins",
     "title": "Introduction to R: the basics",
-    "section": "Exercise 1 (⏰ 5 mins):",
-    "text": "Exercise 1 (⏰ 5 mins):\n\nCreate a folder called r_training on your desktop.\nOpen RStudio.\nCreate a Project:\n\nGo to File &gt; New Project.\nBrowse to the r_training folder on your desktop.\n\nCreate a Script:\n\nClick the blank page icon in the top-left corner to open a new script.\nSave it by clicking the 💾 icon in the toolbar."
+    "section": "Exercise 1 (🕣 5 mins):",
+    "text": "Exercise 1 (🕣 5 mins):\n\nCreate a folder called r_training on your desktop.\nOpen RStudio.\nCreate a Project:\n\nGo to File &gt; New Project.\nBrowse to the r_training folder on your desktop.\n\nCreate a Script:\n\nClick the blank page icon in the top-left corner to open a new script.\nSave it by clicking the 💾 icon in the toolbar."
   },
   {
     "objectID": "1_introduction_to_r.html#basic-math-operations",
@@ -213,7 +220,7 @@
     "objectID": "1_introduction_to_r.html#exercise-1-10-mins",
     "href": "1_introduction_to_r.html#exercise-1-10-mins",
     "title": "Introduction to R: the basics",
-    "section": "Exercise 1 (🕒 10 mins):",
-    "text": "Exercise 1 (🕒 10 mins):\n\nCreating a Sequence:\n\nCreate a sequence of numbers that are multiples of 5, starting from 5 and ending at 50.\nHint: Use the seq() function.\n\nCompute the Mean:\n\nCalculate the mean of the sequence you created in step 2.\n\nLogical Test and Conditional Computation:\n\nCheck if all elements in your sequence are greater than zero.\nThen compute the mean around this new object with only logical elements.\n\nAdding Comments:\n\nAdd comments to your code to explain what each step is doing.\nHint: Use # at the beginning of a line to make it a comment."
+    "section": "Exercise 1 (⌚ 10 mins):",
+    "text": "Exercise 1 (⌚ 10 mins):\n\nCreating a Sequence:\n\nCreate a sequence of numbers that are multiples of 5, starting from 5 and ending at 50.\nHint: Use the seq() function.\n\nCompute the Mean:\n\nCalculate the mean of the sequence you created in step 2.\n\nLogical Test and Conditional Computation:\n\nCheck if all elements in your sequence are greater than zero.\nThen compute the mean around this new object with only logical elements.\n\nAdding Comments:\n\nAdd comments to your code to explain what each step is doing.\nHint: Use # at the beginning of a line to make it a comment."
   }
 ]
