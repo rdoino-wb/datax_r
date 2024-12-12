@@ -326,3 +326,18 @@ section.has-dark-background a, section.has-dark-background a:hover {
     margin: 100px auto 0 auto; /* Centers the block horizontally */
     width: 100%; /* Adjusts the width of the code block */
 }
+
+.navbar img {
+  max-height: 30px;
+  margin-left: auto;
+}
+
+.navbar::after {
+  content: "";
+  display: inline-block;
+  background-image: url("logos/WB-DEC-Impact-horizontal-RGB-high.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 120px; /* Adjust width to fit the logo */
+}

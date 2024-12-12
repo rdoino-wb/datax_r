@@ -1,4 +1,4 @@
 - source: project
   netlify:
     - id: be986388-e14b-40e4-bb1f-5966327f947d
-      url: 'https://preeminent-dusk-9e39c7.netlify.app'
+      url: https://preeminent-dusk-9e39c7.netlify.app

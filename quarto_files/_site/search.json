@@ -103,5 +103,117 @@
     "title": "Data Importing and Writing",
     "section": "Further Resources for SQL",
     "text": "Further Resources for SQL\n\nTake a look at this extensive list of free resources\nGreat Graduate-level course taught by Grant R. McDermott\nRStudio’s Databases using R is an excellent resource that covers a lot.\nJuan Mayorga’s tutorial, Getting Global Fishing Watch Data from Google Big Query using R, offers a hands-on guide to accessing data and highlights why learning SQL is valuable beyond just using the dplyr translation.\nFor a concise introduction to SQL, Julia Evans’ Become A Select Star is a highly recommended resource.\nGoogle’s official BigQuery documentation provides a deep dive into SQL functions, syntax, and specialized operations, such as handling datetime and JSON objects.\nPlatforms like W3Schools and Codecademy offer numerous free and paid SQL tutorials and courses to enhance your skills."
+  },
+  {
+    "objectID": "index.html#explore-the-course-content",
+    "href": "index.html#explore-the-course-content",
+    "title": "Welcome to the DataTax R Course",
+    "section": "📚 Explore the Course Content",
+    "text": "📚 Explore the Course Content\n\n\n&lt;a href=\"1_Introduction_to_R.qmd\" style=\"text-decoration: none; color: #007bff;\"&gt;\n  &lt;strong&gt;Introduction to R&lt;/strong&gt;\n&lt;/a&gt;\n\n\n&lt;a href=\"2_import_export.qmd\" style=\"text-decoration: none; color: #007bff;\"&gt;\n  &lt;strong&gt;Data Import/Export&lt;/strong&gt;\n&lt;/a&gt;"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#coding-is-a-journey",
+    "href": "1_introduction_to_r.html#coding-is-a-journey",
+    "title": "Introduction to R: the basics",
+    "section": "Coding is a Journey",
+    "text": "Coding is a Journey\n\n\n\n\nExcel is widely used for reporting results due to its user-friendliness and ease of learning.\nHowever, it’s prone to manual errors and isn’t ideal for large datasets or complex analyses.\nIt lacks tools for reproducible workflows."
+  },
+  {
+    "objectID": "1_introduction_to_r.html#getting-started-with-rstudio",
+    "href": "1_introduction_to_r.html#getting-started-with-rstudio",
+    "title": "Introduction to R: the basics",
+    "section": "Getting Started with RStudio",
+    "text": "Getting Started with RStudio\nIf you haven’t downloaded it yet, follow these steps:\nStep 1: Download R\n\nGo to the Comprehensive R Archive Network (CRAN): https://cloud.r-project.org\n\n\n\n\n\n\n\nTip\n\n\nR is updated regularly (1 major version/year, 2-3 minor releases). Keeping R up-to-date is recommended, but upgrading to a major version requires reinstalling your packages.\n\n\n\nStep 2: Download RStudio\n\nRStudio is the Integrated Development Environment (IDE) for R programming.\nDownload it here: http://www.rstudio.com/download"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#setting-up-rstudio",
+    "href": "1_introduction_to_r.html#setting-up-rstudio",
+    "title": "Introduction to R: the basics",
+    "section": "Setting Up RStudio",
+    "text": "Setting Up RStudio\n\nAvoid .RData Clutter: Disable automatic loading and saving of .RData to start with a clean workspace.\nSave Your Workspace History: Keeping a history helps you track your commands without needing to save .RData files."
+  },
+  {
+    "objectID": "1_introduction_to_r.html#good-practice-in-project-organization",
+    "href": "1_introduction_to_r.html#good-practice-in-project-organization",
+    "title": "Introduction to R: the basics",
+    "section": "Good Practice in Project Organization",
+    "text": "Good Practice in Project Organization\n\nWhen starting a new analysis, organize your work by creating a structured folder system:\n📁 r_training\n\n📂 scripts/ (code)\n📂 data/ (datasets)\n📂 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nUse lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R to maintain consistency and ease management."
+  },
+  {
+    "objectID": "1_introduction_to_r.html#understanding-folder-paths",
+    "href": "1_introduction_to_r.html#understanding-folder-paths",
+    "title": "Introduction to R: the basics",
+    "section": "Understanding Folder Paths",
+    "text": "Understanding Folder Paths\n\nA path is an address that tells a software where to find a file or folder on your computer.\n\nTwo Types of Paths:\n\nAbsolute Path: /Users/yourname/Desktop/r_training\nRelative Path: r_training/scripts"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#the-advantage-of-using-projects",
+    "href": "1_introduction_to_r.html#the-advantage-of-using-projects",
+    "title": "Introduction to R: the basics",
+    "section": "The Advantage of Using Projects",
+    "text": "The Advantage of Using Projects\nR doesn’t automatically know where your files are. Using an RStudio project creates a shortcut that tells R where to find everything, making your workflow smoother."
+  },
+  {
+    "objectID": "1_introduction_to_r.html#exercise-1-5-mins",
+    "href": "1_introduction_to_r.html#exercise-1-5-mins",
+    "title": "Introduction to R: the basics",
+    "section": "Exercise 1 (⏰ 5 mins):",
+    "text": "Exercise 1 (⏰ 5 mins):\n\nCreate a folder called r_training on your desktop.\nOpen RStudio.\nCreate a Project:\n\nGo to File &gt; New Project.\nBrowse to the r_training folder on your desktop.\n\nCreate a Script:\n\nClick the blank page icon in the top-left corner to open a new script.\nSave it by clicking the 💾 icon in the toolbar."
+  },
+  {
+    "objectID": "1_introduction_to_r.html#basic-math-operations",
+    "href": "1_introduction_to_r.html#basic-math-operations",
+    "title": "Introduction to R: the basics",
+    "section": "Basic Math Operations",
+    "text": "Basic Math Operations\nA simple sum:\n\n99 + 1\n\n[1] 100\n\n\n\nMore complex calculations:\n\n99 + 1 * 2\n\n[1] 101\n\n\n\n\nFollowing mathematical rules:\n\n(99 + 1) * 2\n\n[1] 200\n\n\n\n\nScientific notation:\n\n2 / 100000\n\n[1] 2e-05\n\n\n\n5e3\n\n[1] 5000"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#overview-of-data-types",
+    "href": "1_introduction_to_r.html#overview-of-data-types",
+    "title": "Introduction to R: the basics",
+    "section": "Overview of Data Types",
+    "text": "Overview of Data Types\n\nNumeric values : numbers, as shown in previous examples.\n\n\n\nCharacter Values : Always quoted, e.g., “text”.\n\n\n\n\nLogical Values : Also known as Boolean, representing TRUE or FALSE\n\n\n10  &gt; 9\n\n[1] TRUE\n\n10 == 9\n\n[1] FALSE\n\n10 != 9\n\n[1] TRUE\n\n10 &gt; 9 & 9 &lt; 10\n\n[1] TRUE\n\n10 &gt; 9 | 9 &gt; 10\n\n[1] TRUE\n\n9 %in% 1:10\n\n[1] TRUE"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#importance-of-assigning-results-to-objects",
+    "href": "1_introduction_to_r.html#importance-of-assigning-results-to-objects",
+    "title": "Introduction to R: the basics",
+    "section": "Importance of Assigning Results to Objects",
+    "text": "Importance of Assigning Results to Objects\nIn R, it’s important to assign results to objects to store the values and use them later in your analysis. Think of an object as a named storage location for your data or calculations.\n\nConsider this calculation:\n\nsum_result = 99 + 1\n\n\n\nHere, we assign the result of 99 + 1 to an object called sum_result using the assignment operator = (some people use &lt;- … the community discuss about this here and here).\n\n\nNow, whenever you need the value, you can just use sum_result instead of retyping 99 + 1.\n\n\n\n\n\n\n\n\nNote\n\n\nIn coding, it’s good practice to use only lower case and “_” or “.” for names (snake_case)."
+  },
+  {
+    "objectID": "1_introduction_to_r.html#mathematical-functions",
+    "href": "1_introduction_to_r.html#mathematical-functions",
+    "title": "Introduction to R: the basics",
+    "section": "Mathematical Functions",
+    "text": "Mathematical Functions\nIn economics, we frequently use logarithms:\n\nlog(1)\n\n[1] 0\n\n\n\nR has a large collection of built-in functions, called like this:\n\nfunction_name(argument1 = value1, argument2 = value2, ...)\n\n\n\nFor example, if you want to calculate the natural logarithm of a number…\n\nlog(10)\n\n[1] 2.302585\n\n\n\n\nArguments can also have names, which makes it easy to understand what each input does.\n\nround(3.14159, digits = 2)\n\n[1] 3.14"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#functions-are-our-tool-box",
+    "href": "1_introduction_to_r.html#functions-are-our-tool-box",
+    "title": "Introduction to R: the basics",
+    "section": "Functions Are Our Tool Box 🧰",
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\n\nThe help() function is like R’s built-in manual. Whenever you’re unsure about how a function works or what arguments it accepts, you can use help() to get detailed information.\n\nExample: To learn about the mean() function, type help(mean) or simply ?mean in the R console."
+  },
+  {
+    "objectID": "1_introduction_to_r.html#functions-are-our-tool-box-1",
+    "href": "1_introduction_to_r.html#functions-are-our-tool-box-1",
+    "title": "Introduction to R: the basics",
+    "section": "Functions Are Our Tool Box 🧰",
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\nexample()\n\nWhile help() provides information about a function, example() shows you how to use it with real code snippets.\n\nExample: Type example(sum) in the R console to see various ways to use the sum() function for creating graphs.\n\n\n\n\nsum&gt; ## Pass a vector to sum, and it will add the elements together.\nsum&gt; sum(1:5)\n[1] 15\n\nsum&gt; ## Pass several numbers to sum, and it also adds the elements.\nsum&gt; sum(1, 2, 3, 4, 5)\n[1] 15\n\nsum&gt; ## In fact, you can pass vectors into several arguments, and everything gets added.\nsum&gt; sum(1:2, 3:5)\n[1] 15\n\nsum&gt; ## If there are missing values, the sum is unknown, i.e., also missing, ....\nsum&gt; sum(1:5, NA)\n[1] NA\n\nsum&gt; ## ... unless  we exclude missing values explicitly:\nsum&gt; sum(1:5, NA, na.rm = TRUE)\n[1] 15"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#functions-are-our-tool-box-2",
+    "href": "1_introduction_to_r.html#functions-are-our-tool-box-2",
+    "title": "Introduction to R: the basics",
+    "section": "Functions Are Our Tool Box 🧰",
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\nexample()\nlibrary()\n\nR’s functionality can be extended with packages—collections of functions and datasets created by the community.\n\nInstalling Packages: Before using a package, install it using install.packages(\"packageName\").\nLoading Packages: Use library(packageName) to load the package into your session.\nExample: To use the ggplot2 package for advanced plotting:\n\ninstall.packages(\"ggplot2\")   # Install (only needed once)\nlibrary(ggplot2)              # Load the package"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#exercise-1-10-mins",
+    "href": "1_introduction_to_r.html#exercise-1-10-mins",
+    "title": "Introduction to R: the basics",
+    "section": "Exercise 1 (🕒 10 mins):",
+    "text": "Exercise 1 (🕒 10 mins):\n\nCreating a Sequence:\n\nCreate a sequence of numbers that are multiples of 5, starting from 5 and ending at 50.\nHint: Use the seq() function.\n\nCompute the Mean:\n\nCalculate the mean of the sequence you created in step 2.\n\nLogical Test and Conditional Computation:\n\nCheck if all elements in your sequence are greater than zero.\nThen compute the mean around this new object with only logical elements.\n\nAdding Comments:\n\nAdd comments to your code to explain what each step is doing.\nHint: Use # at the beginning of a line to make it a comment."
   }
 ]
