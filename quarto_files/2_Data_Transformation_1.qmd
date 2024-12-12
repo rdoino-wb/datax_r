@@ -1,7 +1,7 @@
 ---
 title: "Data Importing and Writing"
-subtitle: "`R` Training"
-institute: The World Bank Group - DataTax
+subtitle: "R Training"
+institute: "The World Bank Group - DataTax"
 date: today
 author: ""
 date-format: "dddd, [the] D[<sup style='font-size:65%;font-style:italic;'>th</sup>] [of] MMMM, YYYY"
@@ -413,3 +413,31 @@ fwrite(panel_vat, here("quarto_files", "Solutions", "Data", "Intermediate", "pan
 fwrite(panel_cit, here("quarto_files", "Solutions", "Data", "Intermediate", "panel_cit.csv"))
 
 ```
+
+# Bonus: Connecting `R` to Databases
+
+## Why Connect to Databases?
+
+- Organizations often store data in centralized databases for security and accessibility.
+- Traditional workflows require submitting data requests to IT departments, which can be time-consuming and delay analysis.
+
+. . . 
+
+## The Power o`f R` for Database Access
+
+- `R` allows direct connections to databases, enabling you to:
+  - Query data in real-time.
+  - Import large datasets directly into your `R` environment.
+  
+. . .
+
+## The `DBI` Package: A Common Interface
+
+- The `DBI` package provides a standardized interface for database connections in R.
+  - It supports various database systems, including:
+    - MySQL
+    - PostgreSQL
+    - SQLite
+    - Microsoft SQL Server
+    - Oracle
+- Combine `DBI` with backend-specific packages (e.g., `RMySQL`, `RPostgres`) for seamless access.

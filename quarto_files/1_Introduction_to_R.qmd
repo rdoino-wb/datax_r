@@ -5,12 +5,14 @@ institute: The World Bank Group - DataTax
 date: today
 author: ""
 date-format: "dddd, [the] D[<sup style='font-size:65%;font-style:italic;'>th</sup>] [of] MMMM, YYYY"
+output-dir: "_site/"
 format:
   dime-revealjs:
     # Output file
-    output-file: index.html
+    output-file: 1_introduction_to_r.html
+    code-line-numbers: true
     # Table of Contents
-    toc: true
+    toc: false
     toc_float: false
     toc-depth: 1
     toc-location: left
