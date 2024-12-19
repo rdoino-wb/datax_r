@@ -35,7 +35,7 @@ contributes:
 
 formats:
   revealjs:
-    theme: dime.scss
+    theme: _extensions/dime-worldbank/dime/dime.scss
     slide-number: c/t
     highlight-style: atom-one
     show-slide-number: all
@@ -43,3 +43,5 @@ formats:
       data-background-color: "#FFFFFF"
     preview-links: true
     include-in-header: favicon.html
+
+    

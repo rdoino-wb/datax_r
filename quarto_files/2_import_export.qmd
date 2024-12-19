@@ -46,6 +46,54 @@ data <- read_excel("data_tax.xlsx")
 
 ```
 
+
+------------------------------------------------------------------------
+
+## Good Practice in Project Organization
+
+- When starting a new analysis, organize your work by creating a structured folder system:
+
+- `r emo::ji("folder")` `r_training`
+  - `r emo::ji("folder")` `scripts/` (code)
+  - `r emo::ji("folder")` `data/` (datasets)
+  - `r emo::ji("folder")` `outputs/` (results like plots, tables, etc.)
+
+```{mermaid}
+%%| fig-align: center
+
+graph TD;
+    A[r_training] --> B[scripts];
+    A --> C[data];
+    A --> D[outputs];
+```    
+
+:::{.callout-note}
+Use lowercase and hyphens (`-`) instead of spaces when naming folders, files, and objects in R to maintain consistency and ease management.
+:::
+
+----
+
+## Understanding Folder Paths
+
+- A path is an address that tells a software where to find a file or folder on your computer.
+
+**Two Types of Paths:**
+
+1. **Absolute Path**: `/Users/yourname/Desktop/r_training`
+2. **Relative Path**: `r_training/scripts`
+
+![](images/paths.png){fig-align="center" width="70%"}
+
+------------------------------------------------------------------------
+
+## The Advantage of Using Projects
+
+`R` doesn’t automatically know where your files are. Using an RStudio project creates a shortcut that tells `R` where to find everything, making your workflow smoother.
+
+![](images/project.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
 # Import
 
 ## Preparing Data for R: General Concepts and Best Practices

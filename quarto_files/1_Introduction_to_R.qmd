@@ -7,7 +7,8 @@ author: ""
 date-format: "dddd, [the] D[<sup style='font-size:65%;font-style:italic;'>th</sup>] [of] MMMM, YYYY"
 output-dir: "_site/"
 format:
-  dime-revealjs:
+  revealjs:
+    theme: _extensions/dime-worldbank/dime/dime.scss
     # Output file
     output-file: 1_introduction_to_r.html
     code-line-numbers: true
@@ -34,17 +35,47 @@ library(emo)
 
 ```
 
-# Introduction to `R`
+------------------------------------------------------------------------
+
+## Welcome to the "Introduction to R Course"! {.center}
+
+. . . 
+
+::: incremental
+
+- We will learn to use the `R` programming language!
+
+- Using administrative data familiar to tax administrations. 
+
+::: 
+
+. . . 
+
+**Some pre-requirements**
+
+. . .
+
+`r emo::ji("cross_mark")` The training does not require any background in statistical programming.
+
+. . . 
+
+`r emo::ji("white_check_mark")` A computer with R and RStudio installed is required to complete the exercises.
+
+. . . 
+
+`r emo::ji("white_check_mark")` Internet connection is required to download training materials.
 
 ------------------------------------------------------------------------
 
-### What is `R`? {.unlisted}
+## What is `R`? {.center}
 
--   `R` is an [**object-oriented programming (OOP)**](https://en.wikipedia.org/wiki/Object-oriented_programming) **language** that excels in **statistical analysis** and **data visualization**.
+. . . 
 
-------------------------------------------------------------------------
+`R` is a programming language with powerful statistical and graphic capabilities.
 
-### Why `R`? {.unlisted}
+. . .
+
+### Why `R`?
 
 1.  **Flexible and Powerful**: `R` can handle almost any data-related task, from basic data cleaning and visualization to advanced econometrics, machine learning, spatial analysis, and web scraping.
 
@@ -52,175 +83,109 @@ library(emo)
 ![](images/base.png){height="auto" width="auto"}
 :::
 
+------------------------------------------------------------------------
+
+::: center-slide
 2.  **Free and Open Source**: `R` is open source and free to use. Its open-source nature allows anyone to contribute, ensuring a constantly growing and improving ecosystem of tools.
 
 ::: center
-![](images/open_source.png){width="25%" fig-align="center"}
+![](images/open_source.png){width="20%" fig-align="center"}
 :::
+
+. . .
 
 3.  **Growing Popularity**: `R` has been growing rapidly in popularity.
 
 ::: center
 ![Source: [PYPL Index](https://pypl.github.io/PYPL.html)](images/ranking_r.png){width="50%"}
 :::
+:::
 
+------------------------------------------------------------------------
+
+::: center-slide
 4.  **User-friendly**: `R` offers an Integrated Development Environment (IDE) through RStudio, making it more accessible for new users.
 
 ::: center
 ![](images/R_vs_RStudio_1.png){width="80%" fig-align="center"}
+:::
 :::
 
 ------------------------------------------------------------------------
 
 ## Coding is a Journey
 
-:::: {columns}
-
-::: {.column width="60%" fig-align="center"}
-::: {.incremental}
-- Excel is widely used for reporting results due to its user-friendliness and ease of learning.
-- However, it's prone to manual errors and isn't ideal for large datasets or complex analyses.
-- It lacks tools for reproducible workflows.
+:::::: {columns}
+:::: {.column width="60%" fig-align="center"}
+::: incremental
+-   Excel is widely used for reporting results due to its user-friendliness and ease of learning.
+-   However, it's prone to manual errors and isn't ideal for large datasets or complex analyses.
+-   It lacks tools for reproducible workflows.
 :::
-:::
+::::
 
 ::: {.column width="40%" fig-align="center"}
 ![](images/excel.png){width="80%"}
 :::
+::::::
 
-::::
-
-![](images/trash_1.png){class="fixed-bottom"}
+![](images/trash_1.png){.fixed-bottom}
 
 ------------------------------------------------------------------------
 
-:::: {columns}
-
-::: {.column width="60%" fig-align="center"}
-::: {.incremental}
-- Stata is widely used in economics.
-- Easier to learn than most programming languages but lacks flexibility for custom programming.
-- It can also be expensive.
+:::::: {columns}
+:::: {.column width="60%" fig-align="center"}
+::: incremental
+-   Stata is widely used in economics.
+-   Easier to learn than most programming languages but lacks flexibility for custom programming.
+-   It can also be expensive.
 :::
-:::
+::::
 
 ::: {.column width="40%" fig-align="center"}
 ![](images/stata.png){width="80%"}
 :::
+::::::
 
-::::
-
-![](images/trash_2.png){class="fixed-bottom"}
+![](images/trash_2.png){.fixed-bottom}
 
 ------------------------------------------------------------------------
 
-:::: {columns}
-
-::: {.column width="60%" fig-align="center"}
-::: {.incremental}
-- R is free and open source.
-- It allows multiple datasets to be managed simultaneously, unlike the `keep`, `preserve`, `restore` hackery in other software.
-- Highly flexible and powerful for data analysis.
+:::::: {columns}
+:::: {.column width="60%" fig-align="center"}
+::: incremental
+-   R is free and open source.
+-   It allows multiple datasets to be managed simultaneously, unlike the `keep`, `preserve`, `restore` hackery in other software.
+-   Highly flexible and powerful for data analysis.
 :::
-:::
+::::
 
 ::: {.column width="40%" fig-align="center"}
 ![](images/r.png){width="80%"}
 :::
+::::::
 
-::::
+![](images/trash_3.png){.fixed-bottom}
 
-![](images/trash_3.png){class="fixed-bottom"}
-
-# Introduction to `RStudio`
+# Introduction to `R`
 
 ------------------------------------------------------------------------
 
 ## Getting Started with `RStudio`
 
-If you haven't downloaded it yet, follow these steps:
-
-### Step 1: Download R
-- Go to the **Comprehensive R Archive Network (CRAN)**: [https://cloud.r-project.org](https://cloud.r-project.org)
-
-:::{.callout-tip}
-R is updated regularly (1 major version/year, 2-3 minor releases). Keeping R up-to-date is recommended, but upgrading to a major version requires reinstalling your packages.
+::: {.center}
+**Open RStudio (and not R)**
 :::
 
-### Step 2: Download RStudio
-- RStudio is the **Integrated Development Environment (IDE)** for R programming.
-- Download it here: [http://www.rstudio.com/download](http://www.rstudio.com/download)
+![](images/r-rstudio.png){width="30%" fig-align="center"}
 
-------------------------------------------------------------------------
+. . .
 
-## Setting Up RStudio
-
-- **Avoid .RData Clutter**: Disable automatic loading and saving of `.RData` to start with a clean workspace.
-
-- **Save Your Workspace History**: Keeping a history helps you track your commands without needing to save `.RData` files.
-
-![](images/clean_rstudio.png){width="auto" fig-align="center"}
-
-------------------------------------------------------------------------
-
-## Good Practice in Project Organization
-
-- When starting a new analysis, organize your work by creating a structured folder system:
-
-- `r emo::ji("folder")` `r_training`
-  - `r emo::ji("folder")` `scripts/` (code)
-  - `r emo::ji("folder")` `data/` (datasets)
-  - `r emo::ji("folder")` `outputs/` (results like plots, tables, etc.)
-
-```{mermaid}
-%%| fig-align: center
-
-graph TD;
-    A[r_training] --> B[scripts];
-    A --> C[data];
-    A --> D[outputs];
-```    
-
-:::{.callout-note}
-Use lowercase and hyphens (`-`) instead of spaces when naming folders, files, and objects in R to maintain consistency and ease management.
+::: {.center}
+What's the difference?
 :::
 
-----
-
-## Understanding Folder Paths
-
-- A path is an address that tells a software where to find a file or folder on your computer.
-
-**Two Types of Paths:**
-
-1. **Absolute Path**: `/Users/yourname/Desktop/r_training`
-2. **Relative Path**: `r_training/scripts`
-
-![](images/paths.png){fig-align="center" width="70%"}
-
-------------------------------------------------------------------------
-
-## The Advantage of Using Projects
-
-`R` doesn’t automatically know where your files are. Using an RStudio project creates a shortcut that tells `R` where to find everything, making your workflow smoother.
-
-![](images/project.png){width="auto" fig-align="center"}
-
-------------------------------------------------------------------------
-
-## Exercise 1 (`r emo::ji("clock")` 5 mins):
-
-1. **Create a folder called `r_training` on your desktop.**
-
-2. **Open RStudio**.
-
-3. **Create a Project**:
-   - Go to `File > New Project`.
-   - Browse to the `r_training` folder on your desktop.
-
-4. **Create a Script**:
-   - Click the blank page icon in the top-left corner to open a new script.
-   - Save it by clicking the `r emo::ji("save")` icon in the toolbar.
+![](images/R_vs_RStudio_1.png){width="60%" fig-align="center"}
 
 # Introduction to the Script
 
@@ -228,19 +193,17 @@ Use lowercase and hyphens (`-`) instead of spaces when naming folders, files, an
 
 ### The Script: Your Coding Canvas
 
-:::: {columns}
-
+::::: {columns}
 ::: {.column width="35%"}
-- **`Cmd/Ctrl + Enter`**: Run the current line or selected section of your code.
-- **`Cmd/Ctrl + Shift + S`**: Run the entire script.
-- **Console**: The console is for temporary actions unless saved in your script.
+-   **`Cmd/Ctrl + Enter`**: Run the current line or selected section of your code.
+-   **`Cmd/Ctrl + Shift + S`**: Run the entire script.
+-   **Console**: The console is for temporary actions unless saved in your script.
 :::
 
 ::: {.column width="65%"}
 ![](images/script.gif){fig-align="center"}
 :::
-
-::::
+:::::
 
 # Using R as a Calculator
 
@@ -254,7 +217,7 @@ A simple sum:
 99 + 1
 ```
 
-. . . 
+. . .
 
 More complex calculations:
 
@@ -262,7 +225,7 @@ More complex calculations:
 99 + 1 * 2
 ```
 
-. . . 
+. . .
 
 Following mathematical rules:
 
@@ -270,7 +233,7 @@ Following mathematical rules:
 (99 + 1) * 2
 ```
 
-. . . 
+. . .
 
 Scientific notation:
 
@@ -286,15 +249,15 @@ Scientific notation:
 
 ## Overview of Data Types
 
-- **Numeric values** : numbers, as shown in previous examples. 
+-   **Numeric values** : numbers, as shown in previous examples.
 
-. . . 
+. . .
 
-- **Character Values** : Always quoted, e.g., "text".
+-   **Character Values** : Always quoted, e.g., "text".
 
-. . . 
+. . .
 
-- **Logical Values** : Also known as Boolean, representing `TRUE` or `FALSE`
+-   **Logical Values** : Also known as Boolean, representing `TRUE` or `FALSE`
 
 ```{r operators, echo = TRUE, eval = TRUE}
 10  > 9
@@ -309,12 +272,11 @@ Scientific notation:
 
 ## Importance of Assigning Results to Objects
 
-In R, it's important to assign results to objects to store the values and use them later in your analysis. Think of an object as a named storage location for your data or calculations. 
+In R, it's important to assign results to objects to store the values and use them later in your analysis. Think of an object as a named storage location for your data or calculations.
 
-. . . 
+. . .
 
 Consider this calculation:
-
 
 ```{r math6, echo = TRUE, eval = TRUE}
 sum_result = 99 + 1
@@ -322,16 +284,16 @@ sum_result = 99 + 1
 
 . . .
 
-Here, we assign the result of 99 + 1 to an object called sum_result using the assignment operator `=` (some people use <- ... the community discuss about this [here](https://www.separatinghyperplanes.com/2018/02/why-you-should-use-and-never.html) and [here](https://github.com/geocompx/geocompr/issues/319#issuecomment-427376764)). 
+Here, we assign the result of 99 + 1 to an object called sum_result using the assignment operator `=` (some people use \<- ... the community discuss about this [here](https://www.separatinghyperplanes.com/2018/02/why-you-should-use-and-never.html) and [here](https://github.com/geocompx/geocompr/issues/319#issuecomment-427376764)).
 
-. . . 
+. . .
 
 Now, whenever you need the value, you can just use sum_result instead of retyping 99 + 1.
 
-. . . 
+. . .
 
-::: {.callout-note}
-In coding, it's good practice to use only lower case and "_" or "." for names (`snake_case`). 
+::: callout-note
+In coding, it's good practice to use only lower case and "\_" or "." for names (`snake_case`).
 :::
 
 ------------------------------------------------------------------------
@@ -344,15 +306,15 @@ In economics, we frequently use logarithms:
 log(1)
 ```
 
-. . . 
+. . .
 
 *R has a large collection of built-in functions, called like this:*
 
 ::: center
 `function_name(argument1 = value1, argument2 = value2, ...)`
-::: 
+:::
 
-. . . 
+. . .
 
 For example, if you want to calculate the natural logarithm of a number...
 
@@ -360,9 +322,9 @@ For example, if you want to calculate the natural logarithm of a number...
 log(10)
 ```
 
-. . . 
+. . .
 
-Arguments can also have names, which makes it easy to understand what each input does. 
+Arguments can also have names, which makes it easy to understand what each input does.
 
 ```{r math9, echo = TRUE, eval = TRUE}
 round(3.14159, digits = 2)
@@ -372,99 +334,81 @@ round(3.14159, digits = 2)
 
 ## Functions Are Our Tool Box `r emo::ji("toolbox")`
 
-::: {.columns}
-
+::::: columns
 ::: {.column width="15%"}
 **help()**
 :::
 
 ::: {.column width="85%"}
-
 The `help()` function is like R's built-in manual. Whenever you're unsure about how a function works or what arguments it accepts, you can use `help()` to get detailed information.
 
-- **Example**: To learn about the `mean()` function, type `help(mean)` or simply `?mean` in the R console. 
+-   **Example**: To learn about the `mean()` function, type `help(mean)` or simply `?mean` in the R console.
 
 ![](images/help.png){height="auto" width="auto"}
-
 :::
+:::::
 
-:::
-
-----
+------------------------------------------------------------------------
 
 ## Functions Are Our Tool Box `r emo::ji("toolbox")`
 
-::: {.columns}
-
+::::: columns
 ::: {.column width="15%"}
-
 **help()**
 
 **example()**
-
 :::
 
 ::: {.column width="85%"}
-
 While `help()` provides information about a function, `example()` shows you how to use it with real code snippets.
 
-- **Example**: Type `example(sum)` in the R console to see various ways to use the `sum()` function for creating graphs.
+-   **Example**: Type `example(sum)` in the R console to see various ways to use the `sum()` function for creating graphs.
 
-``` {r example}
+```{r example}
 example(sum)
 ```
-
 :::
+:::::
 
-:::
-
-----
+------------------------------------------------------------------------
 
 ## Functions Are Our Tool Box `r emo::ji("toolbox")`
 
-::: {.columns}
-
+::::: columns
 ::: {.column width="15%"}
-
 **help()**
 
 **example()**
 
 **library()**
-
 :::
 
 ::: {.column width="85%"}
-
 R's functionality can be extended with packages—collections of functions and datasets created by the community.
 
-- **Installing Packages**: Before using a package, install it using `install.packages("packageName")`.
-- **Loading Packages**: Use `library(packageName)` to load the package into your session.
-- **Example**: To use the `ggplot2` package for advanced plotting:
+-   **Installing Packages**: Before using a package, install it using `install.packages("packageName")`.
+-   **Loading Packages**: Use `library(packageName)` to load the package into your session.
+-   **Example**: To use the `ggplot2` package for advanced plotting:
 
-```r
+``` r
 install.packages("ggplot2")   # Install (only needed once)
 library(ggplot2)              # Load the package
 ```
 :::
-
-:::
+:::::
 
 ------------------------------------------------------------------------
 
 ## Exercise 1 (`r emo::ji("clock")` 10 mins):
 
-1. **Creating a Sequence:**
-   - Create a sequence of numbers that are multiples of 5, starting from 5 and ending at 50. 
-   - *Hint*: Use the `seq()` function.
-
-2. **Compute the Mean:**
-   - Calculate the mean of the sequence you created in step 2.
-   
-3. **Logical Test and Conditional Computation:**
-   - Check if all elements in your sequence are greater than zero.
-   - Then compute the mean around this new object with only logical elements.  
-
-4. **Adding Comments:**
-   - Add comments to your code to explain what each step is doing.
-   - *Hint*: Use `#` at the beginning of a line to make it a comment.
+1.  **Creating a Sequence:**
+    -   Create a sequence of numbers that are multiples of 5, starting from 5 and ending at 50.
+    -   *Hint*: Use the `seq()` function.
+2.  **Compute the Mean:**
+    -   Calculate the mean of the sequence you created in step 2.
+3.  **Logical Test and Conditional Computation:**
+    -   Check if all elements in your sequence are greater than zero.
+    -   Then compute the mean around this new object with only logical elements.
+4.  **Adding Comments:**
+    -   Add comments to your code to explain what each step is doing.
+    -   *Hint*: Use `#` at the beginning of a line to make it a comment.
