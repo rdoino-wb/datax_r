@@ -1,18 +1,7 @@
 ---
-title: "Welcome to the DataTax R Course"
-format: 
-  html
+title: ScPoProgramming
+author: "[Florian Oswald](https://floswald.github.io)"
+subtitle: "SciencesPo Paris, Ecole Doctorale 2024"
 ---
 
-# Welcome to the DataTax R Course
-
-Dive into the world of **R programming** and its applications in tax data analytics!
-
----
-
-## 📚 Explore the Course Content
-
-Navigate through the course slide decks:
-
-- [Introduction to R](1_Introduction_to_R.qmd)
-- [Data Import/Export](2_import_export.qmd)
+# Welcome to *Introduction to Programming*

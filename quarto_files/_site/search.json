@@ -109,7 +109,7 @@
     "href": "index.html",
     "title": "Welcome to the DataTax R Course",
     "section": "",
-    "text": "Dive into the world of R programming and its applications in tax data analytics!\n\n\n\nNavigate through the course slide decks:\n\nIntroduction to R\nData Import/Export"
+    "text": "Dive into the world of R programming and its applications in tax data analytics!\n\n\n\nNavigate through the course slide decks:\n\nIntroduction to R\nData Import/Export\n© DataTax (The World Bank), 2025"
   },
   {
     "objectID": "index.html#explore-the-course-content",
@@ -123,7 +123,7 @@
     "href": "1_introduction_to_r.html#coding-is-a-journey",
     "title": "Introduction to R: the basics",
     "section": "Coding is a Journey",
-    "text": "Coding is a Journey\n\n\n\n\nExcel is widely used for reporting results due to its user-friendliness and ease of learning.\nHowever, it’s prone to manual errors and isn’t ideal for large datasets or complex analyses.\nIt lacks tools for reproducible workflows."
+    "text": "Coding is a Journey\n\n\n\n✅ Easy to use.\n❌ Only good for small datasets.\n❌ We don’t keep track of what we do.\n❌ Not straightforward to merge data.\n❌ And the list goes on…"
   },
   {
     "objectID": "1_introduction_to_r.html#getting-started-with-rstudio",
@@ -220,8 +220,8 @@
     "objectID": "1_introduction_to_r.html#exercise-1-10-mins",
     "href": "1_introduction_to_r.html#exercise-1-10-mins",
     "title": "Introduction to R: the basics",
-    "section": "Exercise 1 (🕙 10 mins):",
-    "text": "Exercise 1 (🕙 10 mins):\n\nCreating a Sequence:\n\nCreate a sequence of numbers that are multiples of 5, starting from 5 and ending at 50.\nHint: Use the seq() function.\n\nCompute the Mean:\n\nCalculate the mean of the sequence you created in step 2.\n\nLogical Test and Conditional Computation:\n\nCheck if all elements in your sequence are greater than zero.\nThen compute the mean around this new object with only logical elements.\n\nAdding Comments:\n\nAdd comments to your code to explain what each step is doing.\nHint: Use # at the beginning of a line to make it a comment."
+    "section": "Exercise 1 (🕡 10 mins):",
+    "text": "Exercise 1 (🕡 10 mins):\n\nCreating a Sequence:\n\nCreate a sequence of numbers that are multiples of 5, starting from 5 and ending at 50.\nHint: Use the seq() function.\n\nCompute the Mean:\n\nCalculate the mean of the sequence you created in step 2.\n\nLogical Test and Conditional Computation:\n\nCheck if all elements in your sequence are greater than zero.\nThen compute the mean around this new object with only logical elements.\n\nAdding Comments:\n\nAdd comments to your code to explain what each step is doing.\nHint: Use # at the beginning of a line to make it a comment."
   },
   {
     "objectID": "1_introduction_to_r.html#welcome-to-the-introduction-to-r-course",
@@ -249,7 +249,7 @@
     "href": "1_introduction_to_r.html#what-is-r",
     "title": "Introduction to R: the basics",
     "section": "What is R?",
-    "text": "What is R?\n\nR is a programming language with powerful statistical and graphic capabilities.\n\n\nWhy R?\n\nFlexible and Powerful: R can handle almost any data-related task, from basic data cleaning and visualization to advanced econometrics, machine learning, spatial analysis, and web scraping."
+    "text": "What is R?\n\nR is a programming language with powerful statistical and graphic capabilities."
   },
   {
     "objectID": "1_introduction_to_r.html#why-r",
@@ -257,5 +257,82 @@
     "title": "Introduction to R: the basics",
     "section": "Why R?",
     "text": "Why R?\n\nFlexible and Powerful: R can handle almost any data-related task, from basic data cleaning and visualization to advanced econometrics, machine learning, spatial analysis, and web scraping."
+  },
+  {
+    "objectID": "1_introduction_to_r.html#coding-is-a-journey-1",
+    "href": "1_introduction_to_r.html#coding-is-a-journey-1",
+    "title": "Introduction to R: the basics",
+    "section": "Coding is a Journey",
+    "text": "Coding is a Journey\n\n\n✅ Stata is widely used in economics.\n✅ Easy to learn.\n❌ Only good for small datasets.\n❌ Expensive!\n❌ Lack of flexibility… do you hate keep, preserve, and restore too?"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#coding-is-a-journey-2",
+    "href": "1_introduction_to_r.html#coding-is-a-journey-2",
+    "title": "Introduction to R: the basics",
+    "section": "Coding is a Journey",
+    "text": "Coding is a Journey\n\nToday, our journey ends/starts from R"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#start-your-rstudio",
+    "href": "1_introduction_to_r.html#start-your-rstudio",
+    "title": "Introduction to R: the basics",
+    "section": "Start your RStudio!",
+    "text": "Start your RStudio!\nOpen RStudio (and not R)"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#what-is-r-1",
+    "href": "1_introduction_to_r.html#what-is-r-1",
+    "title": "Introduction to R: the basics",
+    "section": "What is R?",
+    "text": "What is R?\nR is a programming language with powerful statistical and graphic capabilities."
+  },
+  {
+    "objectID": "1_introduction_to_r.html#and-what-about-excel",
+    "href": "1_introduction_to_r.html#and-what-about-excel",
+    "title": "Introduction to R: the basics",
+    "section": "And what about Excel?",
+    "text": "And what about Excel?\n\n\n\n✅ Easy to use.\n❌ Only good for small datasets.\n❌ We don’t keep track of what we do.\n❌ Not straightforward to merge data.\n❌ And the list goes on…"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#and-what-about-stata",
+    "href": "1_introduction_to_r.html#and-what-about-stata",
+    "title": "Introduction to R: the basics",
+    "section": "And what about STATA?",
+    "text": "And what about STATA?\n\n\n✅ Stata is widely used in economics.\n✅ Easy to learn.\n❌ Only good for small datasets.\n❌ Expensive!\n❌ Lack of flexibility… do you hate keep, preserve, and restore too?"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#you-should-see-this",
+    "href": "1_introduction_to_r.html#you-should-see-this",
+    "title": "Introduction to R: the basics",
+    "section": "You should see this!",
+    "text": "You should see this!\n\nIf you don’t, make sure you opened RStudio and not R!"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#rstudio-layout",
+    "href": "1_introduction_to_r.html#rstudio-layout",
+    "title": "Introduction to R: the basics",
+    "section": "RStudio Layout",
+    "text": "RStudio Layout"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#section",
+    "href": "1_introduction_to_r.html#section",
+    "title": "Introduction to R: the basics",
+    "section": "",
+    "text": "The Script: Your Coding Canvas\n\n\n\nCmd/Ctrl + Enter: Run the current line or selected section of your code.\nCmd/Ctrl + Shift + S: Run the entire script.\nConsole: The console is for temporary actions unless saved in your script."
+  },
+  {
+    "objectID": "1_introduction_to_r.html#rstudio-interface",
+    "href": "1_introduction_to_r.html#rstudio-interface",
+    "title": "Introduction to R: the basics",
+    "section": "RStudio Interface",
+    "text": "RStudio Interface"
+  },
+  {
+    "objectID": "1_introduction_to_r.html#console",
+    "href": "1_introduction_to_r.html#console",
+    "title": "Introduction to R: the basics",
+    "section": "Console",
+    "text": "Console"
   }
 ]

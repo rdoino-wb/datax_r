@@ -71,123 +71,108 @@ library(emo)
 
 . . . 
 
-`R` is a programming language with powerful statistical and graphic capabilities.
+**`R`** is a **programming language** with powerful statistical and graphic capabilities.
 
-. . .
+. . . 
 
-### Why `R`?
+![](images/data_cooking_1.png){height="auto" width="auto" fig-align="center"}
 
-1.  **Flexible and Powerful**: `R` can handle almost any data-related task, from basic data cleaning and visualization to advanced econometrics, machine learning, spatial analysis, and web scraping.
+. . . 
 
-::: center
-![](images/base.png){height="auto" width="auto"}
-:::
+![](images/data_cooking_2.png){height="auto" width="auto" fig-align="center"}
 
 ------------------------------------------------------------------------
 
-::: center-slide
-2.  **Free and Open Source**: `R` is open source and free to use. Its open-source nature allows anyone to contribute, ensuring a constantly growing and improving ecosystem of tools.
+### Why should we use `R`? 
 
-::: center
-![](images/open_source.png){width="20%" fig-align="center"}
-:::
+1. **`R`** is very **flexible** and **powerful—adaptable** to nearly any task, (data cleaning, data visualization, econometrics, spatial data analysis, machine learning, web scraping, etc.)
 
-. . .
+![](images/base.png){height="auto" width="50%" fig-align="center"}
 
-3.  **Growing Popularity**: `R` has been growing rapidly in popularity.
-
-::: center
-![Source: [PYPL Index](https://pypl.github.io/PYPL.html)](images/ranking_r.png){width="50%"}
-:::
-:::
-
-------------------------------------------------------------------------
-
-::: center-slide
-4.  **User-friendly**: `R` offers an Integrated Development Environment (IDE) through RStudio, making it more accessible for new users.
-
-::: center
-![](images/R_vs_RStudio_1.png){width="80%" fig-align="center"}
-:::
-:::
-
-------------------------------------------------------------------------
-
-## Coding is a Journey
-
-:::::: {columns}
-:::: {.column width="60%" fig-align="center"}
-::: incremental
--   Excel is widely used for reporting results due to its user-friendliness and ease of learning.
--   However, it's prone to manual errors and isn't ideal for large datasets or complex analyses.
--   It lacks tools for reproducible workflows.
-:::
-::::
-
-::: {.column width="40%" fig-align="center"}
-![](images/excel.png){width="80%"}
-:::
-::::::
-
-![](images/trash_1.png){.fixed-bottom}
+2.  **`R`** is **open source** and **free** to use - allowing both you and your instituion to save money!
 
 ------------------------------------------------------------------------
 
 :::::: {columns}
-:::: {.column width="60%" fig-align="center"}
-::: incremental
--   Stata is widely used in economics.
--   Easier to learn than most programming languages but lacks flexibility for custom programming.
--   It can also be expensive.
-:::
+:::: {.column width="30%"}
+3. **`R`** has been growing rapidly in **popularity**.
 ::::
 
-::: {.column width="40%" fig-align="center"}
-![](images/stata.png){width="80%"}
+::: {.column width="70%" fig-align="center"}
+![Source: [PYPL Index, 2024](https://pypl.github.io/PYPL.html)](images/ranking_r.png){width="65%"}
 :::
 ::::::
 
-![](images/trash_2.png){.fixed-bottom}
+. . . 
 
-------------------------------------------------------------------------
+4.  **`R`** offers a **great interface** - **`RStudio`**.
 
-:::::: {columns}
-:::: {.column width="60%" fig-align="center"}
-::: incremental
--   R is free and open source.
--   It allows multiple datasets to be managed simultaneously, unlike the `keep`, `preserve`, `restore` hackery in other software.
--   Highly flexible and powerful for data analysis.
-:::
-::::
-
-::: {.column width="40%" fig-align="center"}
-![](images/r.png){width="80%"}
-:::
-::::::
-
-![](images/trash_3.png){.fixed-bottom}
-
-# Introduction to `R`
-
-------------------------------------------------------------------------
-
-## Getting Started with `RStudio`
-
-::: {.center}
-**Open RStudio (and not R)**
-:::
-
-![](images/r-rstudio.png){width="30%" fig-align="center"}
-
-. . .
-
-::: {.center}
-What's the difference?
-:::
-
+::: center
 ![](images/R_vs_RStudio_1.png){width="60%" fig-align="center"}
+:::
 
-# Introduction to the Script
+------------------------------------------------------------------------
+
+## And what about `Excel`? {.center}
+
+. . .
+
+:::::: {columns}
+:::: {.column width="40%" fig-align="center"}
+`r emo::ji("white_check_mark")` Easy to use. 
+
+`r emo::ji("cross_mark")` Only good for small datasets.
+
+`r emo::ji("cross_mark")` We don't keep track of what we do. 
+
+`r emo::ji("cross_mark")` Not straightforward to merge data. 
+
+`r emo::ji("cross_mark")` And the list goes on...
+::::
+
+::: {.column width="55%" fig-align="right"}
+![](images/excel.png){width="auto"}
+:::
+::::::
+
+------------------------------------------------------------------------
+
+## And what about `STATA`? {.center}
+
+:::::: {columns}
+:::: {.column width="40%" fig-align="center"}
+`r emo::ji("white_check_mark")` Stata is widely used in economics.
+
+`r emo::ji("white_check_mark")` Easy to learn. 
+
+`r emo::ji("cross_mark")` Only good for small datasets.
+
+`r emo::ji("cross_mark")` Expensive! 
+
+`r emo::ji("cross_mark")` Lack of flexibility... do you hate `keep`, `preserve`, and `restore` too?
+
+::::
+
+::: {.column width="55%" fig-align="right"}
+![](images/stata.png){width="auto"}
+:::
+::::::
+
+# Start your `RStudio`!
+
+------------------------------------------------------------------------
+
+## You should see this! {.center}
+
+![](images/rstudio-panels.png){width="auto" fig-align="center"}
+
+If you don't, make sure you opened `RStudio` and not `R`!
+
+------------------------------------------------------------------------
+
+## Console
+
+![](images/rstudio-example.png){width="auto" fig-align="center"}
 
 ------------------------------------------------------------------------
 
@@ -198,10 +183,6 @@ What's the difference?
 -   **`Cmd/Ctrl + Enter`**: Run the current line or selected section of your code.
 -   **`Cmd/Ctrl + Shift + S`**: Run the entire script.
 -   **Console**: The console is for temporary actions unless saved in your script.
-:::
-
-::: {.column width="65%"}
-![](images/script.gif){fig-align="center"}
 :::
 :::::
 

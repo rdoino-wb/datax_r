@@ -18,16 +18,16 @@ $font-family-sans-serif: 'Lato', sans-serif !default;
 $presentation-heading-font: 'Lato', sans-serif  !default;
 
 $h1-font-size: 1.6em !default;
-$h1-color: #4090BE !default;
+$h1-color: #07202E !default;
 
 $h2-font-size: 1.3em !default;
 $h2-color: #4090BE !default;
 
 $h3-font-size: 1.3em !default;
-$h3-color: #07202E !default;
+$h3-color: #4090BE !default;
 
 //code
-$code-color: #4090BE !default;
+$code-color: #047EC2 !default;
 $font-family-monospace: 'Inconsolata', monospace  !default;
 
 // general  
@@ -49,22 +49,29 @@ $math-fontsize: 80%;
   line-height: 1.2em;
 }
 
-h1 {
+// Explicitly apply styles for headings
+.reveal h1 {
   font-family: $presentation-heading-font;
   font-size: $h1-font-size;
-  color: $h1-color; /* Explicitly use the color variable */
+  color: $h1-color;
 }
 
-h2 {
+.reveal h2 {
   font-family: $presentation-heading-font;
   font-size: $h2-font-size;
   color: $h2-color;
 }
 
-h3 {
+.reveal h3 {
   font-family: $presentation-heading-font;
   font-size: $h3-font-size;
   color: $h3-color;
+}
+
+// Explicitly apply styles for code
+.reveal code, .reveal pre {
+  font-family: $font-family-monospace;
+  color: $code-color;
 }
 
 code, pre {
@@ -89,6 +96,8 @@ code, pre {
   text-align: left;
   
   .title {
+
+    color: $solid-blue;
     font-size: 1.5em;
     border-bottom: 5px solid $link-color;
   }
@@ -373,8 +382,8 @@ section.has-dark-background a, section.has-dark-background a:hover {
 .center-slide {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   height: 100%;
-  text-align: center;
+  text-align: left;
 }
