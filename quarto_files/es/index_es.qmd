@@ -1,0 +1,42 @@
+---
+title: "Welcome to DataTax R Course"
+lang: es
+---
+
+Este sitio web es tu punto central para participar en el taller, donde aprenderás **programación en R** 🖥️ y sus aplicaciones en **investigación y análisis de datos** 📊 con un enfoque en datos fiscales y administrativos.
+
+---
+
+## Objetivos de este Curso 🎯
+- Comprender los conceptos básicos de la **programación en R** y cómo aplicarlos de manera efectiva.  
+- Aprender a **manipular, limpiar y analizar datos** con R.  
+- Adquirir experiencia práctica con **conjuntos de datos fiscales y administrativos reales**.  
+- Construir una base para la **investigación reproducible** y la **visualización de datos** 📊.  
+- Desarrollar habilidades para automatizar tareas repetitivas y optimizar flujos de trabajo 🔄.
+
+---
+
+## Qué Necesitas Saber:
+- **No se requiere experiencia previa en programación**—¡este taller está diseñado para principiantes completos! 🐣  
+- **Antes del taller**: Sigue las instrucciones de configuración a continuación para asegurarte de estar listo para comenzar. ✅  
+- **Materiales**: Todos los materiales del curso están accesibles aquí y en el [repositorio de GitHub](#). 📂  
+
+---
+  
+## Cómo Instalar R y RStudio 🛠️
+
+1. **Instalar R**:
+   - Visita el [sitio web del Proyecto CRAN R](https://cran.r-project.org/).
+   - Selecciona el enlace de descarga adecuado para tu sistema operativo (Windows, macOS o Linux).
+   - Sigue las instrucciones de instalación proporcionadas en el sitio web.
+
+2. **Instalar RStudio**:
+   - Visita el [sitio web de RStudio](https://posit.co/download/rstudio-desktop/).
+   - Descarga la versión gratuita de RStudio Desktop para tu sistema operativo.
+   - Ejecuta el instalador y sigue las instrucciones en pantalla.
+
+3. **Verificar la Instalación**:
+   - Abre RStudio y verifica que se inicie correctamente.  
+
+5. **¿Necesitas Más Ayuda?**  
+   Para instrucciones detalladas paso a paso sobre la instalación, visita esta excelente guía: [Tutorial de DataCamp sobre la Instalación de R y RStudio](https://www.datacamp.com/tutorial/installing-R-windows-mac-ubuntu?dc_referrer=https%3A%2F%2Fraw.githack.com%2F).

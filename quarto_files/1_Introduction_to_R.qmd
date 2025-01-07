@@ -139,6 +139,8 @@ library(emo)
 
 ## And what about `STATA`? {.center}
 
+. . . 
+
 :::::: {columns}
 :::: {.column width="40%" fig-align="center"}
 `r emo::ji("white_check_mark")` Stata is widely used in economics.
@@ -170,21 +172,45 @@ If you don't, make sure you opened `RStudio` and not `R`!
 
 ------------------------------------------------------------------------
 
-## Console
+## Console {.center}
 
 ![](images/rstudio-example.png){width="auto" fig-align="center"}
 
 ------------------------------------------------------------------------
 
-### The Script: Your Coding Canvas
+**Let's begin by writing your R scripts (source code) in the Source pane.**
 
-::::: {columns}
-::: {.column width="35%"}
--   **`Cmd/Ctrl + Enter`**: Run the current line or selected section of your code.
--   **`Cmd/Ctrl + Shift + S`**: Run the entire script.
--   **Console**: The console is for temporary actions unless saved in your script.
-:::
-:::::
+![](images/rstudio_2.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+**You can use the menubar or Ctrl + Shift + N to create new R scripts.**
+
+![](images/rstudio_3.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+**Scripts help us document and organize the steps we want to perform.**
+
+![](images/rstudio_4.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+**To run a command, type it in the Source pane and press Ctrl+Enter (Windows) to execute it in the Console.**
+
+![](images/rstudio_5.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+**The result will appear in the Console pane (bottom-left panel).**
+
+![](images/rstudio_6.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+**The Environment pane displays all the objects you’ve created during your session.**
+
+![](images/rstudio_7.png){width="auto" fig-align="center"}
 
 # Using R as a Calculator
 
@@ -383,7 +409,7 @@ library(ggplot2)              # Load the package
 ## Exercise 1 (`r emo::ji("clock")` 10 mins):
 
 1.  **Creating a Sequence:**
-    -   Create a sequence of numbers that are multiples of 5, starting from 5 and ending at 50.
+    -   Create a sequence of numbers that are multiples of 5, starting from 0 and ending at 50.
     -   *Hint*: Use the `seq()` function.
 2.  **Compute the Mean:**
     -   Calculate the mean of the sequence you created in step 2.
@@ -393,3 +419,43 @@ library(ggplot2)              # Load the package
 4.  **Adding Comments:**
     -   Add comments to your code to explain what each step is doing.
     -   *Hint*: Use `#` at the beginning of a line to make it a comment.
+
+------------------------------------------------------------------------
+
+## Solutions
+
+```{r exercise_1, echo = TRUE, eval = FALSE}
+
+# Step 1: Creating a Sequence
+# Create a sequence of numbers that are multiples of 5, from 0 to 50.
+# Use the seq() function to generate the sequence and assign it to an object named 'sequence'.
+sequence <- seq(from = 0, to = 50, by = 5)
+
+# Print the sequence to verify it was created correctly.
+print(sequence) # Output: [1] 0 5 10 15 20 25 30 35 40 45 50
+
+
+# Step 2: Compute the Mean
+# Calculate the mean of the sequence created above using the mean() function.
+mean_sequence <- mean(sequence)
+
+# Print the mean to verify the calculation.
+print(mean_sequence) # Output: [1] 27.5
+
+
+# Step 3: Logical Test and Conditional Computation
+# Check if all elements in the sequence are greater than zero.
+# Use the ">" operator and assign the result to a new object named 'logical_test'.
+logical_test <- sequence > 0
+
+# Print the logical test result to see which elements satisfy the condition.
+print(logical_test) # Output: [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+
+# Compute the mean of the logical test result.
+# This will treat TRUE as 1 and FALSE as 0.
+mean_logical <- mean(logical_test)
+
+# Print the mean of the logical test result.
+print(mean_logical) # Output: [1] 0.9090909
+
+```

@@ -1,5 +1,5 @@
 ---
-title: "Data Importing and Writing"
+title: "Data Importing, Tyding and Writing"
 subtitle: "R Training"
 institute: "The World Bank Group - DataTax"
 date: today
@@ -8,7 +8,6 @@ date-format: "dddd, [the] D[<sup style='font-size:65%;font-style:italic;'>th</su
 knitr:
   opts_chunk:
     dev: 'png'
-output-dir: "_site/"
 format:
   dime-revealjs:
     embed-resources: true
@@ -42,12 +41,10 @@ library(readxl)
 library(dplyr)
 
 # Importing data from an .xlsx file
-data <- read_excel("data_tax.xlsx")
+data <- read_excel("Exercises/data_tax.xlsx")
 
 ```
-
-
-------------------------------------------------------------------------
+# Folder Management `r emo::ji("folder")`
 
 ## Good Practice in Project Organization
 
@@ -94,7 +91,42 @@ Use lowercase and hyphens (`-`) instead of spaces when naming folders, files, an
 
 ------------------------------------------------------------------------
 
-# Import
+## Organizing the `data` Folder
+
+```{mermaid}
+%%| fig-align: center
+
+graph TD;
+    A[data] --> B[Raw];
+    A --> C[Intermediate];
+    A --> D[Final];
+```
+
+:::: {.columns}
+
+::: {.column width="33%" .fragment}
+### `Raw`
+- Original, untouched data.  
+- Backup recommended to preserve integrity.  
+:::
+
+::: {.column width="33%" .fragment}
+### `Intermediate`
+- Data formatted, renamed, and tidied.  
+- Ready for further cleaning.  
+:::
+
+::: {.column width="33%" .fragment}
+### `Final`
+- Cleaned and transformed data.  
+- Ready for graphs, tables, and regressions.  
+:::
+
+::::
+
+# Import {.center}
+
+![](images/import.png){width="auto" fig-align="center"}
 
 ## Preparing Data for R: General Concepts and Best Practices
 
@@ -343,6 +375,99 @@ head(panel_cit)
 # Column names look consistent, so no need for further cleaning
 
 ```
+
+# Tyding Data 
+
+## Tidy Tax Administrative Data {.center}
+
+. . . 
+
+**What is Tidy Data?**
+
+Tidy data organizes tax administrative data into a consistent, analysis-ready format:
+
+. . . 
+
+1. **Each variable is a column; each column is a variable.**
+
+. . .
+
+2. **Each observation is a row; each row is an observation.**
+
+. . .
+
+3. **Each value is a cell; each cell is a single value.**
+
+. . .
+
+![](images/tidy.png){fig-align="center"}
+
+---
+
+::: {.fragment}
+
+### Let's take a look at this dataset 
+
+| Taxpayer ID | Tax Type   | 2021 Q1 | 2021 Q2 | 2021 Q3 | 2021 Q4 |
+|-------------|------------|---------|---------|---------|---------|
+| 101         | Income Tax | 500     | 600     | 450     | 700     |
+| 102         | VAT        | 300     | 400     | 350     | 500     |
+
+:::
+
+::: {.fragment}
+
+**What are the variables?** 
+
+:::
+
+::: {.fragment}
+
+Taxpayer ID, Tax Type, Quarter, Payment Amount.
+
+::: 
+
+::: {.fragment}
+
+**What constitutes a single observation in this dataset?** 
+
+:::
+
+::: {.fragment}
+
+One observation is a specific tax payment for a taxpayer during a particular quarter.
+
+::: 
+
+::: {.fragment}
+
+**How would you reshape the dataset to meet the three key tidy characteristics?** 
+:::
+
+::: {.fragment}
+
+  - Each variable is a column; each column is a variable.
+
+  - Each observation is a row; each row is an observation.
+
+  - Each value is a cell; each cell is a single value.
+
+:::
+
+---
+
+### Example: Tidy Data
+
+| Taxpayer ID | Tax Type   | Quarter | Payment Amount |
+|-------------|------------|---------|----------------|
+| 101         | Income Tax | 2021 Q1 | 500            |
+| 101         | Income Tax | 2021 Q2 | 600            |
+| 101         | Income Tax | 2021 Q3 | 450            |
+| 101         | Income Tax | 2021 Q4 | 700            |
+| 102         | VAT        | 2021 Q1 | 300            |
+| 102         | VAT        | 2021 Q2 | 400            |
+| 102         | VAT        | 2021 Q3 | 350            |
+| 102         | VAT        | 2021 Q4 | 500            |
 
 # Writing Data in R
 

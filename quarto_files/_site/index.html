@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Florian Oswald">
 
-<title>ScPoProgramming – DataTax R Course</title>
+<title>DataTax R Course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href=".//logos/favicon.html" rel="icon" type="text/html">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-0626ff4d7a71b55c8707dcae1d04a9b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c09050f20ddd9378a4eb2489f038e06e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8425ab94aa1d255775d6e0fa420d7b53.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="style.scss">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -79,6 +79,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./logos/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">DataTax R Course</span>
     </a>
@@ -94,6 +97,31 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-language-🌐" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Language 🌐</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-language-🌐">    
+        <li>
+    <a class="dropdown-item" href="./en/index_es.html">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./es/index_es.html">
+ <span class="dropdown-text">Español</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./pt/index_pt.html">
+ <span class="dropdown-text">Português</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./fr/index_fr.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -104,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">ScPoProgramming</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -128,13 +156,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./1_introduction_to_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to R</span></a>
+ <span class="menu-text">1. Introduction to R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./2_import_export.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Import/Export</span></a>
+ <span class="menu-text">2. Data Import/Export</span></a>
   </div>
 </li>
       </ul>
@@ -149,43 +177,73 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome-to-introduction-to-programming" id="toc-welcome-to-introduction-to-programming" class="nav-link active" data-scroll-target="#welcome-to-introduction-to-programming">Welcome to <em>Introduction to Programming</em></a></li>
+  <li><a href="#welcome-to-introduction-to-programming-in-r" id="toc-welcome-to-introduction-to-programming-in-r" class="nav-link active" data-scroll-target="#welcome-to-introduction-to-programming-in-r">Welcome to <em>Introduction to Programming in R</em> 🎉</a>
+  <ul class="collapse">
+  <li><a href="#objectives-of-this-course" id="toc-objectives-of-this-course" class="nav-link" data-scroll-target="#objectives-of-this-course">Objectives of this Course 🎯</a></li>
+  <li><a href="#what-you-need-to-know" id="toc-what-you-need-to-know" class="nav-link" data-scroll-target="#what-you-need-to-know">What You Need to Know:</a></li>
+  <li><a href="#how-to-install-r-and-rstudio" id="toc-how-to-install-r-and-rstudio" class="nav-link" data-scroll-target="#how-to-install-r-and-rstudio">How to Install R and RStudio 🛠️</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">ScPoProgramming</h1>
-<p class="subtitle lead">SciencesPo Paris, Ecole Doctorale 2024</p>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p><a href="https://floswald.github.io">Florian Oswald</a> </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
+<section id="welcome-to-introduction-to-programming-in-r" class="level1">
+<h1>Welcome to <em>Introduction to Programming in R</em> 🎉</h1>
+<p>This website is your central hub for participating in the workshop, where you’ll learn <strong>R programming</strong> 🖥️ and its applications in <strong>research and data analysis</strong> 📊 with a focus on tax and administrative data.</p>
+<section id="objectives-of-this-course" class="level3">
+<h3 class="anchored" data-anchor-id="objectives-of-this-course">Objectives of this Course 🎯</h3>
+<ul>
+<li>Understand the basics of <strong>R programming</strong> and how to apply it effectively.<br>
+</li>
+<li>Learn to <strong>manipulate, clean, and analyze data</strong> with R.<br>
+</li>
+<li>Gain hands-on experience with <strong>real-world tax and administrative datasets</strong>.<br>
+</li>
+<li>Build a foundation for <strong>reproducible research</strong> and <strong>data visualization</strong> 📊.<br>
+</li>
+<li>Develop skills to automate repetitive tasks and streamline workflows 🔄.</li>
+</ul>
+</section>
+<section id="what-you-need-to-know" class="level3">
+<h3 class="anchored" data-anchor-id="what-you-need-to-know">What You Need to Know:</h3>
+<ul>
+<li><strong>No prior programming experience required</strong>—this workshop is designed for complete beginners! 🐣<br>
+</li>
+<li><strong>Before the workshop</strong>: Follow the setup instructions below to ensure you’re ready to dive in. ✅<br>
+</li>
+<li><strong>Materials</strong>: All course materials are accessible here and via the <a href="#">GitHub repository</a>. 📂</li>
+</ul>
+</section>
+<section id="how-to-install-r-and-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-install-r-and-rstudio">How to Install R and RStudio 🛠️</h3>
+<ol type="1">
+<li><strong>Install R</strong>:
+<ul>
+<li>Visit the <a href="https://cran.r-project.org/">CRAN R Project Website</a>.</li>
+<li>Select the appropriate download link for your operating system (Windows, macOS, or Linux).</li>
+<li>Follow the installation instructions provided on the website.</li>
+</ul></li>
+<li><strong>Install RStudio</strong>:
+<ul>
+<li>Visit the <a href="https://posit.co/download/rstudio-desktop/">RStudio Website</a>.</li>
+<li>Download the free RStudio Desktop version for your operating system.</li>
+<li>Run the installer and follow the on-screen instructions.</li>
+</ul></li>
+<li><strong>Verify the Installation</strong>:
+<ul>
+<li>Open RStudio and check that it launches correctly.</li>
+</ul></li>
+<li><strong>Need More Help?</strong><br>
+For detailed, step-by-step installation instructions, visit this excellent guide: <a href="https://www.datacamp.com/tutorial/installing-R-windows-mac-ubuntu?dc_referrer=https%3A%2F%2Fraw.githack.com%2F">DataCamp Tutorial on Installing R and RStudio</a>.</li>
+</ol>
 
 
-</header>
-
-
-<section id="welcome-to-introduction-to-programming" class="level1">
-<h1>Welcome to <em>Introduction to Programming</em></h1>
-
-
+</section>
 </section>
 
 </main> <!-- /main -->

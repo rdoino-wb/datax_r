@@ -4,112 +4,187 @@
     "href": "2_import_export.html#preparing-data-for-r-general-concepts-and-best-practices",
     "title": "Data Importing and Writing",
     "section": "Preparing Data for R: General Concepts and Best Practices",
-    "text": "Preparing Data for R: General Concepts and Best Practices\n\n\nDocument Types organizations extensively rely on spreadsheets (read)\n\nCommon data formats include:\n\nSpreadsheets (.csv, .xlsx, xls…): Standard for structured data.\nDTA (.dta): Used for data from STATA.\n\n\nSpreadsheets\n\nCSV is generally preferable:\n\nEasier to import and process.\nMore compatible across different systems and software and much lighter.\n\n\n\n\n\n\n\n\n\n\n\nAdvanced\n\n\nThe Apache Arrow format is designed to handle large data sets efficiently, making it suitable for big data analysis. Arrow files offer faster read/write operations compared to traditional formats."
+    "text": "Preparing Data for R: General Concepts and Best Practices\n\n\nDocument Types organizations extensively rely on spreadsheets (read)\n\nCommon data formats include:\n\nSpreadsheets (.csv, .xlsx, xls…): Standard for structured data.\nDTA (.dta): Used for data from STATA.\n\n\nSpreadsheets\n\nCSV is generally preferable:\n\nEasier to import and process.\nMore compatible across different systems and software and much lighter.\n\n\n\n\n\n\n\n\n\n\n\nAdvanced\n\n\nThe Apache Arrow format is designed to handle large data sets efficiently, making it suitable for big data analysis. Arrow files offer faster read/write operations compared to traditional formats.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#importing-data-into-r",
     "href": "2_import_export.html#importing-data-into-r",
     "title": "Data Importing and Writing",
     "section": "Importing Data into R",
-    "text": "Importing Data into R\n\nMain Import Methods\n\nThe library readxl provides some useful functions\n\nread_xls() for XLS files (.xls).\nread_xlsx() for Excel files (.xlsx).\nread_csv() CSV files (.csv).\nread_parquet() for .dta files, using the haven package.\nreadRDS() for .RDS files.\n\n\n\n\n\nExample: Importing an .xlsx File\n\nTo import an Excel file, you’ll need to load the readxl package\n\n\n\n# Install the package if necessary\ninstall.packages(\"readxl\")\n\n# Load the readxl package\nlibrary(readxl)\n\n# Importing data from an .xlsx file\ndata &lt;- read_excel(\"data_tax.xlsx\")"
+    "text": "Importing Data into R\n\nMain Import Methods\n\nThe library readxl provides some useful functions\n\nread_xls() for XLS files (.xls).\nread_xlsx() for Excel files (.xlsx).\nread_csv() CSV files (.csv).\nread_parquet() for .dta files, using the haven package.\nreadRDS() for .RDS files.\n\n\n\n\n\nExample: Importing an .xlsx File\n\nTo import an Excel file, you’ll need to load the readxl package\n\n\n\n# Install the package if necessary\ninstall.packages(\"readxl\")\n\n# Load the readxl package\nlibrary(readxl)\n\n# Importing data from an .xlsx file\ndata &lt;- read_excel(\"data_tax.xlsx\")",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#practical-steps-right-after-importing-data",
     "href": "2_import_export.html#practical-steps-right-after-importing-data",
     "title": "Data Importing and Writing",
     "section": "Practical Steps Right After Importing Data",
-    "text": "Practical Steps Right After Importing Data\n\nOnce data is imported, we first want to take a look at it 👀\n\n\n# print the first 5 rows\nhead(data)\n\n# A tibble: 6 × 7\n  `Taxpayer ID` Name       `Tax Filing Year` `Taxable Income` `Tax Paid` Region\n  &lt;chr&gt;         &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; \n1 TX001         John Doe                2020            89854       8985 North \n2 TX001         John Doe                2021            65289       6528 North \n3 TX001         John Doe                2022            87053       8705 North \n4 TX001         John Doe                2023            58685       5868 North \n5 TX002         Jane Smith              2020            97152       9715 South \n6 TX002         Jane Smith              2021            62035       6203 South \n# ℹ 1 more variable: `Payment Date` &lt;dttm&gt;\n\n# open the entire dataset \n# View(data)\n\n# we can mix them together\n# View(head(data))\n\n\n\n\n\n\n\n\nNote\n\n\nYou might also notice that the Taxpayer ID and Full Name columns are surrounded by back-ticks. This is because they contain spaces, which breaks R’s standard naming rules, making them non-syntactic names. To refer to these variables in R, you need to enclose them in back-ticks."
+    "text": "Practical Steps Right After Importing Data\n\nOnce data is imported, we first want to take a look at it 👀\n\n\n# print the first 5 rows\nhead(data)\n\n# A tibble: 6 × 7\n  `Taxpayer ID` Name       `Tax Filing Year` `Taxable Income` `Tax Paid` Region\n  &lt;chr&gt;         &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; \n1 TX001         John Doe                2020            89854       8985 North \n2 TX001         John Doe                2021            65289       6528 North \n3 TX001         John Doe                2022            87053       8705 North \n4 TX001         John Doe                2023            58685       5868 North \n5 TX002         Jane Smith              2020            97152       9715 South \n6 TX002         Jane Smith              2021            62035       6203 South \n# ℹ 1 more variable: `Payment Date` &lt;dttm&gt;\n\n# open the entire dataset \n# View(data)\n\n# we can mix them together\n# View(head(data))\n\n\n\n\n\n\n\n\nNote\n\n\nYou might also notice that the Taxpayer ID and Full Name columns are surrounded by back-ticks. This is because they contain spaces, which breaks R’s standard naming rules, making them non-syntactic names. To refer to these variables in R, you need to enclose them in back-ticks.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#practical-steps-right-after-importing-data-1",
     "href": "2_import_export.html#practical-steps-right-after-importing-data-1",
     "title": "Data Importing and Writing",
     "section": "Practical Steps Right After Importing Data",
-    "text": "Practical Steps Right After Importing Data\n\nLet’s get a snapshot of the data structure and content:\n\n\n# Install the package if necessary\n# install.packages(\"dplyr\")\n\n# Load the dplyr package\nlibrary(dplyr)\n\n# Get an overview of the data\nglimpse(data)\n\nRows: 40\nColumns: 7\n$ `Taxpayer ID`     &lt;chr&gt; \"TX001\", \"TX001\", \"TX001\", \"TX001\", \"TX002\", \"TX002\"…\n$ Name              &lt;chr&gt; \"John Doe\", \"John Doe\", \"John Doe\", \"John Doe\", \"Jan…\n$ `Tax Filing Year` &lt;dbl&gt; 2020, 2021, 2022, 2023, 2020, 2021, 2022, 2023, 2020…\n$ `Taxable Income`  &lt;dbl&gt; 89854, 65289, 87053, 58685, 97152, 62035, 60378, 876…\n$ `Tax Paid`        &lt;dbl&gt; 8985, 6528, 8705, 5868, 9715, 6203, 6037, 8768, 9368…\n$ Region            &lt;chr&gt; \"North\", \"North\", \"North\", \"North\", \"South\", \"South\"…\n$ `Payment Date`    &lt;dttm&gt; 2020-01-31, 2021-12-31, 2022-01-31, 2023-04-30, 202…"
+    "text": "Practical Steps Right After Importing Data\n\nLet’s get a snapshot of the data structure and content:\n\n\n# Install the package if necessary\n# install.packages(\"dplyr\")\n\n# Load the dplyr package\nlibrary(dplyr)\n\n# Get an overview of the data\nglimpse(data)\n\nRows: 40\nColumns: 7\n$ `Taxpayer ID`     &lt;chr&gt; \"TX001\", \"TX001\", \"TX001\", \"TX001\", \"TX002\", \"TX002\"…\n$ Name              &lt;chr&gt; \"John Doe\", \"John Doe\", \"John Doe\", \"John Doe\", \"Jan…\n$ `Tax Filing Year` &lt;dbl&gt; 2020, 2021, 2022, 2023, 2020, 2021, 2022, 2023, 2020…\n$ `Taxable Income`  &lt;dbl&gt; 89854, 65289, 87053, 58685, 97152, 62035, 60378, 876…\n$ `Tax Paid`        &lt;dbl&gt; 8985, 6528, 8705, 5868, 9715, 6203, 6037, 8768, 9368…\n$ Region            &lt;chr&gt; \"North\", \"North\", \"North\", \"North\", \"South\", \"South\"…\n$ `Payment Date`    &lt;dttm&gt; 2020-01-31, 2021-12-31, 2022-01-31, 2023-04-30, 202…",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#practical-steps-right-after-importing-data-2",
     "href": "2_import_export.html#practical-steps-right-after-importing-data-2",
     "title": "Data Importing and Writing",
     "section": "Practical Steps Right After Importing Data",
-    "text": "Practical Steps Right After Importing Data\n\nNow, we’ll make sure that our variable names follow snake_case convention 😎\n\n\nOption 1: Rename columns manually:\n\n\n# We can rename columns one by one\ndata = rename(\n  data, \n  tax_payer_id    = `Taxpayer ID`,\n  name            = `Name`\n  ...\n  )\n\n\n\nOption 2: Automatically convert all column names to snake_case using janitor:\n\n\n# Install the package if necessary\n# install.packages(\"janitor\")\n\n# Load the janitor package\nlibrary(janitor)\n\n# transform in snake_case all the var names\ndata = clean_names(data)\n\n# take a look\nnames(data)\n\n[1] \"taxpayer_id\"     \"name\"            \"tax_filing_year\" \"taxable_income\" \n[5] \"tax_paid\"        \"region\"          \"payment_date\""
+    "text": "Practical Steps Right After Importing Data\n\nNow, we’ll make sure that our variable names follow snake_case convention 😎\n\n\nOption 1: Rename columns manually:\n\n\n# We can rename columns one by one\ndata = rename(\n  data, \n  tax_payer_id    = `Taxpayer ID`,\n  name            = `Name`\n  ...\n  )\n\n\n\nOption 2: Automatically convert all column names to snake_case using janitor:\n\n\n# Install the package if necessary\n# install.packages(\"janitor\")\n\n# Load the janitor package\nlibrary(janitor)\n\n# transform in snake_case all the var names\ndata = clean_names(data)\n\n# take a look\nnames(data)\n\n[1] \"taxpayer_id\"     \"name\"            \"tax_filing_year\" \"taxable_income\" \n[5] \"tax_paid\"        \"region\"          \"payment_date\"",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#exercise-1",
     "href": "2_import_export.html#exercise-1",
     "title": "Data Importing and Writing",
     "section": "Exercise 1",
-    "text": "Exercise 1\nYou can find the exercise in the folder “Exercises/Import_and_Export.R”\n −+ 10:00 \n\n# Exercise: Data Import and Initial Cleaning ----\n\n# Step 1: Setting Up\n\n# List of required packages\npackages = c(\n  \"readxl\",      # For reading Excel files\n  \"dplyr\",       # For data manipulation\n  \"tidyverse\",   # For general data handling and visualization\n  \"data.table\",  # For fast data import and manipulation\n  \"here\",        # For file path management\n  \"haven\",       # For importing Stata files\n  \"janitor\"      # For cleaning column names\n)\n\n# Install pacman if not already installed\nif (!require(\"pacman\")) install.packages(\"pacman\")\n\n# Load the packages with pacman\npacman::p_load(packages, character.only = TRUE, install = TRUE)\n\n# Step 2: Loading and Inspecting Data ----\n\n# 1. Firm Characteristics Data set\n# Hint: Use an appropriate function to load a CSV file.\n# Objective: Load \"firm_characteristics.csv\" and check the first few rows.\n\n# Hint: After loading, apply a function from `janitor` to clean column names.\n\n# 2. VAT Declarations Data set\n# Hint: Use a function that can read Stata (.dta) files.\n# Objective: Load \"vat_declarations.dta\" and check the first few rows.\n\n# Hint: Review the column names to see if they need cleaning.\n\n# 3. CIT Declarations Data set\n# Hint: Use a function that can read Excel files and specify the sheet.\n# Objective: Load \"cit_declarations.xlsx\" from the second sheet and check the first few rows.\n\n# Reflection (BONUS) \n# After completing each step, ensure column names are consistent across files."
+    "text": "Exercise 1\nYou can find the exercise in the folder “Exercises/Import_and_Export.R”\n −+ 10:00 \n\n# Exercise: Data Import and Initial Cleaning ----\n\n# Step 1: Setting Up\n\n# List of required packages\npackages = c(\n  \"readxl\",      # For reading Excel files\n  \"dplyr\",       # For data manipulation\n  \"tidyverse\",   # For general data handling and visualization\n  \"data.table\",  # For fast data import and manipulation\n  \"here\",        # For file path management\n  \"haven\",       # For importing Stata files\n  \"janitor\"      # For cleaning column names\n)\n\n# Install pacman if not already installed\nif (!require(\"pacman\")) install.packages(\"pacman\")\n\n# Load the packages with pacman\npacman::p_load(packages, character.only = TRUE, install = TRUE)\n\n# Step 2: Loading and Inspecting Data ----\n\n# 1. Firm Characteristics Data set\n# Hint: Use an appropriate function to load a CSV file.\n# Objective: Load \"firm_characteristics.csv\" and check the first few rows.\n\n# Hint: After loading, apply a function from `janitor` to clean column names.\n\n# 2. VAT Declarations Data set\n# Hint: Use a function that can read Stata (.dta) files.\n# Objective: Load \"vat_declarations.dta\" and check the first few rows.\n\n# Hint: Review the column names to see if they need cleaning.\n\n# 3. CIT Declarations Data set\n# Hint: Use a function that can read Excel files and specify the sheet.\n# Objective: Load \"cit_declarations.xlsx\" from the second sheet and check the first few rows.\n\n# Reflection (BONUS) \n# After completing each step, ensure column names are consistent across files.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#exercise-1-solutions",
     "href": "2_import_export.html#exercise-1-solutions",
     "title": "Data Importing and Writing",
     "section": "Exercise 1 (Solutions)",
-    "text": "Exercise 1 (Solutions)\n\n# Pre-requisites ----\n\n# List of required packages\npackages = c(\n  \"readxl\",\n  \"dplyr\",\n  \"tidyverse\",\n  \"data.table\",\n  \"here\",\n  \"haven\",\n  \"janitor\" # Added janitor for clean_names() function\n)\n\n# Install pacman if not already installed\nif (!require(\"pacman\")) install.packages(\"pacman\")\n\n# Load the packages with pacman\npacman::p_load(packages, character.only = TRUE, install = TRUE)\n\n# Import the Data ----\n\n# FIRMS CHARACTERISTICS\n\n# Load the firm-level characteristics (firm_characteristics.csv)\ndt_firms = fread(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"firm_characteristics.csv\"))\n\n# Display the first 5 rows\nhead(dt_firms)\n\n# Clean column names to make them consistent\ndt_firms = clean_names(dt_firms)\n\n# VAT DECLARATIONS\n\n# Load the VAT panel data (vat_declarations.dta)\npanel_vat = read_dta(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"vat_declarations.dta\"))\n\n# Display the first 5 rows\nhead(panel_vat)\n\n# Column names look fine, but the bonus question requires us to change firm_id\npanel_vat = rename(panel_vat, firm_id = id_firm)\n\n# CIT DECLARATIONS\n\n# Load the CIT panel data (cit_declarations.xlsx)\npanel_cit = read_xlsx(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"cit_declarations.xlsx\"), sheet = 2)\n\n# Display the first 5 rows\nhead(panel_cit)\n\n# Column names look consistent, so no need for further cleaning"
+    "text": "Exercise 1 (Solutions)\n\n# Pre-requisites ----\n\n# List of required packages\npackages = c(\n  \"readxl\",\n  \"dplyr\",\n  \"tidyverse\",\n  \"data.table\",\n  \"here\",\n  \"haven\",\n  \"janitor\" # Added janitor for clean_names() function\n)\n\n# Install pacman if not already installed\nif (!require(\"pacman\")) install.packages(\"pacman\")\n\n# Load the packages with pacman\npacman::p_load(packages, character.only = TRUE, install = TRUE)\n\n# Import the Data ----\n\n# FIRMS CHARACTERISTICS\n\n# Load the firm-level characteristics (firm_characteristics.csv)\ndt_firms = fread(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"firm_characteristics.csv\"))\n\n# Display the first 5 rows\nhead(dt_firms)\n\n# Clean column names to make them consistent\ndt_firms = clean_names(dt_firms)\n\n# VAT DECLARATIONS\n\n# Load the VAT panel data (vat_declarations.dta)\npanel_vat = read_dta(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"vat_declarations.dta\"))\n\n# Display the first 5 rows\nhead(panel_vat)\n\n# Column names look fine, but the bonus question requires us to change firm_id\npanel_vat = rename(panel_vat, firm_id = id_firm)\n\n# CIT DECLARATIONS\n\n# Load the CIT panel data (cit_declarations.xlsx)\npanel_cit = read_xlsx(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"cit_declarations.xlsx\"), sheet = 2)\n\n# Display the first 5 rows\nhead(panel_cit)\n\n# Column names look consistent, so no need for further cleaning",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#writing-in-.csv-format-is-almost-always-a-good-choice",
     "href": "2_import_export.html#writing-in-.csv-format-is-almost-always-a-good-choice",
     "title": "Data Importing and Writing",
     "section": "Writing in .csv Format is (Almost) Always a Good Choice",
-    "text": "Writing in .csv Format is (Almost) Always a Good Choice\n\nFor most cases, writing data in .csv format is a reliable and widely compatible option.\nI recommend using the fwrite function from the data.table package for its speed and efficiency.\n\n\n\nBelow, we save various datasets into the Intermediate folder using fwrite:\n\n\n# Write the VAT Data\nfwrite(panel_vat, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_vat.csv\"))\n\n# Write the CIT Declarations\nfwrite(panel_cit, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_cit.csv\"))\n       \n# Write the Firm Characteristics\nfwrite(dt_firms, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"dt_firms.csv\"))"
+    "text": "Writing in .csv Format is (Almost) Always a Good Choice\n\nFor most cases, writing data in .csv format is a reliable and widely compatible option.\nI recommend using the fwrite function from the data.table package for its speed and efficiency.\n\n\n\nBelow, we save various datasets into the Intermediate folder using fwrite:\n\n\n# Write the VAT Data\nfwrite(panel_vat, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_vat.csv\"))\n\n# Write the CIT Declarations\nfwrite(panel_cit, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_cit.csv\"))\n       \n# Write the Firm Characteristics\nfwrite(dt_firms, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"dt_firms.csv\"))",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#there-other-options-to-write-data",
     "href": "2_import_export.html#there-other-options-to-write-data",
     "title": "Data Importing and Writing",
     "section": "There other options to write data",
-    "text": "There other options to write data\n\nWriting .rds Files (For R Objects)\n\nThe .rds format is specifically designed for saving R objects. It is useful for saving intermediate results, objects, or data.\nWe’ll explore this format in more detail later, but here’s a quick example:\n\n\n\n# Example\nbase::saveRDS(data, \"data_tax.rds\")\n\n\n\nWriting .xlsx Files (For Excel Compatibility): To save data in Excel format (.xlsx), use the writexl package. It is lightweight and doesn’t require external dependencies.\n\n\n# Example\nwritexl::write_xlsx(data, \"data_tax.xlsx\")\n\n\n\n\nWriting .parquet Files (For Large Datasets): The .parquet format is a columnar storage format that is highly efficient for both reading and writing large datasets (typically &gt;1GB).\n\n\n# Example\narrow::writea_parquet(data, \"data_tax.parquet\")\n\n# Reading parquet files\narrow::read_parquet(\"data_tax.parquet\")"
+    "text": "There other options to write data\n\nWriting .rds Files (For R Objects)\n\nThe .rds format is specifically designed for saving R objects. It is useful for saving intermediate results, objects, or data.\nWe’ll explore this format in more detail later, but here’s a quick example:\n\n\n\n# Example\nbase::saveRDS(data, \"data_tax.rds\")\n\n\n\nWriting .xlsx Files (For Excel Compatibility): To save data in Excel format (.xlsx), use the writexl package. It is lightweight and doesn’t require external dependencies.\n\n\n# Example\nwritexl::write_xlsx(data, \"data_tax.xlsx\")\n\n\n\n\nWriting .parquet Files (For Large Datasets): The .parquet format is a columnar storage format that is highly efficient for both reading and writing large datasets (typically &gt;1GB).\n\n\n# Example\narrow::writea_parquet(data, \"data_tax.parquet\")\n\n# Reading parquet files\narrow::read_parquet(\"data_tax.parquet\")",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#to-sum-up",
     "href": "2_import_export.html#to-sum-up",
     "title": "Data Importing and Writing",
     "section": "To Sum Up",
-    "text": "To Sum Up"
+    "text": "To Sum Up",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#exercise-2",
     "href": "2_import_export.html#exercise-2",
     "title": "Data Importing and Writing",
     "section": "Exercise 2",
-    "text": "Exercise 2\nYou can find the exercise in the folder “Exercises/Import_and_Export.R”\n −+ 05:00 \n\n# Exercise 2: Write the Data ----\n\n# FIRMS CHARACTERISTICS\n\n# Write the firm-level characteristics (firm_characteristics.format)\n# Don't forget to put in the right folder and pick the best format\n\n\n# VAT DECLARATIONS\n\n# Write the VAT panel data (vat_declarations.format)\n\n\n# CIT DECLARATIONS\n\n# Write the CIT panel data (cit_declarations.format)"
+    "text": "Exercise 2\nYou can find the exercise in the folder “Exercises/Import_and_Export.R”\n −+ 05:00 \n\n# Exercise 2: Write the Data ----\n\n# FIRMS CHARACTERISTICS\n\n# Write the firm-level characteristics (firm_characteristics.format)\n# Don't forget to put in the right folder and pick the best format\n\n\n# VAT DECLARATIONS\n\n# Write the VAT panel data (vat_declarations.format)\n\n\n# CIT DECLARATIONS\n\n# Write the CIT panel data (cit_declarations.format)",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#exercise-2-solutions",
     "href": "2_import_export.html#exercise-2-solutions",
     "title": "Data Importing and Writing",
     "section": "Exercise 2 (Solutions)",
-    "text": "Exercise 2 (Solutions)\n\n# Exercise 2: Write the Data ----\n\n# FIRMS CHARACTERISTICS\nfwrite(dt_firms, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"dt_firms.csv\")\n\n# VAT DECLARATIONS\n\n# Write the VAT panel data (vat_declarations.format)\nfwrite(panel_vat, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_vat.csv\"))\n\n# CIT DECLARATIONS\n\n# Write the CIT panel data \nfwrite(panel_cit, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_cit.csv\"))"
+    "text": "Exercise 2 (Solutions)\n\n# Exercise 2: Write the Data ----\n\n# FIRMS CHARACTERISTICS\nfwrite(dt_firms, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"dt_firms.csv\")\n\n# VAT DECLARATIONS\n\n# Write the VAT panel data (vat_declarations.format)\nfwrite(panel_vat, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_vat.csv\"))\n\n# CIT DECLARATIONS\n\n# Write the CIT panel data \nfwrite(panel_cit, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_cit.csv\"))",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#example-connecting-to-a-database",
     "href": "2_import_export.html#example-connecting-to-a-database",
     "title": "Data Importing and Writing",
     "section": "Example: connecting to a database",
-    "text": "Example: connecting to a database\n\n# Load Packages\nlibrary(DBI) # this package is always needed\nlibrary(RMariaDB) # there are packages for each type of database (e.g. RPostgreSQL)\n\n# Example connection\ncon &lt;- dbConnect(RMariaDB::MariaDB(),\n  dbname = \"your_db_name\",\n  host = \"your_host\",\n  user = \"your_user\",\n  password = \"your_password\"\n)\n\n# Query data\nresult &lt;- dbGetQuery(con, \"SELECT * FROM your_table LIMIT 5\")\nprint(result)\n\n# Disconnect\ndbDisconnect(con)"
+    "text": "Example: connecting to a database\n\n# Load Packages\nlibrary(DBI) # this package is always needed\nlibrary(RMariaDB) # there are packages for each type of database (e.g. RPostgreSQL)\n\n# Example connection\ncon &lt;- dbConnect(RMariaDB::MariaDB(),\n  dbname = \"your_db_name\",\n  host = \"your_host\",\n  user = \"your_user\",\n  password = \"your_password\"\n)\n\n# Query data\nresult &lt;- dbGetQuery(con, \"SELECT * FROM your_table LIMIT 5\")\nprint(result)\n\n# Disconnect\ndbDisconnect(con)",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#writing-dynamic-sql-queries-with-glue_sql",
     "href": "2_import_export.html#writing-dynamic-sql-queries-with-glue_sql",
     "title": "Data Importing and Writing",
     "section": "Writing Dynamic SQL Queries with glue_sql",
-    "text": "Writing Dynamic SQL Queries with glue_sql\n\n# Load required packages\nlibrary(DBI)\nlibrary(RSQLite)\nlibrary(glue)\n\n# Connect to SQLite database\ncon &lt;- dbConnect(RSQLite::SQLite(), \":memory:\")\n\n# Create a Mock DB\ntax_data &lt;- data.frame(\n  taxpayer_id = paste0(\"TP\", sprintf(\"%03d\", 1:10)),\n  name = c(\"Aisha Khan\", \"Carlos Martinez\", \"Chen Wei\", \"Elena Petrova\", \"Fatima Al-Farsi\",\n           \"George Okoro\", \"Hiroshi Tanaka\", \"Leila Kaur\", \"Maria Rossi\", \"William Smith\"),\n  income = c(85000, 62000, 78000, 90000, 68000, 72000, 95000, 56000, 89000, 75000),\n  tax_paid = c(8500, 6200, 7800, 9000, 6800, 7200, 9500, 5600, 8900, 7500),\n  tax_year = rep(2022, 10)\n)\n\n# Write the dataset to the database using dbWriteTable\ndbWriteTable(con, \"tax_records\", tax_data, overwrite = TRUE)\n\n# Use glue_sql for a dynamic query\nmin_income &lt;- 60000\nquery &lt;- glue_sql(\"SELECT * FROM tax_records WHERE income &gt; {min_income}\", .con = con)\n\n# Execute the query\nresult &lt;- dbGetQuery(con, query)\nprint(result)\n##   taxpayer_id            name income tax_paid tax_year\n## 1       TP001      Aisha Khan  85000     8500     2022\n## 2       TP002 Carlos Martinez  62000     6200     2022\n## 3       TP003        Chen Wei  78000     7800     2022\n## 4       TP004   Elena Petrova  90000     9000     2022\n## 5       TP005 Fatima Al-Farsi  68000     6800     2022\n## 6       TP006    George Okoro  72000     7200     2022\n## 7       TP007  Hiroshi Tanaka  95000     9500     2022\n## 8       TP009     Maria Rossi  89000     8900     2022\n## 9       TP010   William Smith  75000     7500     2022\n\n# Disconnect\ndbDisconnect(con)"
+    "text": "Writing Dynamic SQL Queries with glue_sql\n\n# Load required packages\nlibrary(DBI)\nlibrary(RSQLite)\nlibrary(glue)\n\n# Connect to SQLite database\ncon &lt;- dbConnect(RSQLite::SQLite(), \":memory:\")\n\n# Create a Mock DB\ntax_data &lt;- data.frame(\n  taxpayer_id = paste0(\"TP\", sprintf(\"%03d\", 1:10)),\n  name = c(\"Aisha Khan\", \"Carlos Martinez\", \"Chen Wei\", \"Elena Petrova\", \"Fatima Al-Farsi\",\n           \"George Okoro\", \"Hiroshi Tanaka\", \"Leila Kaur\", \"Maria Rossi\", \"William Smith\"),\n  income = c(85000, 62000, 78000, 90000, 68000, 72000, 95000, 56000, 89000, 75000),\n  tax_paid = c(8500, 6200, 7800, 9000, 6800, 7200, 9500, 5600, 8900, 7500),\n  tax_year = rep(2022, 10)\n)\n\n# Write the dataset to the database using dbWriteTable\ndbWriteTable(con, \"tax_records\", tax_data, overwrite = TRUE)\n\n# Use glue_sql for a dynamic query\nmin_income &lt;- 60000\nquery &lt;- glue_sql(\"SELECT * FROM tax_records WHERE income &gt; {min_income}\", .con = con)\n\n# Execute the query\nresult &lt;- dbGetQuery(con, query)\nprint(result)\n##   taxpayer_id            name income tax_paid tax_year\n## 1       TP001      Aisha Khan  85000     8500     2022\n## 2       TP002 Carlos Martinez  62000     6200     2022\n## 3       TP003        Chen Wei  78000     7800     2022\n## 4       TP004   Elena Petrova  90000     9000     2022\n## 5       TP005 Fatima Al-Farsi  68000     6800     2022\n## 6       TP006    George Okoro  72000     7200     2022\n## 7       TP007  Hiroshi Tanaka  95000     9500     2022\n## 8       TP009     Maria Rossi  89000     8900     2022\n## 9       TP010   William Smith  75000     7500     2022\n\n# Disconnect\ndbDisconnect(con)",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "2_import_export.html#further-resources-for-sql",
     "href": "2_import_export.html#further-resources-for-sql",
     "title": "Data Importing and Writing",
     "section": "Further Resources for SQL",
-    "text": "Further Resources for SQL\n\nTake a look at this extensive list of free resources\nGreat Graduate-level course taught by Grant R. McDermott\nRStudio’s Databases using R is an excellent resource that covers a lot.\nJuan Mayorga’s tutorial, Getting Global Fishing Watch Data from Google Big Query using R, offers a hands-on guide to accessing data and highlights why learning SQL is valuable beyond just using the dplyr translation.\nFor a concise introduction to SQL, Julia Evans’ Become A Select Star is a highly recommended resource.\nGoogle’s official BigQuery documentation provides a deep dive into SQL functions, syntax, and specialized operations, such as handling datetime and JSON objects.\nPlatforms like W3Schools and Codecademy offer numerous free and paid SQL tutorials and courses to enhance your skills."
+    "text": "Further Resources for SQL\n\nTake a look at this extensive list of free resources\nGreat Graduate-level course taught by Grant R. McDermott\nRStudio’s Databases using R is an excellent resource that covers a lot.\nJuan Mayorga’s tutorial, Getting Global Fishing Watch Data from Google Big Query using R, offers a hands-on guide to accessing data and highlights why learning SQL is valuable beyond just using the dplyr translation.\nFor a concise introduction to SQL, Julia Evans’ Become A Select Star is a highly recommended resource.\nGoogle’s official BigQuery documentation provides a deep dive into SQL functions, syntax, and specialized operations, such as handling datetime and JSON objects.\nPlatforms like W3Schools and Codecademy offer numerous free and paid SQL tutorials and courses to enhance your skills.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Welcome to the DataTax R Course",
+    "title": "Welcome to Introduction to Programming in R 🎉",
     "section": "",
-    "text": "Dive into the world of R programming and its applications in tax data analytics!\n\n\n\nNavigate through the course slide decks:\n\nIntroduction to R\nData Import/Export\n© DataTax (The World Bank), 2025"
+    "text": "Welcome to Introduction to Programming in R 🎉\nThis website is your central hub for participating in the workshop, where you’ll learn R programming 🖥️ and its applications in research and data analysis 📊 with a focus on tax and administrative data.\n\nObjectives of this Course 🎯\n\nUnderstand the basics of R programming and how to apply it effectively.\n\nLearn to manipulate, clean, and analyze data with R.\n\nGain hands-on experience with real-world tax and administrative datasets.\n\nBuild a foundation for reproducible research and data visualization 📊.\n\nDevelop skills to automate repetitive tasks and streamline workflows 🔄.\n\n\n\nWhat You Need to Know:\n\nNo prior programming experience required—this workshop is designed for complete beginners! 🐣\n\nBefore the workshop: Follow the setup instructions below to ensure you’re ready to dive in. ✅\n\nMaterials: All course materials are accessible here and via the GitHub repository. 📂\n\n\n\nHow to Install R and RStudio 🛠️\n\nInstall R:\n\nVisit the CRAN R Project Website.\nSelect the appropriate download link for your operating system (Windows, macOS, or Linux).\nFollow the installation instructions provided on the website.\n\nInstall RStudio:\n\nVisit the RStudio Website.\nDownload the free RStudio Desktop version for your operating system.\nRun the installer and follow the on-screen instructions.\n\nVerify the Installation:\n\nOpen RStudio and check that it launches correctly.\n\nNeed More Help?\nFor detailed, step-by-step installation instructions, visit this excellent guide: DataCamp Tutorial on Installing R and RStudio."
   },
   {
     "objectID": "index.html#explore-the-course-content",
@@ -172,63 +247,108 @@
     "href": "1_introduction_to_r.html#basic-math-operations",
     "title": "Introduction to R: the basics",
     "section": "Basic Math Operations",
-    "text": "Basic Math Operations\nA simple sum:\n\n99 + 1\n\n[1] 100\n\n\n\nMore complex calculations:\n\n99 + 1 * 2\n\n[1] 101\n\n\n\n\nFollowing mathematical rules:\n\n(99 + 1) * 2\n\n[1] 200\n\n\n\n\nScientific notation:\n\n2 / 100000\n\n[1] 2e-05\n\n\n\n5e3\n\n[1] 5000"
+    "text": "Basic Math Operations\nA simple sum:\n\n99 + 1\n\n[1] 100\n\n\n\nMore complex calculations:\n\n99 + 1 * 2\n\n[1] 101\n\n\n\n\nFollowing mathematical rules:\n\n(99 + 1) * 2\n\n[1] 200\n\n\n\n\nScientific notation:\n\n2 / 100000\n\n[1] 2e-05\n\n\n\n5e3\n\n[1] 5000",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#overview-of-data-types",
     "href": "1_introduction_to_r.html#overview-of-data-types",
     "title": "Introduction to R: the basics",
     "section": "Overview of Data Types",
-    "text": "Overview of Data Types\n\nNumeric values : numbers, as shown in previous examples.\n\n\n\nCharacter Values : Always quoted, e.g., “text”.\n\n\n\n\nLogical Values : Also known as Boolean, representing TRUE or FALSE\n\n\n10  &gt; 9\n\n[1] TRUE\n\n10 == 9\n\n[1] FALSE\n\n10 != 9\n\n[1] TRUE\n\n10 &gt; 9 & 9 &lt; 10\n\n[1] TRUE\n\n10 &gt; 9 | 9 &gt; 10\n\n[1] TRUE\n\n9 %in% 1:10\n\n[1] TRUE"
+    "text": "Overview of Data Types\n\nNumeric values : numbers, as shown in previous examples.\n\n\n\nCharacter Values : Always quoted, e.g., “text”.\n\n\n\n\nLogical Values : Also known as Boolean, representing TRUE or FALSE\n\n\n10  &gt; 9\n\n[1] TRUE\n\n10 == 9\n\n[1] FALSE\n\n10 != 9\n\n[1] TRUE\n\n10 &gt; 9 & 9 &lt; 10\n\n[1] TRUE\n\n10 &gt; 9 | 9 &gt; 10\n\n[1] TRUE\n\n9 %in% 1:10\n\n[1] TRUE",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#importance-of-assigning-results-to-objects",
     "href": "1_introduction_to_r.html#importance-of-assigning-results-to-objects",
     "title": "Introduction to R: the basics",
     "section": "Importance of Assigning Results to Objects",
-    "text": "Importance of Assigning Results to Objects\nIn R, it’s important to assign results to objects to store the values and use them later in your analysis. Think of an object as a named storage location for your data or calculations.\n\nConsider this calculation:\n\nsum_result = 99 + 1\n\n\n\nHere, we assign the result of 99 + 1 to an object called sum_result using the assignment operator = (some people use &lt;- … the community discuss about this here and here).\n\n\nNow, whenever you need the value, you can just use sum_result instead of retyping 99 + 1.\n\n\n\n\n\n\n\n\nNote\n\n\nIn coding, it’s good practice to use only lower case and “_” or “.” for names (snake_case)."
+    "text": "Importance of Assigning Results to Objects\nIn R, it’s important to assign results to objects to store the values and use them later in your analysis. Think of an object as a named storage location for your data or calculations.\n\nConsider this calculation:\n\nsum_result = 99 + 1\n\n\n\nHere, we assign the result of 99 + 1 to an object called sum_result using the assignment operator = (some people use &lt;- … the community discuss about this here and here).\n\n\nNow, whenever you need the value, you can just use sum_result instead of retyping 99 + 1.\n\n\n\n\n\n\n\n\nNote\n\n\nIn coding, it’s good practice to use only lower case and “_” or “.” for names (snake_case).",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#mathematical-functions",
     "href": "1_introduction_to_r.html#mathematical-functions",
     "title": "Introduction to R: the basics",
     "section": "Mathematical Functions",
-    "text": "Mathematical Functions\nIn economics, we frequently use logarithms:\n\nlog(1)\n\n[1] 0\n\n\n\nR has a large collection of built-in functions, called like this:\n\nfunction_name(argument1 = value1, argument2 = value2, ...)\n\n\n\nFor example, if you want to calculate the natural logarithm of a number…\n\nlog(10)\n\n[1] 2.302585\n\n\n\n\nArguments can also have names, which makes it easy to understand what each input does.\n\nround(3.14159, digits = 2)\n\n[1] 3.14"
+    "text": "Mathematical Functions\nIn economics, we frequently use logarithms:\n\nlog(1)\n\n[1] 0\n\n\n\nR has a large collection of built-in functions, called like this:\n\nfunction_name(argument1 = value1, argument2 = value2, ...)\n\n\n\nFor example, if you want to calculate the natural logarithm of a number…\n\nlog(10)\n\n[1] 2.302585\n\n\n\n\nArguments can also have names, which makes it easy to understand what each input does.\n\nround(3.14159, digits = 2)\n\n[1] 3.14",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#functions-are-our-tool-box",
     "href": "1_introduction_to_r.html#functions-are-our-tool-box",
     "title": "Introduction to R: the basics",
     "section": "Functions Are Our Tool Box 🧰",
-    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\n\nThe help() function is like R’s built-in manual. Whenever you’re unsure about how a function works or what arguments it accepts, you can use help() to get detailed information.\n\nExample: To learn about the mean() function, type help(mean) or simply ?mean in the R console."
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\n\nThe help() function is like R’s built-in manual. Whenever you’re unsure about how a function works or what arguments it accepts, you can use help() to get detailed information.\n\nExample: To learn about the mean() function, type help(mean) or simply ?mean in the R console.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#functions-are-our-tool-box-1",
     "href": "1_introduction_to_r.html#functions-are-our-tool-box-1",
     "title": "Introduction to R: the basics",
     "section": "Functions Are Our Tool Box 🧰",
-    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\nexample()\n\nWhile help() provides information about a function, example() shows you how to use it with real code snippets.\n\nExample: Type example(sum) in the R console to see various ways to use the sum() function for creating graphs.\n\n\n\n\nsum&gt; ## Pass a vector to sum, and it will add the elements together.\nsum&gt; sum(1:5)\n[1] 15\n\nsum&gt; ## Pass several numbers to sum, and it also adds the elements.\nsum&gt; sum(1, 2, 3, 4, 5)\n[1] 15\n\nsum&gt; ## In fact, you can pass vectors into several arguments, and everything gets added.\nsum&gt; sum(1:2, 3:5)\n[1] 15\n\nsum&gt; ## If there are missing values, the sum is unknown, i.e., also missing, ....\nsum&gt; sum(1:5, NA)\n[1] NA\n\nsum&gt; ## ... unless  we exclude missing values explicitly:\nsum&gt; sum(1:5, NA, na.rm = TRUE)\n[1] 15"
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\nexample()\n\nWhile help() provides information about a function, example() shows you how to use it with real code snippets.\n\nExample: Type example(sum) in the R console to see various ways to use the sum() function for creating graphs.\n\n\n\n\nsum&gt; ## Pass a vector to sum, and it will add the elements together.\nsum&gt; sum(1:5)\n[1] 15\n\nsum&gt; ## Pass several numbers to sum, and it also adds the elements.\nsum&gt; sum(1, 2, 3, 4, 5)\n[1] 15\n\nsum&gt; ## In fact, you can pass vectors into several arguments, and everything gets added.\nsum&gt; sum(1:2, 3:5)\n[1] 15\n\nsum&gt; ## If there are missing values, the sum is unknown, i.e., also missing, ....\nsum&gt; sum(1:5, NA)\n[1] NA\n\nsum&gt; ## ... unless  we exclude missing values explicitly:\nsum&gt; sum(1:5, NA, na.rm = TRUE)\n[1] 15",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#functions-are-our-tool-box-2",
     "href": "1_introduction_to_r.html#functions-are-our-tool-box-2",
     "title": "Introduction to R: the basics",
     "section": "Functions Are Our Tool Box 🧰",
-    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\nexample()\nlibrary()\n\nR’s functionality can be extended with packages—collections of functions and datasets created by the community.\n\nInstalling Packages: Before using a package, install it using install.packages(\"packageName\").\nLoading Packages: Use library(packageName) to load the package into your session.\nExample: To use the ggplot2 package for advanced plotting:\n\ninstall.packages(\"ggplot2\")   # Install (only needed once)\nlibrary(ggplot2)              # Load the package"
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\nexample()\nlibrary()\n\nR’s functionality can be extended with packages—collections of functions and datasets created by the community.\n\nInstalling Packages: Before using a package, install it using install.packages(\"packageName\").\nLoading Packages: Use library(packageName) to load the package into your session.\nExample: To use the ggplot2 package for advanced plotting:\n\ninstall.packages(\"ggplot2\")   # Install (only needed once)\nlibrary(ggplot2)              # Load the package",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#exercise-1-10-mins",
     "href": "1_introduction_to_r.html#exercise-1-10-mins",
     "title": "Introduction to R: the basics",
-    "section": "Exercise 1 (🕡 10 mins):",
-    "text": "Exercise 1 (🕡 10 mins):\n\nCreating a Sequence:\n\nCreate a sequence of numbers that are multiples of 5, starting from 5 and ending at 50.\nHint: Use the seq() function.\n\nCompute the Mean:\n\nCalculate the mean of the sequence you created in step 2.\n\nLogical Test and Conditional Computation:\n\nCheck if all elements in your sequence are greater than zero.\nThen compute the mean around this new object with only logical elements.\n\nAdding Comments:\n\nAdd comments to your code to explain what each step is doing.\nHint: Use # at the beginning of a line to make it a comment."
+    "section": "Exercise 1 (⏰ 10 mins):",
+    "text": "Exercise 1 (⏰ 10 mins):\n\nCreating a Sequence:\n\nCreate a sequence of numbers that are multiples of 5, starting from 0 and ending at 50.\nHint: Use the seq() function.\n\nCompute the Mean:\n\nCalculate the mean of the sequence you created in step 2.\n\nLogical Test and Conditional Computation:\n\nCheck if all elements in your sequence are greater than zero.\nThen compute the mean around this new object with only logical elements.\n\nAdding Comments:\n\nAdd comments to your code to explain what each step is doing.\nHint: Use # at the beginning of a line to make it a comment.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#welcome-to-the-introduction-to-r-course",
     "href": "1_introduction_to_r.html#welcome-to-the-introduction-to-r-course",
     "title": "Introduction to R: the basics",
     "section": "Welcome to the “Introduction to R Course”!",
-    "text": "Welcome to the “Introduction to R Course”!\n\n\n\nWe will learn to use the R programming language!\nUsing administrative data familiar to tax administrations.\n\n\n\n\nSome pre-requirements\n\n\n❌ The training does not require any background in statistical programming.\n\n\n✅ A computer with R and RStudio installed is required to complete the exercises.\n\n\n✅ Internet connection is required to download training materials."
+    "text": "Welcome to the “Introduction to R Course”!\n\n\n\nWe will learn to use the R programming language!\nUsing administrative data familiar to tax administrations.\n\n\n\n\nSome pre-requirements\n\n\n❌ The training does not require any background in statistical programming.\n\n\n✅ A computer with R and RStudio installed is required to complete the exercises.\n\n\n✅ Internet connection is required to download training materials.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#the-training-does-not-require-any-background-in-statistical-programming.",
@@ -249,7 +369,12 @@
     "href": "1_introduction_to_r.html#what-is-r",
     "title": "Introduction to R: the basics",
     "section": "What is R?",
-    "text": "What is R?\n\nR is a programming language with powerful statistical and graphic capabilities."
+    "text": "What is R?\n\nR is a programming language with powerful statistical and graphic capabilities.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#why-r",
@@ -291,21 +416,36 @@
     "href": "1_introduction_to_r.html#and-what-about-excel",
     "title": "Introduction to R: the basics",
     "section": "And what about Excel?",
-    "text": "And what about Excel?\n\n\n\n✅ Easy to use.\n❌ Only good for small datasets.\n❌ We don’t keep track of what we do.\n❌ Not straightforward to merge data.\n❌ And the list goes on…"
+    "text": "And what about Excel?\n\n\n\n✅ Easy to use.\n❌ Only good for small datasets.\n❌ We don’t keep track of what we do.\n❌ Not straightforward to merge data.\n❌ And the list goes on…",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#and-what-about-stata",
     "href": "1_introduction_to_r.html#and-what-about-stata",
     "title": "Introduction to R: the basics",
     "section": "And what about STATA?",
-    "text": "And what about STATA?\n\n\n✅ Stata is widely used in economics.\n✅ Easy to learn.\n❌ Only good for small datasets.\n❌ Expensive!\n❌ Lack of flexibility… do you hate keep, preserve, and restore too?"
+    "text": "And what about STATA?\n\n\n\n✅ Stata is widely used in economics.\n✅ Easy to learn.\n❌ Only good for small datasets.\n❌ Expensive!\n❌ Lack of flexibility… do you hate keep, preserve, and restore too?",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#you-should-see-this",
     "href": "1_introduction_to_r.html#you-should-see-this",
     "title": "Introduction to R: the basics",
     "section": "You should see this!",
-    "text": "You should see this!\n\nIf you don’t, make sure you opened RStudio and not R!"
+    "text": "You should see this!\n\nIf you don’t, make sure you opened RStudio and not R!",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#rstudio-layout",
@@ -319,7 +459,12 @@
     "href": "1_introduction_to_r.html#section",
     "title": "Introduction to R: the basics",
     "section": "",
-    "text": "The Script: Your Coding Canvas\n\n\n\nCmd/Ctrl + Enter: Run the current line or selected section of your code.\nCmd/Ctrl + Shift + S: Run the entire script.\nConsole: The console is for temporary actions unless saved in your script."
+    "text": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "Introduction to R"
+    ]
   },
   {
     "objectID": "1_introduction_to_r.html#rstudio-interface",
@@ -333,6 +478,211 @@
     "href": "1_introduction_to_r.html#console",
     "title": "Introduction to R: the basics",
     "section": "Console",
-    "text": "Console"
+    "text": "Console",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#good-practice-in-project-organization",
+    "href": "2_import_export.html#good-practice-in-project-organization",
+    "title": "Data Importing and Writing",
+    "section": "Good Practice in Project Organization",
+    "text": "Good Practice in Project Organization\n\nWhen starting a new analysis, organize your work by creating a structured folder system:\n📂 r_training\n\n📂 scripts/ (code)\n📁 data/ (datasets)\n📂 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nUse lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R to maintain consistency and ease management.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#understanding-folder-paths",
+    "href": "2_import_export.html#understanding-folder-paths",
+    "title": "Data Importing and Writing",
+    "section": "Understanding Folder Paths",
+    "text": "Understanding Folder Paths\n\nA path is an address that tells a software where to find a file or folder on your computer.\n\nTwo Types of Paths:\n\nAbsolute Path: /Users/yourname/Desktop/r_training\nRelative Path: r_training/scripts",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#the-advantage-of-using-projects",
+    "href": "2_import_export.html#the-advantage-of-using-projects",
+    "title": "Data Importing and Writing",
+    "section": "The Advantage of Using Projects",
+    "text": "The Advantage of Using Projects\nR doesn’t automatically know where your files are. Using an RStudio project creates a shortcut that tells R where to find everything, making your workflow smoother.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#lets-begin-by-writing-your-r-scripts-source-code-in-the-source-pane.",
+    "href": "1_introduction_to_r.html#lets-begin-by-writing-your-r-scripts-source-code-in-the-source-pane.",
+    "title": "Introduction to R: the basics",
+    "section": "Let’s begin by writing your R scripts (source code) in the Source pane.",
+    "text": "Let’s begin by writing your R scripts (source code) in the Source pane.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#you-can-use-the-menubar-or-ctrl-shift-n-to-create-new-r-scripts.",
+    "href": "1_introduction_to_r.html#you-can-use-the-menubar-or-ctrl-shift-n-to-create-new-r-scripts.",
+    "title": "Introduction to R: the basics",
+    "section": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "text": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#you-can-use-the-menubar-or-ctrl-shift-n-to-create-new-r-scripts.-1",
+    "href": "1_introduction_to_r.html#you-can-use-the-menubar-or-ctrl-shift-n-to-create-new-r-scripts.-1",
+    "title": "Introduction to R: the basics",
+    "section": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "text": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#you-can-use-the-menubar-or-ctrl-shift-n-to-create-new-r-scripts.-2",
+    "href": "1_introduction_to_r.html#you-can-use-the-menubar-or-ctrl-shift-n-to-create-new-r-scripts.-2",
+    "title": "Introduction to R: the basics",
+    "section": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "text": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#you-can-use-the-menubar-or-ctrl-shift-n-to-create-new-r-scripts.-3",
+    "href": "1_introduction_to_r.html#you-can-use-the-menubar-or-ctrl-shift-n-to-create-new-r-scripts.-3",
+    "title": "Introduction to R: the basics",
+    "section": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "text": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#you-can-use-the-menubar-or-ctrl-shift-n-to-create-new-r-scripts.-4",
+    "href": "1_introduction_to_r.html#you-can-use-the-menubar-or-ctrl-shift-n-to-create-new-r-scripts.-4",
+    "title": "Introduction to R: the basics",
+    "section": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "text": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#section-1",
+    "href": "1_introduction_to_r.html#section-1",
+    "title": "Introduction to R: the basics",
+    "section": "",
+    "text": "You can use the menubar or Ctrl + Shift + N to create new R scripts.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#instructions-sequences-means-and-logical-tests",
+    "href": "1_introduction_to_r.html#instructions-sequences-means-and-logical-tests",
+    "title": "Introduction to R: the basics",
+    "section": "Instructions: Sequences, Means, and Logical Tests",
+    "text": "Instructions: Sequences, Means, and Logical Tests\nStep 1: Create a Sequence\n\nCreate a list of numbers that are multiples of 0, starting at 5 and ending at 50.\nUse the seq() function to create the sequence.\nSave the sequence in a variable called sequence.\nHint: Check your sequence by printing it using print().\n\nStep 2: Calculate the Mean\n\nCalculate the average (mean) of the numbers in your sequence.\nUse the mean() function to compute the mean.\nSave the result in a variable called mean_sequence.\nHint: Print the mean to verify your result.\n\nStep 3: Logical Test and Mean of Logical Values\n\nPerform a logical test to check if all the numbers in your sequence are greater than 0.\nUse the &gt; operator to create a logical vector (TRUE/FALSE).\nSave the result in a variable called logical_test.\nPrint the logical test result to see the TRUE/FALSE values.\nCalculate the mean of the logical values using mean() to find the percentage of TRUE values.\nHint: Remember, TRUE is counted as 1 and FALSE as 0.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#solutions",
+    "href": "1_introduction_to_r.html#solutions",
+    "title": "Introduction to R: the basics",
+    "section": "Solutions",
+    "text": "Solutions\n\n# Step 1: Creating a Sequence\n# Create a sequence of numbers that are multiples of 5, from 0 to 50.\n# Use the seq() function to generate the sequence and assign it to an object named 'sequence'.\nsequence &lt;- seq(from = 0, to = 50, by = 5)\n\n# Print the sequence to verify it was created correctly.\nprint(sequence) # Output: [1] 0 5 10 15 20 25 30 35 40 45 50\n\n\n# Step 2: Compute the Mean\n# Calculate the mean of the sequence created above using the mean() function.\nmean_sequence &lt;- mean(sequence)\n\n# Print the mean to verify the calculation.\nprint(mean_sequence) # Output: [1] 27.5\n\n\n# Step 3: Logical Test and Conditional Computation\n# Check if all elements in the sequence are greater than zero.\n# Use the \"&gt;\" operator and assign the result to a new object named 'logical_test'.\nlogical_test &lt;- sequence &gt; 0\n\n# Print the logical test result to see which elements satisfy the condition.\nprint(logical_test) # Output: [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n\n# Compute the mean of the logical test result.\n# This will treat TRUE as 1 and FALSE as 0.\nmean_logical &lt;- mean(logical_test)\n\n# Print the mean of the logical test result.\nprint(mean_logical) # Output: [1] 0.9090909",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "en/index.html",
+    "href": "en/index.html",
+    "title": "Welcome to Introduction to Programming in R 🎉",
+    "section": "",
+    "text": "Welcome to Introduction to Programming in R 🎉\nThis website is your central hub for participating in the workshop, where you’ll learn R programming 🖥️ and its applications in research and data analysis 📊 with a focus on tax and administrative data.\n\nObjectives of this Course 🎯\n\nUnderstand the basics of R programming and how to apply it effectively.\n\nLearn to manipulate, clean, and analyze data with R.\n\nGain hands-on experience with real-world tax and administrative datasets.\n\nBuild a foundation for reproducible research and data visualization 📊.\n\nDevelop skills to automate repetitive tasks and streamline workflows 🔄.\n\n\n\nWhat You Need to Know:\n\nNo prior programming experience required—this workshop is designed for complete beginners! 🐣\n\nBefore the workshop: Follow the setup instructions below to ensure you’re ready to dive in. ✅\n\nMaterials: All course materials are accessible here and via the GitHub repository. 📂\n\n\n\nHow to Install R and RStudio 🛠️\n\nInstall R:\n\nVisit the CRAN R Project Website.\nSelect the appropriate download link for your operating system (Windows, macOS, or Linux).\nFollow the installation instructions provided on the website.\n\nInstall RStudio:\n\nVisit the RStudio Website.\nDownload the free RStudio Desktop version for your operating system.\nRun the installer and follow the on-screen instructions.\n\nVerify the Installation:\n\nOpen RStudio and check that it launches correctly.\n\nNeed More Help?\nFor detailed, step-by-step installation instructions, visit this excellent guide: DataCamp Tutorial on Installing R and RStudio."
+  },
+  {
+    "objectID": "fr/index_fr.html",
+    "href": "fr/index_fr.html",
+    "title": "Welcome to DataTax R Course",
+    "section": "",
+    "text": "Bienvenue à Introduction à la Programmation en R 🎉\nCe site web est votre point central pour participer à l’atelier où vous apprendrez la programmation en R 🖥️ et ses applications en recherche et analyse de données 📊, avec un focus sur les données fiscales et administratives.\n\nObjectifs de ce Cours 🎯\n\nComprendre les bases de la programmation en R et comment les appliquer efficacement.\n\nApprendre à manipuler, nettoyer et analyser des données avec R.\n\nAcquérir une expérience pratique avec des données fiscales et administratives réelles.\n\nConstruire une base pour des recherches reproductibles et la visualisation de données 📊.\n\nDévelopper des compétences pour automatiser des tâches répétitives et optimiser les flux de travail 🔄.\n\n\n\nCe Qu’il Faut Savoir :\n\nAucune expérience préalable en programmation n’est requise—cet atelier est conçu pour les débutants complets ! 🐣\n\nAvant l’atelier : Suivez les instructions ci-dessous pour vous préparer. ✅\n\nMatériel : Tous les supports du cours sont accessibles ici et via le répertoire GitHub. 📂\n\n\n\nComment Installer R et RStudio 🛠️\n\nInstaller R :\n\nRendez-vous sur le site web du projet CRAN R.\nSélectionnez le lien de téléchargement correspondant à votre système d’exploitation (Windows, macOS ou Linux).\nSuivez les instructions d’installation fournies sur le site.\n\nInstaller RStudio :\n\nRendez-vous sur le site web de RStudio.\nTéléchargez la version gratuite de RStudio Desktop pour votre système d’exploitation.\nExécutez l’installateur et suivez les instructions affichées.\n\nVérifier l’Installation :\n\nOuvrez RStudio et vérifiez qu’il se lance correctement.\n\nBesoin d’Aide Supplémentaire ?\nPour des instructions détaillées et étape par étape sur l’installation, consultez ce guide excellent : Tutoriel DataCamp sur l’Installation de R et RStudio."
+  },
+  {
+    "objectID": "en/index_en.html",
+    "href": "en/index_en.html",
+    "title": "Welcome to DataTax R Course",
+    "section": "",
+    "text": "Welcome to Introduction to Programming in R 🎉\nThis website is your central hub for participating in the workshop, where you’ll learn R programming 🖥️ and its applications in research and data analysis 📊 with a focus on tax and administrative data.\n\nObjectives of this Course 🎯\n\nUnderstand the basics of R programming and how to apply it effectively.\n\nLearn to manipulate, clean, and analyze data with R.\n\nGain hands-on experience with real-world tax and administrative datasets.\n\nBuild a foundation for reproducible research and data visualization 📊.\n\nDevelop skills to automate repetitive tasks and streamline workflows 🔄.\n\n\n\nWhat You Need to Know:\n\nNo prior programming experience required—this workshop is designed for complete beginners! 🐣\n\nBefore the workshop: Follow the setup instructions below to ensure you’re ready to dive in. ✅\n\nMaterials: All course materials are accessible here and via the GitHub repository. 📂\n\n\n\nHow to Install R and RStudio 🛠️\n\nInstall R:\n\nVisit the CRAN R Project Website.\nSelect the appropriate download link for your operating system (Windows, macOS, or Linux).\nFollow the installation instructions provided on the website.\n\nInstall RStudio:\n\nVisit the RStudio Website.\nDownload the free RStudio Desktop version for your operating system.\nRun the installer and follow the on-screen instructions.\n\nVerify the Installation:\n\nOpen RStudio and check that it launches correctly.\n\nNeed More Help?\nFor detailed, step-by-step installation instructions, visit this excellent guide: DataCamp Tutorial on Installing R and RStudio."
+  },
+  {
+    "objectID": "pt/index_pt.html",
+    "href": "pt/index_pt.html",
+    "title": "Welcome to DataTax R Course",
+    "section": "",
+    "text": "Bem-vindo à Introdução à Programação em R 🎉\nEste site é o seu ponto central para participar do workshop, onde você aprenderá programação em R 🖥️ e suas aplicações em pesquisa e análise de dados 📊 com foco em dados fiscais e administrativos.\n\nObjetivos deste Curso 🎯\n\nCompreender os fundamentos da programação em R e como aplicá-los de forma eficaz.\n\nAprender a manipular, limpar e analisar dados com R.\n\nAdquirir experiência prática com conjuntos de dados reais fiscais e administrativos.\n\nConstruir uma base para pesquisas reprodutíveis e visualização de dados 📊.\n\nDesenvolver habilidades para automatizar tarefas repetitivas e otimizar fluxos de trabalho 🔄.\n\n\n\nO Que Você Precisa Saber:\n\nNão é necessário ter experiência prévia em programação—este workshop foi projetado para iniciantes completos! 🐣\n\nAntes do workshop: Siga as instruções de configuração abaixo para garantir que você esteja preparado. ✅\n\nMateriais: Todos os materiais do curso estão acessíveis aqui e no repositório GitHub. 📂\n\n\n\nComo Instalar R e RStudio 🛠️\n\nInstalar R:\n\nVisite o site do Projeto CRAN R.\nSelecione o link de download apropriado para o seu sistema operacional (Windows, macOS ou Linux).\nSiga as instruções de instalação fornecidas no site.\n\nInstalar RStudio:\n\nVisite o site do RStudio.\nBaixe a versão gratuita do RStudio Desktop para o seu sistema operacional.\nExecute o instalador e siga as instruções na tela.\n\nVerificar a Instalação:\n\nAbra o RStudio e verifique se ele inicia corretamente.\n\nPrecisa de Mais Ajuda?\nPara instruções detalhadas, passo a passo sobre a instalação, visite este excelente guia: Tutorial do DataCamp sobre Instalação do R e RStudio."
+  },
+  {
+    "objectID": "es/index_es.html",
+    "href": "es/index_es.html",
+    "title": "Welcome to DataTax R Course",
+    "section": "",
+    "text": "Este sitio web es tu punto central para participar en el taller, donde aprenderás programación en R 🖥️ y sus aplicaciones en investigación y análisis de datos 📊 con un enfoque en datos fiscales y administrativos."
+  },
+  {
+    "objectID": "es/index_es.html#objetivos-de-este-curso",
+    "href": "es/index_es.html#objetivos-de-este-curso",
+    "title": "Welcome to DataTax R Course",
+    "section": "Objetivos de este Curso 🎯",
+    "text": "Objetivos de este Curso 🎯\n\nComprender los conceptos básicos de la programación en R y cómo aplicarlos de manera efectiva.\n\nAprender a manipular, limpiar y analizar datos con R.\n\nAdquirir experiencia práctica con conjuntos de datos fiscales y administrativos reales.\n\nConstruir una base para la investigación reproducible y la visualización de datos 📊.\n\nDesarrollar habilidades para automatizar tareas repetitivas y optimizar flujos de trabajo 🔄."
+  },
+  {
+    "objectID": "es/index_es.html#qué-necesitas-saber",
+    "href": "es/index_es.html#qué-necesitas-saber",
+    "title": "Welcome to DataTax R Course",
+    "section": "Qué Necesitas Saber:",
+    "text": "Qué Necesitas Saber:\n\nNo se requiere experiencia previa en programación—¡este taller está diseñado para principiantes completos! 🐣\n\nAntes del taller: Sigue las instrucciones de configuración a continuación para asegurarte de estar listo para comenzar. ✅\n\nMateriales: Todos los materiales del curso están accesibles aquí y en el repositorio de GitHub. 📂"
+  },
+  {
+    "objectID": "es/index_es.html#cómo-instalar-r-y-rstudio",
+    "href": "es/index_es.html#cómo-instalar-r-y-rstudio",
+    "title": "Welcome to DataTax R Course",
+    "section": "Cómo Instalar R y RStudio 🛠️",
+    "text": "Cómo Instalar R y RStudio 🛠️\n\nInstalar R:\n\nVisita el sitio web del Proyecto CRAN R.\nSelecciona el enlace de descarga adecuado para tu sistema operativo (Windows, macOS o Linux).\nSigue las instrucciones de instalación proporcionadas en el sitio web.\n\nInstalar RStudio:\n\nVisita el sitio web de RStudio.\nDescarga la versión gratuita de RStudio Desktop para tu sistema operativo.\nEjecuta el instalador y sigue las instrucciones en pantalla.\n\nVerificar la Instalación:\n\nAbre RStudio y verifica que se inicie correctamente.\n\n¿Necesitas Más Ayuda?\nPara instrucciones detalladas paso a paso sobre la instalación, visita esta excelente guía: Tutorial de DataCamp sobre la Instalación de R y RStudio."
   }
 ]
