@@ -379,3 +379,47 @@ section.has-dark-background a, section.has-dark-background a:hover {
   height: 100%;
   text-align: left;
 }
+
+/* Styling for exercise slides as a closed box */
+.reveal .slides .exercise {
+  background-color: #f9f9f9; /* Light gray background */
+  color: #333333; /* Dark text */
+  border: 3px solid #4682b4; /* Blue border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 0px; /* Space inside the box */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  margin: 0px; /* Spacing around the box */
+  overflow: visible; /* Prevents clipping of content */
+}
+
+/* Styling for headers within the exercise */
+.reveal .slides .exercise h1, 
+.reveal .slides .exercise h2, 
+.reveal .slides .exercise h3 {
+  color: #2c3e50; /* Darker shade for headers */
+  margin-bottom: 10px;
+}
+
+/* Styling for list items */
+.reveal .slides .exercise ul {
+  list-style-type: disc; /* Standard bullet points */
+  padding-left: 20px;
+}
+
+.reveal .slides .exercise ul li {
+  margin-bottom: 10px; /* Space between items */
+}
+
+/* Styling for code blocks */
+.reveal .slides .exercise pre {
+  background-color: #f4f4f4; /* Subtle gray for code blocks */
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 0.85em; /* Adjust font size */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: pre-wrap; /* Ensures line wrapping */
+  word-wrap: break-word; /* Breaks long lines */
+  overflow: visible; /* Removes scrollbars */
+  max-width: 100%; /* Ensures the code block fits inside the box */
+}

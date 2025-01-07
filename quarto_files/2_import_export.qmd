@@ -44,7 +44,9 @@ library(dplyr)
 data <- read_excel("Exercises/data_tax.xlsx")
 
 ```
-# Folder Management `r emo::ji("folder")`
+
+
+------------------------------------------------------------------------
 
 ## Good Practice in Project Organization
 
@@ -57,6 +59,8 @@ data <- read_excel("Exercises/data_tax.xlsx")
 
 ```{mermaid}
 %%| fig-align: center
+%%| fig-width: 1200
+%%| fig-height: 800
 
 graph TD;
     A[r_training] --> B[scripts];
@@ -88,6 +92,32 @@ Use lowercase and hyphens (`-`) instead of spaces when naming folders, files, an
 `R` doesn’t automatically know where your files are. Using an RStudio project creates a shortcut that tells `R` where to find everything, making your workflow smoother.
 
 ![](images/project.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Setting Up Your Environment {.exercise}
+
+`r countdown::countdown(minutes = 5, seconds = 0, top = 0)`
+
+1. **Create a new Folder named `r_training`**
+
+2. **Create a Project**  
+   - Open **RStudio**.  
+   - Go to **File > New Project > Existing Directory**.  
+   - Browse to your `r_training` folder and click **Open**.  
+   - Click **Create Project** to finish.
+
+3. **Open the Project**  (Double-click the file to open it in RStudio.)
+
+4. **Run this command in the RStudio Console:  ** 
+
+```{r usecourse, echo = T, eval = F}
+usethis::use_course("https://github.com/your-organization/course-repo")
+```
+     
+   - Follow the prompts to unzip the materials into your project folder.
+
+You’re all set to begin! `r emo::ji("party_popper")`
 
 ------------------------------------------------------------------------
 
@@ -124,9 +154,7 @@ graph TD;
 
 ::::
 
-# Import {.center}
-
-![](images/import.png){width="auto" fig-align="center"}
+# Import
 
 ## Preparing Data for R: General Concepts and Best Practices
 
@@ -264,7 +292,7 @@ names(data)
 
 ---
 
-## Exercise 1 
+## Exercise 1 {.exercise}
 
 You can find the exercise in the folder "Exercises/Import_and_Export.R"
 
@@ -317,7 +345,7 @@ pacman::p_load(packages, character.only = TRUE, install = TRUE)
 ```
 ---
 
-## Exercise 1 (Solutions)
+## Exercise 1 (Solutions) {.exercise}
 
 ```{r solutions1, echo = T, eval = F}
 

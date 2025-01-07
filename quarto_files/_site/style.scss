@@ -57,3 +57,36 @@ $h1-color: #4090BE !default;
   background-color: #f8f8f8; /* Slight gray for hover effect */
 }
 
+
+/* CSS for Exercise Slides */
+
+/* Change background color for slides with the "exercise" class */
+.reveal .slides .exercise {
+  background-color: #f0f8ff; /* Light blue */
+  color: #333333;           /* Dark text for contrast */
+  border-left: 5px solid #4682b4; /* Blue border */
+  padding: 20px;
+}
+
+/* Add custom styling for headers */
+.reveal .slides .exercise h1, 
+.reveal .slides .exercise h2, 
+.reveal .slides .exercise h3 {
+  color: #2c3e50; /* Darker shade for headers */
+  text-shadow: 1px 1px 2px #ffffff;
+}
+
+/* Add custom styling for code blocks */
+.reveal .slides .exercise pre {
+  background-color: #f7f9fc; /* Subtle gray for code blocks */
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1.1em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style list items for clarity */
+.reveal .slides .exercise ul li {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
