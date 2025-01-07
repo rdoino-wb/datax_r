@@ -349,11 +349,19 @@ section.has-dark-background a, section.has-dark-background a:hover {
 }
 
 .code-scroll {
-    align-items: center;
-    max-height: 120vh; /* Sets the height to be as long as the viewport */
-    overflow-y: auto; /* Allows for scrolling if the content is longer than the viewport */
-    margin: 100px auto 0 auto; /* Centers the block horizontally */
-    width: 100%; /* Adjusts the width of the code block */
+    align-items: center; /* Centers content vertically within a flexbox (if applicable) */
+    max-height: 60vh; /* Limits the height to 60% of the viewport */
+    overflow-y: auto; /* Enables vertical scrolling if content exceeds max-height */
+    margin: 50px auto; /* Centers the block horizontally and adds vertical spacing */
+    width: 50%; /* Adjusts the width of the code block */
+    padding: 10px; /* Adds some inner spacing for readability */
+    background-color: #f4f4f4; /* Subtle gray background for contrast */
+    border: 1px solid #cccccc; /* Adds a light border */
+    border-radius: 5px; /* Rounds the corners for a polished look */
+    font-size: 0.65em; /* Reduces font size slightly for compact display */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    white-space: pre-wrap; /* Ensures code wraps to fit within the block */
+    word-wrap: break-word; /* Breaks long lines */
 }
 
 .navbar img {
@@ -388,8 +396,7 @@ section.has-dark-background a, section.has-dark-background a:hover {
   border-radius: 10px; /* Rounded corners */
   padding: 0px; /* Space inside the box */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  margin: 0px; /* Spacing around the box */
-  overflow: visible; /* Prevents clipping of content */
+  margin: 5px; /* Spacing around the box */
 }
 
 /* Styling for headers within the exercise */
@@ -408,18 +415,4 @@ section.has-dark-background a, section.has-dark-background a:hover {
 
 .reveal .slides .exercise ul li {
   margin-bottom: 10px; /* Space between items */
-}
-
-/* Styling for code blocks */
-.reveal .slides .exercise pre {
-  background-color: #f4f4f4; /* Subtle gray for code blocks */
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 0.85em; /* Adjust font size */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  white-space: pre-wrap; /* Ensures line wrapping */
-  word-wrap: break-word; /* Breaks long lines */
-  overflow: visible; /* Removes scrollbars */
-  max-width: 100%; /* Ensures the code block fits inside the box */
 }
