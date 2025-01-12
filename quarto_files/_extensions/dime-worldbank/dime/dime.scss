@@ -39,6 +39,7 @@ $math-fontsize: 80%;
   font-size: 1em;
   padding: 0.5em;
   line-height: 1.2em;
+  max-width: 90%;
 }
 
 // Explicitly apply styles for headings
@@ -82,6 +83,22 @@ code, pre {
 
 .reveal .slide-number a {
   color: $link-color;
+  
+}
+
+/* Universal link style */
+.reveal a {
+  color: #0078D7; /* Default blue color for links */
+  text-decoration: underline; /* Underline for visibility */
+  text-underline-offset: 2px; /* Space between text and underline */
+  text-decoration-thickness: 1px; /* Thickness of underline */
+  transition: color 0.3s ease, text-decoration-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect */
+a:hover {
+  color: #0056A3; /* Darker blue on hover */
+  text-decoration-color: #0056A3; /* Match underline color on hover */
 }
 
 #title-slide {
@@ -353,7 +370,7 @@ section.has-dark-background a, section.has-dark-background a:hover {
     max-height: 60vh; /* Limits the height to 60% of the viewport */
     overflow-y: auto; /* Enables vertical scrolling if content exceeds max-height */
     margin: 50px auto; /* Centers the block horizontally and adds vertical spacing */
-    width: 50%; /* Adjusts the width of the code block */
+    max-width: 90%; /* Adjusts the width of the code block */
     padding: 10px; /* Adds some inner spacing for readability */
     background-color: #f4f4f4; /* Subtle gray background for contrast */
     border: 1px solid #cccccc; /* Adds a light border */
@@ -365,7 +382,7 @@ section.has-dark-background a, section.has-dark-background a:hover {
 }
 
 .navbar img {
-  max-height: 30px;
+  max-height: 80px;
   margin-left: auto;
 }
 
@@ -375,8 +392,8 @@ section.has-dark-background a, section.has-dark-background a:hover {
   background-image: url("logos/WB-DEC-Impact-horizontal-RGB-high.png");
   background-size: contain;
   background-repeat: no-repeat;
-  height: 40px;
-  width: 120px; /* Adjust width to fit the logo */
+  height: 120px;
+  width: 180px; /* Adjust width to fit the logo */
 }
 
 .center-slide {
@@ -390,13 +407,13 @@ section.has-dark-background a, section.has-dark-background a:hover {
 
 /* Styling for exercise slides as a closed box */
 .reveal .slides .exercise {
-  background-color: #f9f9f9; /* Light gray background */
+  background-color: #E3F3FB; /* Light gray background */
   color: #333333; /* Dark text */
   border: 3px solid #4682b4; /* Blue border */
   border-radius: 10px; /* Rounded corners */
-  padding: 0px; /* Space inside the box */
+  padding: 15px; /* Space inside the box */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  margin: 5px; /* Spacing around the box */
+  margin: 0px; /* Spacing around the box */
 }
 
 /* Styling for headers within the exercise */

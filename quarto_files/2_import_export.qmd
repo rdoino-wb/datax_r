@@ -33,6 +33,8 @@ format:
 
 ```{r set-up}
 
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
 library(emo)
 library(countdown)
 
@@ -430,11 +432,10 @@ Tidy data organizes tax administrative data into a consistent, analysis-ready fo
 
 ![](images/tidy.png){fig-align="center"}
 
----
+
+## Let's take a look at this dataset 
 
 ::: {.fragment}
-
-### Let's take a look at this dataset 
 
 | Taxpayer ID | Tax Type   | 2021 Q1 | 2021 Q2 | 2021 Q3 | 2021 Q4 |
 |-------------|------------|---------|---------|---------|---------|
@@ -470,9 +471,6 @@ One observation is a specific tax payment for a taxpayer during a particular qua
 ::: {.fragment}
 
 **How would you reshape the dataset to meet the three key tidy characteristics?** 
-:::
-
-::: {.fragment}
 
   - Each variable is a column; each column is a variable.
 
@@ -484,7 +482,16 @@ One observation is a specific tax payment for a taxpayer during a particular qua
 
 ---
 
-### Example: Tidy Data
+**From "Wide"**
+
+| Taxpayer ID | Tax Type   | 2021 Q1 | 2021 Q2 | 2021 Q3 | 2021 Q4 |
+|-------------|------------|---------|---------|---------|---------|
+| 101         | Income Tax | 500     | 600     | 450     | 700     |
+| 102         | VAT        | 300     | 400     | 350     | 500     |
+
+. . . 
+
+**To "Long" --> Tidy Data**
 
 | Taxpayer ID | Tax Type   | Quarter | Payment Amount |
 |-------------|------------|---------|----------------|
@@ -496,6 +503,183 @@ One observation is a specific tax payment for a taxpayer during a particular qua
 | 102         | VAT        | 2021 Q2 | 400            |
 | 102         | VAT        | 2021 Q3 | 350            |
 | 102         | VAT        | 2021 Q4 | 500            |
+
+---
+
+## How Do We Go from “Wide” to “Long” in R?
+
+. . . 
+
+
+:::: {.columns}
+
+::: {.column width=20%}
+![](images/tidyr.png){fig-align="center" width=75px fig-height=auto}
+:::
+
+::: {.column width=80%}
+<div style="margin-top: 35px;">
+We need to introduce the package [tidyr](https://tidyr.tidyverse.org/).  
+</div>
+:::
+
+::::
+
+. . . 
+
+**Why Use Packages?**
+
+-	Packages contain tools (or “verbs”) to perform specific tasks in R.
+-	Once installed and loaded, these verbs simplify complex operations.
+	
+``` {r tidyr, echo = T, eval = T}
+install.packages("tidyr") #  the package
+library(tidyr) # load it
+```
+
+```{r, echo = F, eval = T}
+install.packages("tibble")
+library(tibble)
+
+# Create a wide dataset
+wide_data <- tribble(
+  ~`taxpayer_id`, ~`tax_type`, ~`2021 Q1`, ~`2021 Q2`, ~`2021 Q3`, ~`2021 Q4`,
+  101, "Income Tax", 500, 600, 450, 700,
+  102, "VAT", 300, 400, 350, 500,
+  102, "Income Tax", 530, 110, 350, 400,
+  101, "VAT", 100, 700, 850, 400
+)
+```
+
+:::{.callout-note}
+Use cheat sheets for quick summaries of a package’s verbs and their usage (e.g., [tidyr Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf)). And don’t forget! AI tools can also assist with coding and debugging. 
+:::
+
+. . . 
+
+---
+
+## In practice: 
+
+Start with a `wide` dataset
+
+``` {r wide, echo = F, eval = T}
+
+print(wide_data)
+```
+
+. . . 
+
+```{r, echo = T, eval = T}
+#| collapse: true
+#| code-line-numbers: "1,2|4,5|7,8,9,10,11,12,13,14,15,16,17|7,8,9|10,11,12,13,14|15|16|"
+# Install the package 
+install.packages("tidyr")
+
+# Load the package in our session
+library(tidyr)
+
+# Pivot the dataset to long format
+long_tax_data <- pivot_longer(
+    wide_data,                  # Dataset name
+    cols = c(
+      "2021 Q1",
+      "2021 Q2", 
+      "2021 Q3", 
+      "2021 Q4"),               # Select columns to pivot
+    names_to = "Quarter",       # New column for the old column headers (quarters)
+    values_to = "Amount"        # New column for the values
+  )
+
+```
+
+---
+
+## The final result
+
+```{r, echo = T, eval = T}
+
+# Print the final result
+print(long_tax_data)
+
+```
+
+---
+
+## Let's start with two key definitions
+
+:::: {.columns}
+
+::: {.column width="50%" .fragment}
+
+::: {.callout-note icon=false appearence=simple}
+## Unit of Observation
+The unit of observation refers to the smallest entity or item for which data is collected in a dataset.
+:::
+
+:::
+
+::: {.column width="50%" .fragment}
+
+::: {.callout-note icon=false appearence=simple}
+## Unit of Analysis
+The unit of analysis refers to the entity or object about which you are trying to make conclusions or draw insights.
+:::
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width="50%" .fragment}
+
+::: {.callout-note icon=false appearence=simple}
+## Unit of Observation
+The unit of observation refers to the smallest entity or item for which data is collected in a dataset.
+:::
+
+:::
+
+::: {.column width="50%" .fragment}
+
+::: {.callout-note icon=false appearence=simple}
+## Unit of Analysis
+The unit of analysis refers to the entity or object about which you are trying to make conclusions or draw insights.
+:::
+
+:::
+
+::::
+
+--- 
+
+## Unit of Analysis
+
+1. We need to identify the Unit of Analysis:
+  - If studying the different sources of taxes --> `Transaction` X `Tax` X `Time` 
+  - If looking at taxpaers behavior --> `Tax ID` X `Time`
+  
+2. The Unit of Analysis always needs to be uniquely identified by an ID (combined with time periods in the case of a panel).
+
+. . . 
+
+3. How do we now move from `Long` to `Wide`? 
+
+```{r, echo = F, eval = T}
+
+wide_tax_data <- long_tax_data %>%
+  pivot_wider(
+    names_from = `tax_type`,       # Use `Tax Type` to create new column names
+    values_from = Amount          # Populate the new columns with `Amount` values
+  )
+
+# Print the final result
+print(wide_tax_data)
+
+```
+
+---
 
 # Writing Data in R
 
