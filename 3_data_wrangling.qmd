@@ -1,0 +1,927 @@
+---
+title: "Data Wrangling with `dplyr`"
+subtitle: "`R` Training"
+institute: The World Bank Group - DataTax
+date: today
+author: ""
+date-format: "dddd, [the] D[<sup style='font-size:65%;font-style:italic;'>th</sup>] [of] MMMM, YYYY"
+output-dir: "_site/"
+format:
+  revealjs:
+    theme: _extensions/dime-worldbank/dime/dime.scss
+    # Output file
+    output-file: 3_data_wrangling.html
+    code-line-numbers: true
+    # Table of Contents
+    toc: false
+    toc_float: false
+    toc-depth: 1
+    toc-location: left
+    toc-title: "Agenda"
+    # Generate a self contained file
+    self-contained: true
+    self-contained-math: true
+    # Turn preview links within the presentation off (all links open in a new tab)
+    preview-links: true
+    auto-animate: true
+    # Logo and footer options
+    logo: "logos/WB-DEC-Impact-horizontal-RGB-high.png"
+    footer: "Code available on [GitHub](https://github.com/rdoino-wb/data_analysis_DataTable)."
+---
+
+```{r set-up}
+#| echo: false
+#| warning: false
+
+library(emo)
+library(countdown)
+library(dplyr)
+library(data.table)
+library(here)
+library(knitr)
+library(kableExtra)
+library(stringr)
+library(lubridate)
+library(tidyr)
+
+# Load the datasets from Module 2
+panel_vat <- fread(here("Solutions", "Data", "Intermediate", "panel_vat.csv"))
+panel_cit <- fread(here("Solutions", "Data", "Intermediate", "panel_cit.csv"))
+dt_firms  <- fread(here("Solutions", "Data", "Intermediate", "dt_firms.csv"))
+
+# Create a small example dataset for demonstrations
+example_vat <- panel_vat %>% 
+  slice_head(n = 5) %>%
+  select(firm_id, declaration_date, vat_inputs, vat_outputs)
+```
+
+------------------------------------------------------------------------
+
+## Where We Are
+
+> *"The best thing about R is that it was written by statisticians. The worst thing about R is that it was written by statisticians."*
+>
+> -- Bo Cowgill, Google
+
+. . .
+
+### Module Roadmap `r emo::ji("world_map")`
+
+::: {.fragment .fade-in}
+1. ✅ **R Basics**: You can speak R!
+2. ✅ **Import/Export**: You can get data in and out!
+3. 👉 **Data Wrangling**: Making data behave
+4. 🔜 **Visualization**: Making data speak
+5. 🔜 **Analysis**: Making data work
+:::
+
+------------------------------------------------------------------------
+
+## A Tax Administrator's Daily Challenge {.center}
+
+. . .
+
+You receive three datasets:
+
+::: incremental
+- 📊 **VAT declarations** (100,000 records)
+- 💰 **CIT filings** (50,000 records)  
+- 🏢 **Firm characteristics** (150,000 firms)
+:::
+
+. . .
+
+Your boss asks: *"Which large firms in the manufacturing sector have increasing tax gaps?"*
+
+. . .
+
+### How do you even start? `r emo::ji("thinking")`
+
+------------------------------------------------------------------------
+
+## The Data Wrangling Journey
+
+```{mermaid}
+%%| fig-align: center
+%%| fig-width: 1200
+
+graph LR
+    A[😱 Messy Data] --> B[🔧 Transform]
+    B --> C[🎯 Clean Data]
+    C --> D[📊 Analysis]
+    
+    style A fill:#ff6b6b,stroke:#c92a2a
+    style B fill:#4dabf7,stroke:#1864ab
+    style C fill:#51cf66,stroke:#2b8a3e
+    style D fill:#ffd43b,stroke:#fab005
+```
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+### Before `dplyr` 😰
+```r
+# Which firms have high VAT?
+high_vat <- panel_vat[
+  panel_vat$vat_outputs > 40000,
+  c("firm_id", "vat_outputs")
+]
+# Now sort... wait, how?
+high_vat <- high_vat[
+  order(high_vat$vat_outputs, 
+        decreasing = TRUE),
+]
+```
+:::
+
+::: {.column width="50%"}
+### After `dplyr` 😊
+```r
+# Clear as natural language!
+high_vat <- panel_vat %>%
+  filter(vat_outputs > 40000) %>%
+  select(firm_id, vat_outputs) %>%
+  arrange(desc(vat_outputs))
+```
+:::
+:::
+
+------------------------------------------------------------------------
+
+## The Grammar of Data Manipulation {.center}
+
+. . .
+
+**Think of data manipulation as writing sentences:**
+
+. . .
+
+> "Take the **VAT data**, then **filter** for large taxpayers, then **select** key columns, then **arrange** by amount."
+
+. . .
+
+### Each verb is an action:
+
+::: columns
+::: {.column width="20%"}
+📝 `select()`
+:::
+::: {.column width="80%"}
+*"I want to see these columns"*
+:::
+:::
+
+::: columns
+::: {.column width="20%"}
+🔍 `filter()`
+:::
+::: {.column width="80%"}
+*"I want to see these rows"*
+:::
+:::
+
+::: columns
+::: {.column width="20%"}
+➕ `mutate()`
+:::
+::: {.column width="80%"}
+*"I want to calculate something new"*
+:::
+:::
+
+::: columns
+::: {.column width="20%"}
+📊 `summarize()`
+:::
+::: {.column width="80%"}
+*"I want to aggregate my data"*
+:::
+:::
+
+::: columns
+::: {.column width="20%"}
+🔢 `arrange()`
+:::
+::: {.column width="80%"}
+*"I want to sort my data"*
+:::
+:::
+
+------------------------------------------------------------------------
+
+## The Pipe: Your New Best Friend
+
+Without the pipe: 🍝 (Spaghetti code!)
+
+```{r no_pipe, echo = TRUE}
+# Read from inside out... 🤯
+result <- arrange(
+  select(
+    filter(panel_vat, vat_outputs > 30000),
+    firm_id, vat_outputs
+  ),
+  desc(vat_outputs)
+)
+```
+
+. . .
+
+### With the pipe: 📖 (Like reading a story!)
+
+```{r with_pipe, echo = TRUE}
+# Read from top to bottom! 
+result <- panel_vat %>%
+  filter(vat_outputs > 30000) %>%
+  select(firm_id, vat_outputs) %>%
+  arrange(desc(vat_outputs))
+```
+
+. . .
+
+::: callout-tip
+The pipe `%>%` means **"and then..."** - it takes the output from the left and feeds it as the first argument to the right!
+:::
+
+------------------------------------------------------------------------
+
+## Let's Start Simple
+
+### Our toy dataset:
+
+```{r show_example, echo = FALSE}
+example_vat %>%
+  kable(format = "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = FALSE,
+                font_size = 16)
+```
+
+. . .
+
+### Question: How do we get just the firm IDs and outputs?
+
+. . .
+
+```{r select_demo, echo = TRUE}
+example_vat %>%
+  select(firm_id, vat_outputs)
+```
+
+------------------------------------------------------------------------
+
+## Selecting Columns: Multiple Ways
+
+::: panel-tabset
+
+### By Name
+```{r select_name, echo = TRUE}
+panel_vat %>%
+  select(firm_id, vat_outputs) %>%
+  head(3)
+```
+
+### By Position
+```{r select_position, echo = TRUE}
+panel_vat %>%
+  select(1, 4) %>%  # First and fourth columns
+  head(3)
+```
+
+### By Pattern
+```{r select_pattern, echo = TRUE}
+panel_vat %>%
+  select(starts_with("vat")) %>%
+  head(3)
+```
+
+### By Exclusion
+```{r select_exclude, echo = TRUE}
+panel_vat %>%
+  select(-reimbursement_date) %>%
+  head(3)
+```
+
+:::
+
+------------------------------------------------------------------------
+
+## Your Turn! {.exercise}
+
+`r countdown::countdown(minutes = 3, seconds = 0, top = 0)`
+
+### Mini Exercise: Column Selection
+
+Using `panel_vat`, create a dataset that:
+1. Includes the firm ID
+2. Includes all columns that contain "vat"
+3. Excludes the reimbursement date
+
+```{r mini_ex1, echo = TRUE, eval = FALSE}
+# Your code here:
+my_selection <- panel_vat %>%
+  _______________
+```
+
+. . .
+
+### Solution:
+```{r mini_ex1_solution, echo = TRUE}
+my_selection <- panel_vat %>%
+  select(firm_id, contains("vat"), -reimbursement_date)
+
+head(my_selection, 3)
+```
+
+------------------------------------------------------------------------
+
+## Filtering: Finding the Needles in the Haystack
+
+### Scenario: Your boss wants to audit high-value transactions
+
+. . .
+
+```{r filter_basic, echo = TRUE}
+# Find declarations with outputs over 40,000
+high_value <- panel_vat %>%
+  filter(vat_outputs > 40000)
+
+nrow(high_value)
+```
+
+. . .
+
+### But wait! What about complex criteria?
+
+```{r filter_complex, echo = TRUE}
+# High outputs OR suspicious input-output ratio
+suspicious <- panel_vat %>%
+  filter(vat_outputs > 40000 | vat_inputs/vat_outputs > 0.9)
+
+nrow(suspicious)
+```
+
+------------------------------------------------------------------------
+
+## Filter Operators: Your Investigation Toolkit
+
+```{r filter_operators, echo = FALSE}
+tribble(
+  ~Operator, ~Meaning, ~Example,
+  "==", "Equal to", "industry == 'Manufacturing'",
+  "!=", "Not equal to", "region != 'North'",
+  ">", "Greater than", "vat_outputs > 50000",
+  ">=", "Greater than or equal", "employees >= 100",
+  "<", "Less than", "tax_rate < 0.05",
+  "<=", "Less than or equal", "days_late <= 30",
+  "%in%", "In a set", "firm_id %in% c('FIRM_001', 'FIRM_002')",
+  "is.na()", "Is missing", "is.na(reimbursement_date)",
+  "&", "AND", "size == 'Large' & region == 'North'",
+  "|", "OR", "late_filing == TRUE | adjustments < 0"
+) %>%
+  kable(format = "html", escape = FALSE) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = FALSE,
+                font_size = 14)
+```
+
+------------------------------------------------------------------------
+
+## Creating New Variables: The Power of `mutate()`
+
+### The Problem:
+> "We need to calculate the net VAT base and the implied VAT amount for each transaction"
+
+. . .
+
+### The Solution:
+```{r mutate_basic, echo = TRUE}
+vat_calculated <- panel_vat %>%
+  mutate(
+    net_vat_base = vat_outputs - vat_inputs,
+    implied_vat = net_vat_base * 0.18,  # 18% VAT rate
+    margin_ratio = vat_inputs / vat_outputs
+  ) %>%
+  select(firm_id, vat_outputs, vat_inputs, net_vat_base, implied_vat, margin_ratio)
+
+head(vat_calculated, 4)
+```
+
+------------------------------------------------------------------------
+
+## Conditional Logic: Making Smart Calculations
+
+### Categorizing taxpayers by size:
+
+```{r case_when, echo = TRUE}
+#| code-line-numbers: "|2-9|"
+taxpayer_categories <- panel_vat %>%
+  mutate(
+    taxpayer_size = case_when(
+      vat_outputs < 10000 ~ "Micro",
+      vat_outputs < 50000 ~ "Small",
+      vat_outputs < 100000 ~ "Medium",
+      TRUE ~ "Large"  # Everything else
+    )
+  ) %>%
+  select(firm_id, vat_outputs, taxpayer_size)
+
+# Let's see the distribution
+table(taxpayer_categories$taxpayer_size)
+```
+
+------------------------------------------------------------------------
+
+## Date Magic with `lubridate` `r emo::ji("calendar")`
+
+### Dates are tricky... but not with the right tools!
+
+```{r date_magic, echo = TRUE}
+#| code-line-numbers: "|4-11|"
+# Extract useful date components
+vat_with_dates <- panel_vat %>%
+  mutate(
+    year = year(declaration_date),
+    month = month(declaration_date),
+    quarter = quarter(declaration_date),
+    # Days between declaration and reimbursement
+    processing_days = as.numeric(
+      reimbursement_date - declaration_date
+    ),
+    # Fiscal year (if July-June)
+    fiscal_year = ifelse(month >= 7, year + 1, year)
+  ) %>%
+  select(firm_id, declaration_date, year, quarter, processing_days, fiscal_year)
+
+head(vat_with_dates, 5)
+```
+
+------------------------------------------------------------------------
+
+## Aggregation: From Transactions to Insights
+
+### Question: What's the total VAT collection by year?
+
+```{r summarize_basic, echo = TRUE}
+yearly_summary <- panel_vat %>%
+  mutate(year = year(declaration_date)) %>%
+  group_by(year) %>%
+  summarize(
+    n_declarations = n(),
+    total_outputs = sum(vat_outputs),
+    total_inputs = sum(vat_inputs),
+    net_vat_base = sum(vat_outputs - vat_inputs),
+    implied_collection = net_vat_base * 0.18
+  )
+
+yearly_summary
+```
+
+------------------------------------------------------------------------
+
+## The Group-By Magic ✨
+
+### Without grouping:
+```{r no_group, echo = TRUE}
+panel_vat %>%
+  summarize(avg_outputs = mean(vat_outputs))
+```
+
+. . .
+
+### With grouping - The real power!
+```{r with_group, echo = TRUE}
+panel_vat %>%
+  mutate(year = year(declaration_date)) %>%
+  group_by(year) %>%
+  summarize(avg_outputs = mean(vat_outputs))
+```
+
+. . .
+
+::: callout-important
+`group_by()` splits your data into groups, and subsequent operations are performed **within each group**!
+:::
+
+------------------------------------------------------------------------
+
+## A Real Analysis: Finding Tax Gaps
+
+Let's identify potential compliance issues:
+
+```{r tax_gaps, echo = TRUE}
+#| code-line-numbers: "|3-6|8-9|11-18|20-21|"
+# Comprehensive compliance analysis
+compliance_analysis <- panel_vat %>%
+  # Calculate key metrics
+  mutate(
+    net_base = vat_outputs - vat_inputs,
+    input_ratio = vat_inputs / vat_outputs,
+    year = year(declaration_date)
+  ) %>%
+  # Group by firm and year
+  group_by(firm_id, year) %>%
+  # Calculate firm-year statistics
+  summarize(
+    declarations = n(),
+    avg_net_base = mean(net_base),
+    avg_input_ratio = mean(input_ratio),
+    volatility = sd(net_base),
+    .groups = "drop"
+  ) %>%
+  # Flag suspicious patterns
+  mutate(
+    suspicious = avg_input_ratio > 0.95 | volatility > 50000
+  )
+
+# How many suspicious cases?
+sum(compliance_analysis$suspicious)
+```
+
+------------------------------------------------------------------------
+
+## Joining the Dots: Preparing for Integration
+
+### Check which firms appear across datasets:
+
+```{r overlap_analysis, echo = TRUE}
+# Get unique firms from each dataset
+vat_firms <- unique(panel_vat$firm_id)
+cit_firms <- unique(panel_cit$firm_id)
+char_firms <- unique(dt_firms$firm_id)
+
+# Create a summary
+overlap_summary <- tribble(
+  ~Dataset, ~`Number of Firms`,
+  "VAT Declarations", length(vat_firms),
+  "CIT Declarations", length(cit_firms),
+  "Firm Characteristics", length(char_firms),
+  "In Both VAT & CIT", length(intersect(vat_firms, cit_firms)),
+  "In All Three", length(Reduce(intersect, list(vat_firms, cit_firms, char_firms)))
+)
+
+overlap_summary %>%
+  kable(format = "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = FALSE, font_size = 16)
+```
+
+------------------------------------------------------------------------
+
+## Exercise: Build a Taxpayer Risk Score {.exercise}
+
+`r countdown::countdown(minutes = 15, seconds = 0, top = 0)`
+
+Create a risk scoring system using VAT data:
+
+1. Calculate for each firm:
+   - Average input-to-output ratio
+   - Number of late reimbursements (reimbursement > 90 days after declaration)
+   - Coefficient of variation in outputs (sd/mean)
+   
+2. Create risk flags:
+   - High input ratio (>0.9)
+   - Frequent late reimbursements (>50%)
+   - High volatility (CV > 0.5)
+   
+3. Assign risk score: 1 point per flag
+
+4. Show top 10 riskiest firms
+
+```{r exercise_risk, echo = TRUE, eval = FALSE}
+# Your code here:
+risk_scores <- panel_vat %>%
+  mutate(
+    # Calculate metrics
+    
+  ) %>%
+  group_by(____) %>%
+  summarize(
+    # Aggregate metrics
+    
+  ) %>%
+  mutate(
+    # Create risk flags and score
+    
+  ) %>%
+  # Get top 10
+  
+```
+
+------------------------------------------------------------------------
+
+## Exercise Solution
+
+```{r exercise_solution, echo = TRUE}
+#| code-line-numbers: "|2-6|7|8-14|15-20|21|"
+risk_scores <- panel_vat %>%
+  mutate(
+    input_ratio = vat_inputs / vat_outputs,
+    processing_days = as.numeric(reimbursement_date - declaration_date),
+    late_reimbursement = processing_days > 90
+  ) %>%
+  group_by(firm_id) %>%
+  summarize(
+    avg_input_ratio = mean(input_ratio, na.rm = TRUE),
+    pct_late_reimb = mean(late_reimbursement, na.rm = TRUE) * 100,
+    avg_outputs = mean(vat_outputs, na.rm = TRUE),
+    sd_outputs = sd(vat_outputs, na.rm = TRUE),
+    cv_outputs = sd_outputs / avg_outputs
+  ) %>%
+  mutate(
+    flag_high_input = avg_input_ratio > 0.9,
+    flag_late_reimb = pct_late_reimb > 50,
+    flag_volatility = cv_outputs > 0.5,
+    risk_score = flag_high_input + flag_late_reimb + flag_volatility
+  ) %>%
+  arrange(desc(risk_score), desc(avg_outputs)) %>%
+  slice_head(n = 10)
+
+risk_scores %>%
+  select(firm_id, risk_score, avg_input_ratio, pct_late_reimb, cv_outputs) %>%
+  kable(format = "html", digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), font_size = 14)
+```
+
+------------------------------------------------------------------------
+
+## Common Patterns in Tax Data Analysis
+
+::: panel-tabset
+
+### Time Trends
+```{r pattern_time, echo = TRUE}
+# Monthly collection trends
+panel_vat %>%
+  mutate(month = floor_date(declaration_date, "month")) %>%
+  group_by(month) %>%
+  summarize(
+    total_base = sum(vat_outputs - vat_inputs),
+    n_filings = n()
+  ) %>%
+  slice_head(n = 6)
+```
+
+### Sector Analysis
+```{r pattern_sector, echo = TRUE}
+# Join with firm characteristics for sector analysis
+manufacturing_firms <- dt_firms %>%
+  filter(industry == "Manufacturing") %>%
+  pull(firm_id)
+
+panel_vat %>%
+  filter(firm_id %in% manufacturing_firms) %>%
+  summarize(
+    total_vat_base = sum(vat_outputs - vat_inputs),
+    avg_transaction = mean(vat_outputs)
+  )
+```
+
+### Compliance Metrics
+```{r pattern_compliance, echo = TRUE}
+# Late filing analysis
+panel_vat %>%
+  mutate(
+    days_to_reimb = as.numeric(reimbursement_date - declaration_date),
+    late = days_to_reimb > 60
+  ) %>%
+  summarize(
+    late_filing_rate = mean(late, na.rm = TRUE) * 100,
+    avg_days = mean(days_to_reimb, na.rm = TRUE)
+  )
+```
+
+:::
+
+------------------------------------------------------------------------
+
+## Best Practices for Tax Data `r emo::ji("star")`
+
+### 1. **Always validate your calculations**
+```{r validate, echo = TRUE}
+# Check: Do input ratios make sense?
+panel_vat %>%
+  mutate(input_ratio = vat_inputs / vat_outputs) %>%
+  summarize(
+    min_ratio = min(input_ratio),
+    max_ratio = max(input_ratio),
+    ratios_above_1 = sum(input_ratio > 1)
+  )
+```
+
+. . .
+
+### 2. **Handle missing values explicitly**
+```{r missing, echo = TRUE}
+# Always use na.rm = TRUE in aggregations
+panel_vat %>%
+  summarize(
+    with_na = mean(vat_outputs),        # Dangerous!
+    without_na = mean(vat_outputs, na.rm = TRUE)  # Safe!
+  )
+```
+
+------------------------------------------------------------------------
+
+## Advanced Tips: Window Functions
+
+### Ranking within groups:
+```{r window_rank, echo = TRUE}
+# Top 3 taxpayers by month
+top_monthly <- panel_vat %>%
+  mutate(
+    month = floor_date(declaration_date, "month"),
+    net_base = vat_outputs - vat_inputs
+  ) %>%
+  group_by(month) %>%
+  mutate(rank = dense_rank(desc(net_base))) %>%
+  filter(rank <= 3) %>%
+  select(month, firm_id, net_base, rank) %>%
+  arrange(month, rank)
+
+head(top_monthly, 9)
+```
+
+------------------------------------------------------------------------
+
+## Debugging Your Pipeline `r emo::ji("bug")`
+
+### When things go wrong, debug step by step:
+
+```{r debug_demo, echo = TRUE}
+# Original attempt - something's wrong!
+result <- panel_vat %>%
+  filter(vat_outputs > 50000) %>%
+  group_by(firm_id) %>%
+  summarize(avg = mean(vat_outputs))
+
+# Debug by checking each step:
+# Step 1: How many rows after filter?
+panel_vat %>%
+  filter(vat_outputs > 50000) %>%
+  nrow()
+
+# Step 2: Check grouping
+panel_vat %>%
+  filter(vat_outputs > 50000) %>%
+  group_by(firm_id) %>%
+  tally() %>%
+  head()
+```
+
+------------------------------------------------------------------------
+
+## Performance Matters! `r emo::ji("rocket")`
+
+### For large datasets (>1M rows):
+
+::: columns
+::: {.column width="50%"}
+#### Option 1: `data.table`
+```{r dt_example, echo = TRUE, eval = FALSE}
+library(data.table)
+dt <- as.data.table(panel_vat)
+
+# data.table syntax
+dt[vat_outputs > 50000, 
+   .(avg = mean(vat_outputs)), 
+   by = firm_id]
+```
+:::
+
+::: {.column width="50%"}
+#### Option 2: `dtplyr`
+```{r dtplyr_example, echo = TRUE, eval = FALSE}
+library(dtplyr)
+
+# Use dplyr syntax with data.table speed!
+panel_vat %>%
+  lazy_dt() %>%
+  filter(vat_outputs > 50000) %>%
+  group_by(firm_id) %>%
+  summarize(avg = mean(vat_outputs)) %>%
+  as_tibble()
+```
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Your Data Wrangling Toolkit `r emo::ji("toolbox")`
+
+### Core Verbs Recap:
+
+```{r toolkit_table, echo = FALSE}
+tribble(
+  ~Verb, ~What_it_does, ~Real_Example,
+  "select()", "Pick columns", "Get taxpayer ID and amounts",
+  "filter()", "Pick rows", "Find large taxpayers",
+  "mutate()", "Add columns", "Calculate tax rates",
+  "summarize()", "Aggregate", "Total tax by region",
+  "group_by()", "Split data", "Analyze by sector",
+  "arrange()", "Sort rows", "Rank by tax paid"
+) %>%
+  kable(format = "html", escape = FALSE) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = FALSE,
+                font_size = 16) %>%
+  column_spec(1, bold = TRUE, color = "white", background = "#4090BE") %>%
+  column_spec(2, width = "200px") %>%
+  column_spec(3, width = "300px")
+```
+
+------------------------------------------------------------------------
+
+## Key Takeaways `r emo::ji("key")`
+
+::: incremental
+
+1. **Think in verbs**: Each `dplyr` function does ONE thing well
+
+2. **Use the pipe**: Makes your code readable and debuggable
+
+3. **Start simple**: Build complex analyses step by step
+
+4. **Validate often**: Check your assumptions with summaries
+
+5. **Group wisely**: Remember to `ungroup()` when done
+
+:::
+
+. . .
+
+::: {.callout-tip}
+## Pro tip
+The best data wranglers aren't the ones who write complex code - they're the ones who write code that others (including future them) can understand!
+:::
+
+------------------------------------------------------------------------
+
+## What's Next? `r emo::ji("crystal_ball")`
+
+### Module 4: Data Visualization with `ggplot2`
+
+We'll learn to:
+- Transform your wrangled data into insights
+- Create publication-ready visualizations
+- Build dashboards for tax monitoring
+- Tell stories with data
+
+. . .
+
+### But first... Practice! `r emo::ji("muscle")`
+
+Try the additional exercises in `Exercises/data_wrangling_practice.R`
+
+------------------------------------------------------------------------
+
+## Final Challenge {.exercise}
+
+`r countdown::countdown(minutes = 5, seconds = 0, top = 0)`
+
+Using all three datasets, answer: *"What's the average effective CIT rate for large manufacturing firms?"*
+
+Hints:
+- Large = more than 100 employees
+- Manufacturing firms from `dt_firms`
+- Effective rate from `panel_cit`
+- You'll need to identify common firms
+
+```{r final_challenge, echo = TRUE, eval = FALSE}
+# Your multi-dataset analysis here:
+
+```
+
+. . .
+
+### Solution preview:
+```{r final_solution, echo = TRUE}
+# We'll explore joins in detail next module!
+# For now, here's the approach:
+
+# Step 1: Get large manufacturing firms
+large_manufacturing <- dt_firms %>%
+  filter(industry == "Manufacturing", 
+         number_of_employees > 100) %>%
+  pull(firm_id)
+
+# Step 2: Calculate effective rates for these firms
+panel_cit %>%
+  filter(firm_id %in% large_manufacturing,
+         taxable_income > 0) %>%
+  mutate(effective_rate = (tax_paid / taxable_income) * 100) %>%
+  summarize(
+    avg_effective_rate = mean(effective_rate, na.rm = TRUE),
+    n_firms = n_distinct(firm_id)
+  )
+```
+
+---
+
+::: {style="text-align: center; margin-top: 100px; font-size: 1.5em;"}
+**Thank you!** `r emo::ji("clap")`
+
+Questions? `r emo::ji("raising_hand")`
+
+**Remember**: Great analysis starts with clean data! `r emo::ji("sparkles")`
+:::

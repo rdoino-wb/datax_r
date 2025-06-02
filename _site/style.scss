@@ -1,0 +1,92 @@
+/*-- scss:defaults --*/
+
+// importing fonts Arimo and Lato
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&display=swap');
+
+// fonts
+$font-family-sans-serif: 'Lato', sans-serif !default;
+
+$h1-font-size: 1.6em !default;
+$h1-color: #4090BE !default;
+
+
+/* Navbar styling */
+.navbar {
+  height: 80px; /* Adjust height as needed */
+  font-size: 1.2rem; /* Adjust font size as needed */
+  background-color: white; /* Set inside to white */
+  border-bottom: 3px solid #4090BE; /* Add bottom border only */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Adjust the size of the site title */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4090BE; /* Match border color */
+}
+
+/* Adjust the logo size */
+.navbar-brand img {
+  max-height: 50px; /* Increase logo height */
+  width: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Add spacing between logo and text */
+}
+
+/* Adjust the size and spacing of navigation links */
+.nav-link {
+  font-size: 1.2rem;
+  color: #07202E; /* Dark text color for contrast */
+  padding: 10px 15px;
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for navigation links */
+.nav-link:hover {
+  color: #4090BE; /* Match border color on hover */
+}
+
+/* Adjust padding inside the navbar container */
+.navbar .container-fluid {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Add hover effect for the navbar background */
+.navbar:hover {
+  background-color: #f8f8f8; /* Slight gray for hover effect */
+}
+
+
+/* CSS for Exercise Slides */
+
+/* Change background color for slides with the "exercise" class */
+.reveal .slides .exercise {
+  background-color: #f0f8ff; /* Light blue */
+  color: #333333;           /* Dark text for contrast */
+  border-left: 5px solid #4682b4; /* Blue border */
+  padding: 20px;
+}
+
+/* Add custom styling for headers */
+.reveal .slides .exercise h1, 
+.reveal .slides .exercise h2, 
+.reveal .slides .exercise h3 {
+  color: #2c3e50; /* Darker shade for headers */
+  text-shadow: 1px 1px 2px #ffffff;
+}
+
+/* Add custom styling for code blocks */
+.reveal .slides .exercise pre {
+  background-color: #f7f9fc; /* Subtle gray for code blocks */
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1.1em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style list items for clarity */
+.reveal .slides .exercise ul li {
+  margin: 10px 0;
+  font-size: 1.1em;
+}

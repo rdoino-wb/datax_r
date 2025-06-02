@@ -1,0 +1,988 @@
+[
+  {
+    "objectID": "en/index_en.html",
+    "href": "en/index_en.html",
+    "title": "Welcome to DataTax R Course",
+    "section": "",
+    "text": "Welcome to Introduction to Programming in R 🎉\nThis website is your central hub for participating in the workshop, where you’ll learn R programming 🖥️ and its applications in research and data analysis 📊 with a focus on tax and administrative data.\n\nObjectives of this Course 🎯\n\nUnderstand the basics of R programming and how to apply it effectively.\n\nLearn to manipulate, clean, and analyze data with R.\n\nGain hands-on experience with real-world tax and administrative datasets.\n\nBuild a foundation for reproducible research and data visualization 📊.\n\nDevelop skills to automate repetitive tasks and streamline workflows 🔄.\n\n\n\nWhat You Need to Know:\n\nNo prior programming experience required—this workshop is designed for complete beginners! 🐣\n\nBefore the workshop: Follow the setup instructions below to ensure you’re ready to dive in. ✅\n\nMaterials: All course materials are accessible here and via the GitHub repository. 📂\n\n\n\nHow to Install R and RStudio 🛠️\n\nInstall R:\n\nVisit the CRAN R Project Website.\nSelect the appropriate download link for your operating system (Windows, macOS, or Linux).\nFollow the installation instructions provided on the website.\n\nInstall RStudio:\n\nVisit the RStudio Website.\nDownload the free RStudio Desktop version for your operating system.\nRun the installer and follow the on-screen instructions.\n\nVerify the Installation:\n\nOpen RStudio and check that it launches correctly.\n\nNeed More Help?\nFor detailed, step-by-step installation instructions, visit this excellent guide: DataCamp Tutorial on Installing R and RStudio."
+  },
+  {
+    "objectID": "fr/index_fr.html",
+    "href": "fr/index_fr.html",
+    "title": "Welcome to DataTax R Course",
+    "section": "",
+    "text": "Bienvenue à Introduction à la Programmation en R 🎉\nCe site web est votre point central pour participer à l’atelier où vous apprendrez la programmation en R 🖥️ et ses applications en recherche et analyse de données 📊, avec un focus sur les données fiscales et administratives.\n\nObjectifs de ce Cours 🎯\n\nComprendre les bases de la programmation en R et comment les appliquer efficacement.\n\nApprendre à manipuler, nettoyer et analyser des données avec R.\n\nAcquérir une expérience pratique avec des données fiscales et administratives réelles.\n\nConstruire une base pour des recherches reproductibles et la visualisation de données 📊.\n\nDévelopper des compétences pour automatiser des tâches répétitives et optimiser les flux de travail 🔄.\n\n\n\nCe Qu’il Faut Savoir :\n\nAucune expérience préalable en programmation n’est requise—cet atelier est conçu pour les débutants complets ! 🐣\n\nAvant l’atelier : Suivez les instructions ci-dessous pour vous préparer. ✅\n\nMatériel : Tous les supports du cours sont accessibles ici et via le répertoire GitHub. 📂\n\n\n\nComment Installer R et RStudio 🛠️\n\nInstaller R :\n\nRendez-vous sur le site web du projet CRAN R.\nSélectionnez le lien de téléchargement correspondant à votre système d’exploitation (Windows, macOS ou Linux).\nSuivez les instructions d’installation fournies sur le site.\n\nInstaller RStudio :\n\nRendez-vous sur le site web de RStudio.\nTéléchargez la version gratuite de RStudio Desktop pour votre système d’exploitation.\nExécutez l’installateur et suivez les instructions affichées.\n\nVérifier l’Installation :\n\nOuvrez RStudio et vérifiez qu’il se lance correctement.\n\nBesoin d’Aide Supplémentaire ?\nPour des instructions détaillées et étape par étape sur l’installation, consultez ce guide excellent : Tutoriel DataCamp sur l’Installation de R et RStudio."
+  },
+  {
+    "objectID": "pt/index_pt.html",
+    "href": "pt/index_pt.html",
+    "title": "Welcome to DataTax R Course",
+    "section": "",
+    "text": "Bem-vindo à Introdução à Programação em R 🎉\nEste site é o seu ponto central para participar do workshop, onde você aprenderá programação em R 🖥️ e suas aplicações em pesquisa e análise de dados 📊 com foco em dados fiscais e administrativos.\n\nObjetivos deste Curso 🎯\n\nCompreender os fundamentos da programação em R e como aplicá-los de forma eficaz.\n\nAprender a manipular, limpar e analisar dados com R.\n\nAdquirir experiência prática com conjuntos de dados reais fiscais e administrativos.\n\nConstruir uma base para pesquisas reprodutíveis e visualização de dados 📊.\n\nDesenvolver habilidades para automatizar tarefas repetitivas e otimizar fluxos de trabalho 🔄.\n\n\n\nO Que Você Precisa Saber:\n\nNão é necessário ter experiência prévia em programação—este workshop foi projetado para iniciantes completos! 🐣\n\nAntes do workshop: Siga as instruções de configuração abaixo para garantir que você esteja preparado. ✅\n\nMateriais: Todos os materiais do curso estão acessíveis aqui e no repositório GitHub. 📂\n\n\n\nComo Instalar R e RStudio 🛠️\n\nInstalar R:\n\nVisite o site do Projeto CRAN R.\nSelecione o link de download apropriado para o seu sistema operacional (Windows, macOS ou Linux).\nSiga as instruções de instalação fornecidas no site.\n\nInstalar RStudio:\n\nVisite o site do RStudio.\nBaixe a versão gratuita do RStudio Desktop para o seu sistema operacional.\nExecute o instalador e siga as instruções na tela.\n\nVerificar a Instalação:\n\nAbra o RStudio e verifique se ele inicia corretamente.\n\nPrecisa de Mais Ajuda?\nPara instruções detalhadas, passo a passo sobre a instalação, visite este excelente guia: Tutorial do DataCamp sobre Instalação do R e RStudio."
+  },
+  {
+    "objectID": "1_introduction_to_r.html#welcome-to-the-introduction-to-r-course",
+    "href": "1_introduction_to_r.html#welcome-to-the-introduction-to-r-course",
+    "title": "Introduction to R: the basics",
+    "section": "Welcome to the “Introduction to R Course”!",
+    "text": "Welcome to the “Introduction to R Course”!\n\n\n\nWe will learn to use the R programming language!\nUsing administrative data familiar to tax administrations.\n\n\n\n\nSome pre-requirements\n\n\n❌ The training does not require any background in statistical programming.\n\n\n✅ A computer with R and RStudio installed is required to complete the exercises.\n\n\n✅ Internet connection is required to download training materials.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#what-is-r",
+    "href": "1_introduction_to_r.html#what-is-r",
+    "title": "Introduction to R: the basics",
+    "section": "What is R?",
+    "text": "What is R?\n\nR is a programming language with powerful statistical and graphic capabilities.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#and-what-about-excel",
+    "href": "1_introduction_to_r.html#and-what-about-excel",
+    "title": "Introduction to R: the basics",
+    "section": "And what about Excel?",
+    "text": "And what about Excel?\n\n\n\n✅ Easy to use.\n❌ Only good for small datasets.\n❌ We don’t keep track of what we do.\n❌ Not straightforward to merge data.\n❌ And the list goes on…",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#and-what-about-stata",
+    "href": "1_introduction_to_r.html#and-what-about-stata",
+    "title": "Introduction to R: the basics",
+    "section": "And what about STATA?",
+    "text": "And what about STATA?\n\n\n\n✅ Stata is widely used in economics.\n✅ Easy to learn.\n❌ Only good for small datasets.\n❌ Expensive!\n❌ Lack of flexibility… do you hate keep, preserve, and restore too?",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#you-should-see-this",
+    "href": "1_introduction_to_r.html#you-should-see-this",
+    "title": "Introduction to R: the basics",
+    "section": "You should see this!",
+    "text": "You should see this!\n\nIf you don’t, make sure you opened RStudio and not R!",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#console",
+    "href": "1_introduction_to_r.html#console",
+    "title": "Introduction to R: the basics",
+    "section": "Console",
+    "text": "Console",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#basic-math-operations",
+    "href": "1_introduction_to_r.html#basic-math-operations",
+    "title": "Introduction to R: the basics",
+    "section": "Basic Math Operations",
+    "text": "Basic Math Operations\nA simple sum:\n\n99 + 1\n\n[1] 100\n\n\n\nMore complex calculations:\n\n99 + 1 * 2\n\n[1] 101\n\n\n\n\nFollowing mathematical rules:\n\n(99 + 1) * 2\n\n[1] 200\n\n\n\n\nScientific notation:\n\n2 / 100000\n\n[1] 2e-05\n\n\n\n5e3\n\n[1] 5000",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#overview-of-data-types",
+    "href": "1_introduction_to_r.html#overview-of-data-types",
+    "title": "Introduction to R: the basics",
+    "section": "Overview of Data Types",
+    "text": "Overview of Data Types\n\nNumeric values : numbers, as shown in previous examples.\n\n\n\nCharacter Values : Always quoted, e.g., “text”.\n\n\n\n\nLogical Values : Also known as Boolean, representing TRUE or FALSE\n\n\n10  &gt; 9\n\n[1] TRUE\n\n10 == 9\n\n[1] FALSE\n\n10 != 9\n\n[1] TRUE\n\n10 &gt; 9 & 9 &lt; 10\n\n[1] TRUE\n\n10 &gt; 9 | 9 &gt; 10\n\n[1] TRUE\n\n9 %in% 1:10\n\n[1] TRUE",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#importance-of-assigning-results-to-objects",
+    "href": "1_introduction_to_r.html#importance-of-assigning-results-to-objects",
+    "title": "Introduction to R: the basics",
+    "section": "Importance of Assigning Results to Objects",
+    "text": "Importance of Assigning Results to Objects\nIn R, it’s important to assign results to objects to store the values and use them later in your analysis. Think of an object as a named storage location for your data or calculations.\n\nConsider this calculation:\n\nsum_result = 99 + 1\n\n\n\nHere, we assign the result of 99 + 1 to an object called sum_result using the assignment operator = (some people use &lt;- … the community discuss about this here and here).\n\n\nNow, whenever you need the value, you can just use sum_result instead of retyping 99 + 1.\n\n\n\n\n\n\n\n\nNote\n\n\nIn coding, it’s good practice to use only lower case and “_” or “.” for names (snake_case).",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#mathematical-functions",
+    "href": "1_introduction_to_r.html#mathematical-functions",
+    "title": "Introduction to R: the basics",
+    "section": "Mathematical Functions",
+    "text": "Mathematical Functions\nIn economics, we frequently use logarithms:\n\nlog(1)\n\n[1] 0\n\n\n\nR has a large collection of built-in functions, called like this:\n\nfunction_name(argument1 = value1, argument2 = value2, ...)\n\n\n\nFor example, if you want to calculate the natural logarithm of a number…\n\nlog(10)\n\n[1] 2.302585\n\n\n\n\nArguments can also have names, which makes it easy to understand what each input does.\n\nround(3.14159, digits = 2)\n\n[1] 3.14",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#functions-are-our-tool-box",
+    "href": "1_introduction_to_r.html#functions-are-our-tool-box",
+    "title": "Introduction to R: the basics",
+    "section": "Functions Are Our Tool Box 🧰",
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\n\nThe help() function is like R’s built-in manual. Whenever you’re unsure about how a function works or what arguments it accepts, you can use help() to get detailed information.\n\nExample: To learn about the mean() function, type help(mean) or simply ?mean in the R console.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#functions-are-our-tool-box-1",
+    "href": "1_introduction_to_r.html#functions-are-our-tool-box-1",
+    "title": "Introduction to R: the basics",
+    "section": "Functions Are Our Tool Box 🧰",
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\nexample()\n\nWhile help() provides information about a function, example() shows you how to use it with real code snippets.\n\nExample: Type example(sum) in the R console to see various ways to use the sum() function for creating graphs.\n\n\n\n\nsum&gt; ## Pass a vector to sum, and it will add the elements together.\nsum&gt; sum(1:5)\n[1] 15\n\nsum&gt; ## Pass several numbers to sum, and it also adds the elements.\nsum&gt; sum(1, 2, 3, 4, 5)\n[1] 15\n\nsum&gt; ## In fact, you can pass vectors into several arguments, and everything gets added.\nsum&gt; sum(1:2, 3:5)\n[1] 15\n\nsum&gt; ## If there are missing values, the sum is unknown, i.e., also missing, ....\nsum&gt; sum(1:5, NA)\n[1] NA\n\nsum&gt; ## ... unless  we exclude missing values explicitly:\nsum&gt; sum(1:5, NA, na.rm = TRUE)\n[1] 15",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#functions-are-our-tool-box-2",
+    "href": "1_introduction_to_r.html#functions-are-our-tool-box-2",
+    "title": "Introduction to R: the basics",
+    "section": "Functions Are Our Tool Box 🧰",
+    "text": "Functions Are Our Tool Box 🧰\n\n\nhelp()\nexample()\nlibrary()\n\nR’s functionality can be extended with packages—collections of functions and datasets created by the community.\n\nInstalling Packages: Before using a package, install it using install.packages(\"packageName\").\nLoading Packages: Use library(packageName) to load the package into your session.\nExample: To use the ggplot2 package for advanced plotting:\n\ninstall.packages(\"ggplot2\")   # Install (only needed once)\nlibrary(ggplot2)              # Load the package",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#exercise-1-10-mins",
+    "href": "1_introduction_to_r.html#exercise-1-10-mins",
+    "title": "Introduction to R: the basics",
+    "section": "Exercise 1 (⏱ 10 mins):",
+    "text": "Exercise 1 (⏱ 10 mins):\n\nCreating a Sequence:\n\nCreate a sequence of numbers that are multiples of 5, starting from 0 and ending at 50.\nHint: Use the seq() function.\n\nCompute the Mean:\n\nCalculate the mean of the sequence you created in step 2.\n\nLogical Test and Conditional Computation:\n\nCheck if all elements in your sequence are greater than zero.\nThen compute the mean around this new object with only logical elements.\n\nAdding Comments:\n\nAdd comments to your code to explain what each step is doing.\nHint: Use # at the beginning of a line to make it a comment.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "1_introduction_to_r.html#solutions",
+    "href": "1_introduction_to_r.html#solutions",
+    "title": "Introduction to R: the basics",
+    "section": "Solutions",
+    "text": "Solutions\n\n# Step 1: Creating a Sequence\n# Create a sequence of numbers that are multiples of 5, from 0 to 50.\n# Use the seq() function to generate the sequence and assign it to an object named 'sequence'.\nsequence &lt;- seq(from = 0, to = 50, by = 5)\n\n# Print the sequence to verify it was created correctly.\nprint(sequence) # Output: [1] 0 5 10 15 20 25 30 35 40 45 50\n\n\n# Step 2: Compute the Mean\n# Calculate the mean of the sequence created above using the mean() function.\nmean_sequence &lt;- mean(sequence)\n\n# Print the mean to verify the calculation.\nprint(mean_sequence) # Output: [1] 27.5\n\n\n# Step 3: Logical Test and Conditional Computation\n# Check if all elements in the sequence are greater than zero.\n# Use the \"&gt;\" operator and assign the result to a new object named 'logical_test'.\nlogical_test &lt;- sequence &gt; 0\n\n# Print the logical test result to see which elements satisfy the condition.\nprint(logical_test) # Output: [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n\n# Compute the mean of the logical test result.\n# This will treat TRUE as 1 and FALSE as 0.\nmean_logical &lt;- mean(logical_test)\n\n# Print the mean of the logical test result.\nprint(mean_logical) # Output: [1] 0.9090909",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "1. Introduction to R"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#good-practice-in-project-organization",
+    "href": "2_import_export.html#good-practice-in-project-organization",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Good Practice in Project Organization",
+    "text": "Good Practice in Project Organization\n\nWhen starting a new analysis, organize your work by creating a structured folder system:\n📂 r_training\n\n📂 scripts/ (code)\n📂 data/ (datasets)\n📁 outputs/ (results like plots, tables, etc.)\n\n\n\n\n\n\n\ngraph TD;\n    A[r_training] --&gt; B[scripts];\n    A --&gt; C[data];\n    A --&gt; D[outputs];\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nUse lowercase and hyphens (-) instead of spaces when naming folders, files, and objects in R to maintain consistency and ease management.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#understanding-folder-paths",
+    "href": "2_import_export.html#understanding-folder-paths",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Understanding Folder Paths",
+    "text": "Understanding Folder Paths\n\nA path is an address that tells a software where to find a file or folder on your computer.\n\nTwo Types of Paths:\n\nAbsolute Path: /Users/yourname/Desktop/r_training\nRelative Path: r_training/scripts",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#the-advantage-of-using-projects",
+    "href": "2_import_export.html#the-advantage-of-using-projects",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "The Advantage of Using Projects",
+    "text": "The Advantage of Using Projects\nR doesn’t automatically know where your files are. Using an RStudio project creates a shortcut that tells R where to find everything, making your workflow smoother.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#setting-up-your-environment",
+    "href": "2_import_export.html#setting-up-your-environment",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Setting Up Your Environment",
+    "text": "Setting Up Your Environment\n −+ 05:00 \n\nCreate a new Folder named r_training\nCreate a Project\n\nOpen RStudio.\n\nGo to File &gt; New Project &gt; Existing Directory.\n\nBrowse to your r_training folder and click Open.\n\nClick Create Project to finish.\n\nOpen the Project (Double-click the file to open it in RStudio.)\nRun this command in the RStudio Console: \n\n\nusethis::use_course(\"https://github.com/your-organization/course-repo\")\n\n\nFollow the prompts to unzip the materials into your project folder.\n\nYou’re all set to begin! 🎉",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#organizing-the-data-folder",
+    "href": "2_import_export.html#organizing-the-data-folder",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Organizing the data Folder",
+    "text": "Organizing the data Folder\n\n\n\n\n\ngraph TD;\n    A[data] --&gt; B[Raw];\n    A --&gt; C[Intermediate];\n    A --&gt; D[Final];\n\n\n\n\n\n\n\n\nRaw\n\nOriginal, untouched data.\n\nBackup recommended to preserve integrity.\n\n\n\nIntermediate\n\nData formatted, renamed, and tidied.\n\nReady for further cleaning.\n\n\n\nFinal\n\nCleaned and transformed data.\n\nReady for graphs, tables, and regressions.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#preparing-data-for-r-general-concepts-and-best-practices",
+    "href": "2_import_export.html#preparing-data-for-r-general-concepts-and-best-practices",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Preparing Data for R: General Concepts and Best Practices",
+    "text": "Preparing Data for R: General Concepts and Best Practices\n\n\nDocument Types organizations extensively rely on spreadsheets (read)\n\nCommon data formats include:\n\nSpreadsheets (.csv, .xlsx, xls…): Standard for structured data.\nDTA (.dta): Used for data from STATA.\n\n\nSpreadsheets\n\nCSV is generally preferable:\n\nEasier to import and process.\nMore compatible across different systems and software and much lighter.\n\n\n\n\n\n\n\n\n\n\n\nAdvanced\n\n\nThe Apache Arrow format is designed to handle large data sets efficiently, making it suitable for big data analysis. Arrow files offer faster read/write operations compared to traditional formats.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#importing-data-into-r",
+    "href": "2_import_export.html#importing-data-into-r",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Importing Data into R",
+    "text": "Importing Data into R\n\nMain Import Methods\n\nThe library readxl provides some useful functions\n\nread_xls() for XLS files (.xls).\nread_xlsx() for Excel files (.xlsx).\nread_csv() CSV files (.csv).\nread_parquet() for .dta files, using the haven package.\nreadRDS() for .RDS files.\n\n\n\n\n\nExample: Importing an .xlsx File\n\nTo import an Excel file, you’ll need to load the readxl package\n\n\n\n# Install the package if necessary\ninstall.packages(\"readxl\")\n\n# Load the readxl package\nlibrary(readxl)\n\n# Importing data from an .xlsx file\ndata &lt;- read_excel(\"data_tax.xlsx\")",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#practical-steps-right-after-importing-data",
+    "href": "2_import_export.html#practical-steps-right-after-importing-data",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Practical Steps Right After Importing Data",
+    "text": "Practical Steps Right After Importing Data\n\nOnce data is imported, we first want to take a look at it 👀\n\n\n# print the first 5 rows\nhead(data)\n\n# A tibble: 6 × 7\n  `Taxpayer ID` Name       `Tax Filing Year` `Taxable Income` `Tax Paid` Region\n  &lt;chr&gt;         &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; \n1 TX001         John Doe                2020            89854       8985 North \n2 TX001         John Doe                2021            65289       6528 North \n3 TX001         John Doe                2022            87053       8705 North \n4 TX001         John Doe                2023            58685       5868 North \n5 TX002         Jane Smith              2020            97152       9715 South \n6 TX002         Jane Smith              2021            62035       6203 South \n# ℹ 1 more variable: `Payment Date` &lt;dttm&gt;\n\n# open the entire dataset \n# View(data)\n\n# we can mix them together\n# View(head(data))\n\n\n\n\n\n\n\n\nNote\n\n\nYou might also notice that the Taxpayer ID and Full Name columns are surrounded by back-ticks. This is because they contain spaces, which breaks R’s standard naming rules, making them non-syntactic names. To refer to these variables in R, you need to enclose them in back-ticks.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#practical-steps-right-after-importing-data-1",
+    "href": "2_import_export.html#practical-steps-right-after-importing-data-1",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Practical Steps Right After Importing Data",
+    "text": "Practical Steps Right After Importing Data\n\nLet’s get a snapshot of the data structure and content:\n\n\n# Install the package if necessary\n# install.packages(\"dplyr\")\n\n# Load the dplyr package\nlibrary(dplyr)\n\n# Get an overview of the data\nglimpse(data)\n\nRows: 40\nColumns: 7\n$ `Taxpayer ID`     &lt;chr&gt; \"TX001\", \"TX001\", \"TX001\", \"TX001\", \"TX002\", \"TX002\"…\n$ Name              &lt;chr&gt; \"John Doe\", \"John Doe\", \"John Doe\", \"John Doe\", \"Jan…\n$ `Tax Filing Year` &lt;dbl&gt; 2020, 2021, 2022, 2023, 2020, 2021, 2022, 2023, 2020…\n$ `Taxable Income`  &lt;dbl&gt; 89854, 65289, 87053, 58685, 97152, 62035, 60378, 876…\n$ `Tax Paid`        &lt;dbl&gt; 8985, 6528, 8705, 5868, 9715, 6203, 6037, 8768, 9368…\n$ Region            &lt;chr&gt; \"North\", \"North\", \"North\", \"North\", \"South\", \"South\"…\n$ `Payment Date`    &lt;dttm&gt; 2020-01-31, 2021-12-31, 2022-01-31, 2023-04-30, 202…",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#practical-steps-right-after-importing-data-2",
+    "href": "2_import_export.html#practical-steps-right-after-importing-data-2",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Practical Steps Right After Importing Data",
+    "text": "Practical Steps Right After Importing Data\n\nNow, we’ll make sure that our variable names follow snake_case convention 😎\n\n\nOption 1: Rename columns manually:\n\n\n# We can rename columns one by one\ndata = rename(\n  data, \n  tax_payer_id    = `Taxpayer ID`,\n  name            = `Name`\n  ...\n  )\n\n\n\nOption 2: Automatically convert all column names to snake_case using janitor:\n\n\n# Install the package if necessary\n# install.packages(\"janitor\")\n\n# Load the janitor package\nlibrary(janitor)\n\n# transform in snake_case all the var names\ndata = clean_names(data)\n\n# take a look\nnames(data)\n\n[1] \"taxpayer_id\"     \"name\"            \"tax_filing_year\" \"taxable_income\" \n[5] \"tax_paid\"        \"region\"          \"payment_date\"",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#exercise-1",
+    "href": "2_import_export.html#exercise-1",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nYou can find the exercise in the folder “Exercises/Import_and_Export.R”\n −+ 10:00 \n\n# Exercise: Data Import and Initial Cleaning ----\n\n# Step 1: Setting Up\n\n# List of required packages\npackages = c(\n  \"readxl\",      # For reading Excel files\n  \"dplyr\",       # For data manipulation\n  \"tidyverse\",   # For general data handling and visualization\n  \"data.table\",  # For fast data import and manipulation\n  \"here\",        # For file path management\n  \"haven\",       # For importing Stata files\n  \"janitor\"      # For cleaning column names\n)\n\n# Install pacman if not already installed\nif (!require(\"pacman\")) install.packages(\"pacman\")\n\n# Load the packages with pacman\npacman::p_load(packages, character.only = TRUE, install = TRUE)\n\n# Step 2: Loading and Inspecting Data ----\n\n# 1. Firm Characteristics Data set\n# Hint: Use an appropriate function to load a CSV file.\n# Objective: Load \"firm_characteristics.csv\" and check the first few rows.\n\n# Hint: After loading, apply a function from `janitor` to clean column names.\n\n# 2. VAT Declarations Data set\n# Hint: Use a function that can read Stata (.dta) files.\n# Objective: Load \"vat_declarations.dta\" and check the first few rows.\n\n# Hint: Review the column names to see if they need cleaning.\n\n# 3. CIT Declarations Data set\n# Hint: Use a function that can read Excel files and specify the sheet.\n# Objective: Load \"cit_declarations.xlsx\" from the second sheet and check the first few rows.\n\n# Reflection (BONUS) \n# After completing each step, ensure column names are consistent across files.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#exercise-1-solutions",
+    "href": "2_import_export.html#exercise-1-solutions",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Exercise 1 (Solutions)",
+    "text": "Exercise 1 (Solutions)\n\n# Pre-requisites ----\n\n# List of required packages\npackages = c(\n  \"readxl\",\n  \"dplyr\",\n  \"tidyverse\",\n  \"data.table\",\n  \"here\",\n  \"haven\",\n  \"janitor\" # Added janitor for clean_names() function\n)\n\n# Install pacman if not already installed\nif (!require(\"pacman\")) install.packages(\"pacman\")\n\n# Load the packages with pacman\npacman::p_load(packages, character.only = TRUE, install = TRUE)\n\n# Import the Data ----\n\n# FIRMS CHARACTERISTICS\n\n# Load the firm-level characteristics (firm_characteristics.csv)\ndt_firms = fread(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"firm_characteristics.csv\"))\n\n# Display the first 5 rows\nhead(dt_firms)\n\n# Clean column names to make them consistent\ndt_firms = clean_names(dt_firms)\n\n# VAT DECLARATIONS\n\n# Load the VAT panel data (vat_declarations.dta)\npanel_vat = read_dta(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"vat_declarations.dta\"))\n\n# Display the first 5 rows\nhead(panel_vat)\n\n# Column names look fine, but the bonus question requires us to change firm_id\npanel_vat = rename(panel_vat, firm_id = id_firm)\n\n# CIT DECLARATIONS\n\n# Load the CIT panel data (cit_declarations.xlsx)\npanel_cit = read_xlsx(here(\"quarto_files\", \"Solutions\", \"Data\", \"Raw\", \"cit_declarations.xlsx\"), sheet = 2)\n\n# Display the first 5 rows\nhead(panel_cit)\n\n# Column names look consistent, so no need for further cleaning",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#tidy-tax-administrative-data",
+    "href": "2_import_export.html#tidy-tax-administrative-data",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Tidy Tax Administrative Data",
+    "text": "Tidy Tax Administrative Data\n\nWhat is Tidy Data?\nTidy data organizes tax administrative data into a consistent, analysis-ready format:\n\n\n\nEach variable is a column; each column is a variable.\n\n\n\n\nEach observation is a row; each row is an observation.\n\n\n\n\nEach value is a cell; each cell is a single value.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#how-do-we-go-from-wide-to-long-using-r",
+    "href": "2_import_export.html#how-do-we-go-from-wide-to-long-using-r",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "How do we go from “Wide” to “Long” using R?",
+    "text": "How do we go from “Wide” to “Long” using R?\n\n\n\n\n\n\n\n\n\n\nWe need to introduce the package tidyr.\n\n\n\n\nPackages contain verbs (tools) that we can use after installing and loading them.\n\ninstall.packages(\"tidyr\") #  the package\nlibrary(tidyr) # load it\n\n\n\nWe start from our wide dataframe.\n\n\n# A tibble: 2 × 6\n  `Taxpayer ID` `Tax Type` `2021 Q1` `2021 Q2` `2021 Q3` `2021 Q4`\n          &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1           101 Income Tax       500       600       450       700\n2           102 VAT              300       400       350       500",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#writing-in-.csv-format-is-almost-always-a-good-choice",
+    "href": "2_import_export.html#writing-in-.csv-format-is-almost-always-a-good-choice",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Writing in .csv Format is (Almost) Always a Good Choice",
+    "text": "Writing in .csv Format is (Almost) Always a Good Choice\n\nFor most cases, writing data in .csv format is a reliable and widely compatible option.\nI recommend using the fwrite function from the data.table package for its speed and efficiency.\n\n\n\nBelow, we save various datasets into the Intermediate folder using fwrite:\n\n\n# Write the VAT Data\nfwrite(panel_vat, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_vat.csv\"))\n\n# Write the CIT Declarations\nfwrite(panel_cit, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_cit.csv\"))\n       \n# Write the Firm Characteristics\nfwrite(dt_firms, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"dt_firms.csv\"))",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#there-other-options-to-write-data",
+    "href": "2_import_export.html#there-other-options-to-write-data",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "There other options to write data",
+    "text": "There other options to write data\n\nWriting .rds Files (For R Objects)\n\nThe .rds format is specifically designed for saving R objects. It is useful for saving intermediate results, objects, or data.\nWe’ll explore this format in more detail later, but here’s a quick example:\n\n\n\n# Example\nbase::saveRDS(data, \"data_tax.rds\")\n\n\n\nWriting .xlsx Files (For Excel Compatibility): To save data in Excel format (.xlsx), use the writexl package. It is lightweight and doesn’t require external dependencies.\n\n\n# Example\nwritexl::write_xlsx(data, \"data_tax.xlsx\")\n\n\n\n\nWriting .parquet Files (For Large Datasets): The .parquet format is a columnar storage format that is highly efficient for both reading and writing large datasets (typically &gt;1GB).\n\n\n# Example\narrow::writea_parquet(data, \"data_tax.parquet\")\n\n# Reading parquet files\narrow::read_parquet(\"data_tax.parquet\")",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#to-sum-up",
+    "href": "2_import_export.html#to-sum-up",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "To Sum Up",
+    "text": "To Sum Up",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#exercise-2",
+    "href": "2_import_export.html#exercise-2",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nYou can find the exercise in the folder “Exercises/Import_and_Export.R”\n −+ 05:00 \n\n# Exercise 2: Write the Data ----\n\n# FIRMS CHARACTERISTICS\n\n# Write the firm-level characteristics (firm_characteristics.format)\n# Don't forget to put in the right folder and pick the best format\n\n\n# VAT DECLARATIONS\n\n# Write the VAT panel data (vat_declarations.format)\n\n\n# CIT DECLARATIONS\n\n# Write the CIT panel data (cit_declarations.format)",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#exercise-2-solutions",
+    "href": "2_import_export.html#exercise-2-solutions",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Exercise 2 (Solutions)",
+    "text": "Exercise 2 (Solutions)\n\n# Exercise 2: Write the Data ----\n\n# FIRMS CHARACTERISTICS\nfwrite(dt_firms, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"dt_firms.csv\")\n\n# VAT DECLARATIONS\n\n# Write the VAT panel data (vat_declarations.format)\nfwrite(panel_vat, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_vat.csv\"))\n\n# CIT DECLARATIONS\n\n# Write the CIT panel data \nfwrite(panel_cit, here(\"quarto_files\", \"Solutions\", \"Data\", \"Intermediate\", \"panel_cit.csv\"))",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#example-connecting-to-a-database",
+    "href": "2_import_export.html#example-connecting-to-a-database",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Example: connecting to a database",
+    "text": "Example: connecting to a database\n\n# Load Packages\nlibrary(DBI) # this package is always needed\nlibrary(RMariaDB) # there are packages for each type of database (e.g. RPostgreSQL)\n\n# Example connection\ncon &lt;- dbConnect(RMariaDB::MariaDB(),\n  dbname = \"your_db_name\",\n  host = \"your_host\",\n  user = \"your_user\",\n  password = \"your_password\"\n)\n\n# Query data\nresult &lt;- dbGetQuery(con, \"SELECT * FROM your_table LIMIT 5\")\nprint(result)\n\n# Disconnect\ndbDisconnect(con)",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#writing-dynamic-sql-queries-with-glue_sql",
+    "href": "2_import_export.html#writing-dynamic-sql-queries-with-glue_sql",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Writing Dynamic SQL Queries with glue_sql",
+    "text": "Writing Dynamic SQL Queries with glue_sql\n\n# Load required packages\nlibrary(DBI)\nlibrary(RSQLite)\nlibrary(glue)\n\n# Connect to SQLite database\ncon &lt;- dbConnect(RSQLite::SQLite(), \":memory:\")\n\n# Create a Mock DB\ntax_data &lt;- data.frame(\n  taxpayer_id = paste0(\"TP\", sprintf(\"%03d\", 1:10)),\n  name = c(\"Aisha Khan\", \"Carlos Martinez\", \"Chen Wei\", \"Elena Petrova\", \"Fatima Al-Farsi\",\n           \"George Okoro\", \"Hiroshi Tanaka\", \"Leila Kaur\", \"Maria Rossi\", \"William Smith\"),\n  income = c(85000, 62000, 78000, 90000, 68000, 72000, 95000, 56000, 89000, 75000),\n  tax_paid = c(8500, 6200, 7800, 9000, 6800, 7200, 9500, 5600, 8900, 7500),\n  tax_year = rep(2022, 10)\n)\n\n# Write the dataset to the database using dbWriteTable\ndbWriteTable(con, \"tax_records\", tax_data, overwrite = TRUE)\n\n# Use glue_sql for a dynamic query\nmin_income &lt;- 60000\nquery &lt;- glue_sql(\"SELECT * FROM tax_records WHERE income &gt; {min_income}\", .con = con)\n\n# Execute the query\nresult &lt;- dbGetQuery(con, query)\nprint(result)\n##   taxpayer_id            name income tax_paid tax_year\n## 1       TP001      Aisha Khan  85000     8500     2022\n## 2       TP002 Carlos Martinez  62000     6200     2022\n## 3       TP003        Chen Wei  78000     7800     2022\n## 4       TP004   Elena Petrova  90000     9000     2022\n## 5       TP005 Fatima Al-Farsi  68000     6800     2022\n## 6       TP006    George Okoro  72000     7200     2022\n## 7       TP007  Hiroshi Tanaka  95000     9500     2022\n## 8       TP009     Maria Rossi  89000     8900     2022\n## 9       TP010   William Smith  75000     7500     2022\n\n# Disconnect\ndbDisconnect(con)",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#further-resources-for-sql",
+    "href": "2_import_export.html#further-resources-for-sql",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Further Resources for SQL",
+    "text": "Further Resources for SQL\n\nTake a look at this extensive list of free resources\nGreat Graduate-level course taught by Grant R. McDermott\nRStudio’s Databases using R is an excellent resource that covers a lot.\nJuan Mayorga’s tutorial, Getting Global Fishing Watch Data from Google Big Query using R, offers a hands-on guide to accessing data and highlights why learning SQL is valuable beyond just using the dplyr translation.\nFor a concise introduction to SQL, Julia Evans’ Become A Select Star is a highly recommended resource.\nGoogle’s official BigQuery documentation provides a deep dive into SQL functions, syntax, and specialized operations, such as handling datetime and JSON objects.\nPlatforms like W3Schools and Codecademy offer numerous free and paid SQL tutorials and courses to enhance your skills.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "es/index_es.html",
+    "href": "es/index_es.html",
+    "title": "Welcome to DataTax R Course",
+    "section": "",
+    "text": "Este sitio web es tu punto central para participar en el taller, donde aprenderás programación en R 🖥️ y sus aplicaciones en investigación y análisis de datos 📊 con un enfoque en datos fiscales y administrativos."
+  },
+  {
+    "objectID": "es/index_es.html#objetivos-de-este-curso",
+    "href": "es/index_es.html#objetivos-de-este-curso",
+    "title": "Welcome to DataTax R Course",
+    "section": "Objetivos de este Curso 🎯",
+    "text": "Objetivos de este Curso 🎯\n\nComprender los conceptos básicos de la programación en R y cómo aplicarlos de manera efectiva.\n\nAprender a manipular, limpiar y analizar datos con R.\n\nAdquirir experiencia práctica con conjuntos de datos fiscales y administrativos reales.\n\nConstruir una base para la investigación reproducible y la visualización de datos 📊.\n\nDesarrollar habilidades para automatizar tareas repetitivas y optimizar flujos de trabajo 🔄."
+  },
+  {
+    "objectID": "es/index_es.html#qué-necesitas-saber",
+    "href": "es/index_es.html#qué-necesitas-saber",
+    "title": "Welcome to DataTax R Course",
+    "section": "Qué Necesitas Saber:",
+    "text": "Qué Necesitas Saber:\n\nNo se requiere experiencia previa en programación—¡este taller está diseñado para principiantes completos! 🐣\n\nAntes del taller: Sigue las instrucciones de configuración a continuación para asegurarte de estar listo para comenzar. ✅\n\nMateriales: Todos los materiales del curso están accesibles aquí y en el repositorio de GitHub. 📂"
+  },
+  {
+    "objectID": "es/index_es.html#cómo-instalar-r-y-rstudio",
+    "href": "es/index_es.html#cómo-instalar-r-y-rstudio",
+    "title": "Welcome to DataTax R Course",
+    "section": "Cómo Instalar R y RStudio 🛠️",
+    "text": "Cómo Instalar R y RStudio 🛠️\n\nInstalar R:\n\nVisita el sitio web del Proyecto CRAN R.\nSelecciona el enlace de descarga adecuado para tu sistema operativo (Windows, macOS o Linux).\nSigue las instrucciones de instalación proporcionadas en el sitio web.\n\nInstalar RStudio:\n\nVisita el sitio web de RStudio.\nDescarga la versión gratuita de RStudio Desktop para tu sistema operativo.\nEjecuta el instalador y sigue las instrucciones en pantalla.\n\nVerificar la Instalación:\n\nAbre RStudio y verifica que se inicie correctamente.\n\n¿Necesitas Más Ayuda?\nPara instrucciones detalladas paso a paso sobre la instalación, visita esta excelente guía: Tutorial de DataCamp sobre la Instalación de R y RStudio."
+  },
+  {
+    "objectID": "2_import_export.html#in-practice",
+    "href": "2_import_export.html#in-practice",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "In practice:",
+    "text": "In practice:\nStart with a wide dataset\n\n\n# A tibble: 4 × 6\n  taxpayer_id tax_type   `2021 Q1` `2021 Q2` `2021 Q3` `2021 Q4`\n        &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1         101 Income Tax       500       600       450       700\n2         102 VAT              300       400       350       500\n3         102 Income Tax       530       110       350       400\n4         101 VAT              100       700       850       400\n\n\n\n\n# Install the package \ninstall.packages(\"tidyr\")\n## \n## The downloaded binary packages are in\n##  /var/folders/5q/h6vzng1n2bz125flqrw0r3dw0000gp/T//RtmpsQUpTc/downloaded_packages\n\n# Load the package in our session\nlibrary(tidyr)\n\n# Pivot the dataset to long format\nlong_tax_data &lt;- pivot_longer(\n    wide_data,                  # Dataset name\n    cols = c(\n      \"2021 Q1\",\n      \"2021 Q2\", \n      \"2021 Q3\", \n      \"2021 Q4\"),               # Select columns to pivot\n    names_to = \"Quarter\",       # New column for the old column headers (quarters)\n    values_to = \"Amount\"        # New column for the values\n  )",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#how-do-we-go-from-wide-to-long-in-r",
+    "href": "2_import_export.html#how-do-we-go-from-wide-to-long-in-r",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "How Do We Go from “Wide” to “Long” in R?",
+    "text": "How Do We Go from “Wide” to “Long” in R?\n\n\n\n\n\n\n\n\n\n\nWe need to introduce the package tidyr.\n\n\n\n\nWhy Use Packages?\n\nPackages contain tools (or “verbs”) to perform specific tasks in R.\nOnce installed and loaded, these verbs simplify complex operations.\n\n\ninstall.packages(\"tidyr\") #  the package\n\n\nThe downloaded binary packages are in\n    /var/folders/5q/h6vzng1n2bz125flqrw0r3dw0000gp/T//RtmpsQUpTc/downloaded_packages\n\nlibrary(tidyr) # load it\n\n\n\n\nThe downloaded binary packages are in\n    /var/folders/5q/h6vzng1n2bz125flqrw0r3dw0000gp/T//RtmpsQUpTc/downloaded_packages\n\n\n\n\n\n\n\n\nNote\n\n\nUse cheat sheets for quick summaries of a package’s verbs and their usage (e.g., tidyr Cheat Sheet). And don’t forget! AI tools can also assist with coding and debugging.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#the-final-result",
+    "href": "2_import_export.html#the-final-result",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "The final result",
+    "text": "The final result\n\n# Print the final result\nprint(long_tax_data)\n\n# A tibble: 16 × 4\n   taxpayer_id tax_type   Quarter Amount\n         &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;dbl&gt;\n 1         101 Income Tax 2021 Q1    500\n 2         101 Income Tax 2021 Q2    600\n 3         101 Income Tax 2021 Q3    450\n 4         101 Income Tax 2021 Q4    700\n 5         102 VAT        2021 Q1    300\n 6         102 VAT        2021 Q2    400\n 7         102 VAT        2021 Q3    350\n 8         102 VAT        2021 Q4    500\n 9         102 Income Tax 2021 Q1    530\n10         102 Income Tax 2021 Q2    110\n11         102 Income Tax 2021 Q3    350\n12         102 Income Tax 2021 Q4    400\n13         101 VAT        2021 Q1    100\n14         101 VAT        2021 Q2    700\n15         101 VAT        2021 Q3    850\n16         101 VAT        2021 Q4    400",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#unit-of-analysis",
+    "href": "2_import_export.html#unit-of-analysis",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Unit of Analysis",
+    "text": "Unit of Analysis\n\nWe need to identify the Unit of Analysis:\n\n\nIf studying the different sources of taxes –&gt; Transaction X Tax X Time\nIf looking at taxpaers behavior –&gt; Tax ID X Time\n\n\nThe Unit of Analysis always needs to be uniquely identified by an ID (combined with time periods in the case of a panel).\n\n\n\nHow do we now move from Long to Wide?\n\n\n\n# A tibble: 8 × 4\n  taxpayer_id Quarter `Income Tax`   VAT\n        &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;\n1         101 2021 Q1          500   100\n2         101 2021 Q2          600   700\n3         101 2021 Q3          450   850\n4         101 2021 Q4          700   400\n5         102 2021 Q1          530   300\n6         102 2021 Q2          110   400\n7         102 2021 Q3          350   350\n8         102 2021 Q4          400   500",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#unit-of-analysis-1",
+    "href": "2_import_export.html#unit-of-analysis-1",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Unit of Analysis",
+    "text": "Unit of Analysis\n\nWe need to identify the Unit of Analysis:\n\n\nIf studying the different sources of taxes –&gt; Transaction X Tax X Time\nIf looking at taxpaers behavior –&gt; Tax ID X Time\n\n\nThe Unit of Analysis always needs to be uniquely identified by an ID (combined with time periods in the case of a panel).\n\n\n\nHow do we now move from Long to Wide?\n\n\n\n# A tibble: 8 × 4\n  taxpayer_id Quarter `Income Tax`   VAT\n        &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;\n1         101 2021 Q1          500   100\n2         101 2021 Q2          600   700\n3         101 2021 Q3          450   850\n4         101 2021 Q4          700   400\n5         102 2021 Q1          530   300\n6         102 2021 Q2          110   400\n7         102 2021 Q3          350   350\n8         102 2021 Q4          400   500",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#section",
+    "href": "2_import_export.html#section",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "",
+    "text": "Unit of Observation\n\n\nThe unit of observation refers to the smallest entity or item for which data is collected in a dataset.\n\n\n\n\n\n\n\n\n\nUnit of Analysis\n\n\nThe unit of analysis refers to the entity or object about which you are trying to make conclusions or draw insights.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#lets-start-with-two-key-definitions",
+    "href": "2_import_export.html#lets-start-with-two-key-definitions",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Let’s start with two key definitions",
+    "text": "Let’s start with two key definitions\n\n\n\n\n\n\nUnit of Observation\n\n\nThe unit of observation refers to the smallest entity or item for which data is collected in a dataset.\n\n\n\n\n\n\n\n\n\nUnit of Analysis\n\n\nThe unit of analysis refers to the entity or object about which you are trying to make conclusions or draw insights.\n\n\n\n\n\n\n\n\n\n\n\nUnit of Observation\n\n\nThe unit of observation refers to the smallest entity or item for which data is collected in a dataset.\n\n\n\n\n\n\n\n\n\nUnit of Analysis\n\n\nThe unit of analysis refers to the entity or object about which you are trying to make conclusions or draw insights.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#lets-take-a-look-at-this-dataset",
+    "href": "2_import_export.html#lets-take-a-look-at-this-dataset",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Let’s take a look at this dataset",
+    "text": "Let’s take a look at this dataset\n\n\n\n\nTaxpayer ID\nTax Type\n2021 Q1\n2021 Q2\n2021 Q3\n2021 Q4\n\n\n\n\n101\nIncome Tax\n500\n600\n450\n700\n\n\n102\nVAT\n300\n400\n350\n500\n\n\n\n\n\nWhat are the variables?\n\n\nTaxpayer ID, Tax Type, Quarter, Payment Amount.\n\n\nWhat constitutes a single observation in this dataset?\n\n\nOne observation is a specific tax payment for a taxpayer during a particular quarter.\n\n\nHow would you reshape the dataset to meet the three key tidy characteristics?\n\nEach variable is a column; each column is a variable.\nEach observation is a row; each row is an observation.\nEach value is a cell; each cell is a single value.",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "2_import_export.html#unit-of-analysis-2",
+    "href": "2_import_export.html#unit-of-analysis-2",
+    "title": "Data Importing, Tyding and Writing",
+    "section": "Unit of Analysis",
+    "text": "Unit of Analysis\n\nWe need to identify the Unit of Analysis:\n\n\nIf studying the different sources of taxes –&gt; Transaction X Tax X Time\nIf looking at taxpaers behavior –&gt; Tax ID X Time\n\n\nThe Unit of Analysis always needs to be uniquely identified by an ID (combined with time periods in the case of a panel).\n\n\n\nHow do we now move from Long to Wide?\n\n\n\n# A tibble: 8 × 4\n  taxpayer_id Quarter `Income Tax`   VAT\n        &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;\n1         101 2021 Q1          500   100\n2         101 2021 Q2          600   700\n3         101 2021 Q3          450   850\n4         101 2021 Q4          700   400\n5         102 2021 Q1          530   300\n6         102 2021 Q2          110   400\n7         102 2021 Q3          350   350\n8         102 2021 Q4          400   500",
+    "crumbs": [
+      "Home",
+      "Lessons:",
+      "2. Data Import/Export"
+    ]
+  },
+  {
+    "objectID": "3_data_wrangling.html#welcome-back",
+    "href": "3_data_wrangling.html#welcome-back",
+    "title": "Data Wrangling with dplyr",
+    "section": "Welcome Back!",
+    "text": "Welcome Back!\n\n\n\nIn Module 1, we learned the basics of R 📈\nIn Module 2, we learned to import, tidy, and export data 📥 📤\nToday: Transform and manipulate tax data like a pro! 💪\n\n\n\n\nToday’s Goal\n\n\nTransform raw tax data into actionable insights using the dplyr package."
+  },
+  {
+    "objectID": "3_data_wrangling.html#what-is-dplyr",
+    "href": "3_data_wrangling.html#what-is-dplyr",
+    "title": "Data Wrangling with dplyr",
+    "section": "What is dplyr?",
+    "text": "What is dplyr?\n\ndplyr is a grammar of data manipulation - providing a consistent set of verbs to solve most data manipulation challenges.\n\n\n\n\nThe Core Verbs 🧰\n\nselect() → Choose columns\nfilter() → Choose rows\n\nmutate() → Create columns\nsummarize() → Aggregate data\narrange() → Sort data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nThink of these verbs as actions you perform on your data - just like in natural language!"
+  },
+  {
+    "objectID": "3_data_wrangling.html#the-magic-pipe",
+    "href": "3_data_wrangling.html#the-magic-pipe",
+    "title": "Data Wrangling with dplyr",
+    "section": "The Magic Pipe: %>%",
+    "text": "The Magic Pipe: %&gt;%\n\nThe pipe operator %&gt;% (or |&gt; in base R) allows us to chain operations together.\n\n\nWithout the pipe:\n\n# Nested functions - hard to read!\narrange(filter(select(data, firm_id, vat_outputs), vat_outputs &gt; 10000), desc(vat_outputs))\n\n\n\nWith the pipe:\n\n# Clear, readable workflow!\ndata %&gt;%\n  select(firm_id, vat_outputs) %&gt;%\n  filter(vat_outputs &gt; 10000) %&gt;%\n  arrange(desc(vat_outputs))\n\n\n\n\n\n\n\n\n\nTip\n\n\nRead the pipe as “then” - take data, then select columns, then filter rows, then arrange!"
+  },
+  {
+    "objectID": "3_data_wrangling.html#lets-start-wrangling",
+    "href": "3_data_wrangling.html#lets-start-wrangling",
+    "title": "Data Wrangling with dplyr",
+    "section": "Let’s Start Wrangling!",
+    "text": "Let’s Start Wrangling!\nFirst, let’s look at our VAT data:\n\n# Quick overview of VAT declarations\nglimpse(panel_vat)\n\nRows: 1,000\nColumns: 5\n$ firm_id            &lt;chr&gt; \"FIRM_0096\", \"FIRM_0081\", \"FIRM_0024\", \"FIRM_0091\",…\n$ declaration_date   &lt;dttm&gt; 2023-01-31, 2022-05-31, 2023-03-31, 2023-08-31, 20…\n$ vat_inputs         &lt;int&gt; 45262, 9225, 15289, 9347, 47317, 44471, 23806, 4907…\n$ vat_outputs        &lt;int&gt; 45914, 29661, 10005, 14410, 33378, 45639, 19855, 25…\n$ reimbursement_date &lt;dttm&gt; 2023-12-31, 2021-07-31, 2023-09-30, 2021-11-30, 20…"
+  },
+  {
+    "objectID": "3_data_wrangling.html#select---choose-your-columns",
+    "href": "3_data_wrangling.html#select---choose-your-columns",
+    "title": "Data Wrangling with dplyr",
+    "section": "1. select() - Choose Your Columns",
+    "text": "1. select() - Choose Your Columns\nSelect specific columns from your dataset:\n\n# Select specific columns\npanel_vat %&gt;%\n  select(firm_id, declaration_date, vat_inputs, vat_outputs) %&gt;%\n  head(3)\n\n     firm_id declaration_date vat_inputs vat_outputs\n      &lt;char&gt;           &lt;POSc&gt;      &lt;int&gt;       &lt;int&gt;\n1: FIRM_0096       2023-01-31      45262       45914\n2: FIRM_0081       2022-05-31       9225       29661\n3: FIRM_0024       2023-03-31      15289       10005\n\n# Select all columns except some\npanel_vat %&gt;%\n  select(-reimbursement_date) %&gt;%\n  head(3)\n\n     firm_id declaration_date vat_inputs vat_outputs\n      &lt;char&gt;           &lt;POSc&gt;      &lt;int&gt;       &lt;int&gt;\n1: FIRM_0096       2023-01-31      45262       45914\n2: FIRM_0081       2022-05-31       9225       29661\n3: FIRM_0024       2023-03-31      15289       10005"
+  },
+  {
+    "objectID": "3_data_wrangling.html#advanced-selection-helpers",
+    "href": "3_data_wrangling.html#advanced-selection-helpers",
+    "title": "Data Wrangling with dplyr",
+    "section": "Advanced Selection Helpers",
+    "text": "Advanced Selection Helpers\ndplyr provides helper functions for column selection:\n\n# Select columns that start with \"vat\"\npanel_vat %&gt;%\n  select(firm_id, starts_with(\"vat\")) %&gt;%\n  head(3)\n\n     firm_id vat_inputs vat_outputs\n      &lt;char&gt;      &lt;int&gt;       &lt;int&gt;\n1: FIRM_0096      45262       45914\n2: FIRM_0081       9225       29661\n3: FIRM_0024      15289       10005\n\n# Select numeric columns\npanel_vat %&gt;%\n  select(where(is.numeric)) %&gt;%\n  head(3)\n\n   vat_inputs vat_outputs\n        &lt;int&gt;       &lt;int&gt;\n1:      45262       45914\n2:       9225       29661\n3:      15289       10005\n\n# Rename while selecting\npanel_vat %&gt;%\n  select(taxpayer = firm_id, inputs = vat_inputs, outputs = vat_outputs) %&gt;%\n  head(3)\n\n    taxpayer inputs outputs\n      &lt;char&gt;  &lt;int&gt;   &lt;int&gt;\n1: FIRM_0096  45262   45914\n2: FIRM_0081   9225   29661\n3: FIRM_0024  15289   10005"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter---choose-your-rows",
+    "href": "3_data_wrangling.html#filter---choose-your-rows",
+    "title": "Data Wrangling with dplyr",
+    "section": "2. filter() - Choose Your Rows",
+    "text": "2. filter() - Choose Your Rows\nFilter rows based on conditions:\n\n# Filter high-output taxpayers (VAT outputs &gt; 40,000)\nhigh_output_taxpayers &lt;- panel_vat %&gt;%\n  filter(vat_outputs &gt; 40000)\n\nnrow(high_output_taxpayers)\n\n[1] 211\n\n# Multiple conditions\nefficient_taxpayers &lt;- panel_vat %&gt;%\n  filter(vat_outputs &gt; 30000,\n         vat_inputs &lt; 30000)\n\nnrow(efficient_taxpayers)\n\n[1] 241"
+  },
+  {
+    "objectID": "3_data_wrangling.html#complex-filtering",
+    "href": "3_data_wrangling.html#complex-filtering",
+    "title": "Data Wrangling with dplyr",
+    "section": "Complex Filtering",
+    "text": "Complex Filtering\n\n# Using OR conditions\npanel_vat %&gt;%\n  filter(vat_outputs &gt; 45000 | vat_inputs &gt; 45000) %&gt;%\n  select(firm_id, vat_inputs, vat_outputs) %&gt;%\n  head(5)\n\n     firm_id vat_inputs vat_outputs\n      &lt;char&gt;      &lt;int&gt;       &lt;int&gt;\n1: FIRM_0096      45262       45914\n2: FIRM_0014      47317       33378\n3: FIRM_0090      44471       45639\n4: FIRM_0080      49071       25070\n5: FIRM_0060      45563       18817\n\n# Filter based on multiple values\nselected_firms &lt;- panel_vat %&gt;%\n  filter(firm_id %in% c(\"FIRM_0001\", \"FIRM_0002\", \"FIRM_0003\")) %&gt;%\n  select(firm_id, declaration_date, vat_outputs) %&gt;%\n  arrange(firm_id, declaration_date)"
+  },
+  {
+    "objectID": "3_data_wrangling.html#mutate---create-new-variables",
+    "href": "3_data_wrangling.html#mutate---create-new-variables",
+    "title": "Data Wrangling with dplyr",
+    "section": "3. mutate() - Create New Variables",
+    "text": "3. mutate() - Create New Variables\nCreate new columns or modify existing ones:\n\n# Calculate VAT amounts and margins\nvat_calculated &lt;- panel_vat %&gt;%\n  mutate(\n    vat_payable = (vat_outputs - vat_inputs) * 0.18,  # Assuming 18% VAT rate\n    vat_margin = vat_outputs - vat_inputs\n  ) %&gt;%\n  select(firm_id, declaration_date, vat_inputs, vat_outputs, vat_payable, vat_margin)\n\nhead(vat_calculated, 5)\n\n     firm_id declaration_date vat_inputs vat_outputs vat_payable vat_margin\n      &lt;char&gt;           &lt;POSc&gt;      &lt;int&gt;       &lt;int&gt;       &lt;num&gt;      &lt;int&gt;\n1: FIRM_0096       2023-01-31      45262       45914      117.36        652\n2: FIRM_0081       2022-05-31       9225       29661     3678.48      20436\n3: FIRM_0024       2023-03-31      15289       10005     -951.12      -5284\n4: FIRM_0091       2023-08-31       9347       14410      911.34       5063\n5: FIRM_0014       2023-09-30      47317       33378    -2509.02     -13939\n\n# Create categories based on output levels\npanel_vat %&gt;%\n  mutate(\n    size_category = case_when(\n      vat_outputs &lt; 10000 ~ \"Small\",\n      vat_outputs &lt; 30000 ~ \"Medium\", \n      TRUE ~ \"Large\"\n    )\n  ) %&gt;%\n  select(firm_id, vat_outputs, size_category) %&gt;%\n  head(5)\n\n     firm_id vat_outputs size_category\n      &lt;char&gt;       &lt;int&gt;        &lt;char&gt;\n1: FIRM_0096       45914         Large\n2: FIRM_0081       29661        Medium\n3: FIRM_0024       10005        Medium\n4: FIRM_0091       14410        Medium\n5: FIRM_0014       33378         Large"
+  },
+  {
+    "objectID": "3_data_wrangling.html#working-with-dates",
+    "href": "3_data_wrangling.html#working-with-dates",
+    "title": "Data Wrangling with dplyr",
+    "section": "Working with Dates",
+    "text": "Working with Dates\nLet’s use the lubridate package for date manipulation:\n\n# Load lubridate for date handling\nlibrary(lubridate)\n\n# Extract date components\nvat_with_dates &lt;- panel_vat %&gt;%\n  mutate(\n    year = year(declaration_date),\n    month = month(declaration_date),\n    quarter = quarter(declaration_date),\n    days_to_reimbursement = as.numeric(reimbursement_date - declaration_date)\n  ) %&gt;%\n  select(firm_id, declaration_date, reimbursement_date, year, month, quarter, days_to_reimbursement)\n\nhead(vat_with_dates, 5)\n\n     firm_id declaration_date reimbursement_date  year month quarter\n      &lt;char&gt;           &lt;POSc&gt;             &lt;POSc&gt; &lt;num&gt; &lt;num&gt;   &lt;int&gt;\n1: FIRM_0096       2023-01-31         2023-12-31  2023     1       1\n2: FIRM_0081       2022-05-31         2021-07-31  2022     5       2\n3: FIRM_0024       2023-03-31         2023-09-30  2023     3       1\n4: FIRM_0091       2023-08-31         2021-11-30  2023     8       3\n5: FIRM_0014       2023-09-30         2021-12-31  2023     9       3\n   days_to_reimbursement\n                   &lt;num&gt;\n1:              28857600\n2:             -26265600\n3:              15811200\n4:             -55209600\n5:             -55123200"
+  },
+  {
+    "objectID": "3_data_wrangling.html#summarize---aggregate-your-data",
+    "href": "3_data_wrangling.html#summarize---aggregate-your-data",
+    "title": "Data Wrangling with dplyr",
+    "section": "4. summarize() - Aggregate Your Data",
+    "text": "4. summarize() - Aggregate Your Data\nCalculate summary statistics:\n\n# Overall VAT statistics\npanel_vat %&gt;%\n  summarize(\n    total_declarations = n(),\n    total_vat_outputs = sum(vat_outputs, na.rm = TRUE),\n    avg_vat_outputs = mean(vat_outputs, na.rm = TRUE),\n    median_vat_outputs = median(vat_outputs, na.rm = TRUE)\n  )\n\n  total_declarations total_vat_outputs avg_vat_outputs median_vat_outputs\n1               1000          25883247        25883.25            26212.5\n\n# Group by year for yearly summaries\nyearly_vat &lt;- panel_vat %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  group_by(year) %&gt;%\n  summarize(\n    count = n(),\n    total_outputs = sum(vat_outputs, na.rm = TRUE),\n    total_inputs = sum(vat_inputs, na.rm = TRUE),\n    net_vat_base = sum(vat_outputs - vat_inputs, na.rm = TRUE)\n  )\n\nprint(yearly_vat)\n\n# A tibble: 3 × 5\n   year count total_outputs total_inputs net_vat_base\n  &lt;dbl&gt; &lt;int&gt;         &lt;int&gt;        &lt;int&gt;        &lt;int&gt;\n1  2021   329       8582818      8373297       209521\n2  2022   332       8436159      8581657      -145498\n3  2023   339       8864270      8332259       532011"
+  },
+  {
+    "objectID": "3_data_wrangling.html#powerful-grouping-operations",
+    "href": "3_data_wrangling.html#powerful-grouping-operations",
+    "title": "Data Wrangling with dplyr",
+    "section": "Powerful Grouping Operations",
+    "text": "Powerful Grouping Operations\n\n# Monthly VAT collection patterns\nmonthly_vat &lt;- panel_vat %&gt;%\n  mutate(year_month = floor_date(declaration_date, \"month\")) %&gt;%\n  group_by(year_month) %&gt;%\n  summarize(\n    n_declarations = n(),\n    total_outputs = sum(vat_outputs, na.rm = TRUE),\n    total_inputs = sum(vat_inputs, na.rm = TRUE),\n    net_vat_base = sum(vat_outputs - vat_inputs, na.rm = TRUE)\n  ) %&gt;%\n  arrange(year_month)\n\nhead(monthly_vat, 6)\n\n# A tibble: 6 × 5\n  year_month          n_declarations total_outputs total_inputs net_vat_base\n  &lt;dttm&gt;                       &lt;int&gt;         &lt;int&gt;        &lt;int&gt;        &lt;int&gt;\n1 2021-01-01 00:00:00             20        591955       513310        78645\n2 2021-02-01 00:00:00             22        465858       580504      -114646\n3 2021-03-01 00:00:00             30        812477       813822        -1345\n4 2021-04-01 00:00:00             28        642575       732147       -89572\n5 2021-05-01 00:00:00             26        769453       668730       100723\n6 2021-06-01 00:00:00             23        715678       538373       177305\n\n# Top taxpayers by VAT contribution\ntop_taxpayers &lt;- panel_vat %&gt;%\n  mutate(vat_contribution = (vat_outputs - vat_inputs) * 0.18) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    total_vat_contribution = sum(vat_contribution, na.rm = TRUE),\n    avg_monthly_outputs = mean(vat_outputs, na.rm = TRUE),\n    n_declarations = n()\n  ) %&gt;%\n  arrange(desc(total_vat_contribution)) %&gt;%\n  slice_head(n = 10)"
+  },
+  {
+    "objectID": "3_data_wrangling.html#arrange---sort-your-data",
+    "href": "3_data_wrangling.html#arrange---sort-your-data",
+    "title": "Data Wrangling with dplyr",
+    "section": "5. arrange() - Sort Your Data",
+    "text": "5. arrange() - Sort Your Data\n\n# Sort by VAT outputs (descending)\npanel_vat %&gt;%\n  arrange(desc(vat_outputs)) %&gt;%\n  select(firm_id, declaration_date, vat_outputs) %&gt;%\n  head(5)\n\n     firm_id declaration_date vat_outputs\n      &lt;char&gt;           &lt;POSc&gt;       &lt;int&gt;\n1: FIRM_0020       2022-12-31       49969\n2: FIRM_0096       2023-07-31       49844\n3: FIRM_0040       2022-12-31       49806\n4: FIRM_0075       2021-05-31       49710\n5: FIRM_0022       2022-03-31       49689\n\n# Multiple sorting criteria\npanel_vat %&gt;%\n  arrange(firm_id, desc(declaration_date)) %&gt;%\n  select(firm_id, declaration_date, vat_outputs) %&gt;%\n  head(10)\n\n      firm_id declaration_date vat_outputs\n       &lt;char&gt;           &lt;POSc&gt;       &lt;int&gt;\n 1: FIRM_0001       2023-10-31       49327\n 2: FIRM_0001       2023-06-30       26768\n 3: FIRM_0001       2023-04-30       42722\n 4: FIRM_0001       2022-10-31        2133\n 5: FIRM_0001       2022-08-31       43750\n 6: FIRM_0001       2022-05-31        8814\n 7: FIRM_0001       2022-03-31       23242\n 8: FIRM_0001       2021-04-30       24343\n 9: FIRM_0002       2023-12-31       15943\n10: FIRM_0002       2023-11-30       27315"
+  },
+  {
+    "objectID": "3_data_wrangling.html#combining-everything-together",
+    "href": "3_data_wrangling.html#combining-everything-together",
+    "title": "Data Wrangling with dplyr",
+    "section": "Combining Everything Together",
+    "text": "Combining Everything Together\nLet’s create a comprehensive VAT compliance analysis:\n\n# Comprehensive taxpayer analysis\ntaxpayer_vat_analysis &lt;- panel_vat %&gt;%\n  mutate(\n    net_vat_base = vat_outputs - vat_inputs,\n    vat_payable = net_vat_base * 0.18,\n    year = year(declaration_date)\n  ) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    total_outputs = sum(vat_outputs, na.rm = TRUE),\n    total_inputs = sum(vat_inputs, na.rm = TRUE),\n    total_vat_payable = sum(vat_payable, na.rm = TRUE),\n    avg_net_base = mean(net_vat_base, na.rm = TRUE),\n    n_declarations = n(),\n    active_years = n_distinct(year)\n  ) %&gt;%\n  filter(n_declarations &gt;= 3) %&gt;%  # Only firms with 3+ declarations\n  arrange(desc(total_vat_payable)) %&gt;%\n  mutate(rank = row_number())\n\nhead(taxpayer_vat_analysis, 10)\n\n# A tibble: 10 × 8\n   firm_id   total_outputs total_inputs total_vat_payable avg_net_base\n   &lt;chr&gt;             &lt;int&gt;        &lt;int&gt;             &lt;dbl&gt;        &lt;dbl&gt;\n 1 FIRM_0067        349225       171140            32055.       17808.\n 2 FIRM_0019        291105       165472            22614.       12563.\n 3 FIRM_0022        231860       115203            20998.       16665.\n 4 FIRM_0014        300224       194817            18973.       10541.\n 5 FIRM_0002        261810       171331            16286.        8225.\n 6 FIRM_0053        193887       113063            14548.       13471.\n 7 FIRM_0009        381441       311984            12502.        4961.\n 8 FIRM_0066        274250       205035            12459.        7691.\n 9 FIRM_0099        389834       321476            12304.        4883.\n10 FIRM_0017        303850       235663            12274.        5245.\n# ℹ 3 more variables: n_declarations &lt;int&gt;, active_years &lt;int&gt;, rank &lt;int&gt;"
+  },
+  {
+    "objectID": "3_data_wrangling.html#working-with-firm-characteristics",
+    "href": "3_data_wrangling.html#working-with-firm-characteristics",
+    "title": "Data Wrangling with dplyr",
+    "section": "Working with Firm Characteristics",
+    "text": "Working with Firm Characteristics\nLet’s explore the firm characteristics data:\n\n# First, let's see what we have\nglimpse(dt_firms)\n\nRows: 300\nColumns: 6\n$ firm_id             &lt;chr&gt; \"FIRM_0001\", \"FIRM_0001\", \"FIRM_0001\", \"FIRM_0002\"…\n$ year                &lt;int&gt; 2021, 2022, 2023, 2021, 2022, 2023, 2021, 2022, 20…\n$ size                &lt;chr&gt; \"Small\", \"Small\", \"Large\", \"Large\", \"Medium\", \"Sma…\n$ number_of_employees &lt;int&gt; 479, 188, 127, 150, 121, 499, 490, 227, 277, 190, …\n$ region              &lt;chr&gt; \"South\", \"North\", \"East\", \"East\", \"North\", \"South\"…\n$ industry            &lt;chr&gt; \"Retail\", \"Services\", \"Retail\", \"Services\", \"Servi…\n\n# Analyze firm distribution by size and industry\nfirm_distribution &lt;- dt_firms %&gt;%\n  group_by(year, size, industry) %&gt;%\n  summarize(\n    n_firms = n(),\n    avg_employees = mean(number_of_employees, na.rm = TRUE),\n    .groups = \"drop\"\n  )\n\nhead(firm_distribution, 10)\n\n# A tibble: 10 × 5\n    year size   industry      n_firms avg_employees\n   &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;           &lt;int&gt;         &lt;dbl&gt;\n 1  2021 Large  Manufacturing      10          213.\n 2  2021 Large  Retail              9          197.\n 3  2021 Large  Services            8          250.\n 4  2021 Large  Technology          4          324.\n 5  2021 Medium Manufacturing       5          247.\n 6  2021 Medium Retail             15          227.\n 7  2021 Medium Services            9          293.\n 8  2021 Medium Technology          6          268.\n 9  2021 Small  Manufacturing       5          283 \n10  2021 Small  Retail             14          320.\n\n# Regional analysis\nregional_summary &lt;- dt_firms %&gt;%\n  group_by(region, year) %&gt;%\n  summarize(\n    total_firms = n(),\n    avg_employees = mean(number_of_employees, na.rm = TRUE),\n    .groups = \"drop\"\n  ) %&gt;%\n  arrange(year, desc(total_firms))"
+  },
+  {
+    "objectID": "3_data_wrangling.html#working-with-cit-data",
+    "href": "3_data_wrangling.html#working-with-cit-data",
+    "title": "Data Wrangling with dplyr",
+    "section": "Working with CIT Data",
+    "text": "Working with CIT Data\nLet’s analyze Corporate Income Tax patterns:\n\n# Calculate effective tax rates\ncit_analysis &lt;- panel_cit %&gt;%\n  mutate(\n    effective_tax_rate = (tax_paid / taxable_income) * 100,\n    year = year(declaration_date)\n  ) %&gt;%\n  filter(taxable_income &gt; 0) %&gt;%  # Only profitable firms\n  select(firm_id, year, taxable_income, tax_paid, adjustments, effective_tax_rate)\n\nhead(cit_analysis, 5)\n\n     firm_id  year taxable_income tax_paid adjustments effective_tax_rate\n      &lt;char&gt; &lt;num&gt;          &lt;int&gt;    &lt;int&gt;       &lt;int&gt;              &lt;num&gt;\n1: FIRM_0075  2023          91591    25447        2239           27.78330\n2: FIRM_0080  2023         181645    22246        4777           12.24697\n3: FIRM_0007  2021         110826    32964       -2942           29.74392\n4: FIRM_0045  2021         101530    27547       -3658           27.13188\n5: FIRM_0053  2021          69730    18176        2794           26.06626\n\n# Yearly CIT summary\nyearly_cit &lt;- panel_cit %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  group_by(year) %&gt;%\n  summarize(\n    n_declarations = n(),\n    total_taxable_income = sum(taxable_income, na.rm = TRUE),\n    total_tax_paid = sum(tax_paid, na.rm = TRUE),\n    total_adjustments = sum(adjustments, na.rm = TRUE),\n    avg_effective_rate = mean((tax_paid/taxable_income)*100, na.rm = TRUE)\n  )\n\nprint(yearly_cit)\n\n# A tibble: 3 × 6\n   year n_declarations total_taxable_income total_tax_paid total_adjustments\n  &lt;dbl&gt;          &lt;int&gt;                &lt;int&gt;          &lt;int&gt;             &lt;int&gt;\n1  2021            347             43618513        7371324             50941\n2  2022            322             40011335        7256158             -2344\n3  2023            331             41189338        7305336             -9516\n# ℹ 1 more variable: avg_effective_rate &lt;dbl&gt;"
+  },
+  {
+    "objectID": "3_data_wrangling.html#exercise-1-basic-data-wrangling",
+    "href": "3_data_wrangling.html#exercise-1-basic-data-wrangling",
+    "title": "Data Wrangling with dplyr",
+    "section": "Exercise 1: Basic Data Wrangling",
+    "text": "Exercise 1: Basic Data Wrangling\n −+ 10:00 \nUsing the panel_vat dataset:\n\nFilter to find all declarations from 2023\nSelect only: firm_id, declaration_date, vat_inputs, vat_outputs\nMutate to create net_vat_base = vat_outputs - vat_inputs\nFilter again to keep only records where net_vat_base &gt; 5000\nArrange by net_vat_base in descending order\nShow the top 10 records\n\n\n# Your code here:\nresult &lt;- panel_vat %&gt;%\n  # Step 1: Filter for 2023\n  \n  # Step 2: Select columns\n  \n  # Step 3: Create net_vat_base\n  \n  # Step 4: Filter net_vat_base\n  \n  # Step 5: Arrange\n  \n  # Show top 10"
+  },
+  {
+    "objectID": "3_data_wrangling.html#exercise-1-solution",
+    "href": "3_data_wrangling.html#exercise-1-solution",
+    "title": "Data Wrangling with dplyr",
+    "section": "Exercise 1: Solution",
+    "text": "Exercise 1: Solution\n\nresult &lt;- panel_vat %&gt;%\n  # Step 1: Filter for 2023\n  filter(year(declaration_date) == 2023) %&gt;%\n  # Step 2: Select columns\n  select(firm_id, declaration_date, vat_inputs, vat_outputs) %&gt;%\n  # Step 3: Create net_vat_base\n  mutate(net_vat_base = vat_outputs - vat_inputs) %&gt;%\n  # Step 4: Filter net_vat_base\n  filter(net_vat_base &gt; 5000) %&gt;%\n  # Step 5: Arrange\n  arrange(desc(net_vat_base)) %&gt;%\n  # Show top 10\n  slice_head(n = 10)\n\nprint(result)\n\n      firm_id declaration_date vat_inputs vat_outputs net_vat_base\n       &lt;char&gt;           &lt;POSc&gt;      &lt;int&gt;       &lt;int&gt;        &lt;int&gt;\n 1: FIRM_0001       2023-10-31       2032       49327        47295\n 2: FIRM_0049       2023-06-30       1117       46498        45381\n 3: FIRM_0066       2023-06-30       4240       49251        45011\n 4: FIRM_0007       2023-08-31       2916       46158        43242\n 5: FIRM_0099       2023-01-31       5902       47249        41347\n 6: FIRM_0060       2023-09-30       8745       49601        40856\n 7: FIRM_0071       2023-10-31       7052       47198        40146\n 8: FIRM_0025       2023-10-31       4955       45095        40140\n 9: FIRM_0056       2023-02-28       5856       45140        39284\n10: FIRM_0079       2023-09-30       4060       43153        39093"
+  },
+  {
+    "objectID": "3_data_wrangling.html#exercise-2-tax-analytics",
+    "href": "3_data_wrangling.html#exercise-2-tax-analytics",
+    "title": "Data Wrangling with dplyr",
+    "section": "Exercise 2: Tax Analytics",
+    "text": "Exercise 2: Tax Analytics\n −+ 15:00 \nCreate a comprehensive tax burden analysis:\n\nUsing panel_cit, add a year column\nCalculate for each firm and year:\n\nTotal taxable income\nTotal tax paid\nAverage effective tax rate\nWhether they had any negative adjustments\n\nKeep only firms with total taxable income &gt; 100,000\nArrange by year and total tax paid (descending)\n\n\n# Your code here:\ntax_burden_analysis &lt;- panel_cit %&gt;%\n  # Add year column\n  \n  # Group and summarize\n  \n  # Filter for minimum income\n  \n  # Arrange results"
+  },
+  {
+    "objectID": "3_data_wrangling.html#exercise-2-solution",
+    "href": "3_data_wrangling.html#exercise-2-solution",
+    "title": "Data Wrangling with dplyr",
+    "section": "Exercise 2: Solution",
+    "text": "Exercise 2: Solution\n\ntax_burden_analysis &lt;- panel_cit %&gt;%\n  # Add year column\n  mutate(year = year(declaration_date)) %&gt;%\n  # Group and summarize  \n  group_by(firm_id, year) %&gt;%\n  summarize(\n    total_taxable_income = sum(taxable_income, na.rm = TRUE),\n    total_tax_paid = sum(tax_paid, na.rm = TRUE),\n    avg_effective_rate = mean((tax_paid/taxable_income)*100, na.rm = TRUE),\n    has_negative_adjustments = any(adjustments &lt; 0),\n    .groups = \"drop\"\n  ) %&gt;%\n  # Filter for minimum income\n  filter(total_taxable_income &gt; 100000) %&gt;%\n  # Arrange results\n  arrange(year, desc(total_tax_paid))\n\nhead(tax_burden_analysis, 10)\n\n# A tibble: 10 × 6\n   firm_id    year total_taxable_income total_tax_paid avg_effective_rate\n   &lt;chr&gt;     &lt;dbl&gt;                &lt;int&gt;          &lt;int&gt;              &lt;dbl&gt;\n 1 FIRM_0068  2021              1097798         182223               20.0\n 2 FIRM_0062  2021               872130         164191               19.0\n 3 FIRM_0097  2021               597251         148373               27.6\n 4 FIRM_0015  2021               707309         145439               21.8\n 5 FIRM_0061  2021               605522         132608               23.0\n 6 FIRM_0044  2021               927408         130315               14.5\n 7 FIRM_0053  2021               693577         130286               20.3\n 8 FIRM_0009  2021               857126         125912               15.3\n 9 FIRM_0073  2021               735627         125312               17.6\n10 FIRM_0002  2021               499162         125038               30.4\n# ℹ 1 more variable: has_negative_adjustments &lt;lgl&gt;"
+  },
+  {
+    "objectID": "3_data_wrangling.html#advanced-techniques-window-functions",
+    "href": "3_data_wrangling.html#advanced-techniques-window-functions",
+    "title": "Data Wrangling with dplyr",
+    "section": "Advanced Techniques: Window Functions",
+    "text": "Advanced Techniques: Window Functions\nWindow functions perform calculations across a set of rows:\n\n# Rank taxpayers by VAT contribution\nranked_vat_taxpayers &lt;- panel_vat %&gt;%\n  mutate(\n    vat_contribution = (vat_outputs - vat_inputs) * 0.18,\n    year = year(declaration_date)\n  ) %&gt;%\n  group_by(year) %&gt;%\n  mutate(\n    vat_rank = rank(desc(vat_contribution)),\n    vat_percentile = percent_rank(vat_contribution) * 100\n  ) %&gt;%\n  filter(vat_rank &lt;= 5) %&gt;%  # Top 5 each year\n  select(year, firm_id, vat_contribution, vat_rank, vat_percentile) %&gt;%\n  arrange(year, vat_rank)\n\nhead(ranked_vat_taxpayers, 10)\n\n# A tibble: 10 × 5\n# Groups:   year [2]\n    year firm_id   vat_contribution vat_rank vat_percentile\n   &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;          &lt;dbl&gt;\n 1  2021 FIRM_0014            8520.        1          100  \n 2  2021 FIRM_0051            7836.        2           99.7\n 3  2021 FIRM_0009            7511.        3           99.4\n 4  2021 FIRM_0017            7119.        4           99.1\n 5  2021 FIRM_0099            7079.        5           98.8\n 6  2022 FIRM_0048            8616.        1          100  \n 7  2022 FIRM_0022            8548.        2           99.7\n 8  2022 FIRM_0067            7861.        3           99.4\n 9  2022 FIRM_0073            7823.        4           99.1\n10  2022 FIRM_0015            7696.        5           98.8"
+  },
+  {
+    "objectID": "3_data_wrangling.html#handling-missing-values",
+    "href": "3_data_wrangling.html#handling-missing-values",
+    "title": "Data Wrangling with dplyr",
+    "section": "Handling Missing Values",
+    "text": "Handling Missing Values\n\n# Check for missing values\npanel_vat %&gt;%\n  summarize(across(everything(), ~ sum(is.na(.x)))) %&gt;%\n  pivot_longer(everything(), \n               names_to = \"column\", \n               values_to = \"missing_count\") %&gt;%\n  filter(missing_count &gt; 0)\n\n# A tibble: 0 × 2\n# ℹ 2 variables: column &lt;chr&gt;, missing_count &lt;int&gt;\n\n# Handle missing values in CIT calculations\ncit_summary &lt;- panel_cit %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  group_by(year) %&gt;%\n  summarize(\n    total_with_na = sum(tax_paid),  # Will return NA if any NA exists\n    total_no_na = sum(tax_paid, na.rm = TRUE),  # Removes NA values\n    n_missing = sum(is.na(tax_paid))\n  )"
+  },
+  {
+    "objectID": "3_data_wrangling.html#cross-dataset-analysis-preview",
+    "href": "3_data_wrangling.html#cross-dataset-analysis-preview",
+    "title": "Data Wrangling with dplyr",
+    "section": "Cross-Dataset Analysis Preview",
+    "text": "Cross-Dataset Analysis Preview\nLet’s check which firms appear across datasets:\n\n# Firms in VAT data\nvat_firms &lt;- unique(panel_vat$firm_id)\n\n# Firms in CIT data  \ncit_firms &lt;- unique(panel_cit$firm_id)\n\n# Firms in characteristics data\nchar_firms &lt;- unique(dt_firms$firm_id)\n\n# Quick overlap analysis\ncat(\"Firms in VAT data:\", length(vat_firms), \"\\n\")\n\nFirms in VAT data: 100 \n\ncat(\"Firms in CIT data:\", length(cit_firms), \"\\n\")\n\nFirms in CIT data: 100 \n\ncat(\"Firms in characteristics:\", length(char_firms), \"\\n\")\n\nFirms in characteristics: 100 \n\ncat(\"Firms in both VAT and CIT:\", length(intersect(vat_firms, cit_firms)), \"\\n\")\n\nFirms in both VAT and CIT: 100 \n\ncat(\"Firms in all three datasets:\", \n    length(Reduce(intersect, list(vat_firms, cit_firms, char_firms))), \"\\n\")\n\nFirms in all three datasets: 100"
+  },
+  {
+    "objectID": "3_data_wrangling.html#performance-tips",
+    "href": "3_data_wrangling.html#performance-tips",
+    "title": "Data Wrangling with dplyr",
+    "section": "Performance Tips 🚀",
+    "text": "Performance Tips 🚀\n\n\nUse data.table for large datasets (&gt;1M rows)\n# Convert to data.table for speed\nlibrary(data.table)\ndt_vat &lt;- as.data.table(panel_vat)\nFilter early in your pipeline to reduce data size\nAvoid unnecessary grouping - ungroup when done:\ndata %&gt;% \n  group_by(category) %&gt;%\n  summarize(mean = mean(value)) %&gt;%\n  ungroup()  # Important!\nUse glimpse() frequently to check your transformations"
+  },
+  {
+    "objectID": "3_data_wrangling.html#common-pitfalls-to-avoid",
+    "href": "3_data_wrangling.html#common-pitfalls-to-avoid",
+    "title": "Data Wrangling with dplyr",
+    "section": "Common Pitfalls to Avoid ⚠️",
+    "text": "Common Pitfalls to Avoid ⚠️\n\n\nForgetting na.rm = TRUE in summary functions\nNot ungrouping after group operations\nUsing == with NA values (use is.na() instead)\nOverwriting your original data (always create new objects)\nComplex operations in one step (break them down!)"
+  },
+  {
+    "objectID": "3_data_wrangling.html#key-takeaways",
+    "href": "3_data_wrangling.html#key-takeaways",
+    "title": "Data Wrangling with dplyr",
+    "section": "Key Takeaways 🔑",
+    "text": "Key Takeaways 🔑\n\n\nThink in verbs: Each dplyr function does ONE thing well\nUse the pipe: Makes your code readable and debuggable\nStart simple: Build complex analyses step by step\nValidate often: Check your assumptions with summaries\nGroup wisely: Remember to ungroup() when done\n\n\n\n\n\n\n\n\n\nPro tip\n\n\nThe best data wranglers aren’t the ones who write complex code - they’re the ones who write code that others (including future them) can understand!"
+  },
+  {
+    "objectID": "3_data_wrangling.html#next-module-preview",
+    "href": "3_data_wrangling.html#next-module-preview",
+    "title": "Data Wrangling with dplyr",
+    "section": "Next Module Preview 👀",
+    "text": "Next Module Preview 👀\nModule 4: Data Visualization with ggplot2\n\nCreating publication-ready graphs\nVisualizing tax trends and distributions\n\nBuilding interactive dashboards\nBest practices for data communication\n\n\n\nThank you! 👏\nQuestions? 🙋"
+  },
+  {
+    "objectID": "3_data_wrangling.html#bonus-quick-reference-card",
+    "href": "3_data_wrangling.html#bonus-quick-reference-card",
+    "title": "Data Wrangling with dplyr",
+    "section": "Bonus: Quick Reference Card",
+    "text": "Bonus: Quick Reference Card\n\n\n\n\n\nVerb\nPurpose\nExample\n\n\n\n\nselect()\nChoose columns\nselect(data, col1, col2)\n\n\nfilter()\nChoose rows\nfilter(data, value &gt; 100)\n\n\nmutate()\nCreate/modify columns\nmutate(data, new = old * 2)\n\n\nsummarize()\nAggregate data\nsummarize(data, mean = mean(value))\n\n\ngroup_by()\nGroup data\ngroup_by(data, category)\n\n\narrange()\nSort data\narrange(data, desc(value))\n\n\n\n\n\n\n\n```\nThe updated module now correctly uses: - vat_inputs and vat_outputs instead of vat_sales/vat_tax - declaration_date for date operations - reimbursement_date for calculating processing times - taxable_income, tax_paid, and adjustments from the CIT data - number_of_employees, size, region, and industry from firm characteristics\nAll examples and exercises now work with the actual column names shown in your screenshots."
+  },
+  {
+    "objectID": "3_data_wrangling.html#where-we-are",
+    "href": "3_data_wrangling.html#where-we-are",
+    "title": "Data Wrangling with dplyr",
+    "section": "Where We Are",
+    "text": "Where We Are\n\n“The best thing about R is that it was written by statisticians. The worst thing about R is that it was written by statisticians.”\n– Bo Cowgill, Google\n\n\nModule Roadmap 🗺\n\n\n✅ R Basics: You can speak R!\n✅ Import/Export: You can get data in and out!\n👉 Data Wrangling: Making data behave\n🔜 Visualization: Making data speak\n🔜 Analysis: Making data work"
+  },
+  {
+    "objectID": "3_data_wrangling.html#a-tax-administrators-daily-challenge",
+    "href": "3_data_wrangling.html#a-tax-administrators-daily-challenge",
+    "title": "Data Wrangling with dplyr",
+    "section": "A Tax Administrator’s Daily Challenge",
+    "text": "A Tax Administrator’s Daily Challenge\n\nYou receive three datasets:\n\n\n📊 VAT declarations (100,000 records)\n💰 CIT filings (50,000 records)\n\n🏢 Firm characteristics (150,000 firms)\n\n\n\n\nYour boss asks: “Which large firms in the manufacturing sector have increasing tax gaps?”\n\n\nHow do you even start? 🤔"
+  },
+  {
+    "objectID": "3_data_wrangling.html#the-data-wrangling-journey",
+    "href": "3_data_wrangling.html#the-data-wrangling-journey",
+    "title": "Data Wrangling with dplyr",
+    "section": "The Data Wrangling Journey",
+    "text": "The Data Wrangling Journey\n\n\n\n\n\ngraph LR\n    A[😱 Messy Data] --&gt; B[🔧 Transform]\n    B --&gt; C[🎯 Clean Data]\n    C --&gt; D[📊 Analysis]\n    \n    style A fill:#ff6b6b,stroke:#c92a2a\n    style B fill:#4dabf7,stroke:#1864ab\n    style C fill:#51cf66,stroke:#2b8a3e\n    style D fill:#ffd43b,stroke:#fab005\n\n\n\n\n\n\n\n\n\nBefore dplyr 😰\n# Which firms have high VAT?\nhigh_vat &lt;- panel_vat[\n  panel_vat$vat_outputs &gt; 40000,\n  c(\"firm_id\", \"vat_outputs\")\n]\n# Now sort... wait, how?\nhigh_vat &lt;- high_vat[\n  order(high_vat$vat_outputs, \n        decreasing = TRUE),\n]\n\nAfter dplyr 😊\n# Clear as natural language!\nhigh_vat &lt;- panel_vat %&gt;%\n  filter(vat_outputs &gt; 40000) %&gt;%\n  select(firm_id, vat_outputs) %&gt;%\n  arrange(desc(vat_outputs))"
+  },
+  {
+    "objectID": "3_data_wrangling.html#the-grammar-of-data-manipulation",
+    "href": "3_data_wrangling.html#the-grammar-of-data-manipulation",
+    "title": "Data Wrangling with dplyr",
+    "section": "The Grammar of Data Manipulation",
+    "text": "The Grammar of Data Manipulation\n\nThink of data manipulation as writing sentences:\n\n\n\n“Take the VAT data, then filter for large taxpayers, then select key columns, then arrange by amount.”\n\n\n\nEach verb is an action:\n\n\n📝 select()\n\n“I want to see these columns”\n\n\n\n🔍 filter()\n\n“I want to see these rows”\n\n\n\n➕ mutate()\n\n“I want to calculate something new”\n\n\n\n📊 summarize()\n\n“I want to aggregate my data”\n\n\n\n🔢 arrange()\n\n“I want to sort my data”"
+  },
+  {
+    "objectID": "3_data_wrangling.html#the-pipe-your-new-best-friend",
+    "href": "3_data_wrangling.html#the-pipe-your-new-best-friend",
+    "title": "Data Wrangling with dplyr",
+    "section": "The Pipe: Your New Best Friend",
+    "text": "The Pipe: Your New Best Friend\nWithout the pipe: 🍝 (Spaghetti code!)\n\n# Read from inside out... 🤯\nresult &lt;- arrange(\n  select(\n    filter(panel_vat, vat_outputs &gt; 30000),\n    firm_id, vat_outputs\n  ),\n  desc(vat_outputs)\n)\n\n. . .\nWith the pipe: 📖 (Like reading a story!)\n\n# Read from top to bottom! \nresult &lt;- panel_vat %&gt;%\n  filter(vat_outputs &gt; 30000) %&gt;%\n  select(firm_id, vat_outputs) %&gt;%\n  arrange(desc(vat_outputs))\n\n. . .\n\n\n\n\n\n\nTip\n\n\nThe pipe %&gt;% means “and then…” - it takes the output from the left and feeds it as the first argument to the right!"
+  },
+  {
+    "objectID": "3_data_wrangling.html#lets-start-simple",
+    "href": "3_data_wrangling.html#lets-start-simple",
+    "title": "Data Wrangling with dplyr",
+    "section": "Let’s Start Simple",
+    "text": "Let’s Start Simple\nOur toy dataset:\n\n\n\n\n\nfirm_id\ndeclaration_date\nvat_inputs\nvat_outputs\n\n\n\n\nFIRM_0096\n2023-01-31\n45262\n45914\n\n\nFIRM_0081\n2022-05-31\n9225\n29661\n\n\nFIRM_0024\n2023-03-31\n15289\n10005\n\n\nFIRM_0091\n2023-08-31\n9347\n14410\n\n\nFIRM_0014\n2023-09-30\n47317\n33378\n\n\n\n\n\n\n\n. . .\nQuestion: How do we get just the firm IDs and outputs?\n. . .\n\nexample_vat %&gt;%\n  select(firm_id, vat_outputs)\n\n     firm_id vat_outputs\n      &lt;char&gt;       &lt;int&gt;\n1: FIRM_0096       45914\n2: FIRM_0081       29661\n3: FIRM_0024       10005\n4: FIRM_0091       14410\n5: FIRM_0014       33378"
+  },
+  {
+    "objectID": "3_data_wrangling.html#selecting-columns-multiple-ways",
+    "href": "3_data_wrangling.html#selecting-columns-multiple-ways",
+    "title": "Data Wrangling with dplyr",
+    "section": "Selecting Columns: Multiple Ways",
+    "text": "Selecting Columns: Multiple Ways\n\nBy NameBy PositionBy PatternBy Exclusion\n\n\n\npanel_vat %&gt;%\n  select(firm_id, vat_outputs) %&gt;%\n  head(3)\n\n     firm_id vat_outputs\n      &lt;char&gt;       &lt;int&gt;\n1: FIRM_0096       45914\n2: FIRM_0081       29661\n3: FIRM_0024       10005\n\n\n\n\n\npanel_vat %&gt;%\n  select(1, 4) %&gt;%  # First and fourth columns\n  head(3)\n\n     firm_id vat_outputs\n      &lt;char&gt;       &lt;int&gt;\n1: FIRM_0096       45914\n2: FIRM_0081       29661\n3: FIRM_0024       10005\n\n\n\n\n\npanel_vat %&gt;%\n  select(starts_with(\"vat\")) %&gt;%\n  head(3)\n\n   vat_inputs vat_outputs\n        &lt;int&gt;       &lt;int&gt;\n1:      45262       45914\n2:       9225       29661\n3:      15289       10005\n\n\n\n\n\npanel_vat %&gt;%\n  select(-reimbursement_date) %&gt;%\n  head(3)\n\n     firm_id declaration_date vat_inputs vat_outputs\n      &lt;char&gt;           &lt;POSc&gt;      &lt;int&gt;       &lt;int&gt;\n1: FIRM_0096       2023-01-31      45262       45914\n2: FIRM_0081       2022-05-31       9225       29661\n3: FIRM_0024       2023-03-31      15289       10005"
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-turn",
+    "href": "3_data_wrangling.html#your-turn",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Turn!",
+    "text": "Your Turn!\n −+ 03:00 \nMini Exercise: Column Selection\nUsing panel_vat, create a dataset that: 1. Includes the firm ID 2. Includes all columns that contain “vat” 3. Excludes the reimbursement date\n\n# Your code here:\nmy_selection &lt;- panel_vat %&gt;%\n  _______________\n\n. . .\nSolution:\n\nmy_selection &lt;- panel_vat %&gt;%\n  select(firm_id, contains(\"vat\"), -reimbursement_date)\n\nhead(my_selection, 3)\n\n     firm_id vat_inputs vat_outputs\n      &lt;char&gt;      &lt;int&gt;       &lt;int&gt;\n1: FIRM_0096      45262       45914\n2: FIRM_0081       9225       29661\n3: FIRM_0024      15289       10005"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filtering-finding-the-needles-in-the-haystack",
+    "href": "3_data_wrangling.html#filtering-finding-the-needles-in-the-haystack",
+    "title": "Data Wrangling with dplyr",
+    "section": "Filtering: Finding the Needles in the Haystack",
+    "text": "Filtering: Finding the Needles in the Haystack\nScenario: Your boss wants to audit high-value transactions\n. . .\n\n# Find declarations with outputs over 40,000\nhigh_value &lt;- panel_vat %&gt;%\n  filter(vat_outputs &gt; 40000)\n\nnrow(high_value)\n\n[1] 211\n\n\n. . .\nBut wait! What about complex criteria?\n\n# High outputs OR suspicious input-output ratio\nsuspicious &lt;- panel_vat %&gt;%\n  filter(vat_outputs &gt; 40000 | vat_inputs/vat_outputs &gt; 0.9)\n\nnrow(suspicious)\n\n[1] 712"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-operators-your-investigation-toolkit",
+    "href": "3_data_wrangling.html#filter-operators-your-investigation-toolkit",
+    "title": "Data Wrangling with dplyr",
+    "section": "Filter Operators: Your Investigation Toolkit",
+    "text": "Filter Operators: Your Investigation Toolkit\n\n\n\n\n\nOperator\nMeaning\nExample\n\n\n\n\n==\nEqual to\nindustry == 'Manufacturing'\n\n\n!=\nNot equal to\nregion != 'North'\n\n\n&gt;\nGreater than\nvat_outputs &gt; 50000\n\n\n&gt;=\nGreater than or equal\nemployees &gt;= 100\n\n\n\nLess than\ntax_rate\n\n\n\nLess than or equal\ndays_late\n\n\n%in%\nIn a set\nfirm_id %in% c('FIRM_001', 'FIRM_002')\n\n\nis.na()\nIs missing\nis.na(reimbursement_date)\n\n\n&\nAND\nsize == 'Large' & region == 'North'\n\n\n|\nOR\nlate_filing == TRUE | adjustments"
+  },
+  {
+    "objectID": "3_data_wrangling.html#creating-new-variables-the-power-of-mutate",
+    "href": "3_data_wrangling.html#creating-new-variables-the-power-of-mutate",
+    "title": "Data Wrangling with dplyr",
+    "section": "Creating New Variables: The Power of mutate()",
+    "text": "Creating New Variables: The Power of mutate()\nThe Problem:\n\n“We need to calculate the net VAT base and the implied VAT amount for each transaction”\n\n. . .\nThe Solution:\n\nvat_calculated &lt;- panel_vat %&gt;%\n  mutate(\n    net_vat_base = vat_outputs - vat_inputs,\n    implied_vat = net_vat_base * 0.18,  # 18% VAT rate\n    margin_ratio = vat_inputs / vat_outputs\n  ) %&gt;%\n  select(firm_id, vat_outputs, vat_inputs, net_vat_base, implied_vat, margin_ratio)\n\nhead(vat_calculated, 4)\n\n     firm_id vat_outputs vat_inputs net_vat_base implied_vat margin_ratio\n      &lt;char&gt;       &lt;int&gt;      &lt;int&gt;        &lt;int&gt;       &lt;num&gt;        &lt;num&gt;\n1: FIRM_0096       45914      45262          652      117.36    0.9857995\n2: FIRM_0081       29661       9225        20436     3678.48    0.3110145\n3: FIRM_0024       10005      15289        -5284     -951.12    1.5281359\n4: FIRM_0091       14410       9347         5063      911.34    0.6486468"
+  },
+  {
+    "objectID": "3_data_wrangling.html#conditional-logic-making-smart-calculations",
+    "href": "3_data_wrangling.html#conditional-logic-making-smart-calculations",
+    "title": "Data Wrangling with dplyr",
+    "section": "Conditional Logic: Making Smart Calculations",
+    "text": "Conditional Logic: Making Smart Calculations\nCategorizing taxpayers by size:\n\ntaxpayer_categories &lt;- panel_vat %&gt;%\n  mutate(\n    taxpayer_size = case_when(\n      vat_outputs &lt; 10000 ~ \"Micro\",\n      vat_outputs &lt; 50000 ~ \"Small\",\n      vat_outputs &lt; 100000 ~ \"Medium\",\n      TRUE ~ \"Large\"  # Everything else\n    )\n  ) %&gt;%\n  select(firm_id, vat_outputs, taxpayer_size)\n\n# Let's see the distribution\ntable(taxpayer_categories$taxpayer_size)\n\n\nMicro Small \n  183   817"
+  },
+  {
+    "objectID": "3_data_wrangling.html#date-magic-with-lubridate",
+    "href": "3_data_wrangling.html#date-magic-with-lubridate",
+    "title": "Data Wrangling with dplyr",
+    "section": "Date Magic with lubridate 📆",
+    "text": "Date Magic with lubridate 📆\nDates are tricky… but not with the right tools!\n\n# Extract useful date components\nvat_with_dates &lt;- panel_vat %&gt;%\n  mutate(\n    year = year(declaration_date),\n    month = month(declaration_date),\n    quarter = quarter(declaration_date),\n    # Days between declaration and reimbursement\n    processing_days = as.numeric(\n      reimbursement_date - declaration_date\n    ),\n    # Fiscal year (if July-June)\n    fiscal_year = ifelse(month &gt;= 7, year + 1, year)\n  ) %&gt;%\n  select(firm_id, declaration_date, year, quarter, processing_days, fiscal_year)\n\nhead(vat_with_dates, 5)\n\n     firm_id declaration_date  year quarter processing_days fiscal_year\n      &lt;char&gt;           &lt;POSc&gt; &lt;num&gt;   &lt;int&gt;           &lt;num&gt;       &lt;num&gt;\n1: FIRM_0096       2023-01-31  2023       1        28857600        2023\n2: FIRM_0081       2022-05-31  2022       2       -26265600        2022\n3: FIRM_0024       2023-03-31  2023       1        15811200        2023\n4: FIRM_0091       2023-08-31  2023       3       -55209600        2024\n5: FIRM_0014       2023-09-30  2023       3       -55123200        2024"
+  },
+  {
+    "objectID": "3_data_wrangling.html#aggregation-from-transactions-to-insights",
+    "href": "3_data_wrangling.html#aggregation-from-transactions-to-insights",
+    "title": "Data Wrangling with dplyr",
+    "section": "Aggregation: From Transactions to Insights",
+    "text": "Aggregation: From Transactions to Insights\nQuestion: What’s the total VAT collection by year?\n\nyearly_summary &lt;- panel_vat %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  group_by(year) %&gt;%\n  summarize(\n    n_declarations = n(),\n    total_outputs = sum(vat_outputs),\n    total_inputs = sum(vat_inputs),\n    net_vat_base = sum(vat_outputs - vat_inputs),\n    implied_collection = net_vat_base * 0.18\n  )\n\nyearly_summary\n\n# A tibble: 3 × 6\n   year n_declarations total_outputs total_inputs net_vat_base\n  &lt;dbl&gt;          &lt;int&gt;         &lt;int&gt;        &lt;int&gt;        &lt;int&gt;\n1  2021            329       8582818      8373297       209521\n2  2022            332       8436159      8581657      -145498\n3  2023            339       8864270      8332259       532011\n# ℹ 1 more variable: implied_collection &lt;dbl&gt;"
+  },
+  {
+    "objectID": "3_data_wrangling.html#the-group-by-magic",
+    "href": "3_data_wrangling.html#the-group-by-magic",
+    "title": "Data Wrangling with dplyr",
+    "section": "The Group-By Magic ✨",
+    "text": "The Group-By Magic ✨\nWithout grouping:\n\npanel_vat %&gt;%\n  summarize(avg_outputs = mean(vat_outputs))\n\n  avg_outputs\n1    25883.25\n\n\n. . .\nWith grouping - The real power!\n\npanel_vat %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  group_by(year) %&gt;%\n  summarize(avg_outputs = mean(vat_outputs))\n\n# A tibble: 3 × 2\n   year avg_outputs\n  &lt;dbl&gt;       &lt;dbl&gt;\n1  2021      26088.\n2  2022      25410.\n3  2023      26148.\n\n\n. . .\n\n\n\n\n\n\nImportant\n\n\ngroup_by() splits your data into groups, and subsequent operations are performed within each group!"
+  },
+  {
+    "objectID": "3_data_wrangling.html#a-real-analysis-finding-tax-gaps",
+    "href": "3_data_wrangling.html#a-real-analysis-finding-tax-gaps",
+    "title": "Data Wrangling with dplyr",
+    "section": "A Real Analysis: Finding Tax Gaps",
+    "text": "A Real Analysis: Finding Tax Gaps\nLet’s identify potential compliance issues:\n\n# Comprehensive compliance analysis\ncompliance_analysis &lt;- panel_vat %&gt;%\n  # Calculate key metrics\n  mutate(\n    net_base = vat_outputs - vat_inputs,\n    input_ratio = vat_inputs / vat_outputs,\n    year = year(declaration_date)\n  ) %&gt;%\n  # Group by firm and year\n  group_by(firm_id, year) %&gt;%\n  # Calculate firm-year statistics\n  summarize(\n    declarations = n(),\n    avg_net_base = mean(net_base),\n    avg_input_ratio = mean(input_ratio),\n    volatility = sd(net_base),\n    .groups = \"drop\"\n  ) %&gt;%\n  # Flag suspicious patterns\n  mutate(\n    suspicious = avg_input_ratio &gt; 0.95 | volatility &gt; 50000\n  )\n\n# How many suspicious cases?\nsum(compliance_analysis$suspicious)\n\n[1] NA"
+  },
+  {
+    "objectID": "3_data_wrangling.html#joining-the-dots-preparing-for-integration",
+    "href": "3_data_wrangling.html#joining-the-dots-preparing-for-integration",
+    "title": "Data Wrangling with dplyr",
+    "section": "Joining the Dots: Preparing for Integration",
+    "text": "Joining the Dots: Preparing for Integration\nCheck which firms appear across datasets:\n\n# Get unique firms from each dataset\nvat_firms &lt;- unique(panel_vat$firm_id)\ncit_firms &lt;- unique(panel_cit$firm_id)\nchar_firms &lt;- unique(dt_firms$firm_id)\n\n# Create a summary\noverlap_summary &lt;- tribble(\n  ~Dataset, ~`Number of Firms`,\n  \"VAT Declarations\", length(vat_firms),\n  \"CIT Declarations\", length(cit_firms),\n  \"Firm Characteristics\", length(char_firms),\n  \"In Both VAT & CIT\", length(intersect(vat_firms, cit_firms)),\n  \"In All Three\", length(Reduce(intersect, list(vat_firms, cit_firms, char_firms)))\n)\n\noverlap_summary %&gt;%\n  kable(format = \"html\") %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\"), \n                full_width = FALSE, font_size = 16)\n\n\n\n\nDataset\nNumber of Firms\n\n\n\n\nVAT Declarations\n100\n\n\nCIT Declarations\n100\n\n\nFirm Characteristics\n100\n\n\nIn Both VAT & CIT\n100\n\n\nIn All Three\n100"
+  },
+  {
+    "objectID": "3_data_wrangling.html#exercise-build-a-taxpayer-risk-score",
+    "href": "3_data_wrangling.html#exercise-build-a-taxpayer-risk-score",
+    "title": "Data Wrangling with dplyr",
+    "section": "Exercise: Build a Taxpayer Risk Score",
+    "text": "Exercise: Build a Taxpayer Risk Score\n −+ 15:00 \nCreate a risk scoring system using VAT data:\n\nCalculate for each firm:\n\nAverage input-to-output ratio\nNumber of late reimbursements (reimbursement &gt; 90 days after declaration)\nCoefficient of variation in outputs (sd/mean)\n\nCreate risk flags:\n\nHigh input ratio (&gt;0.9)\nFrequent late reimbursements (&gt;50%)\nHigh volatility (CV &gt; 0.5)\n\nAssign risk score: 1 point per flag\nShow top 10 riskiest firms\n\n\n# Your code here:\nrisk_scores &lt;- panel_vat %&gt;%\n  mutate(\n    # Calculate metrics\n    \n  ) %&gt;%\n  group_by(____) %&gt;%\n  summarize(\n    # Aggregate metrics\n    \n  ) %&gt;%\n  mutate(\n    # Create risk flags and score\n    \n  ) %&gt;%\n  # Get top 10"
+  },
+  {
+    "objectID": "3_data_wrangling.html#exercise-solution",
+    "href": "3_data_wrangling.html#exercise-solution",
+    "title": "Data Wrangling with dplyr",
+    "section": "Exercise Solution",
+    "text": "Exercise Solution\n\nrisk_scores &lt;- panel_vat %&gt;%\n  mutate(\n    input_ratio = vat_inputs / vat_outputs,\n    processing_days = as.numeric(reimbursement_date - declaration_date),\n    late_reimbursement = processing_days &gt; 90\n  ) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    avg_input_ratio = mean(input_ratio, na.rm = TRUE),\n    pct_late_reimb = mean(late_reimbursement, na.rm = TRUE) * 100,\n    avg_outputs = mean(vat_outputs, na.rm = TRUE),\n    sd_outputs = sd(vat_outputs, na.rm = TRUE),\n    cv_outputs = sd_outputs / avg_outputs\n  ) %&gt;%\n  mutate(\n    flag_high_input = avg_input_ratio &gt; 0.9,\n    flag_late_reimb = pct_late_reimb &gt; 50,\n    flag_volatility = cv_outputs &gt; 0.5,\n    risk_score = flag_high_input + flag_late_reimb + flag_volatility\n  ) %&gt;%\n  arrange(desc(risk_score), desc(avg_outputs)) %&gt;%\n  slice_head(n = 10)\n\nrisk_scores %&gt;%\n  select(firm_id, risk_score, avg_input_ratio, pct_late_reimb, cv_outputs) %&gt;%\n  kable(format = \"html\", digits = 2) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\"), font_size = 14)\n\n\n\n\nfirm_id\nrisk_score\navg_input_ratio\npct_late_reimb\ncv_outputs\n\n\n\n\nFIRM_0078\n3\n1.37\n60.00\n0.58\n\n\nFIRM_0075\n3\n1.06\n57.14\n0.51\n\n\nFIRM_0030\n3\n1.56\n60.00\n0.52\n\n\nFIRM_0082\n3\n5.06\n60.00\n0.65\n\n\nFIRM_0099\n3\n2.61\n57.14\n0.55\n\n\nFIRM_0054\n3\n1.17\n55.56\n0.51\n\n\nFIRM_0009\n3\n1.09\n71.43\n0.56\n\n\nFIRM_0011\n3\n1.93\n69.23\n0.68\n\n\nFIRM_0096\n3\n1.27\n57.89\n0.53\n\n\nFIRM_0050\n3\n2.05\n63.64\n0.54"
+  },
+  {
+    "objectID": "3_data_wrangling.html#common-patterns-in-tax-data-analysis",
+    "href": "3_data_wrangling.html#common-patterns-in-tax-data-analysis",
+    "title": "Data Wrangling with dplyr",
+    "section": "Common Patterns in Tax Data Analysis",
+    "text": "Common Patterns in Tax Data Analysis\n\nTime TrendsSector AnalysisCompliance Metrics\n\n\n\n# Monthly collection trends\npanel_vat %&gt;%\n  mutate(month = floor_date(declaration_date, \"month\")) %&gt;%\n  group_by(month) %&gt;%\n  summarize(\n    total_base = sum(vat_outputs - vat_inputs),\n    n_filings = n()\n  ) %&gt;%\n  slice_head(n = 6)\n\n# A tibble: 6 × 3\n  month               total_base n_filings\n  &lt;dttm&gt;                   &lt;int&gt;     &lt;int&gt;\n1 2021-01-01 00:00:00      78645        20\n2 2021-02-01 00:00:00    -114646        22\n3 2021-03-01 00:00:00      -1345        30\n4 2021-04-01 00:00:00     -89572        28\n5 2021-05-01 00:00:00     100723        26\n6 2021-06-01 00:00:00     177305        23\n\n\n\n\n\n# Join with firm characteristics for sector analysis\nmanufacturing_firms &lt;- dt_firms %&gt;%\n  filter(industry == \"Manufacturing\") %&gt;%\n  pull(firm_id)\n\npanel_vat %&gt;%\n  filter(firm_id %in% manufacturing_firms) %&gt;%\n  summarize(\n    total_vat_base = sum(vat_outputs - vat_inputs),\n    avg_transaction = mean(vat_outputs)\n  )\n\n  total_vat_base avg_transaction\n1         675013        26346.15\n\n\n\n\n\n# Late filing analysis\npanel_vat %&gt;%\n  mutate(\n    days_to_reimb = as.numeric(reimbursement_date - declaration_date),\n    late = days_to_reimb &gt; 60\n  ) %&gt;%\n  summarize(\n    late_filing_rate = mean(late, na.rm = TRUE) * 100,\n    avg_days = mean(days_to_reimb, na.rm = TRUE)\n  )\n\n  late_filing_rate avg_days\n1             52.7  2877984"
+  },
+  {
+    "objectID": "3_data_wrangling.html#best-practices-for-tax-data",
+    "href": "3_data_wrangling.html#best-practices-for-tax-data",
+    "title": "Data Wrangling with dplyr",
+    "section": "Best Practices for Tax Data ⭐",
+    "text": "Best Practices for Tax Data ⭐\n1. Always validate your calculations\n\n# Check: Do input ratios make sense?\npanel_vat %&gt;%\n  mutate(input_ratio = vat_inputs / vat_outputs) %&gt;%\n  summarize(\n    min_ratio = min(input_ratio),\n    max_ratio = max(input_ratio),\n    ratios_above_1 = sum(input_ratio &gt; 1)\n  )\n\n   min_ratio max_ratio ratios_above_1\n1 0.02402254  39.05375            491\n\n\n. . .\n2. Handle missing values explicitly\n\n# Always use na.rm = TRUE in aggregations\npanel_vat %&gt;%\n  summarize(\n    with_na = mean(vat_outputs),        # Dangerous!\n    without_na = mean(vat_outputs, na.rm = TRUE)  # Safe!\n  )\n\n   with_na without_na\n1 25883.25   25883.25"
+  },
+  {
+    "objectID": "3_data_wrangling.html#advanced-tips-window-functions",
+    "href": "3_data_wrangling.html#advanced-tips-window-functions",
+    "title": "Data Wrangling with dplyr",
+    "section": "Advanced Tips: Window Functions",
+    "text": "Advanced Tips: Window Functions\nRanking within groups:\n\n# Top 3 taxpayers by month\ntop_monthly &lt;- panel_vat %&gt;%\n  mutate(\n    month = floor_date(declaration_date, \"month\"),\n    net_base = vat_outputs - vat_inputs\n  ) %&gt;%\n  group_by(month) %&gt;%\n  mutate(rank = dense_rank(desc(net_base))) %&gt;%\n  filter(rank &lt;= 3) %&gt;%\n  select(month, firm_id, net_base, rank) %&gt;%\n  arrange(month, rank)\n\nhead(top_monthly, 9)\n\n# A tibble: 9 × 4\n# Groups:   month [3]\n  month               firm_id   net_base  rank\n  &lt;dttm&gt;              &lt;chr&gt;        &lt;int&gt; &lt;int&gt;\n1 2021-01-01 00:00:00 FIRM_0014    47332     1\n2 2021-01-01 00:00:00 FIRM_0081    37202     2\n3 2021-01-01 00:00:00 FIRM_0074    30202     3\n4 2021-02-01 00:00:00 FIRM_0049    31374     1\n5 2021-02-01 00:00:00 FIRM_0011    13619     2\n6 2021-02-01 00:00:00 FIRM_0010     9682     3\n7 2021-03-01 00:00:00 FIRM_0011    25827     1\n8 2021-03-01 00:00:00 FIRM_0019    25351     2\n9 2021-03-01 00:00:00 FIRM_0064    25136     3"
+  },
+  {
+    "objectID": "3_data_wrangling.html#debugging-your-pipeline",
+    "href": "3_data_wrangling.html#debugging-your-pipeline",
+    "title": "Data Wrangling with dplyr",
+    "section": "Debugging Your Pipeline 🐛",
+    "text": "Debugging Your Pipeline 🐛\nWhen things go wrong, debug step by step:\n\n# Original attempt - something's wrong!\nresult &lt;- panel_vat %&gt;%\n  filter(vat_outputs &gt; 50000) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(avg = mean(vat_outputs))\n\n# Debug by checking each step:\n# Step 1: How many rows after filter?\npanel_vat %&gt;%\n  filter(vat_outputs &gt; 50000) %&gt;%\n  nrow()\n\n[1] 0\n\n# Step 2: Check grouping\npanel_vat %&gt;%\n  filter(vat_outputs &gt; 50000) %&gt;%\n  group_by(firm_id) %&gt;%\n  tally() %&gt;%\n  head()\n\n# A tibble: 0 × 2\n# ℹ 2 variables: firm_id &lt;chr&gt;, n &lt;int&gt;"
+  },
+  {
+    "objectID": "3_data_wrangling.html#performance-matters",
+    "href": "3_data_wrangling.html#performance-matters",
+    "title": "Data Wrangling with dplyr",
+    "section": "Performance Matters! 🚀",
+    "text": "Performance Matters! 🚀\nFor large datasets (&gt;1M rows):\n\n\nOption 1: data.table\n\nlibrary(data.table)\ndt &lt;- as.data.table(panel_vat)\n\n# data.table syntax\ndt[vat_outputs &gt; 50000, \n   .(avg = mean(vat_outputs)), \n   by = firm_id]\n\n\nOption 2: dtplyr\n\nlibrary(dtplyr)\n\n# Use dplyr syntax with data.table speed!\npanel_vat %&gt;%\n  lazy_dt() %&gt;%\n  filter(vat_outputs &gt; 50000) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(avg = mean(vat_outputs)) %&gt;%\n  as_tibble()"
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-data-wrangling-toolkit",
+    "href": "3_data_wrangling.html#your-data-wrangling-toolkit",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Data Wrangling Toolkit 🧰",
+    "text": "Your Data Wrangling Toolkit 🧰\nCore Verbs Recap:\n\n\n\n\n\nVerb\nWhat_it_does\nReal_Example\n\n\n\n\nselect()\nPick columns\nGet taxpayer ID and amounts\n\n\nfilter()\nPick rows\nFind large taxpayers\n\n\nmutate()\nAdd columns\nCalculate tax rates\n\n\nsummarize()\nAggregate\nTotal tax by region\n\n\ngroup_by()\nSplit data\nAnalyze by sector\n\n\narrange()\nSort rows\nRank by tax paid"
+  },
+  {
+    "objectID": "3_data_wrangling.html#whats-next",
+    "href": "3_data_wrangling.html#whats-next",
+    "title": "Data Wrangling with dplyr",
+    "section": "What’s Next? 🔮",
+    "text": "What’s Next? 🔮\nModule 4: Data Visualization with ggplot2\nWe’ll learn to: - Transform your wrangled data into insights - Create publication-ready visualizations - Build dashboards for tax monitoring - Tell stories with data\n. . .\nBut first… Practice! 💪\nTry the additional exercises in Exercises/data_wrangling_practice.R"
+  },
+  {
+    "objectID": "3_data_wrangling.html#final-challenge",
+    "href": "3_data_wrangling.html#final-challenge",
+    "title": "Data Wrangling with dplyr",
+    "section": "Final Challenge",
+    "text": "Final Challenge\n −+ 05:00 \nUsing all three datasets, answer: “What’s the average effective CIT rate for large manufacturing firms?”\nHints: - Large = more than 100 employees - Manufacturing firms from dt_firms - Effective rate from panel_cit - You’ll need to identify common firms\n\n# Your multi-dataset analysis here:\n\n\nSolution preview:\n\n# We'll explore joins in detail next module!\n# For now, here's the approach:\n\n# Step 1: Get large manufacturing firms\nlarge_manufacturing &lt;- dt_firms %&gt;%\n  filter(industry == \"Manufacturing\", \n         number_of_employees &gt; 100) %&gt;%\n  pull(firm_id)\n\n# Step 2: Calculate effective rates for these firms\npanel_cit %&gt;%\n  filter(firm_id %in% large_manufacturing,\n         taxable_income &gt; 0) %&gt;%\n  mutate(effective_rate = (tax_paid / taxable_income) * 100) %&gt;%\n  summarize(\n    avg_effective_rate = mean(effective_rate, na.rm = TRUE),\n    n_firms = n_distinct(firm_id)\n  )\n\n  avg_effective_rate n_firms\n1           20.43362      48"
+  }
+]

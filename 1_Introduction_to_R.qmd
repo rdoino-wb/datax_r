@@ -1,0 +1,461 @@
+---
+title: "Introduction to `R`: the basics"
+subtitle: "`R` Training"
+institute: The World Bank Group - DataTax
+date: today
+author: ""
+date-format: "dddd, [the] D[<sup style='font-size:65%;font-style:italic;'>th</sup>] [of] MMMM, YYYY"
+output-dir: "_site/"
+format:
+  revealjs:
+    theme: _extensions/dime-worldbank/dime/dime.scss
+    # Output file
+    output-file: 1_introduction_to_r.html
+    code-line-numbers: true
+    # Table of Contents
+    toc: false
+    toc_float: false
+    toc-depth: 1
+    toc-location: left
+    toc-title: "Agenda"
+    # Generate a self contained file
+    self-contained: true
+    self-contained-math: true
+    # Turn preview links within the presentation off (all links open in a new tab)
+    preview-links: true
+    auto-animate: true
+    # Logo and footer options
+    logo: "logos/WB-DEC-Impact-horizontal-RGB-high.png"
+    footer: "Code available on [GitHub](https://github.com/rdoino-wb/data_analysis_DataTable)."
+---
+
+```{r set-up}
+
+library(emo)
+
+```
+
+------------------------------------------------------------------------
+
+## Welcome to the "Introduction to R Course"! {.center}
+
+. . . 
+
+::: incremental
+
+- We will learn to use the `R` programming language!
+
+- Using administrative data familiar to tax administrations. 
+
+::: 
+
+. . . 
+
+**Some pre-requirements**
+
+. . .
+
+`r emo::ji("cross_mark")` The training does not require any background in statistical programming.
+
+. . . 
+
+`r emo::ji("white_check_mark")` A computer with R and RStudio installed is required to complete the exercises.
+
+. . . 
+
+`r emo::ji("white_check_mark")` Internet connection is required to download training materials.
+
+------------------------------------------------------------------------
+
+## What is `R`? {.center}
+
+. . . 
+
+**`R`** is a **programming language** with powerful statistical and graphic capabilities.
+
+. . . 
+
+![](images/data_cooking_1.png){height="auto" width="auto" fig-align="center"}
+
+. . . 
+
+![](images/data_cooking_2.png){height="auto" width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+### Why should we use `R`? 
+
+1. **`R`** is very **flexible** and **powerful—adaptable** to nearly any task, (data cleaning, data visualization, econometrics, spatial data analysis, machine learning, web scraping, etc.)
+
+![](images/base.png){height="auto" width="50%" fig-align="center"}
+
+2.  **`R`** is **open source** and **free** to use - allowing both you and your instituion to save money!
+
+------------------------------------------------------------------------
+
+:::::: {columns}
+:::: {.column width="30%"}
+3. **`R`** has been growing rapidly in **popularity**.
+::::
+
+::: {.column width="70%" fig-align="center"}
+![Source: [PYPL Index, 2024](https://pypl.github.io/PYPL.html)](images/ranking_r.png){width="65%"}
+:::
+::::::
+
+. . . 
+
+4.  **`R`** offers a **great interface** - **`RStudio`**.
+
+::: center
+![](images/R_vs_RStudio_1.png){width="60%" fig-align="center"}
+:::
+
+------------------------------------------------------------------------
+
+## And what about `Excel`? {.center}
+
+. . .
+
+:::::: {columns}
+:::: {.column width="40%" fig-align="center"}
+`r emo::ji("white_check_mark")` Easy to use. 
+
+`r emo::ji("cross_mark")` Only good for small datasets.
+
+`r emo::ji("cross_mark")` We don't keep track of what we do. 
+
+`r emo::ji("cross_mark")` Not straightforward to merge data. 
+
+`r emo::ji("cross_mark")` And the list goes on...
+::::
+
+::: {.column width="55%" fig-align="right"}
+![](images/excel.png){width="auto"}
+:::
+::::::
+
+------------------------------------------------------------------------
+
+## And what about `STATA`? {.center}
+
+. . . 
+
+:::::: {columns}
+:::: {.column width="40%" fig-align="center"}
+`r emo::ji("white_check_mark")` Stata is widely used in economics.
+
+`r emo::ji("white_check_mark")` Easy to learn. 
+
+`r emo::ji("cross_mark")` Only good for small datasets.
+
+`r emo::ji("cross_mark")` Expensive! 
+
+`r emo::ji("cross_mark")` Lack of flexibility... do you hate `keep`, `preserve`, and `restore` too?
+
+::::
+
+::: {.column width="55%" fig-align="right"}
+![](images/stata.png){width="auto"}
+:::
+::::::
+
+# Start your `RStudio`!
+
+------------------------------------------------------------------------
+
+## You should see this! {.center}
+
+![](images/rstudio-panels.png){width="auto" fig-align="center"}
+
+If you don't, make sure you opened `RStudio` and not `R`!
+
+------------------------------------------------------------------------
+
+## Console {.center}
+
+![](images/rstudio-example.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+**Let's begin by writing your R scripts (source code) in the Source pane.**
+
+![](images/rstudio_2.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+**You can use the menubar or Ctrl + Shift + N to create new R scripts.**
+
+![](images/rstudio_3.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+**Scripts help us document and organize the steps we want to perform.**
+
+![](images/rstudio_4.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+**To run a command, type it in the Source pane and press Ctrl+Enter (Windows) to execute it in the Console.**
+
+![](images/rstudio_5.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+**The result will appear in the Console pane (bottom-left panel).**
+
+![](images/rstudio_6.png){width="auto" fig-align="center"}
+
+------------------------------------------------------------------------
+
+**The Environment pane displays all the objects you’ve created during your session.**
+
+![](images/rstudio_7.png){width="auto" fig-align="center"}
+
+# Using R as a Calculator
+
+------------------------------------------------------------------------
+
+## Basic Math Operations
+
+A simple sum:
+
+```{r math1, echo = TRUE, eval = TRUE}
+99 + 1
+```
+
+. . .
+
+More complex calculations:
+
+```{r math2, echo = TRUE, eval = TRUE}
+99 + 1 * 2
+```
+
+. . .
+
+Following mathematical rules:
+
+```{r math3, echo = TRUE, eval = TRUE}
+(99 + 1) * 2
+```
+
+. . .
+
+Scientific notation:
+
+```{r math4, echo = TRUE, eval = TRUE}
+2 / 100000
+```
+
+```{r math5, echo = TRUE, eval = TRUE}
+5e3
+```
+
+------------------------------------------------------------------------
+
+## Overview of Data Types
+
+-   **Numeric values** : numbers, as shown in previous examples.
+
+. . .
+
+-   **Character Values** : Always quoted, e.g., "text".
+
+. . .
+
+-   **Logical Values** : Also known as Boolean, representing `TRUE` or `FALSE`
+
+```{r operators, echo = TRUE, eval = TRUE}
+10  > 9
+10 == 9
+10 != 9
+10 > 9 & 9 < 10
+10 > 9 | 9 > 10
+9 %in% 1:10
+```
+
+------------------------------------------------------------------------
+
+## Importance of Assigning Results to Objects
+
+In R, it's important to assign results to objects to store the values and use them later in your analysis. Think of an object as a named storage location for your data or calculations.
+
+. . .
+
+Consider this calculation:
+
+```{r math6, echo = TRUE, eval = TRUE}
+sum_result = 99 + 1
+```
+
+. . .
+
+Here, we assign the result of 99 + 1 to an object called sum_result using the assignment operator `=` (some people use \<- ... the community discuss about this [here](https://www.separatinghyperplanes.com/2018/02/why-you-should-use-and-never.html) and [here](https://github.com/geocompx/geocompr/issues/319#issuecomment-427376764)).
+
+. . .
+
+Now, whenever you need the value, you can just use sum_result instead of retyping 99 + 1.
+
+. . .
+
+::: callout-note
+In coding, it's good practice to use only lower case and "\_" or "." for names (`snake_case`).
+:::
+
+------------------------------------------------------------------------
+
+## Mathematical Functions
+
+In economics, we frequently use logarithms:
+
+```{r math7, echo = TRUE, eval = TRUE}
+log(1)
+```
+
+. . .
+
+*R has a large collection of built-in functions, called like this:*
+
+::: center
+`function_name(argument1 = value1, argument2 = value2, ...)`
+:::
+
+. . .
+
+For example, if you want to calculate the natural logarithm of a number...
+
+```{r math8, echo = TRUE, eval = TRUE}
+log(10)
+```
+
+. . .
+
+Arguments can also have names, which makes it easy to understand what each input does.
+
+```{r math9, echo = TRUE, eval = TRUE}
+round(3.14159, digits = 2)
+```
+
+# Functions in R and beyond
+
+## Functions Are Our Tool Box `r emo::ji("toolbox")`
+
+::::: columns
+::: {.column width="15%"}
+**help()**
+:::
+
+::: {.column width="85%"}
+The `help()` function is like R's built-in manual. Whenever you're unsure about how a function works or what arguments it accepts, you can use `help()` to get detailed information.
+
+-   **Example**: To learn about the `mean()` function, type `help(mean)` or simply `?mean` in the R console.
+
+![](images/help.png){height="auto" width="auto"}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Functions Are Our Tool Box `r emo::ji("toolbox")`
+
+::::: columns
+::: {.column width="15%"}
+**help()**
+
+**example()**
+:::
+
+::: {.column width="85%"}
+While `help()` provides information about a function, `example()` shows you how to use it with real code snippets.
+
+-   **Example**: Type `example(sum)` in the R console to see various ways to use the `sum()` function for creating graphs.
+
+```{r example}
+example(sum)
+```
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Functions Are Our Tool Box `r emo::ji("toolbox")`
+
+::::: columns
+::: {.column width="15%"}
+**help()**
+
+**example()**
+
+**library()**
+:::
+
+::: {.column width="85%"}
+R's functionality can be extended with packages—collections of functions and datasets created by the community.
+
+-   **Installing Packages**: Before using a package, install it using `install.packages("packageName")`.
+-   **Loading Packages**: Use `library(packageName)` to load the package into your session.
+-   **Example**: To use the `ggplot2` package for advanced plotting:
+
+``` r
+install.packages("ggplot2")   # Install (only needed once)
+library(ggplot2)              # Load the package
+```
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Exercise 1 (`r emo::ji("clock")` 10 mins):
+
+1.  **Creating a Sequence:**
+    -   Create a sequence of numbers that are multiples of 5, starting from 0 and ending at 50.
+    -   *Hint*: Use the `seq()` function.
+2.  **Compute the Mean:**
+    -   Calculate the mean of the sequence you created in step 2.
+3.  **Logical Test and Conditional Computation:**
+    -   Check if all elements in your sequence are greater than zero.
+    -   Then compute the mean around this new object with only logical elements.
+4.  **Adding Comments:**
+    -   Add comments to your code to explain what each step is doing.
+    -   *Hint*: Use `#` at the beginning of a line to make it a comment.
+
+------------------------------------------------------------------------
+
+## Solutions
+
+```{r exercise_1, echo = TRUE, eval = FALSE}
+
+# Step 1: Creating a Sequence
+# Create a sequence of numbers that are multiples of 5, from 0 to 50.
+# Use the seq() function to generate the sequence and assign it to an object named 'sequence'.
+sequence <- seq(from = 0, to = 50, by = 5)
+
+# Print the sequence to verify it was created correctly.
+print(sequence) # Output: [1] 0 5 10 15 20 25 30 35 40 45 50
+
+
+# Step 2: Compute the Mean
+# Calculate the mean of the sequence created above using the mean() function.
+mean_sequence <- mean(sequence)
+
+# Print the mean to verify the calculation.
+print(mean_sequence) # Output: [1] 27.5
+
+
+# Step 3: Logical Test and Conditional Computation
+# Check if all elements in the sequence are greater than zero.
+# Use the ">" operator and assign the result to a new object named 'logical_test'.
+logical_test <- sequence > 0
+
+# Print the logical test result to see which elements satisfy the condition.
+print(logical_test) # Output: [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+
+# Compute the mean of the logical test result.
+# This will treat TRUE as 1 and FALSE as 0.
+mean_logical <- mean(logical_test)
+
+# Print the mean of the logical test result.
+print(mean_logical) # Output: [1] 0.9090909
+
+```

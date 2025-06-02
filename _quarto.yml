@@ -1,0 +1,43 @@
+project:
+  type: website
+
+website:
+  title: "DataTax R Course"
+  favicon: /logos/favicon.html
+  sidebar:
+    style: "docked"
+    contents:
+      - section: "Lessons:"
+        contents:
+          - text: "1. Introduction to R"
+            href: 1_introduction_to_r.html  # `.html` for web link
+          - text: "2. Data Import/Export"
+            href: 2_import_export.html 
+
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+    logo: /logos/logo.png
+    background: "#FFFFFF"
+    foreground: "#4090BE"
+    right:
+      - menu:
+          - text: "English"
+            href: /en/index_en.html
+          - text: "Español"
+            href: /es/index_es.html
+          - text: "Português"
+            href: /pt/index_pt.html
+          - text: "Français"
+            href: /fr/index_fr.html
+        text: "Language 🌐"
+    
+format:
+  html:
+    theme: cerulan
+    linkcolor: "#4090BE"
+    css: style.scss
+    toc: true
+    highlight-style: github
+
