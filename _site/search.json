@@ -752,35 +752,35 @@
     "href": "3_data_wrangling.html#handling-missing-values",
     "title": "Data Wrangling with dplyr",
     "section": "Handling Missing Values",
-    "text": "Handling Missing Values\n\n# Check for missing values\npanel_vat %&gt;%\n  summarize(across(everything(), ~ sum(is.na(.x)))) %&gt;%\n  pivot_longer(everything(), \n               names_to = \"column\", \n               values_to = \"missing_count\") %&gt;%\n  filter(missing_count &gt; 0)\n\n# A tibble: 0 × 2\n# ℹ 2 variables: column &lt;chr&gt;, missing_count &lt;int&gt;\n\n# Handle missing values in CIT calculations\ncit_summary &lt;- panel_cit %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  group_by(year) %&gt;%\n  summarize(\n    total_with_na = sum(tax_paid),  # Will return NA if any NA exists\n    total_no_na = sum(tax_paid, na.rm = TRUE),  # Removes NA values\n    n_missing = sum(is.na(tax_paid))\n  )"
+    "text": "Handling Missing Values\nAlways be explicit about NA handling:\n\n# Check for missing values\nna_summary &lt;- panel_cit %&gt;%\n  summarize(\n    missing_tax_paid = sum(is.na(tax_paid)),\n    missing_adjustments = sum(is.na(adjustments)),\n    missing_income = sum(is.na(taxable_income))\n  )\n\nna_summary\n\n  missing_tax_paid missing_adjustments missing_income\n1                0                   0              0\n\n\n. . .\n\n# Compare with and without na.rm\npanel_cit %&gt;%\n  summarize(\n    mean_with_na = mean(adjustments),  # Returns NA if any NA exists\n    mean_without_na = mean(adjustments, na.rm = TRUE)  # Ignores NA values\n  )\n\n  mean_with_na mean_without_na\n1       39.081          39.081"
   },
   {
     "objectID": "3_data_wrangling.html#cross-dataset-analysis-preview",
     "href": "3_data_wrangling.html#cross-dataset-analysis-preview",
     "title": "Data Wrangling with dplyr",
     "section": "Cross-Dataset Analysis Preview",
-    "text": "Cross-Dataset Analysis Preview\nLet’s check which firms appear across datasets:\n\n# Firms in VAT data\nvat_firms &lt;- unique(panel_vat$firm_id)\n\n# Firms in CIT data  \ncit_firms &lt;- unique(panel_cit$firm_id)\n\n# Firms in characteristics data\nchar_firms &lt;- unique(dt_firms$firm_id)\n\n# Quick overlap analysis\ncat(\"Firms in VAT data:\", length(vat_firms), \"\\n\")\n\nFirms in VAT data: 100 \n\ncat(\"Firms in CIT data:\", length(cit_firms), \"\\n\")\n\nFirms in CIT data: 100 \n\ncat(\"Firms in characteristics:\", length(char_firms), \"\\n\")\n\nFirms in characteristics: 100 \n\ncat(\"Firms in both VAT and CIT:\", length(intersect(vat_firms, cit_firms)), \"\\n\")\n\nFirms in both VAT and CIT: 100 \n\ncat(\"Firms in all three datasets:\", \n    length(Reduce(intersect, list(vat_firms, cit_firms, char_firms))), \"\\n\")\n\nFirms in all three datasets: 100"
+    "text": "Cross-Dataset Analysis Preview\nWhich firms appear in all datasets?\n\n# Get unique firms from each dataset\nvat_firms &lt;- unique(panel_vat$firm_id)\ncit_firms &lt;- unique(panel_cit$firm_id)\nchar_firms &lt;- unique(dt_firms$firm_id)\n\n# Find overlaps\nall_datasets &lt;- Reduce(intersect, list(vat_firms, cit_firms, char_firms))\n\n# Summary\noverlap_summary &lt;- tribble(\n  ~Category, ~Count,\n  \"Total VAT filers\", length(vat_firms),\n  \"Total CIT filers\", length(cit_firms),\n  \"Total registered firms\", length(char_firms),\n  \"File both VAT & CIT\", length(intersect(vat_firms, cit_firms)),\n  \"In all three datasets\", length(all_datasets)\n)\n\noverlap_summary %&gt;%\n  kable(format = \"html\") %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\"), \n                full_width = FALSE, font_size = 16)\n\n\n\n\nCategory\nCount\n\n\n\n\nTotal VAT filers\n100\n\n\nTotal CIT filers\n100\n\n\nTotal registered firms\n100\n\n\nFile both VAT & CIT\n100\n\n\nIn all three datasets\n100"
   },
   {
     "objectID": "3_data_wrangling.html#performance-tips",
     "href": "3_data_wrangling.html#performance-tips",
     "title": "Data Wrangling with dplyr",
     "section": "Performance Tips 🚀",
-    "text": "Performance Tips 🚀\n\n\nUse data.table for large datasets (&gt;1M rows)\n# Convert to data.table for speed\nlibrary(data.table)\ndt_vat &lt;- as.data.table(panel_vat)\nFilter early in your pipeline to reduce data size\nAvoid unnecessary grouping - ungroup when done:\ndata %&gt;% \n  group_by(category) %&gt;%\n  summarize(mean = mean(value)) %&gt;%\n  ungroup()  # Important!\nUse glimpse() frequently to check your transformations"
+    "text": "Performance Tips 🚀\nFor large datasets (millions of rows):\n\n\nUse data.table\n\nlibrary(data.table)\ndt &lt;- as.data.table(panel_vat)\n\n# Fast aggregation\ndt[, .(total = sum(vat_outputs)), \n   by = firm_id]\n\n\nOr dtplyr\n\nlibrary(dtplyr)\n\n# dplyr syntax, data.table speed\npanel_vat %&gt;%\n  lazy_dt() %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(total = sum(vat_outputs)) %&gt;%\n  as_tibble()\n\n\n. . .\n\n\n\n\n\n\nTip\n\n\nFor datasets under 1 million rows, regular dplyr is perfectly fine!"
   },
   {
     "objectID": "3_data_wrangling.html#common-pitfalls-to-avoid",
     "href": "3_data_wrangling.html#common-pitfalls-to-avoid",
     "title": "Data Wrangling with dplyr",
     "section": "Common Pitfalls to Avoid ⚠️",
-    "text": "Common Pitfalls to Avoid ⚠️\n\n\nForgetting na.rm = TRUE in summary functions\nNot ungrouping after group operations\nUsing == with NA values (use is.na() instead)\nOverwriting your original data (always create new objects)\nComplex operations in one step (break them down!)"
+    "text": "Common Pitfalls to Avoid ⚠️\n1. Forgetting to ungroup\n\n# Bad - stays grouped\ngrouped_data &lt;- data %&gt;%\n  group_by(category) %&gt;%\n  summarize(total = sum(value))\n\n# Good - explicitly ungroup\nclean_data &lt;- data %&gt;%\n  group_by(category) %&gt;%\n  summarize(total = sum(value)) %&gt;%\n  ungroup()  # or use .groups = \"drop\"\n\n2. Overwriting original data\n\n# Bad\ndata &lt;- data %&gt;% filter(value &gt; 0)  # Lost original!\n\n# Good\ndata_filtered &lt;- data %&gt;% filter(value &gt; 0)  # Original preserved"
   },
   {
     "objectID": "3_data_wrangling.html#key-takeaways",
     "href": "3_data_wrangling.html#key-takeaways",
     "title": "Data Wrangling with dplyr",
     "section": "Key Takeaways 🔑",
-    "text": "Key Takeaways 🔑\n\n\nThink in verbs: Each dplyr function does ONE thing well\nUse the pipe: Makes your code readable and debuggable\nStart simple: Build complex analyses step by step\nValidate often: Check your assumptions with summaries\nGroup wisely: Remember to ungroup() when done\n\n\n\n\n\n\n\n\n\nPro tip\n\n\nThe best data wranglers aren’t the ones who write complex code - they’re the ones who write code that others (including future them) can understand!"
+    "text": "Key Takeaways 🔑\nYou’ve learned to:\n\n\nAnswer questions quickly - No more Excel marathons!\nUse the five core verbs:\n\nselect() → Choose columns\nfilter() → Choose rows\nmutate() → Create new variables\nsummarize() + group_by() → Aggregate\narrange() → Sort\n\nChain operations with the pipe %&gt;%\nHandle real tax data efficiently\nCreate reproducible analyses that others can follow"
   },
   {
     "objectID": "3_data_wrangling.html#next-module-preview",
@@ -815,14 +815,14 @@
     "href": "3_data_wrangling.html#the-data-wrangling-journey",
     "title": "Data Wrangling with dplyr",
     "section": "The Data Wrangling Journey",
-    "text": "The Data Wrangling Journey\n\n\n\n\n\ngraph LR\n    A[😱 Messy Data] --&gt; B[🔧 Transform]\n    B --&gt; C[🎯 Clean Data]\n    C --&gt; D[📊 Analysis]\n    \n    style A fill:#ff6b6b,stroke:#c92a2a\n    style B fill:#4dabf7,stroke:#1864ab\n    style C fill:#51cf66,stroke:#2b8a3e\n    style D fill:#ffd43b,stroke:#fab005\n\n\n\n\n\n\n\n\n\nBefore dplyr 😰\n# Which firms have high VAT?\nhigh_vat &lt;- panel_vat[\n  panel_vat$vat_outputs &gt; 40000,\n  c(\"firm_id\", \"vat_outputs\")\n]\n# Now sort... wait, how?\nhigh_vat &lt;- high_vat[\n  order(high_vat$vat_outputs, \n        decreasing = TRUE),\n]\n\nAfter dplyr 😊\n# Clear as natural language!\nhigh_vat &lt;- panel_vat %&gt;%\n  filter(vat_outputs &gt; 40000) %&gt;%\n  select(firm_id, vat_outputs) %&gt;%\n  arrange(desc(vat_outputs))"
+    "text": "The Data Wrangling Journey\n\n\n\n\n\ngraph LR\n    A[😱 Raw Data] --&gt; B[🔧 Transform]\n    B --&gt; C[📊 Answer]\n    \n    style A fill:#ff6b6b,stroke:#c92a2a\n    style B fill:#4dabf7,stroke:#1864ab\n    style C fill:#51cf66,stroke:#2b8a3e\n\n\n\n\n\n\n\n\n\nBefore dplyr 😰\n# Which firms paid most CIT?\ncit_sorted &lt;- panel_cit[\n  order(panel_cit$tax_paid, \n        decreasing = TRUE),\n]\n# Now sum by firm... how?\n# Need loops? 😱\n\nAfter dplyr 😊\n# Clear as day!\npanel_cit %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(total = sum(tax_paid)) %&gt;%\n  arrange(desc(total)) %&gt;%\n  slice_head(n = 5)"
   },
   {
     "objectID": "3_data_wrangling.html#the-grammar-of-data-manipulation",
     "href": "3_data_wrangling.html#the-grammar-of-data-manipulation",
     "title": "Data Wrangling with dplyr",
     "section": "The Grammar of Data Manipulation",
-    "text": "The Grammar of Data Manipulation\n\nThink of data manipulation as writing sentences:\n\n\n\n“Take the VAT data, then filter for large taxpayers, then select key columns, then arrange by amount.”\n\n\n\nEach verb is an action:\n\n\n📝 select()\n\n“I want to see these columns”\n\n\n\n🔍 filter()\n\n“I want to see these rows”\n\n\n\n➕ mutate()\n\n“I want to calculate something new”\n\n\n\n📊 summarize()\n\n“I want to aggregate my data”\n\n\n\n🔢 arrange()\n\n“I want to sort my data”"
+    "text": "The Grammar of Data Manipulation\n\nThink of data manipulation as writing sentences:\n. . .\n\n“Take the CIT data, then group by firm, then sum the tax paid, then arrange by total, then take top 5.”\n\n. . .\nEach verb is an action:\n\n\n📝 select()\n\n“I want to see these columns”\n\n\n\n🔍 filter()\n\n“I want to see these rows”\n\n\n\n➕ mutate()\n\n“I want to calculate something new”\n\n\n\n📊 summarize()\n\n“I want to aggregate my data”\n\n\n\n🔢 arrange()\n\n“I want to sort my data”"
   },
   {
     "objectID": "3_data_wrangling.html#the-pipe-your-new-best-friend",
@@ -927,7 +927,7 @@
     "href": "3_data_wrangling.html#exercise-solution",
     "title": "Data Wrangling with dplyr",
     "section": "Exercise Solution",
-    "text": "Exercise Solution\n\nrisk_scores &lt;- panel_vat %&gt;%\n  mutate(\n    input_ratio = vat_inputs / vat_outputs,\n    processing_days = as.numeric(reimbursement_date - declaration_date),\n    late_reimbursement = processing_days &gt; 90\n  ) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    avg_input_ratio = mean(input_ratio, na.rm = TRUE),\n    pct_late_reimb = mean(late_reimbursement, na.rm = TRUE) * 100,\n    avg_outputs = mean(vat_outputs, na.rm = TRUE),\n    sd_outputs = sd(vat_outputs, na.rm = TRUE),\n    cv_outputs = sd_outputs / avg_outputs\n  ) %&gt;%\n  mutate(\n    flag_high_input = avg_input_ratio &gt; 0.9,\n    flag_late_reimb = pct_late_reimb &gt; 50,\n    flag_volatility = cv_outputs &gt; 0.5,\n    risk_score = flag_high_input + flag_late_reimb + flag_volatility\n  ) %&gt;%\n  arrange(desc(risk_score), desc(avg_outputs)) %&gt;%\n  slice_head(n = 10)\n\nrisk_scores %&gt;%\n  select(firm_id, risk_score, avg_input_ratio, pct_late_reimb, cv_outputs) %&gt;%\n  kable(format = \"html\", digits = 2) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\"), font_size = 14)\n\n\n\n\nfirm_id\nrisk_score\navg_input_ratio\npct_late_reimb\ncv_outputs\n\n\n\n\nFIRM_0078\n3\n1.37\n60.00\n0.58\n\n\nFIRM_0075\n3\n1.06\n57.14\n0.51\n\n\nFIRM_0030\n3\n1.56\n60.00\n0.52\n\n\nFIRM_0082\n3\n5.06\n60.00\n0.65\n\n\nFIRM_0099\n3\n2.61\n57.14\n0.55\n\n\nFIRM_0054\n3\n1.17\n55.56\n0.51\n\n\nFIRM_0009\n3\n1.09\n71.43\n0.56\n\n\nFIRM_0011\n3\n1.93\n69.23\n0.68\n\n\nFIRM_0096\n3\n1.27\n57.89\n0.53\n\n\nFIRM_0050\n3\n2.05\n63.64\n0.54"
+    "text": "Exercise Solution\n\nhigh_risk &lt;- panel_cit %&gt;%\n  # First add calculated fields we need\n  mutate(\n    effective_rate = ifelse(taxable_income &gt; 0, \n                           (tax_paid / taxable_income) * 100, \n                           NA),\n    adjustment_ratio = adjustments / taxable_income\n  ) %&gt;%\n  # Now filter\n  filter(\n    year(declaration_date) == 2023,\n    taxable_income &gt; 50000,\n    (effective_rate &lt; 15 | adjustment_ratio &lt; -0.1)\n  )\n\n# Summary\nhigh_risk %&gt;%\n  summarize(\n    n_firms = n_distinct(firm_id),\n    avg_effective_rate = mean(effective_rate, na.rm = TRUE),\n    total_tax_gap = sum(taxable_income * 0.25 - tax_paid, na.rm = TRUE)\n  )\n\n  n_firms avg_effective_rate total_tax_gap\n1      78           9.420531       3233442"
   },
   {
     "objectID": "3_data_wrangling.html#common-patterns-in-tax-data-analysis",
@@ -969,20 +969,1056 @@
     "href": "3_data_wrangling.html#your-data-wrangling-toolkit",
     "title": "Data Wrangling with dplyr",
     "section": "Your Data Wrangling Toolkit 🧰",
-    "text": "Your Data Wrangling Toolkit 🧰\nCore Verbs Recap:\n\n\n\n\n\nVerb\nWhat_it_does\nReal_Example\n\n\n\n\nselect()\nPick columns\nGet taxpayer ID and amounts\n\n\nfilter()\nPick rows\nFind large taxpayers\n\n\nmutate()\nAdd columns\nCalculate tax rates\n\n\nsummarize()\nAggregate\nTotal tax by region\n\n\ngroup_by()\nSplit data\nAnalyze by sector\n\n\narrange()\nSort rows\nRank by tax paid"
+    "text": "Your Data Wrangling Toolkit 🧰\n\n\n\n\n\nVerb\nPurpose\nTax_Example\n\n\n\n\nselect()\nChoose columns\nSelect firm_id, tax_paid\n\n\nfilter()\nChoose rows\nFind large taxpayers\n\n\nmutate()\nCreate columns\nCalculate effective tax rate\n\n\nsummarize()\nAggregate data\nTotal tax by region\n\n\ngroup_by()\nSplit for analysis\nAnalyze by year, sector\n\n\narrange()\nSort data\nRank by tax contribution\n\n\ncount()\nQuick counts\nFirms per industry\n\n\ndistinct()\nUnique values\nUnique taxpayers\n\n\nslice()\nSelect by position\nTop 10 taxpayers"
   },
   {
     "objectID": "3_data_wrangling.html#whats-next",
     "href": "3_data_wrangling.html#whats-next",
     "title": "Data Wrangling with dplyr",
     "section": "What’s Next? 🔮",
-    "text": "What’s Next? 🔮\nModule 4: Data Visualization with ggplot2\nWe’ll learn to: - Transform your wrangled data into insights - Create publication-ready visualizations - Build dashboards for tax monitoring - Tell stories with data\n. . .\nBut first… Practice! 💪\nTry the additional exercises in Exercises/data_wrangling_practice.R"
+    "text": "What’s Next? 🔮\nModule 4: Data Visualization with ggplot2\nYou’ll learn to transform your wrangled data into:\n\n📊 Professional charts and graphs\n📈 Time series visualizations\n🗺️ Geographic analysis\n📱 Interactive dashboards\n\n. . .\nBut first… Practice! 💪\n\nComplete exercises in Exercises/3_data_wrangling_practice.R\nTry these techniques on your own data\nShare your discoveries!"
   },
   {
     "objectID": "3_data_wrangling.html#final-challenge",
     "href": "3_data_wrangling.html#final-challenge",
     "title": "Data Wrangling with dplyr",
     "section": "Final Challenge",
-    "text": "Final Challenge\n −+ 05:00 \nUsing all three datasets, answer: “What’s the average effective CIT rate for large manufacturing firms?”\nHints: - Large = more than 100 employees - Manufacturing firms from dt_firms - Effective rate from panel_cit - You’ll need to identify common firms\n\n# Your multi-dataset analysis here:\n\n\nSolution preview:\n\n# We'll explore joins in detail next module!\n# For now, here's the approach:\n\n# Step 1: Get large manufacturing firms\nlarge_manufacturing &lt;- dt_firms %&gt;%\n  filter(industry == \"Manufacturing\", \n         number_of_employees &gt; 100) %&gt;%\n  pull(firm_id)\n\n# Step 2: Calculate effective rates for these firms\npanel_cit %&gt;%\n  filter(firm_id %in% large_manufacturing,\n         taxable_income &gt; 0) %&gt;%\n  mutate(effective_rate = (tax_paid / taxable_income) * 100) %&gt;%\n  summarize(\n    avg_effective_rate = mean(effective_rate, na.rm = TRUE),\n    n_firms = n_distinct(firm_id)\n  )\n\n  avg_effective_rate n_firms\n1           20.43362      48"
+    "text": "Final Challenge\n −+ 10:00 \nBringing It All Together\nCreate a “Tax Administration Dashboard” dataset that shows: 1. Top 10 firms by COMBINED tax contribution (VAT + CIT) 2. Their compliance metrics (late filing rate, adjustments) 3. Their characteristics (size, region, industry)\nHint: You’ll need to work with multiple datasets!\n\n# Your code here:\ndashboard_data &lt;- ..."
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-daily-tax-administration-challenges",
+    "href": "3_data_wrangling.html#your-daily-tax-administration-challenges",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Daily Tax Administration Challenges",
+    "text": "Your Daily Tax Administration Challenges\n\nYour director walks in with two urgent questions:\n\n\n\nChallenge 1 📈\n“Who are our top 5 CIT contributors?”\n\n\n\n\nChallenge 2 💰\n“How much VAT comes from our top 10% taxpayers?”\n\n\n\nCan you answer these in under 5 minutes? ⏱"
+  },
+  {
+    "objectID": "3_data_wrangling.html#without-data-wrangling-skills",
+    "href": "3_data_wrangling.html#without-data-wrangling-skills",
+    "title": "Data Wrangling with dplyr",
+    "section": "Without Data Wrangling Skills…",
+    "text": "Without Data Wrangling Skills…\n\n\nThe Excel Way 😩\n\nOpen CIT file (wait…)\nSort by tax_paid (wait…)\nCopy top 5 to new sheet\nOpen VAT file (wait more…)\nSort by amount\nCalculate 10% of rows\nSum manually with calculator\nHope you didn’t make errors!\n\n\nAnd, sometimes you just can’t move from point 1."
+  },
+  {
+    "objectID": "3_data_wrangling.html#with-dplyr-magic",
+    "href": "3_data_wrangling.html#with-dplyr-magic",
+    "title": "Data Wrangling with dplyr",
+    "section": "With dplyr Magic ✨",
+    "text": "With dplyr Magic ✨\nChallenge 1 Solution:\n\n# Top 5 CIT contributors - Done in seconds!\ntop_5_cit &lt;- panel_cit %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(total_cit = sum(tax_paid, na.rm = TRUE)) %&gt;%\n  arrange(desc(total_cit)) %&gt;%\n  slice_head(n = 5)\n\ntop_5_cit\n\n# A tibble: 5 × 2\n  firm_id   total_cit\n  &lt;chr&gt;         &lt;int&gt;\n1 FIRM_0071    404560\n2 FIRM_0050    391992\n3 FIRM_0031    372270\n4 FIRM_0002    370304\n5 FIRM_0082    366191\n\n\n. . .\nTime: 5 seconds ⚡\nReproducible: Yes ✅\nErrors: None ✅"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-2-even-more-impressive",
+    "href": "3_data_wrangling.html#challenge-2-even-more-impressive",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 2: Even More Impressive!",
+    "text": "Challenge 2: Even More Impressive!\n\n# How much VAT from top 10%?\nvat_concentration &lt;- panel_vat %&gt;%\n  mutate(net_vat = (vat_outputs - vat_inputs) * 0.18) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(total_vat = sum(net_vat, na.rm = TRUE)) %&gt;%\n  arrange(desc(total_vat)) %&gt;%\n  mutate(\n    rank = row_number(),\n    percentile = rank / n() * 100,\n    is_top_10pct = percentile &lt;= 10\n  )\n\n# Answer:\ntotal_vat_all &lt;- sum(vat_concentration$total_vat)\ntotal_vat_top10 &lt;- sum(filter(vat_concentration, is_top_10pct)$total_vat)\npct_from_top10 &lt;- total_vat_top10 / total_vat_all * 100\n\ncat(\"Top 10% of firms contribute\", round(pct_from_top10, 1), \"% of total VAT\")\n\nTop 10% of firms contribute 163.1 % of total VAT"
+  },
+  {
+    "objectID": "3_data_wrangling.html#lets-start-simple-select",
+    "href": "3_data_wrangling.html#lets-start-simple-select",
+    "title": "Data Wrangling with dplyr",
+    "section": "Let’s Start Simple: select()",
+    "text": "Let’s Start Simple: select()\nOur example CIT data:\n\n\n\n\n\nfirm_id\ndeclaration_date\ntaxable_income\ntax_paid\n\n\n\n\nFIRM_0075\n2023-03-31\n91591\n25447\n\n\nFIRM_0080\n2023-12-31\n181645\n22246\n\n\nFIRM_0007\n2021-06-30\n110826\n32964\n\n\nFIRM_0045\n2021-06-30\n101530\n27547\n\n\nFIRM_0053\n2021-03-31\n69730\n18176\n\n\n\n\n\n\n\n. . .\nQuestion: How do we get just the firm IDs and tax paid?\n. . .\n\nexample_cit %&gt;%\n  select(firm_id, tax_paid)\n\n     firm_id tax_paid\n      &lt;char&gt;    &lt;int&gt;\n1: FIRM_0075    25447\n2: FIRM_0080    22246\n3: FIRM_0007    32964\n4: FIRM_0045    27547\n5: FIRM_0053    18176"
+  },
+  {
+    "objectID": "3_data_wrangling.html#select-choose-your-columns",
+    "href": "3_data_wrangling.html#select-choose-your-columns",
+    "title": "Data Wrangling with dplyr",
+    "section": "select(): Choose Your Columns",
+    "text": "select(): Choose Your Columns\nThe Basics\nselect() lets you pick which columns to keep or remove:\n\n# Select by name\npanel_cit %&gt;%\n  select(firm_id, tax_paid) %&gt;%\n  head(3)\n\n     firm_id tax_paid\n      &lt;char&gt;    &lt;int&gt;\n1: FIRM_0075    25447\n2: FIRM_0080    22246\n3: FIRM_0007    32964\n\n\n. . .\n\n# Select multiple columns\npanel_cit %&gt;%\n  select(firm_id, declaration_date, taxable_income, tax_paid) %&gt;%\n  head(3)\n\n     firm_id declaration_date taxable_income tax_paid\n      &lt;char&gt;           &lt;POSc&gt;          &lt;int&gt;    &lt;int&gt;\n1: FIRM_0075       2023-03-31          91591    25447\n2: FIRM_0080       2023-12-31         181645    22246\n3: FIRM_0007       2021-06-30         110826    32964"
+  },
+  {
+    "objectID": "3_data_wrangling.html#select-advanced-selection",
+    "href": "3_data_wrangling.html#select-advanced-selection",
+    "title": "Data Wrangling with dplyr",
+    "section": "select(): Advanced Selection",
+    "text": "select(): Advanced Selection\nUsing Helper Functions\n\n# Select columns that start with \"tax\"\npanel_cit %&gt;%\n  select(firm_id, starts_with(\"tax\")) %&gt;%\n  head(3)\n\n     firm_id taxable_income tax_paid\n      &lt;char&gt;          &lt;int&gt;    &lt;int&gt;\n1: FIRM_0075          91591    25447\n2: FIRM_0080         181645    22246\n3: FIRM_0007         110826    32964\n\n\n. . .\n\n# Select columns containing \"date\"\npanel_vat %&gt;%\n  select(firm_id, contains(\"date\")) %&gt;%\n  head(3)\n\n     firm_id declaration_date reimbursement_date\n      &lt;char&gt;           &lt;POSc&gt;             &lt;POSc&gt;\n1: FIRM_0096       2023-01-31         2023-12-31\n2: FIRM_0081       2022-05-31         2021-07-31\n3: FIRM_0024       2023-03-31         2023-09-30"
+  },
+  {
+    "objectID": "3_data_wrangling.html#select-more-helper-functions",
+    "href": "3_data_wrangling.html#select-more-helper-functions",
+    "title": "Data Wrangling with dplyr",
+    "section": "select(): More Helper Functions",
+    "text": "select(): More Helper Functions\n\n\n\n\n\nHelper\nWhat_it_does\nExample\n\n\n\n\nstarts_with()\nColumns starting with prefix\nstarts_with('vat')\n\n\nends_with()\nColumns ending with suffix\nends_with('_date')\n\n\ncontains()\nColumns containing text\ncontains('tax')\n\n\nmatches()\nColumns matching regex\nmatches('[0-9]{4}')\n\n\nwhere()\nColumns where condition is TRUE\nwhere(is.numeric)\n\n\neverything()\nAll remaining columns\nfirm_id, everything()\n\n\nlast_col()\nThe last column\nselect(first_col, last_col())"
+  },
+  {
+    "objectID": "3_data_wrangling.html#select-renaming-while-selecting",
+    "href": "3_data_wrangling.html#select-renaming-while-selecting",
+    "title": "Data Wrangling with dplyr",
+    "section": "select(): Renaming While Selecting",
+    "text": "select(): Renaming While Selecting\n\n# Rename columns while selecting\npanel_cit %&gt;%\n  select(\n    taxpayer = firm_id,\n    date = declaration_date,\n    income = taxable_income,\n    paid = tax_paid\n  ) %&gt;%\n  head(3)\n\n    taxpayer       date income  paid\n      &lt;char&gt;     &lt;POSc&gt;  &lt;int&gt; &lt;int&gt;\n1: FIRM_0075 2023-03-31  91591 25447\n2: FIRM_0080 2023-12-31 181645 22246\n3: FIRM_0007 2021-06-30 110826 32964\n\n\n\nOr use rename() to keep all columns:\n\npanel_cit %&gt;%\n  rename(taxpayer = firm_id) %&gt;%\n  head(3)\n\n    taxpayer declaration_date taxable_income tax_paid adjustments\n      &lt;char&gt;           &lt;POSc&gt;          &lt;int&gt;    &lt;int&gt;       &lt;int&gt;\n1: FIRM_0075       2023-03-31          91591    25447        2239\n2: FIRM_0080       2023-12-31         181645    22246        4777\n3: FIRM_0007       2021-06-30         110826    32964       -2942"
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-turn-column-selection",
+    "href": "3_data_wrangling.html#your-turn-column-selection",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Turn: Column Selection",
+    "text": "Your Turn: Column Selection\n −+ 03:00 \nExercise: Create Tax Summary Columns\nFrom panel_vat, create a dataset with: 1. Firm ID (renamed as ‘taxpayer_id’) 2. All columns with “vat” in the name 3. Declaration date\n\n# Your code here:\nvat_summary &lt;- panel_vat %&gt;%\n  select(\n    _______________\n  )\n\n. . .\nSolution:\n\nvat_summary &lt;- panel_vat %&gt;%\n  select(\n    taxpayer_id = firm_id,\n    contains(\"vat\"),\n    declaration_date\n  )\n\nhead(vat_summary, 3)\n\n   taxpayer_id vat_inputs vat_outputs declaration_date\n        &lt;char&gt;      &lt;int&gt;       &lt;int&gt;           &lt;POSc&gt;\n1:   FIRM_0096      45262       45914       2023-01-31\n2:   FIRM_0081       9225       29661       2022-05-31\n3:   FIRM_0024      15289       10005       2023-03-31"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-finding-the-right-rows",
+    "href": "3_data_wrangling.html#filter-finding-the-right-rows",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): Finding the Right Rows",
+    "text": "filter(): Finding the Right Rows\nThe second essential verb - choose which rows to keep\n\n# How many total CIT declarations?\nnrow(panel_cit)\n\n[1] 1000\n\n# How many with tax paid &gt; 50,000?\npanel_cit %&gt;%\n  filter(tax_paid &gt; 50000) %&gt;%\n  nrow()\n\n[1] 0"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-comparison-operators",
+    "href": "3_data_wrangling.html#filter-comparison-operators",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): Comparison Operators",
+    "text": "filter(): Comparison Operators\n\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n==\nEqual to\nsize == 'Large'\nOnly large firms\n\n\n!=\nNot equal to\nregion != 'North'\nAll except North\n\n\n&gt;\nGreater than\nvat_outputs &gt; 50000\nHigh output firms\n\n\n&gt;=\nGreater than or equal\nemployees &gt;= 100\n100+ employees\n\n\n\nLess than\ntax_rate\nLow tax rates\n\n\n\nLess than or equal\ndays_late\nUp to 30 days late\n\n\n%in%\nIn a set\nfirm_id %in% c('F1', 'F2')\nFirms F1 or F2\n\n\nis.na()\nIs missing\nis.na(payment_date)\nMissing payments\n\n\n!is.na()\nIs not missing\n!is.na(tax_paid)\nHas tax paid"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-logical-operators",
+    "href": "3_data_wrangling.html#filter-logical-operators",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): Logical Operators",
+    "text": "filter(): Logical Operators\nCombining conditions with AND (&) and OR (|)\n\n# AND: Both conditions must be true\nlarge_profitable &lt;- panel_cit %&gt;%\n  filter(taxable_income &gt; 100000 & tax_paid &gt; 25000)\n\nnrow(large_profitable)\n\n[1] 262\n\n\n. . .\n\n# OR: At least one condition must be true\nneeds_attention &lt;- panel_cit %&gt;%\n  filter(adjustments &lt; -5000 | tax_paid == 0)\n\nnrow(needs_attention)\n\n[1] 0"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-working-with-dates",
+    "href": "3_data_wrangling.html#filter-working-with-dates",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): Working with Dates",
+    "text": "filter(): Working with Dates\nDate filtering requires special attention:\n\n# Load lubridate for date functions\nlibrary(lubridate)\n\n# Filter by year\ncit_2023 &lt;- panel_cit %&gt;%\n  filter(year(declaration_date) == 2023)\n\n# Filter by month\njanuary_filings &lt;- panel_cit %&gt;%\n  filter(month(declaration_date) == 1)\n\n# Filter by quarter\nq1_filings &lt;- panel_cit %&gt;%\n  filter(quarter(declaration_date) == 1)"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-using-in-for-multiple-values",
+    "href": "3_data_wrangling.html#filter-using-in-for-multiple-values",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): Using %in% for Multiple Values",
+    "text": "filter(): Using %in% for Multiple Values\n\n# Select specific firms\ntarget_firms &lt;- c(\"FIRM_0001\", \"FIRM_0002\", \"FIRM_0003\", \"FIRM_0004\", \"FIRM_0005\")\n\ntarget_analysis &lt;- panel_cit %&gt;%\n  filter(firm_id %in% target_firms) %&gt;%\n  select(firm_id, declaration_date, tax_paid)\n\nhead(target_analysis, 10)\n\n      firm_id declaration_date tax_paid\n       &lt;char&gt;           &lt;POSc&gt;    &lt;int&gt;\n 1: FIRM_0002       2023-09-30    23480\n 2: FIRM_0002       2023-09-30    20127\n 3: FIRM_0004       2023-03-31     8399\n 4: FIRM_0003       2022-03-31    25120\n 5: FIRM_0001       2021-03-31    17734\n 6: FIRM_0005       2021-03-31    26271\n 7: FIRM_0003       2021-12-31    16899\n 8: FIRM_0001       2022-09-30     8766\n 9: FIRM_0001       2021-09-30    28263\n10: FIRM_0001       2023-12-31    31163"
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-turn-filtering-practice",
+    "href": "3_data_wrangling.html#your-turn-filtering-practice",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Turn: Filtering Practice",
+    "text": "Your Turn: Filtering Practice\n −+ 05:00 \nExercise: Find Audit Candidates\nFilter panel_vat to find potential audit candidates: 1. VAT outputs &gt; 50,000 OR 2. Input ratio (inputs/outputs) &gt; 0.9 3. From year 2023\nHow many firms meet these criteria?\n\n# Your code here:\naudit_candidates &lt;- panel_vat %&gt;%\n  filter(\n    _______________\n  )\n\n. . .\nSolution:\n\naudit_candidates &lt;- panel_vat %&gt;%\n  filter(\n    (vat_outputs &gt; 50000 | vat_inputs/vat_outputs &gt; 0.9),\n    year(declaration_date) == 2023\n  )\n\ncat(\"Number of audit candidates:\", nrow(audit_candidates))\n\nNumber of audit candidates: 181"
+  },
+  {
+    "objectID": "3_data_wrangling.html#mutate-creating-new-variables",
+    "href": "3_data_wrangling.html#mutate-creating-new-variables",
+    "title": "Data Wrangling with dplyr",
+    "section": "mutate(): Creating New Variables",
+    "text": "mutate(): Creating New Variables\nThe third essential verb - add calculated columns\n\n# Add net VAT calculation\nvat_with_calc &lt;- panel_vat %&gt;%\n  mutate(net_vat_base = vat_outputs - vat_inputs) %&gt;%\n  select(firm_id, vat_outputs, vat_inputs, net_vat_base) %&gt;%\n  head(5)\n\nvat_with_calc\n\n     firm_id vat_outputs vat_inputs net_vat_base\n      &lt;char&gt;       &lt;int&gt;      &lt;int&gt;        &lt;int&gt;\n1: FIRM_0096       45914      45262          652\n2: FIRM_0081       29661       9225        20436\n3: FIRM_0024       10005      15289        -5284\n4: FIRM_0091       14410       9347         5063\n5: FIRM_0014       33378      47317       -13939"
+  },
+  {
+    "objectID": "3_data_wrangling.html#mutate-multiple-calculations",
+    "href": "3_data_wrangling.html#mutate-multiple-calculations",
+    "title": "Data Wrangling with dplyr",
+    "section": "mutate(): Multiple Calculations",
+    "text": "mutate(): Multiple Calculations\nYou can create several new columns at once:\n\n# Comprehensive VAT analysis\nvat_analysis &lt;- panel_vat %&gt;%\n  mutate(\n    net_vat_base = vat_outputs - vat_inputs,\n    implied_vat = net_vat_base * 0.18,\n    input_ratio = vat_inputs / vat_outputs,\n    margin_pct = (net_vat_base / vat_outputs) * 100\n  ) %&gt;%\n  select(firm_id, ends_with(\"ratio\"), ends_with(\"pct\"), implied_vat) %&gt;%\n  head(5)\n\nvat_analysis\n\n     firm_id input_ratio margin_pct implied_vat\n      &lt;char&gt;       &lt;num&gt;      &lt;num&gt;       &lt;num&gt;\n1: FIRM_0096   0.9857995   1.420046      117.36\n2: FIRM_0081   0.3110145  68.898554     3678.48\n3: FIRM_0024   1.5281359 -52.813593     -951.12\n4: FIRM_0091   0.6486468  35.135323      911.34\n5: FIRM_0014   1.4176104 -41.761040    -2509.02"
+  },
+  {
+    "objectID": "3_data_wrangling.html#mutate-using-existing-columns",
+    "href": "3_data_wrangling.html#mutate-using-existing-columns",
+    "title": "Data Wrangling with dplyr",
+    "section": "mutate(): Using Existing Columns",
+    "text": "mutate(): Using Existing Columns\nYou can reference columns you just created!\n\n# Chain calculations\nvat_analysis &lt;- panel_vat %&gt;%\n  mutate(\n    net_base = vat_outputs - vat_inputs,\n    implied_vat = net_base * 0.18,  # Uses net_base from above!\n    vat_margin = (net_base / vat_outputs) * 100  # Profit margin\n  ) %&gt;%\n  select(firm_id, net_base, implied_vat, vat_margin) %&gt;%\n  head(5)\n\nvat_analysis\n\n     firm_id net_base implied_vat vat_margin\n      &lt;char&gt;    &lt;int&gt;       &lt;num&gt;      &lt;num&gt;\n1: FIRM_0096      652      117.36   1.420046\n2: FIRM_0081    20436     3678.48  68.898554\n3: FIRM_0024    -5284     -951.12 -52.813593\n4: FIRM_0091     5063      911.34  35.135323\n5: FIRM_0014   -13939    -2509.02 -41.761040"
+  },
+  {
+    "objectID": "3_data_wrangling.html#mutate-conditional-logic-with-case_when",
+    "href": "3_data_wrangling.html#mutate-conditional-logic-with-case_when",
+    "title": "Data Wrangling with dplyr",
+    "section": "mutate(): Conditional Logic with case_when()",
+    "text": "mutate(): Conditional Logic with case_when()\nCreating categories based on conditions:\n\n# Categorize firms by size\nfirm_categories &lt;- panel_vat %&gt;%\n  mutate(\n    size_category = case_when(\n      vat_outputs &lt; 10000 ~ \"Micro\",\n      vat_outputs &lt; 50000 ~ \"Small\",\n      vat_outputs &lt; 100000 ~ \"Medium\",\n      TRUE ~ \"Large\"  # Default case\n    )\n  ) %&gt;%\n  select(firm_id, vat_outputs, size_category) %&gt;%\n  head(10)\n\nfirm_categories\n\n      firm_id vat_outputs size_category\n       &lt;char&gt;       &lt;int&gt;        &lt;char&gt;\n 1: FIRM_0096       45914         Small\n 2: FIRM_0081       29661         Small\n 3: FIRM_0024       10005         Small\n 4: FIRM_0091       14410         Small\n 5: FIRM_0014       33378         Small\n 6: FIRM_0090       45639         Small\n 7: FIRM_0059       19855         Small\n 8: FIRM_0080       25070         Small\n 9: FIRM_0060       18817         Small\n10: FIRM_0015       30824         Small"
+  },
+  {
+    "objectID": "3_data_wrangling.html#mutate-more-complex-conditions",
+    "href": "3_data_wrangling.html#mutate-more-complex-conditions",
+    "title": "Data Wrangling with dplyr",
+    "section": "mutate(): More Complex Conditions",
+    "text": "mutate(): More Complex Conditions\n\n# Risk scoring based on multiple factors\nrisk_assessment &lt;- panel_cit %&gt;%\n  mutate(\n    # Calculate metrics\n    effective_rate = (tax_paid / taxable_income) * 100,\n    has_negative_adj = adjustments &lt; 0,\n    # Risk classification\n    risk_level = case_when(\n      effective_rate &lt; 10 & has_negative_adj ~ \"High Risk\",\n      effective_rate &lt; 15 | has_negative_adj ~ \"Medium Risk\",\n      effective_rate &gt;= 15 & !has_negative_adj ~ \"Low Risk\",\n      TRUE ~ \"Review Required\"\n    )\n  ) %&gt;%\n  select(firm_id, effective_rate, adjustments, risk_level) %&gt;%\n  head(10)\n\nrisk_assessment\n\n      firm_id effective_rate adjustments  risk_level\n       &lt;char&gt;          &lt;num&gt;       &lt;int&gt;      &lt;char&gt;\n 1: FIRM_0075      27.783297        2239    Low Risk\n 2: FIRM_0080      12.246965        4777 Medium Risk\n 3: FIRM_0007      29.743923       -2942 Medium Risk\n 4: FIRM_0045      27.131882       -3658 Medium Risk\n 5: FIRM_0053      26.066256        2794    Low Risk\n 6: FIRM_0029      26.593930        3652    Low Risk\n 7: FIRM_0016      32.657080        2237    Low Risk\n 8: FIRM_0043      10.174440       -4541 Medium Risk\n 9: FIRM_0079      34.278568       -4853 Medium Risk\n10: FIRM_0044       7.975789       -2051   High Risk"
+  },
+  {
+    "objectID": "3_data_wrangling.html#working-with-dates-using-lubridate",
+    "href": "3_data_wrangling.html#working-with-dates-using-lubridate",
+    "title": "Data Wrangling with dplyr",
+    "section": "Working with Dates using lubridate",
+    "text": "Working with Dates using lubridate\nExtract date components easily:\n\nlibrary(lubridate)\n\n# Add date components\ndate_analysis &lt;- panel_vat %&gt;%\n  mutate(\n    year = year(declaration_date),\n    month = month(declaration_date),\n    quarter = quarter(declaration_date),\n    day_of_week = wday(declaration_date, label = TRUE),\n    # Calculate processing time\n    processing_days = as.numeric(reimbursement_date - declaration_date)\n  ) %&gt;%\n  select(firm_id, declaration_date, year, month, quarter, processing_days) %&gt;%\n  head(5)\n\ndate_analysis\n\n     firm_id declaration_date  year month quarter processing_days\n      &lt;char&gt;           &lt;POSc&gt; &lt;num&gt; &lt;num&gt;   &lt;int&gt;           &lt;num&gt;\n1: FIRM_0096       2023-01-31  2023     1       1        28857600\n2: FIRM_0081       2022-05-31  2022     5       2       -26265600\n3: FIRM_0024       2023-03-31  2023     3       1        15811200\n4: FIRM_0091       2023-08-31  2023     8       3       -55209600\n5: FIRM_0014       2023-09-30  2023     9       3       -55123200"
+  },
+  {
+    "objectID": "3_data_wrangling.html#date-calculations",
+    "href": "3_data_wrangling.html#date-calculations",
+    "title": "Data Wrangling with dplyr",
+    "section": "Date Calculations",
+    "text": "Date Calculations\nCalculate time differences:\n\n# Processing time analysis\nprocessing_analysis &lt;- panel_vat %&gt;%\n  mutate(\n    # Days to process\n    processing_days = as.numeric(reimbursement_date - declaration_date),\n    \n    # Categories\n    processing_speed = case_when(\n      is.na(processing_days) ~ \"Not Processed\",\n      processing_days &lt;= 30 ~ \"Fast\",\n      processing_days &lt;= 60 ~ \"Normal\",\n      processing_days &lt;= 90 ~ \"Slow\",\n      TRUE ~ \"Very Slow\"\n    ),\n    \n    # Business days (approximate)\n    processing_business_days = processing_days * 5/7\n  ) %&gt;%\n  select(firm_id, declaration_date, reimbursement_date, \n         processing_days, processing_speed) %&gt;%\n  filter(!is.na(processing_days)) %&gt;%\n  head(10)\n\nprocessing_analysis\n\n      firm_id declaration_date reimbursement_date processing_days\n       &lt;char&gt;           &lt;POSc&gt;             &lt;POSc&gt;           &lt;num&gt;\n 1: FIRM_0096       2023-01-31         2023-12-31        28857600\n 2: FIRM_0081       2022-05-31         2021-07-31       -26265600\n 3: FIRM_0024       2023-03-31         2023-09-30        15811200\n 4: FIRM_0091       2023-08-31         2021-11-30       -55209600\n 5: FIRM_0014       2023-09-30         2021-12-31       -55123200\n 6: FIRM_0090       2022-12-31         2022-10-31        -5270400\n 7: FIRM_0059       2021-02-28         2023-11-30        86832000\n 8: FIRM_0080       2022-07-31         2022-06-30        -2678400\n 9: FIRM_0060       2021-12-31         2022-12-31        31536000\n10: FIRM_0015       2021-11-30         2023-06-30        49852800\n    processing_speed\n              &lt;char&gt;\n 1:        Very Slow\n 2:             Fast\n 3:        Very Slow\n 4:             Fast\n 5:             Fast\n 6:             Fast\n 7:        Very Slow\n 8:             Fast\n 9:        Very Slow\n10:        Very Slow"
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-turn-creating-metrics",
+    "href": "3_data_wrangling.html#your-turn-creating-metrics",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Turn: Creating Metrics",
+    "text": "Your Turn: Creating Metrics\n −+ 07:00 \nExercise: VAT Compliance Metrics\nCreate a compliance scoring system: 1. Calculate net VAT base (outputs - inputs) 2. Calculate input ratio (inputs/outputs) 3. Create compliance categories: - “Excellent”: input ratio &lt; 0.7 - “Normal”: input ratio 0.7-0.85 - “Review”: input ratio 0.85-0.95 - “Investigate”: input ratio &gt; 0.95\n\n# Your code here:\ncompliance_scores &lt;- panel_vat %&gt;%\n  mutate(\n    _______________\n  ) %&gt;%\n  select(firm_id, vat_outputs, vat_inputs, input_ratio, compliance_category)"
+  },
+  {
+    "objectID": "3_data_wrangling.html#summarize-from-many-to-one",
+    "href": "3_data_wrangling.html#summarize-from-many-to-one",
+    "title": "Data Wrangling with dplyr",
+    "section": "summarize(): From Many to One",
+    "text": "summarize(): From Many to One\nAggregate your data to answer questions:\n\n# Total CIT collection\ntotal_cit &lt;- panel_cit %&gt;%\n  summarize(\n    total_collected = sum(tax_paid, na.rm = TRUE),\n    average_payment = mean(tax_paid, na.rm = TRUE),\n    number_of_payments = n()\n  )\n\ntotal_cit\n\n  total_collected average_payment number_of_payments\n1        21932818        21932.82               1000\n\n\n. . .\n\n\n\n\n\n\nImportant\n\n\nsummarize() reduces your data to a single row (unless used with group_by())"
+  },
+  {
+    "objectID": "3_data_wrangling.html#summarize-common-summary-functions",
+    "href": "3_data_wrangling.html#summarize-common-summary-functions",
+    "title": "Data Wrangling with dplyr",
+    "section": "summarize(): Common Summary Functions",
+    "text": "summarize(): Common Summary Functions\n\n\n\n\n\nFunction\nWhat_it_does\nExample\n\n\n\n\nn()\nCount rows\nn()\n\n\nn_distinct()\nCount unique values\nn_distinct(firm_id)\n\n\nsum()\nAdd up values\nsum(tax_paid, na.rm = TRUE)\n\n\nmean()\nAverage\nmean(vat_outputs, na.rm = TRUE)\n\n\nmedian()\nMiddle value\nmedian(taxable_income, na.rm = TRUE)\n\n\nsd()\nStandard deviation\nsd(adjustments, na.rm = TRUE)\n\n\nmin()\nMinimum value\nmin(declaration_date)\n\n\nmax()\nMaximum value\nmax(tax_paid)\n\n\nfirst()\nFirst value\nfirst(firm_id)\n\n\nlast()\nLast value\nlast(declaration_date)"
+  },
+  {
+    "objectID": "3_data_wrangling.html#the-power-of-group_by",
+    "href": "3_data_wrangling.html#the-power-of-group_by",
+    "title": "Data Wrangling with dplyr",
+    "section": "The Power of group_by()",
+    "text": "The Power of group_by()\nTransform summarize from one row to many:\n\n# Without grouping - one result\npanel_cit %&gt;%\n  summarize(avg_tax = mean(tax_paid, na.rm = TRUE))\n\n   avg_tax\n1 21932.82\n\n\n. . .\n\n# With grouping - results per year!\npanel_cit %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  group_by(year) %&gt;%\n  summarize(avg_tax = mean(tax_paid, na.rm = TRUE))\n\n# A tibble: 3 × 2\n   year avg_tax\n  &lt;dbl&gt;   &lt;dbl&gt;\n1  2021  21243.\n2  2022  22535.\n3  2023  22071."
+  },
+  {
+    "objectID": "3_data_wrangling.html#group_by-multiple-groups",
+    "href": "3_data_wrangling.html#group_by-multiple-groups",
+    "title": "Data Wrangling with dplyr",
+    "section": "group_by(): Multiple Groups",
+    "text": "group_by(): Multiple Groups\n\n# Group by multiple variables\nregional_analysis &lt;- dt_firms %&gt;%\n  group_by(region, size) %&gt;%\n  summarize(\n    firm_count = n(),\n    avg_employees = mean(number_of_employees, na.rm = TRUE),\n    .groups = \"drop\"  # Ungroup after summarizing\n  ) %&gt;%\n  arrange(region, size)\n\nhead(regional_analysis, 10)\n\n# A tibble: 10 × 4\n   region size   firm_count avg_employees\n   &lt;chr&gt;  &lt;chr&gt;       &lt;int&gt;         &lt;dbl&gt;\n 1 East   Large          23          268.\n 2 East   Medium         25          274.\n 3 East   Small          31          251.\n 4 North  Large          28          223.\n 5 North  Medium         24          253.\n 6 North  Small          22          242.\n 7 South  Large          24          222.\n 8 South  Medium         22          213 \n 9 South  Small          29          333.\n10 West   Large          19          291."
+  },
+  {
+    "objectID": "3_data_wrangling.html#solving-challenge-1-top-5-cit-contributors",
+    "href": "3_data_wrangling.html#solving-challenge-1-top-5-cit-contributors",
+    "title": "Data Wrangling with dplyr",
+    "section": "Solving Challenge 1: Top 5 CIT Contributors",
+    "text": "Solving Challenge 1: Top 5 CIT Contributors\nLet’s build it step by step:\n\n# Step 1: Group by firm\nstep1 &lt;- panel_cit %&gt;%\n  group_by(firm_id)\n\n# What does this do? Let's see:\nstep1 %&gt;% \n  slice(1:3)  # First row from each group\n\n# A tibble: 300 × 5\n# Groups:   firm_id [100]\n   firm_id   declaration_date    taxable_income tax_paid adjustments\n   &lt;chr&gt;     &lt;dttm&gt;                       &lt;int&gt;    &lt;int&gt;       &lt;int&gt;\n 1 FIRM_0001 2021-03-31 00:00:00         130821    17734        -881\n 2 FIRM_0001 2022-09-30 00:00:00         198447     8766        2670\n 3 FIRM_0001 2021-09-30 00:00:00          73165    28263        3453\n 4 FIRM_0002 2023-09-30 00:00:00          61598    23480       -2025\n 5 FIRM_0002 2023-09-30 00:00:00         117832    20127       -1752\n 6 FIRM_0002 2022-12-31 00:00:00         151512    39653       -4696\n 7 FIRM_0003 2022-03-31 00:00:00          51041    25120        4946\n 8 FIRM_0003 2021-12-31 00:00:00         154526    16899        -933\n 9 FIRM_0003 2023-03-31 00:00:00          90429    35026       -3180\n10 FIRM_0004 2023-03-31 00:00:00          73635     8399        -846\n# ℹ 290 more rows"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-1-continued",
+    "href": "3_data_wrangling.html#challenge-1-continued",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 1 Continued",
+    "text": "Challenge 1 Continued\n\n# Step 2: Sum tax paid per firm\nstep2 &lt;- panel_cit %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(total_cit = sum(tax_paid, na.rm = TRUE))\n\nhead(step2)\n\n# A tibble: 6 × 2\n  firm_id   total_cit\n  &lt;chr&gt;         &lt;int&gt;\n1 FIRM_0001    361157\n2 FIRM_0002    370304\n3 FIRM_0003    166654\n4 FIRM_0004    273477\n5 FIRM_0005    214059\n6 FIRM_0006    180728\n\n\n\n\n# Step 3: Sort by total\nstep3 &lt;- panel_cit %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(total_cit = sum(tax_paid, na.rm = TRUE)) %&gt;%\n  arrange(desc(total_cit))\n\nhead(step3)\n\n# A tibble: 6 × 2\n  firm_id   total_cit\n  &lt;chr&gt;         &lt;int&gt;\n1 FIRM_0071    404560\n2 FIRM_0050    391992\n3 FIRM_0031    372270\n4 FIRM_0002    370304\n5 FIRM_0082    366191\n6 FIRM_0001    361157"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-1-complete-solution",
+    "href": "3_data_wrangling.html#challenge-1-complete-solution",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 1 Complete Solution",
+    "text": "Challenge 1 Complete Solution\n\n# All together now!\ntop_5_cit &lt;- panel_cit %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    total_cit = sum(tax_paid, na.rm = TRUE),\n    n_declarations = n(),\n    avg_payment = mean(tax_paid, na.rm = TRUE)\n  ) %&gt;%\n  arrange(desc(total_cit)) %&gt;%\n  slice_head(n = 5)\n\n# Pretty output\ntop_5_cit %&gt;%\n  mutate(total_cit_millions = round(total_cit / 1e6, 2)) %&gt;%\n  select(firm_id, total_cit_millions, n_declarations) %&gt;%\n  kable(col.names = c(\"Firm ID\", \"Total CIT (Millions)\", \"# Declarations\"),\n        format = \"html\") %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\"), \n                full_width = FALSE, font_size = 16)\n\n\n\n\nFirm ID\nTotal CIT (Millions)\n# Declarations\n\n\n\n\nFIRM_0071\n0.40\n17\n\n\nFIRM_0050\n0.39\n16\n\n\nFIRM_0031\n0.37\n14\n\n\nFIRM_0002\n0.37\n15\n\n\nFIRM_0082\n0.37\n18"
+  },
+  {
+    "objectID": "3_data_wrangling.html#solving-challenge-2-vat-concentration",
+    "href": "3_data_wrangling.html#solving-challenge-2-vat-concentration",
+    "title": "Data Wrangling with dplyr",
+    "section": "Solving Challenge 2: VAT Concentration",
+    "text": "Solving Challenge 2: VAT Concentration\n“How much VAT comes from top 10% taxpayers?”\nStep 1: Calculate VAT per transaction\n\n# Add VAT calculation\nvat_with_amounts &lt;- panel_vat %&gt;%\n  mutate(\n    net_vat_base = vat_outputs - vat_inputs,\n    vat_amount = net_vat_base * 0.18  # 18% VAT rate\n  ) %&gt;%\n  select(firm_id, vat_outputs, vat_inputs, net_vat_base, vat_amount) %&gt;%\n  head(5)\n\nvat_with_amounts\n\n     firm_id vat_outputs vat_inputs net_vat_base vat_amount\n      &lt;char&gt;       &lt;int&gt;      &lt;int&gt;        &lt;int&gt;      &lt;num&gt;\n1: FIRM_0096       45914      45262          652     117.36\n2: FIRM_0081       29661       9225        20436    3678.48\n3: FIRM_0024       10005      15289        -5284    -951.12\n4: FIRM_0091       14410       9347         5063     911.34\n5: FIRM_0014       33378      47317       -13939   -2509.02"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-2-aggregate-by-firm",
+    "href": "3_data_wrangling.html#challenge-2-aggregate-by-firm",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 2: Aggregate by Firm",
+    "text": "Challenge 2: Aggregate by Firm\n\n# Step 2: Sum by firm\nvat_by_firm &lt;- panel_vat %&gt;%\n  mutate(net_vat = (vat_outputs - vat_inputs) * 0.18) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    total_vat = sum(net_vat, na.rm = TRUE),\n    n_declarations = n()\n  ) %&gt;%\n  arrange(desc(total_vat))\n\nhead(vat_by_firm)\n\n# A tibble: 6 × 3\n  firm_id   total_vat n_declarations\n  &lt;chr&gt;         &lt;dbl&gt;          &lt;int&gt;\n1 FIRM_0067    32055.             10\n2 FIRM_0019    22614.             10\n3 FIRM_0022    20998.              7\n4 FIRM_0014    18973.             10\n5 FIRM_0002    16286.             11\n6 FIRM_0053    14548.              6"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-2-identify-top-10",
+    "href": "3_data_wrangling.html#challenge-2-identify-top-10",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 2: Identify Top 10%",
+    "text": "Challenge 2: Identify Top 10%\n\n# Step 3: Add rankings and percentiles\nvat_ranked &lt;- panel_vat %&gt;%\n  mutate(net_vat = (vat_outputs - vat_inputs) * 0.18) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(total_vat = sum(net_vat, na.rm = TRUE)) %&gt;%\n  arrange(desc(total_vat)) %&gt;%\n  mutate(\n    rank = row_number(),\n    total_firms = n(),\n    percentile = (rank / total_firms) * 100,\n    is_top_10pct = percentile &lt;= 10\n  )\n\n# Show transition point\nvat_ranked %&gt;%\n  filter(percentile &gt; 9.5 & percentile &lt; 10.5) %&gt;%\n  head(5)\n\n# A tibble: 1 × 6\n  firm_id   total_vat  rank total_firms percentile is_top_10pct\n  &lt;chr&gt;         &lt;dbl&gt; &lt;int&gt;       &lt;int&gt;      &lt;dbl&gt; &lt;lgl&gt;       \n1 FIRM_0017    12274.    10         100         10 TRUE"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-2-final-answer",
+    "href": "3_data_wrangling.html#challenge-2-final-answer",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 2: Final Answer",
+    "text": "Challenge 2: Final Answer\n\n# Complete analysis\nconcentration_result &lt;- vat_with_ranks %&gt;%\n  mutate(is_top_10pct = percentile &lt;= 10) %&gt;%\n  summarize(\n    total_firms = n(),\n    top_10pct_firms = sum(is_top_10pct),\n    total_vat_all = sum(total_vat),\n    total_vat_top10 = sum(total_vat[is_top_10pct]),\n    pct_firms = (top_10pct_firms / total_firms) * 100,\n    pct_revenue = (total_vat_top10 / total_vat_all) * 100\n  )\n\n# Create visualization\nconcentration_result %&gt;%\n  select(pct_firms, pct_revenue) %&gt;%\n  pivot_longer(everything(), names_to = \"Metric\", values_to = \"Percentage\") %&gt;%\n  mutate(\n    Metric = recode(Metric,\n                   \"pct_firms\" = \"% of Firms\",\n                   \"pct_revenue\" = \"% of VAT Revenue\"),\n    Label = paste0(round(Percentage, 1), \"%\")\n  ) %&gt;%\n  kable(format = \"html\") %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\"))\n\n\n\n\nMetric\nPercentage\nLabel\n\n\n\n\n% of Firms\n10.0000\n10%\n\n\n% of VAT Revenue\n163.1286\n163.1%"
+  },
+  {
+    "objectID": "3_data_wrangling.html#arrange-sorting-your-data",
+    "href": "3_data_wrangling.html#arrange-sorting-your-data",
+    "title": "Data Wrangling with dplyr",
+    "section": "arrange(): Sorting Your Data",
+    "text": "arrange(): Sorting Your Data\nBasic sorting:\n\n# Sort by VAT outputs (ascending by default)\npanel_vat %&gt;%\n  arrange(vat_outputs) %&gt;%\n  select(firm_id, vat_outputs) %&gt;%\n  head(5)\n\n     firm_id vat_outputs\n      &lt;char&gt;       &lt;int&gt;\n1: FIRM_0066        1014\n2: FIRM_0044        1045\n3: FIRM_0020        1073\n4: FIRM_0032        1110\n5: FIRM_0072        1168\n\n\n. . .\n\n# Sort descending\npanel_vat %&gt;%\n  arrange(desc(vat_outputs)) %&gt;%\n  select(firm_id, vat_outputs) %&gt;%\n  head(5)\n\n     firm_id vat_outputs\n      &lt;char&gt;       &lt;int&gt;\n1: FIRM_0020       49969\n2: FIRM_0096       49844\n3: FIRM_0040       49806\n4: FIRM_0075       49710\n5: FIRM_0022       49689"
+  },
+  {
+    "objectID": "3_data_wrangling.html#arrange-multiple-columns",
+    "href": "3_data_wrangling.html#arrange-multiple-columns",
+    "title": "Data Wrangling with dplyr",
+    "section": "arrange(): Multiple Columns",
+    "text": "arrange(): Multiple Columns\nSort by multiple criteria:\n\n# Sort by year, then by tax paid within each year\npanel_cit %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  arrange(year, desc(tax_paid)) %&gt;%\n  select(firm_id, year, tax_paid) %&gt;%\n  head(10)\n\n      firm_id  year tax_paid\n       &lt;char&gt; &lt;num&gt;    &lt;int&gt;\n 1: FIRM_0056  2021    39965\n 2: FIRM_0099  2021    39829\n 3: FIRM_0099  2021    39712\n 4: FIRM_0076  2021    39598\n 5: FIRM_0075  2021    39148\n 6: FIRM_0002  2021    39147\n 7: FIRM_0063  2021    38969\n 8: FIRM_0024  2021    38959\n 9: FIRM_0096  2021    38831\n10: FIRM_0032  2021    38692"
+  },
+  {
+    "objectID": "3_data_wrangling.html#combining-everything-real-analysis",
+    "href": "3_data_wrangling.html#combining-everything-real-analysis",
+    "title": "Data Wrangling with dplyr",
+    "section": "Combining Everything: Real Analysis",
+    "text": "Combining Everything: Real Analysis\nMonthly VAT Collection Trends\n\nmonthly_vat_trends &lt;- panel_vat %&gt;%\n  mutate(\n    month = floor_date(declaration_date, \"month\"),\n    net_vat_base = vat_outputs - vat_inputs,\n    implied_vat = net_vat_base * 0.18\n  ) %&gt;%\n  group_by(month) %&gt;%\n  summarize(\n    n_declarations = n(),\n    total_vat_base = sum(net_vat_base, na.rm = TRUE),\n    total_implied_vat = sum(implied_vat, na.rm = TRUE),\n    avg_transaction_size = mean(vat_outputs, na.rm = TRUE)\n  ) %&gt;%\n  arrange(month)\n\nhead(monthly_vat_trends, 6)\n\n# A tibble: 6 × 5\n  month               n_declarations total_vat_base total_implied_vat\n  &lt;dttm&gt;                       &lt;int&gt;          &lt;int&gt;             &lt;dbl&gt;\n1 2021-01-01 00:00:00             20          78645            14156.\n2 2021-02-01 00:00:00             22        -114646           -20636.\n3 2021-03-01 00:00:00             30          -1345             -242.\n4 2021-04-01 00:00:00             28         -89572           -16123.\n5 2021-05-01 00:00:00             26         100723            18130.\n6 2021-06-01 00:00:00             23         177305            31915.\n# ℹ 1 more variable: avg_transaction_size &lt;dbl&gt;"
+  },
+  {
+    "objectID": "3_data_wrangling.html#advanced-window-functions",
+    "href": "3_data_wrangling.html#advanced-window-functions",
+    "title": "Data Wrangling with dplyr",
+    "section": "Advanced: Window Functions",
+    "text": "Advanced: Window Functions\nCalculate rankings within groups:\n\n# Rank taxpayers within each year\nyearly_rankings &lt;- panel_cit %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  group_by(year) %&gt;%\n  mutate(\n    tax_rank = dense_rank(desc(tax_paid)),\n    tax_percentile = percent_rank(tax_paid) * 100\n  ) %&gt;%\n  filter(tax_rank &lt;= 3) %&gt;%\n  select(year, firm_id, tax_paid, tax_rank) %&gt;%\n  arrange(year, tax_rank)\n\nhead(yearly_rankings, 9)\n\n# A tibble: 9 × 4\n# Groups:   year [3]\n   year firm_id   tax_paid tax_rank\n  &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;    &lt;int&gt;\n1  2021 FIRM_0056    39965        1\n2  2021 FIRM_0099    39829        2\n3  2021 FIRM_0099    39712        3\n4  2022 FIRM_0074    39896        1\n5  2022 FIRM_0048    39893        2\n6  2022 FIRM_0036    39884        3\n7  2023 FIRM_0023    39786        1\n8  2023 FIRM_0050    39783        2\n9  2023 FIRM_0058    39730        3"
+  },
+  {
+    "objectID": "3_data_wrangling.html#window-functions-cumulative-calculations",
+    "href": "3_data_wrangling.html#window-functions-cumulative-calculations",
+    "title": "Data Wrangling with dplyr",
+    "section": "Window Functions: Cumulative Calculations",
+    "text": "Window Functions: Cumulative Calculations\n\n# Cumulative VAT collection by month\ncumulative_vat &lt;- panel_vat %&gt;%\n  mutate(\n    month = floor_date(declaration_date, \"month\"),\n    net_vat = (vat_outputs - vat_inputs) * 0.18\n  ) %&gt;%\n  group_by(month) %&gt;%\n  summarize(monthly_vat = sum(net_vat, na.rm = TRUE)) %&gt;%\n  arrange(month) %&gt;%\n  mutate(\n    cumulative_vat = cumsum(monthly_vat),\n    pct_of_total = (cumulative_vat / sum(monthly_vat)) * 100\n  )\n\ntail(cumulative_vat, 6)\n\n# A tibble: 6 × 4\n  month               monthly_vat cumulative_vat pct_of_total\n  &lt;dttm&gt;                    &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;\n1 2023-07-01 00:00:00     -13976.         79915.         74.5\n2 2023-08-01 00:00:00     -18322.         61593.         57.4\n3 2023-09-01 00:00:00      13470.         75062.         70.0\n4 2023-10-01 00:00:00      18377.         93439.         87.1\n5 2023-11-01 00:00:00       1675.         95114.         88.7\n6 2023-12-01 00:00:00      12172.        107286.        100"
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-turn-comprehensive-analysis",
+    "href": "3_data_wrangling.html#your-turn-comprehensive-analysis",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Turn: Comprehensive Analysis",
+    "text": "Your Turn: Comprehensive Analysis\n −+ 10:00 \nExercise: Tax Gap Analysis\nCreate a tax gap analysis: 1. Calculate expected CIT (taxable_income * 0.25) 2. Calculate actual effective rate 3. Identify firms with effective rate &lt; 20% 4. Summarize by year: - Number of low-tax firms - Total tax gap (expected - actual) - Average effective rate\n\n# Your code here:\ntax_gap_analysis &lt;- panel_cit %&gt;%\n  mutate(\n    _______________\n  ) %&gt;%\n  filter(_______________) %&gt;%\n  group_by(_______________) %&gt;%\n  summarize(\n    _______________\n  )"
+  },
+  {
+    "objectID": "3_data_wrangling.html#exercise-solution-1",
+    "href": "3_data_wrangling.html#exercise-solution-1",
+    "title": "Data Wrangling with dplyr",
+    "section": "Exercise Solution",
+    "text": "Exercise Solution\n\naudit_scores &lt;- panel_vat %&gt;%\n  mutate(\n    # Basic metrics\n    net_vat_base = vat_outputs - vat_inputs,\n    input_ratio = vat_inputs / vat_outputs,\n    days_to_reimb = as.numeric(reimbursement_date - declaration_date),\n    \n    # Risk flags (with point values)\n    high_input_flag = if_else(input_ratio &gt; 0.9, 10, 0),\n    negative_base_flag = if_else(net_vat_base &lt; 0, 20, 0),\n    late_reimb_flag = if_else(days_to_reimb &gt; 90, 5, 0, missing = 0),\n    \n    # Total score\n    audit_score = high_input_flag + negative_base_flag + late_reimb_flag,\n    \n    # Category\n    audit_category = case_when(\n      audit_score == 0 ~ \"Clean\",\n      audit_score &lt;= 10 ~ \"Review\",\n      audit_score &lt;= 20 ~ \"Audit\",\n      TRUE ~ \"Priority Audit\"\n    )\n  ) %&gt;%\n  select(firm_id, input_ratio, days_to_reimb, audit_score, audit_category)\n\n# Summary\naudit_scores %&gt;%\n  count(audit_category) %&gt;%\n  mutate(percentage = n / sum(n) * 100)\n\n   audit_category     n percentage\n           &lt;char&gt; &lt;int&gt;      &lt;num&gt;\n1:          Audit    26        2.6\n2:          Clean   201       20.1\n3: Priority Audit   491       49.1\n4:         Review   282       28.2"
+  },
+  {
+    "objectID": "3_data_wrangling.html#best-practices",
+    "href": "3_data_wrangling.html#best-practices",
+    "title": "Data Wrangling with dplyr",
+    "section": "Best Practices ⭐",
+    "text": "Best Practices ⭐\n1. Always check your data\n\n# Use glimpse() to understand structure\nglimpse(panel_vat)\n\nRows: 1,000\nColumns: 5\n$ firm_id            &lt;chr&gt; \"FIRM_0096\", \"FIRM_0081\", \"FIRM_0024\", \"FIRM_0091\",…\n$ declaration_date   &lt;dttm&gt; 2023-01-31, 2022-05-31, 2023-03-31, 2023-08-31, 20…\n$ vat_inputs         &lt;int&gt; 45262, 9225, 15289, 9347, 47317, 44471, 23806, 4907…\n$ vat_outputs        &lt;int&gt; 45914, 29661, 10005, 14410, 33378, 45639, 19855, 25…\n$ reimbursement_date &lt;dttm&gt; 2023-12-31, 2021-07-31, 2023-09-30, 2021-11-30, 20…"
+  },
+  {
+    "objectID": "3_data_wrangling.html#best-practices-continued",
+    "href": "3_data_wrangling.html#best-practices-continued",
+    "title": "Data Wrangling with dplyr",
+    "section": "Best Practices (continued)",
+    "text": "Best Practices (continued)\n2. Build incrementally\n\n# Don't do this:\nresult &lt;- data %&gt;% filter(...) %&gt;% mutate(...) %&gt;% group_by(...) %&gt;% summarize(...) %&gt;% arrange(...)\n\n# Do this instead:\nstep1 &lt;- data %&gt;% filter(...)\nstep2 &lt;- step1 %&gt;% mutate(...)\nstep3 &lt;- step2 %&gt;% group_by(...) %&gt;% summarize(...)\nfinal &lt;- step3 %&gt;% arrange(...)\n\n3. Use meaningful variable names\n\n# Bad:\nx &lt;- panel_vat %&gt;% mutate(y = vat_outputs - vat_inputs)\n\n# Good:\nvat_analysis &lt;- panel_vat %&gt;% \n  mutate(net_vat_base = vat_outputs - vat_inputs)"
+  },
+  {
+    "objectID": "3_data_wrangling.html#common-pitfalls",
+    "href": "3_data_wrangling.html#common-pitfalls",
+    "title": "Data Wrangling with dplyr",
+    "section": "Common Pitfalls ⚠️",
+    "text": "Common Pitfalls ⚠️\n1. Forgetting na.rm = TRUE\n\n# This might return NA\npanel_cit %&gt;% summarize(mean_tax = mean(tax_paid))\n\n  mean_tax\n1 21932.82\n\n# This handles NAs properly\npanel_cit %&gt;% summarize(mean_tax = mean(tax_paid, na.rm = TRUE))\n\n  mean_tax\n1 21932.82\n\n\n2. Not ungrouping\n\n# Grouped data can cause unexpected behavior\ngrouped_data &lt;- data %&gt;% \n  group_by(category) %&gt;%\n  summarize(total = sum(value))\n# Still grouped!\n\n# Better:\nungrouped_data &lt;- data %&gt;% \n  group_by(category) %&gt;%\n  summarize(total = sum(value)) %&gt;%\n  ungroup()"
+  },
+  {
+    "objectID": "3_data_wrangling.html#summary-what-we-learned",
+    "href": "3_data_wrangling.html#summary-what-we-learned",
+    "title": "Data Wrangling with dplyr",
+    "section": "Summary: What We Learned",
+    "text": "Summary: What We Learned\n\n\nThe pipe %&gt;% makes code readable and logical\nFive core verbs handle 90% of data manipulation:\n\nselect() → columns\nfilter() → rows\n\nmutate() → calculations\ngroup_by() + summarize() → aggregation\narrange() → sorting\n\nReal tax analysis is now at your fingertips:\n\nTop taxpayers ✓\nRevenue concentration ✓\nCompliance metrics ✓\nTrend analysis ✓"
+  },
+  {
+    "objectID": "3_data_wrangling.html#final-challenge-solution",
+    "href": "3_data_wrangling.html#final-challenge-solution",
+    "title": "Data Wrangling with dplyr",
+    "section": "Final Challenge Solution",
+    "text": "Final Challenge Solution\n\n# Step 1: VAT contribution by firm\nvat_summary &lt;- panel_vat %&gt;%\n  mutate(vat_contribution = (vat_outputs - vat_inputs) * 0.18) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    total_vat = sum(vat_contribution, na.rm = TRUE),\n    vat_declarations = n()\n  )\n\n# Step 2: CIT contribution by firm\ncit_summary &lt;- panel_cit %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    total_cit = sum(tax_paid, na.rm = TRUE),\n    cit_declarations = n(),\n    has_adjustments = any(adjustments &lt; 0)\n  )\n\n# Step 3: Combine (preview of joins!)\ncommon_firms &lt;- intersect(vat_summary$firm_id, cit_summary$firm_id)\n\ndashboard_data &lt;- data.frame(\n  firm_id = common_firms\n) %&gt;%\n  left_join(vat_summary, by = \"firm_id\") %&gt;%\n  left_join(cit_summary, by = \"firm_id\") %&gt;%\n  mutate(total_tax = total_vat + total_cit) %&gt;%\n  arrange(desc(total_tax)) %&gt;%\n  slice_head(n = 10)\n\ndashboard_data %&gt;%\n  select(firm_id, total_vat, total_cit, total_tax) %&gt;%\n  kable(format = \"html\", digits = 0) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\"))\n\n\n\n\nfirm_id\ntotal_vat\ntotal_cit\ntotal_tax\n\n\n\n\nFIRM_0071\n11049\n404560\n415609\n\n\nFIRM_0050\n4369\n391992\n396361\n\n\nFIRM_0002\n16286\n370304\n386590\n\n\nFIRM_0031\n1994\n372270\n374264\n\n\nFIRM_0001\n1703\n361157\n362860\n\n\nFIRM_0082\n-5335\n366191\n360856\n\n\nFIRM_0056\n5515\n355082\n360597\n\n\nFIRM_0090\n2980\n343222\n346202\n\n\nFIRM_0021\n4885\n320507\n325392\n\n\nFIRM_0035\n10302\n313082\n323384"
+  },
+  {
+    "objectID": "3_data_wrangling.html#without-r",
+    "href": "3_data_wrangling.html#without-r",
+    "title": "Data Wrangling with dplyr",
+    "section": "Without R",
+    "text": "Without R\nThe Excel Way 😩\n\nOpen CIT file (wait…)\nSort by tax_paid (wait…)\nCopy top 5 to new sheet\nOpen VAT file (wait more…)\nSort by amount\nCalculate 10% of rows\nSum manually with calculator\nHope you didn’t make errors!"
+  },
+  {
+    "objectID": "3_data_wrangling.html#without-r-1",
+    "href": "3_data_wrangling.html#without-r-1",
+    "title": "Data Wrangling with dplyr",
+    "section": "Without R",
+    "text": "Without R\nThe Excel Way 😩\n\nOpen CIT file (wait…)\n\n2. Sort by tax_paid (wait…)\n3. Copy top 5 to new sheet\n4. Open VAT file (wait more…)\n5. Sort by amount\n6. Calculate 10% of rows\n7. Sum manually with calculator\n8. Hope you didn’t make errors!"
+  },
+  {
+    "objectID": "3_data_wrangling.html#with-r-magic-i",
+    "href": "3_data_wrangling.html#with-r-magic-i",
+    "title": "Data Wrangling with dplyr",
+    "section": "With R Magic ✨ (I)",
+    "text": "With R Magic ✨ (I)\nChallenge 1 Solution:\n\n# Top 5 CIT contributors - Done in seconds!\ntop_5_cit &lt;- panel_cit %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(total_cit = sum(tax_paid, na.rm = TRUE)) %&gt;%\n  arrange(desc(total_cit)) %&gt;%\n  slice_head(n = 5)\n\ntop_5_cit\n\n# A tibble: 5 × 2\n  firm_id   total_cit\n  &lt;chr&gt;         &lt;int&gt;\n1 FIRM_0071    404560\n2 FIRM_0050    391992\n3 FIRM_0031    372270\n4 FIRM_0002    370304\n5 FIRM_0082    366191"
+  },
+  {
+    "objectID": "3_data_wrangling.html#with-r-magic-ii",
+    "href": "3_data_wrangling.html#with-r-magic-ii",
+    "title": "Data Wrangling with dplyr",
+    "section": "With R Magic ✨ (II)",
+    "text": "With R Magic ✨ (II)\n\n# How much VAT from top 10%?\nvat_concentration &lt;- panel_vat %&gt;%\n  mutate(net_vat = (vat_outputs - vat_inputs) * 0.18) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(total_vat = sum(net_vat, na.rm = TRUE)) %&gt;%\n  arrange(desc(total_vat)) %&gt;%\n  mutate(\n    rank = row_number(),\n    percentile = rank / n() * 100,\n    is_top_10pct = percentile &lt;= 10\n  )\n\n# Answer:\ntotal_vat_all &lt;- sum(vat_concentration$total_vat)\ntotal_vat_top10 &lt;- sum(filter(vat_concentration, is_top_10pct)$total_vat)\npct_from_top10 &lt;- total_vat_top10 / total_vat_all * 100\n\ncat(\"Top 10% of firms contribute\", round(pct_from_top10, 1), \"% of total VAT\")\n\nTop 10% of firms contribute 163.1 % of total VAT"
+  },
+  {
+    "objectID": "3_data_wrangling.html#understanding-the-pipe-in-detail",
+    "href": "3_data_wrangling.html#understanding-the-pipe-in-detail",
+    "title": "Data Wrangling with dplyr",
+    "section": "Understanding the Pipe in Detail",
+    "text": "Understanding the Pipe in Detail\nHow the pipe works:\n\n# These three are equivalent:\n\n# Option 1: Traditional nesting\nsum(sqrt(abs(c(-4, -9, -16))))\n\n[1] 9\n\n# Option 2: Step by step\nnumbers &lt;- c(-4, -9, -16)\nabsolute &lt;- abs(numbers)\nsquare_root &lt;- sqrt(absolute)\nresult &lt;- sum(square_root)\n\n# Option 3: With pipe\nc(-4, -9, -16) %&gt;%\n  abs() %&gt;%\n  sqrt() %&gt;%\n  sum()\n\n[1] 9\n\n\n. . .\n\n\n\n\n\n\nNote\n\n\nThe pipe automatically passes the result from the left as the first argument to the function on the right."
+  },
+  {
+    "objectID": "3_data_wrangling.html#pipe-with-data-frames",
+    "href": "3_data_wrangling.html#pipe-with-data-frames",
+    "title": "Data Wrangling with dplyr",
+    "section": "Pipe with Data Frames",
+    "text": "Pipe with Data Frames\n\n# The pipe shines with data manipulation!\n\n# Without pipe - hard to read\nhead(arrange(filter(panel_cit, tax_paid &gt; 50000), desc(tax_paid)), 3)\n\nEmpty data.table (0 rows and 5 cols): firm_id,declaration_date,taxable_income,tax_paid,adjustments\n\n# With pipe - crystal clear!\npanel_cit %&gt;%\n  filter(tax_paid &gt; 50000) %&gt;%\n  arrange(desc(tax_paid)) %&gt;%\n  head(3)\n\nEmpty data.table (0 rows and 5 cols): firm_id,declaration_date,taxable_income,tax_paid,adjustments"
+  },
+  {
+    "objectID": "3_data_wrangling.html#select-choosing-your-columns",
+    "href": "3_data_wrangling.html#select-choosing-your-columns",
+    "title": "Data Wrangling with dplyr",
+    "section": "select(): Choosing Your Columns",
+    "text": "select(): Choosing Your Columns\nThe most basic operation - pick what you want to see\n\n# Our full dataset has many columns\nnames(panel_cit)\n\n[1] \"firm_id\"          \"declaration_date\" \"taxable_income\"   \"tax_paid\"        \n[5] \"adjustments\"     \n\n\n. . .\n\n# Select just what we need\npanel_cit %&gt;%\n  select(firm_id, tax_paid) %&gt;%\n  head(3)\n\n     firm_id tax_paid\n      &lt;char&gt;    &lt;int&gt;\n1: FIRM_0075    25447\n2: FIRM_0080    22246\n3: FIRM_0007    32964"
+  },
+  {
+    "objectID": "3_data_wrangling.html#select-multiple-selection-methods",
+    "href": "3_data_wrangling.html#select-multiple-selection-methods",
+    "title": "Data Wrangling with dplyr",
+    "section": "select(): Multiple Selection Methods",
+    "text": "select(): Multiple Selection Methods\n\nBy NameBy PositionBy RangeBy Exclusion\n\n\n\npanel_cit %&gt;%\n  select(firm_id, declaration_date, tax_paid) %&gt;%\n  head(3)\n\n     firm_id declaration_date tax_paid\n      &lt;char&gt;           &lt;POSc&gt;    &lt;int&gt;\n1: FIRM_0075       2023-03-31    25447\n2: FIRM_0080       2023-12-31    22246\n3: FIRM_0007       2021-06-30    32964\n\n\n\n\n\n# Select 1st, 3rd, and 4th columns\npanel_cit %&gt;%\n  select(1, 3, 4) %&gt;%\n  head(3)\n\n     firm_id taxable_income tax_paid\n      &lt;char&gt;          &lt;int&gt;    &lt;int&gt;\n1: FIRM_0075          91591    25447\n2: FIRM_0080         181645    22246\n3: FIRM_0007         110826    32964\n\n\n\n\n\n# Select columns from firm_id to tax_paid\npanel_cit %&gt;%\n  select(firm_id:tax_paid) %&gt;%\n  head(3)\n\n     firm_id declaration_date taxable_income tax_paid\n      &lt;char&gt;           &lt;POSc&gt;          &lt;int&gt;    &lt;int&gt;\n1: FIRM_0075       2023-03-31          91591    25447\n2: FIRM_0080       2023-12-31         181645    22246\n3: FIRM_0007       2021-06-30         110826    32964\n\n\n\n\n\n# Select all EXCEPT adjustments\npanel_cit %&gt;%\n  select(-adjustments) %&gt;%\n  head(3)\n\n     firm_id declaration_date taxable_income tax_paid\n      &lt;char&gt;           &lt;POSc&gt;          &lt;int&gt;    &lt;int&gt;\n1: FIRM_0075       2023-03-31          91591    25447\n2: FIRM_0080       2023-12-31         181645    22246\n3: FIRM_0007       2021-06-30         110826    32964"
+  },
+  {
+    "objectID": "3_data_wrangling.html#select-helper-functions",
+    "href": "3_data_wrangling.html#select-helper-functions",
+    "title": "Data Wrangling with dplyr",
+    "section": "select(): Helper Functions",
+    "text": "select(): Helper Functions\nMake selection easier with built-in helpers:\n\n# All columns starting with \"tax\"\npanel_cit %&gt;%\n  select(starts_with(\"tax\")) %&gt;%\n  head(3)\n\n   taxable_income tax_paid\n            &lt;int&gt;    &lt;int&gt;\n1:          91591    25447\n2:         181645    22246\n3:         110826    32964\n\n\n. . .\n\n# Combine helpers with regular selection\npanel_vat %&gt;%\n  select(firm_id, ends_with(\"date\"), contains(\"vat\")) %&gt;%\n  head(3)\n\n     firm_id declaration_date reimbursement_date vat_inputs vat_outputs\n      &lt;char&gt;           &lt;POSc&gt;             &lt;POSc&gt;      &lt;int&gt;       &lt;int&gt;\n1: FIRM_0096       2023-01-31         2023-12-31      45262       45914\n2: FIRM_0081       2022-05-31         2021-07-31       9225       29661\n3: FIRM_0024       2023-03-31         2023-09-30      15289       10005"
+  },
+  {
+    "objectID": "3_data_wrangling.html#select-complete-helper-reference",
+    "href": "3_data_wrangling.html#select-complete-helper-reference",
+    "title": "Data Wrangling with dplyr",
+    "section": "select(): Complete Helper Reference",
+    "text": "select(): Complete Helper Reference\n\n\n\n\n\nHelper\nDescription\nExample\n\n\n\n\nstarts_with()\nColumns starting with a prefix\nstarts_with(\"tax\")\n\n\nends_with()\nColumns ending with a suffix\nends_with(\"_date\")\n\n\ncontains()\nColumns containing a literal string\ncontains(\"amount\")\n\n\nmatches()\nColumns matching a regular expression\nmatches(\"^[0-9]{4}$\")\n\n\nnum_range()\nColumns with numeric range\nnum_range(\"x\", 1:5)\n\n\nall_of()\nAll columns in a character vector\nall_of(my_columns)\n\n\nany_of()\nAny columns in a character vector\nany_of(my_columns)\n\n\nwhere()\nColumns where a function returns TRUE\nwhere(is.numeric)\n\n\neverything()\nAll remaining columns\nfirm_id, everything()\n\n\nlast_col()\nThe last column\nfirst_col, last_col()"
+  },
+  {
+    "objectID": "3_data_wrangling.html#select-renaming-columns",
+    "href": "3_data_wrangling.html#select-renaming-columns",
+    "title": "Data Wrangling with dplyr",
+    "section": "select(): Renaming Columns",
+    "text": "select(): Renaming Columns\nYou can rename while selecting:\n\n# Rename during selection\npanel_cit %&gt;%\n  select(\n    company = firm_id,\n    filed_on = declaration_date,\n    income = taxable_income,\n    paid = tax_paid\n  ) %&gt;%\n  head(3)\n\n     company   filed_on income  paid\n      &lt;char&gt;     &lt;POSc&gt;  &lt;int&gt; &lt;int&gt;\n1: FIRM_0075 2023-03-31  91591 25447\n2: FIRM_0080 2023-12-31 181645 22246\n3: FIRM_0007 2021-06-30 110826 32964\n\n\n. . .\nOr rename without changing selection:\n\n# Keep all columns but rename some\npanel_cit %&gt;%\n  rename(\n    company = firm_id,\n    filed_on = declaration_date\n  ) %&gt;%\n  head(3)\n\n     company   filed_on taxable_income tax_paid adjustments\n      &lt;char&gt;     &lt;POSc&gt;          &lt;int&gt;    &lt;int&gt;       &lt;int&gt;\n1: FIRM_0075 2023-03-31          91591    25447        2239\n2: FIRM_0080 2023-12-31         181645    22246        4777\n3: FIRM_0007 2021-06-30         110826    32964       -2942"
+  },
+  {
+    "objectID": "3_data_wrangling.html#select-advanced-techniques",
+    "href": "3_data_wrangling.html#select-advanced-techniques",
+    "title": "Data Wrangling with dplyr",
+    "section": "select(): Advanced Techniques",
+    "text": "select(): Advanced Techniques\nReordering columns:\n\n# Move important columns to the front\npanel_vat %&gt;%\n  select(firm_id, vat_outputs, vat_inputs, everything()) %&gt;%\n  head(3)\n\n     firm_id vat_outputs vat_inputs declaration_date reimbursement_date\n      &lt;char&gt;       &lt;int&gt;      &lt;int&gt;           &lt;POSc&gt;             &lt;POSc&gt;\n1: FIRM_0096       45914      45262       2023-01-31         2023-12-31\n2: FIRM_0081       29661       9225       2022-05-31         2021-07-31\n3: FIRM_0024       10005      15289       2023-03-31         2023-09-30\n\n\n. . .\nUsing where() for conditional selection:\n\n# Select only numeric columns\npanel_cit %&gt;%\n  select(firm_id, where(is.numeric)) %&gt;%\n  head(3)\n\n     firm_id taxable_income tax_paid adjustments\n      &lt;char&gt;          &lt;int&gt;    &lt;int&gt;       &lt;int&gt;\n1: FIRM_0075          91591    25447        2239\n2: FIRM_0080         181645    22246        4777\n3: FIRM_0007         110826    32964       -2942"
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-turn-master-selection",
+    "href": "3_data_wrangling.html#your-turn-master-selection",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Turn: Master Selection",
+    "text": "Your Turn: Master Selection\n −+ 05:00 \nExercise: Tax Data Selection\nFrom panel_vat, create a dataset that: 1. Starts with firm_id (renamed as ‘taxpayer’) 2. Includes all VAT-related columns 3. Includes declaration_date but NOT reimbursement_date 4. Ends with all remaining columns\n\n# Your code here:\ntax_selection &lt;- panel_vat %&gt;%\n  select(\n    _______________\n  )\n\n. . .\nSolution:\n\ntax_selection &lt;- panel_vat %&gt;%\n  select(\n    taxpayer = firm_id,\n    contains(\"vat\"),\n    declaration_date,\n    -reimbursement_date,\n    everything()\n  )\n\nnames(tax_selection)\n\n[1] \"taxpayer\"           \"vat_inputs\"         \"vat_outputs\"       \n[4] \"declaration_date\"   \"reimbursement_date\""
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-basic-comparisons",
+    "href": "3_data_wrangling.html#filter-basic-comparisons",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): Basic Comparisons",
+    "text": "filter(): Basic Comparisons\nUsing comparison operators:\n\n# Equal to\npanel_cit %&gt;%\n  filter(adjustments == 0) %&gt;%\n  nrow()\n\n[1] 1\n\n\n. . .\n\n# Not equal to\npanel_cit %&gt;%\n  filter(adjustments != 0) %&gt;%\n  nrow()\n\n[1] 999\n\n\n. . .\n\n# Greater than or equal\npanel_cit %&gt;%\n  filter(adjustments &gt;= 0) %&gt;%\n  nrow()\n\n[1] 495"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-complete-operator-reference",
+    "href": "3_data_wrangling.html#filter-complete-operator-reference",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): Complete Operator Reference",
+    "text": "filter(): Complete Operator Reference\n\n\n\n\n\nOperator\nMeaning\nExample\nUse_Case\n\n\n\n\n==\nEqual to\nstatus == 'Active'\nFind exact matches\n\n\n!=\nNot equal to\nregion != 'North'\nExclude specific values\n\n\n&gt;\nGreater than\namount &gt; 50000\nAbove threshold\n\n\n&gt;=\nGreater than or equal\nscore &gt;= 80\nAt or above threshold\n\n\n\nLess than\ndays\nBelow threshold\n\n\n\nLess than or equal\nrank\nAt or below threshold\n\n\n%in%\nIn a set of values\nid %in% c('A', 'B', 'C')\nMultiple exact matches\n\n\nbetween()\nBetween two values\nbetween(age, 18, 65)\nWithin range\n\n\nnear()\nNear a value (floating point)\nnear(rate, 0.18, tol = 0.001)\nApproximate equality\n\n\nis.na()\nIs missing\nis.na(date)\nFind missing values\n\n\n!is.na()\nIs not missing\n!is.na(amount)\nFind non-missing values"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-combining-conditions",
+    "href": "3_data_wrangling.html#filter-combining-conditions",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): Combining Conditions",
+    "text": "filter(): Combining Conditions\nUsing AND (&, comma):\n\n# Both conditions must be true\n# These are equivalent:\n\n# Using &\nhigh_tax_profitable &lt;- panel_cit %&gt;%\n  filter(taxable_income &gt; 100000 & tax_paid &gt; 25000)\n\n# Using comma (implicit AND)\nhigh_tax_profitable &lt;- panel_cit %&gt;%\n  filter(taxable_income &gt; 100000, tax_paid &gt; 25000)\n\nnrow(high_tax_profitable)\n\n[1] 262"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-using-or",
+    "href": "3_data_wrangling.html#filter-using-or",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): Using OR",
+    "text": "filter(): Using OR\nWhen at least one condition should be true:\n\n# Firms needing review: negative adjustments OR zero tax\nreview_needed &lt;- panel_cit %&gt;%\n  filter(adjustments &lt; 0 | tax_paid == 0)\n\nnrow(review_needed)\n\n[1] 505\n\n\n. . .\nComplex combinations:\n\n# (High income AND low tax) OR negative adjustments\nsuspicious &lt;- panel_cit %&gt;%\n  filter((taxable_income &gt; 100000 & tax_paid &lt; 10000) | adjustments &lt; -5000)\n\nnrow(suspicious)\n\n[1] 101"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-date-ranges",
+    "href": "3_data_wrangling.html#filter-date-ranges",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): Date Ranges",
+    "text": "filter(): Date Ranges\n\n# Between specific dates\nfeb_march_2023 &lt;- panel_vat %&gt;%\n  filter(\n    declaration_date &gt;= \"2023-02-01\",\n    declaration_date &lt;= \"2023-03-31\"\n  )\n\nnrow(feb_march_2023)\n\n[1] 56\n\n\n\n\n# Using between() for cleaner code\nfeb_march_2023_v2 &lt;- panel_vat %&gt;%\n  filter(between(declaration_date, \n                 as.Date(\"2023-02-01\"), \n                 as.Date(\"2023-03-31\")))\n\nnrow(feb_march_2023_v2)\n\n[1] 56"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-the-in-operator",
+    "href": "3_data_wrangling.html#filter-the-in-operator",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): The %in% Operator",
+    "text": "filter(): The %in% Operator\nPerfect for filtering multiple specific values:\n\n# Specific firms of interest\nkey_firms &lt;- c(\"FIRM_0001\", \"FIRM_0002\", \"FIRM_0003\", \"FIRM_0010\", \"FIRM_0020\")\n\nkey_firm_data &lt;- panel_cit %&gt;%\n  filter(firm_id %in% key_firms) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    total_tax = sum(tax_paid, na.rm = TRUE),\n    n_filings = n()\n  )\n\nkey_firm_data\n\n# A tibble: 5 × 3\n  firm_id   total_tax n_filings\n  &lt;chr&gt;         &lt;int&gt;     &lt;int&gt;\n1 FIRM_0001    361157        16\n2 FIRM_0002    370304        15\n3 FIRM_0003    166654         8\n4 FIRM_0010    215389        10\n5 FIRM_0020    110511         6"
+  },
+  {
+    "objectID": "3_data_wrangling.html#filter-dealing-with-na-values",
+    "href": "3_data_wrangling.html#filter-dealing-with-na-values",
+    "title": "Data Wrangling with dplyr",
+    "section": "filter(): Dealing with NA Values",
+    "text": "filter(): Dealing with NA Values\nNA values need special handling:\n\n# This won't work as expected!\n# panel_cit %&gt;% filter(adjustments == NA)  # Returns 0 rows!\n\n# Use is.na() instead\nhas_missing &lt;- panel_cit %&gt;%\n  filter(is.na(adjustments))\n\nnrow(has_missing)\n\n[1] 0\n\n\n. . .\n\n# Find complete cases (no missing values)\ncomplete_records &lt;- panel_cit %&gt;%\n  filter(!is.na(adjustments), \n         !is.na(tax_paid),\n         !is.na(taxable_income))\n\nnrow(complete_records)\n\n[1] 1000"
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-turn-advanced-filtering",
+    "href": "3_data_wrangling.html#your-turn-advanced-filtering",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Turn: Advanced Filtering",
+    "text": "Your Turn: Advanced Filtering\n −+ 07:00 \nExercise: Identify High-Risk Taxpayers\nFind taxpayers that meet ALL these criteria: 1. Filed in 2023 2. Either: - Effective tax rate &lt; 15% (for profitable firms), OR - Have negative adjustments exceeding 10% of taxable income 3. Taxable income &gt; 50,000\n\n# Your code here:\nhigh_risk &lt;- panel_cit %&gt;%\n  filter(\n    _______________\n  ) %&gt;%\n  mutate(_______________) %&gt;%  # You might need this!\n  filter(_______________)"
+  },
+  {
+    "objectID": "3_data_wrangling.html#mutate-modifying-existing-columns",
+    "href": "3_data_wrangling.html#mutate-modifying-existing-columns",
+    "title": "Data Wrangling with dplyr",
+    "section": "mutate(): Modifying Existing Columns",
+    "text": "mutate(): Modifying Existing Columns\nYou can overwrite columns too:\n\n# Convert to millions for readability\ncit_millions &lt;- panel_cit %&gt;%\n  mutate(\n    taxable_income = round(taxable_income / 1e6, 2),\n    tax_paid = round(tax_paid / 1e6, 2)\n  ) %&gt;%\n  select(firm_id, taxable_income, tax_paid) %&gt;%\n  head(5)\n\ncit_millions\n\n     firm_id taxable_income tax_paid\n      &lt;char&gt;          &lt;num&gt;    &lt;num&gt;\n1: FIRM_0075           0.09     0.03\n2: FIRM_0080           0.18     0.02\n3: FIRM_0007           0.11     0.03\n4: FIRM_0045           0.10     0.03\n5: FIRM_0053           0.07     0.02"
+  },
+  {
+    "objectID": "3_data_wrangling.html#mutate-using-column-references",
+    "href": "3_data_wrangling.html#mutate-using-column-references",
+    "title": "Data Wrangling with dplyr",
+    "section": "mutate(): Using Column References",
+    "text": "mutate(): Using Column References\nNew columns can reference other new columns:\n\n# Chain calculations\ntax_metrics &lt;- panel_cit %&gt;%\n  mutate(\n    # First calculation\n    expected_tax = taxable_income * 0.25,\n    # Second uses first\n    tax_gap = expected_tax - tax_paid,\n    # Third uses second\n    gap_percentage = (tax_gap / expected_tax) * 100\n  ) %&gt;%\n  select(firm_id, expected_tax, tax_paid, tax_gap, gap_percentage) %&gt;%\n  filter(!is.na(gap_percentage)) %&gt;%\n  head(5)\n\ntax_metrics\n\n     firm_id expected_tax tax_paid  tax_gap gap_percentage\n      &lt;char&gt;        &lt;num&gt;    &lt;int&gt;    &lt;num&gt;          &lt;num&gt;\n1: FIRM_0075     22897.75    25447 -2549.25     -11.133190\n2: FIRM_0080     45411.25    22246 23165.25      51.012139\n3: FIRM_0007     27706.50    32964 -5257.50     -18.975692\n4: FIRM_0045     25382.50    27547 -2164.50      -8.527529\n5: FIRM_0053     17432.50    18176  -743.50      -4.265022"
+  },
+  {
+    "objectID": "3_data_wrangling.html#mutate-conditional-logic-with-if_else",
+    "href": "3_data_wrangling.html#mutate-conditional-logic-with-if_else",
+    "title": "Data Wrangling with dplyr",
+    "section": "mutate(): Conditional Logic with if_else()",
+    "text": "mutate(): Conditional Logic with if_else()\nSimple conditional calculations:\n\n# Flag large taxpayers\npanel_vat %&gt;%\n  mutate(\n    taxpayer_size = if_else(vat_outputs &gt; 100000, \n                            \"Large\", \n                            \"Small\")\n  ) %&gt;%\n  count(taxpayer_size)\n\n   taxpayer_size     n\n          &lt;char&gt; &lt;int&gt;\n1:         Small  1000\n\n\n. . .\nWith NA handling:\n\n# Handle missing values explicitly\npanel_cit %&gt;%\n  mutate(\n    has_adjustments = if_else(adjustments != 0, \n                              \"Yes\", \n                              \"No\",\n                              missing = \"Unknown\")\n  ) %&gt;%\n  count(has_adjustments)\n\n   has_adjustments     n\n            &lt;char&gt; &lt;int&gt;\n1:              No     1\n2:             Yes   999"
+  },
+  {
+    "objectID": "3_data_wrangling.html#mutate-complex-logic-with-case_when",
+    "href": "3_data_wrangling.html#mutate-complex-logic-with-case_when",
+    "title": "Data Wrangling with dplyr",
+    "section": "mutate(): Complex Logic with case_when()",
+    "text": "mutate(): Complex Logic with case_when()\nFor multiple conditions:\n\n# Comprehensive risk categorization\nrisk_profiles &lt;- panel_cit %&gt;%\n  mutate(\n    effective_rate = (tax_paid / taxable_income) * 100,\n    risk_category = case_when(\n      is.na(effective_rate) ~ \"Cannot Calculate\",\n      effective_rate &lt; 10 ~ \"High Risk\",\n      effective_rate &lt; 15 ~ \"Medium Risk\",\n      effective_rate &lt; 20 ~ \"Low Risk\",\n      effective_rate &gt;= 20 ~ \"Compliant\",\n      TRUE ~ \"Review\"  # Catch-all\n    )\n  ) %&gt;%\n  count(risk_category) %&gt;%\n  arrange(desc(n))\n\nrisk_profiles\n\n   risk_category     n\n          &lt;char&gt; &lt;int&gt;\n1:     Compliant   416\n2:     High Risk   221\n3:   Medium Risk   190\n4:      Low Risk   173"
+  },
+  {
+    "objectID": "3_data_wrangling.html#mutate-real-world-tax-calculations",
+    "href": "3_data_wrangling.html#mutate-real-world-tax-calculations",
+    "title": "Data Wrangling with dplyr",
+    "section": "mutate(): Real-World Tax Calculations",
+    "text": "mutate(): Real-World Tax Calculations\nLet’s build a comprehensive tax analysis:\n\ncomprehensive_analysis &lt;- panel_vat %&gt;%\n  mutate(\n    # Basic calculations\n    net_vat_base = vat_outputs - vat_inputs,\n    implied_vat = net_vat_base * 0.18,\n    \n    # Ratios and percentages\n    input_ratio = vat_inputs / vat_outputs,\n    margin_pct = (net_vat_base / vat_outputs) * 100,\n    \n    # Risk indicators\n    high_input_flag = input_ratio &gt; 0.9,\n    negative_margin_flag = net_vat_base &lt; 0,\n    \n    # Compliance score (0-100)\n    compliance_score = case_when(\n      negative_margin_flag ~ 0,\n      input_ratio &gt; 0.95 ~ 10,\n      input_ratio &gt; 0.90 ~ 30,\n      input_ratio &gt; 0.85 ~ 50,\n      input_ratio &gt; 0.80 ~ 70,\n      TRUE ~ 100\n    )\n  )\n\n# View summary\ncomprehensive_analysis %&gt;%\n  group_by(compliance_score) %&gt;%\n  summarize(count = n()) %&gt;%\n  arrange(compliance_score)\n\n# A tibble: 6 × 2\n  compliance_score count\n             &lt;dbl&gt; &lt;int&gt;\n1                0   491\n2               10    23\n3               30    28\n4               50    29\n5               70    30\n6              100   399"
+  },
+  {
+    "objectID": "3_data_wrangling.html#working-with-dates-in-mutate",
+    "href": "3_data_wrangling.html#working-with-dates-in-mutate",
+    "title": "Data Wrangling with dplyr",
+    "section": "Working with Dates in mutate()",
+    "text": "Working with Dates in mutate()\nExtract date components:\n\n# Comprehensive date analysis\ndate_features &lt;- panel_vat %&gt;%\n  mutate(\n    # Basic components\n    year = year(declaration_date),\n    month = month(declaration_date),\n    quarter = quarter(declaration_date),\n    \n    # Useful for analysis\n    year_month = floor_date(declaration_date, \"month\"),\n    week_number = week(declaration_date),\n    day_of_year = yday(declaration_date),\n    \n    # Business logic\n    fiscal_year = if_else(month &gt;= 7, year + 1, year),\n    is_year_end = month == 12,\n    is_quarter_end = month %in% c(3, 6, 9, 12)\n  ) %&gt;%\n  select(declaration_date, year, month, fiscal_year, is_quarter_end) %&gt;%\n  head(10)\n\ndate_features\n\n    declaration_date  year month fiscal_year is_quarter_end\n              &lt;POSc&gt; &lt;num&gt; &lt;num&gt;       &lt;num&gt;         &lt;lgcl&gt;\n 1:       2023-01-31  2023     1        2023          FALSE\n 2:       2022-05-31  2022     5        2022          FALSE\n 3:       2023-03-31  2023     3        2023           TRUE\n 4:       2023-08-31  2023     8        2024          FALSE\n 5:       2023-09-30  2023     9        2024           TRUE\n 6:       2022-12-31  2022    12        2023           TRUE\n 7:       2021-02-28  2021     2        2021          FALSE\n 8:       2022-07-31  2022     7        2023          FALSE\n 9:       2021-12-31  2021    12        2022           TRUE\n10:       2021-11-30  2021    11        2022          FALSE"
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-turn-complex-calculations",
+    "href": "3_data_wrangling.html#your-turn-complex-calculations",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Turn: Complex Calculations",
+    "text": "Your Turn: Complex Calculations\n −+ 10:00 \nExercise: Build a VAT Audit Score\nCreate an audit scoring system with these components:\n\nCalculate basic metrics:\n\nNet VAT base and input ratio\nDays to reimbursement\n\nCreate risk flags for:\n\nInput ratio &gt; 0.9 (10 points)\nNegative net base (20 points)\nLate reimbursement &gt; 90 days (5 points)\n\nSum flags for total audit score\nCategorize: 0=“Clean”, 1-10=“Review”, 11-20=“Audit”, &gt;20=“Priority Audit”\n\n\n# Your code here:\naudit_scores &lt;- panel_vat %&gt;%\n  mutate(\n    # Basic metrics\n    \n    # Risk flags\n    \n    # Total score\n    \n    # Category\n    \n  ) %&gt;%\n  select(firm_id, audit_score, audit_category)"
+  },
+  {
+    "objectID": "3_data_wrangling.html#summarize-aggregating-data",
+    "href": "3_data_wrangling.html#summarize-aggregating-data",
+    "title": "Data Wrangling with dplyr",
+    "section": "summarize(): Aggregating Data",
+    "text": "summarize(): Aggregating Data\nThe fourth essential verb - collapse many rows into summary statistics\n\n# Simple aggregation\ntotal_cit_stats &lt;- panel_cit %&gt;%\n  summarize(\n    total_tax_collected = sum(tax_paid, na.rm = TRUE),\n    average_tax_paid = mean(tax_paid, na.rm = TRUE),\n    median_tax_paid = median(tax_paid, na.rm = TRUE),\n    number_of_filings = n()\n  )\n\ntotal_cit_stats\n\n  total_tax_collected average_tax_paid median_tax_paid number_of_filings\n1            21932818         21932.82           21813              1000"
+  },
+  {
+    "objectID": "3_data_wrangling.html#summarize-key-summary-functions",
+    "href": "3_data_wrangling.html#summarize-key-summary-functions",
+    "title": "Data Wrangling with dplyr",
+    "section": "summarize(): Key Summary Functions",
+    "text": "summarize(): Key Summary Functions\n\n# Comprehensive summary statistics\nvat_summary &lt;- panel_vat %&gt;%\n  summarize(\n    # Counts\n    n_records = n(),\n    n_firms = n_distinct(firm_id),\n    \n    # Central tendency\n    mean_outputs = mean(vat_outputs, na.rm = TRUE),\n    median_outputs = median(vat_outputs, na.rm = TRUE),\n    \n    # Spread\n    sd_outputs = sd(vat_outputs, na.rm = TRUE),\n    min_outputs = min(vat_outputs, na.rm = TRUE),\n    max_outputs = max(vat_outputs, na.rm = TRUE),\n    \n    # Proportions\n    pct_high_value = mean(vat_outputs &gt; 50000, na.rm = TRUE) * 100\n  )\n\nglimpse(vat_summary)\n\nRows: 1\nColumns: 8\n$ n_records      &lt;int&gt; 1000\n$ n_firms        &lt;int&gt; 100\n$ mean_outputs   &lt;dbl&gt; 25883.25\n$ median_outputs &lt;dbl&gt; 26212.5\n$ sd_outputs     &lt;dbl&gt; 14158.74\n$ min_outputs    &lt;int&gt; 1014\n$ max_outputs    &lt;int&gt; 49969\n$ pct_high_value &lt;dbl&gt; 0"
+  },
+  {
+    "objectID": "3_data_wrangling.html#summarize-complete-function-reference",
+    "href": "3_data_wrangling.html#summarize-complete-function-reference",
+    "title": "Data Wrangling with dplyr",
+    "section": "summarize(): Complete Function Reference",
+    "text": "summarize(): Complete Function Reference\n\n\n\n\n\nFunction\nPurpose\nExample\nNote\n\n\n\n\nn()\nCount rows\nn()\nNever NA\n\n\nn_distinct()\nCount unique values\nn_distinct(firm_id)\nRemoves NA by default\n\n\nsum()\nTotal\nsum(amount, na.rm = TRUE)\nSet na.rm = TRUE\n\n\nmean()\nAverage\nmean(value, na.rm = TRUE)\nArithmetic mean\n\n\nmedian()\nMiddle value\nmedian(value, na.rm = TRUE)\n50th percentile\n\n\nsd()\nStandard deviation\nsd(value, na.rm = TRUE)\nMeasure of spread\n\n\nvar()\nVariance\nvar(value, na.rm = TRUE)\nSquared SD\n\n\nmin()\nMinimum\nmin(date)\nEarliest date/smallest number\n\n\nmax()\nMaximum\nmax(amount)\nLatest date/largest number\n\n\nquantile()\nPercentiles\nquantile(value, 0.75)\n75th percentile\n\n\nIQR()\nInterquartile range\nIQR(value)\n75th - 25th percentile\n\n\nfirst()\nFirst value\nfirst(status)\nFirst in order\n\n\nlast()\nLast value\nlast(status)\nLast in order\n\n\nany()\nAny TRUE?\nany(flag == TRUE)\nLogical check\n\n\nall()\nAll TRUE?\nall(amount &gt; 0)\nLogical check"
+  },
+  {
+    "objectID": "3_data_wrangling.html#the-magic-of-group_by",
+    "href": "3_data_wrangling.html#the-magic-of-group_by",
+    "title": "Data Wrangling with dplyr",
+    "section": "The Magic of group_by()",
+    "text": "The Magic of group_by()\nTransform your summaries from one row to many:\n\n# Without grouping - single summary\npanel_cit %&gt;%\n  summarize(total = sum(tax_paid, na.rm = TRUE))\n\n     total\n1 21932818\n\n# With grouping - summary per group!\npanel_cit %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  group_by(year) %&gt;%\n  summarize(total = sum(tax_paid, na.rm = TRUE))\n\n# A tibble: 3 × 2\n   year   total\n  &lt;dbl&gt;   &lt;int&gt;\n1  2021 7371324\n2  2022 7256158\n3  2023 7305336"
+  },
+  {
+    "objectID": "3_data_wrangling.html#group_by-how-it-works",
+    "href": "3_data_wrangling.html#group_by-how-it-works",
+    "title": "Data Wrangling with dplyr",
+    "section": "group_by(): How It Works",
+    "text": "group_by(): How It Works\nConceptually splits your data:\n\n# Group by region\nregional_summary &lt;- dt_firms %&gt;%\n  group_by(region) %&gt;%\n  summarize(\n    n_firms = n(),\n    avg_employees = mean(number_of_employees, na.rm = TRUE)\n  ) %&gt;%\n  arrange(desc(n_firms))\n\nregional_summary\n\n# A tibble: 4 × 3\n  region n_firms avg_employees\n  &lt;chr&gt;    &lt;int&gt;         &lt;dbl&gt;\n1 East        79          263.\n2 South       75          263.\n3 North       74          238.\n4 West        72          263."
+  },
+  {
+    "objectID": "3_data_wrangling.html#group_by-multiple-variables",
+    "href": "3_data_wrangling.html#group_by-multiple-variables",
+    "title": "Data Wrangling with dplyr",
+    "section": "group_by(): Multiple Variables",
+    "text": "group_by(): Multiple Variables\nGroup by multiple columns for detailed breakdowns:\n\n# Industry and size breakdown\ndetailed_breakdown &lt;- dt_firms %&gt;%\n  group_by(industry, size) %&gt;%\n  summarize(\n    count = n(),\n    avg_employees = mean(number_of_employees, na.rm = TRUE),\n    total_employees = sum(number_of_employees, na.rm = TRUE),\n    .groups = \"drop\"  # Important: ungroup after!\n  ) %&gt;%\n  arrange(industry, desc(count))\n\nhead(detailed_breakdown, 10)\n\n# A tibble: 10 × 5\n   industry      size   count avg_employees total_employees\n   &lt;chr&gt;         &lt;chr&gt;  &lt;int&gt;         &lt;dbl&gt;           &lt;int&gt;\n 1 Manufacturing Small     28          245.            6849\n 2 Manufacturing Large     26          241.            6254\n 3 Manufacturing Medium    17          262.            4450\n 4 Retail        Medium    34          236.            8036\n 5 Retail        Small     32          286.            9165\n 6 Retail        Large     24          207.            4973\n 7 Services      Medium    25          288.            7199\n 8 Services      Small     24          251.            6022\n 9 Services      Large     22          265.            5820\n10 Technology    Small     25          253.            6328"
+  },
+  {
+    "objectID": "3_data_wrangling.html#important-.groups-parameter",
+    "href": "3_data_wrangling.html#important-.groups-parameter",
+    "title": "Data Wrangling with dplyr",
+    "section": "Important: .groups Parameter",
+    "text": "Important: .groups Parameter\nControl what happens after summarize:\n\n# Default keeps some grouping\ntest1 &lt;- dt_firms %&gt;%\n  group_by(region, size) %&gt;%\n  summarize(n = n())  # Still grouped by region!\n\ngroups(test1)\n\n[[1]]\nregion\n\n# Explicit ungrouping\ntest2 &lt;- dt_firms %&gt;%\n  group_by(region, size) %&gt;%\n  summarize(n = n(), .groups = \"drop\")  # Fully ungrouped\n\ngroups(test2)\n\nlist()"
+  },
+  {
+    "objectID": "3_data_wrangling.html#solving-challenge-1-step-by-step",
+    "href": "3_data_wrangling.html#solving-challenge-1-step-by-step",
+    "title": "Data Wrangling with dplyr",
+    "section": "Solving Challenge 1 Step-by-Step",
+    "text": "Solving Challenge 1 Step-by-Step\n“Who are our top 5 CIT contributors?”\nStep 1: Understand the data\n\n# What do we have?\npanel_cit %&gt;%\n  select(firm_id, tax_paid) %&gt;%\n  head(5)\n\n     firm_id tax_paid\n      &lt;char&gt;    &lt;int&gt;\n1: FIRM_0075    25447\n2: FIRM_0080    22246\n3: FIRM_0007    32964\n4: FIRM_0045    27547\n5: FIRM_0053    18176"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-1-step-2---group-by-firm",
+    "href": "3_data_wrangling.html#challenge-1-step-2---group-by-firm",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 1: Step 2 - Group by Firm",
+    "text": "Challenge 1: Step 2 - Group by Firm\n\n# Each firm has multiple payments\npanel_cit %&gt;%\n  filter(firm_id == \"FIRM_0001\") %&gt;%\n  select(firm_id, declaration_date, tax_paid)\n\n      firm_id declaration_date tax_paid\n       &lt;char&gt;           &lt;POSc&gt;    &lt;int&gt;\n 1: FIRM_0001       2021-03-31    17734\n 2: FIRM_0001       2022-09-30     8766\n 3: FIRM_0001       2021-09-30    28263\n 4: FIRM_0001       2023-12-31    31163\n 5: FIRM_0001       2022-06-30    37948\n 6: FIRM_0001       2022-03-31    28492\n 7: FIRM_0001       2022-12-31    29100\n 8: FIRM_0001       2023-06-30    23345\n 9: FIRM_0001       2023-09-30    27374\n10: FIRM_0001       2022-09-30    26267\n11: FIRM_0001       2022-09-30     9692\n12: FIRM_0001       2021-03-31    16581\n13: FIRM_0001       2022-12-31    16317\n14: FIRM_0001       2022-06-30    29505\n15: FIRM_0001       2021-06-30    11940\n16: FIRM_0001       2021-03-31    18670\n\n\n\n\n# We need to sum these up\ngrouped_cit &lt;- panel_cit %&gt;%\n  group_by(firm_id)\n\n# The data looks the same, but it's grouped internally\ngroups(grouped_cit)\n\n[[1]]\nfirm_id"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-1-step-3---calculate-totals",
+    "href": "3_data_wrangling.html#challenge-1-step-3---calculate-totals",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 1: Step 3 - Calculate Totals",
+    "text": "Challenge 1: Step 3 - Calculate Totals\n\n# Sum tax paid per firm\nfirm_totals &lt;- panel_cit %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    total_tax_paid = sum(tax_paid, na.rm = TRUE),\n    n_payments = n(),\n    avg_payment = mean(tax_paid, na.rm = TRUE)\n  )\n\nhead(firm_totals)\n\n# A tibble: 6 × 4\n  firm_id   total_tax_paid n_payments avg_payment\n  &lt;chr&gt;              &lt;int&gt;      &lt;int&gt;       &lt;dbl&gt;\n1 FIRM_0001         361157         16      22572.\n2 FIRM_0002         370304         15      24687.\n3 FIRM_0003         166654          8      20832.\n4 FIRM_0004         273477         12      22790.\n5 FIRM_0005         214059         10      21406.\n6 FIRM_0006         180728          8      22591"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-1-step-4---find-top-5",
+    "href": "3_data_wrangling.html#challenge-1-step-4---find-top-5",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 1: Step 4 - Find Top 5",
+    "text": "Challenge 1: Step 4 - Find Top 5\n\n# Sort and take top 5\ntop_5_cit &lt;- firm_totals %&gt;%\n  arrange(desc(total_tax_paid)) %&gt;%\n  slice_head(n = 5)\n\n# Make it presentable\ntop_5_cit %&gt;%\n  mutate(\n    total_millions = round(total_tax_paid / 1e6, 2),\n    avg_thousands = round(avg_payment / 1e3, 1)\n  ) %&gt;%\n  select(firm_id, total_millions, n_payments, avg_thousands) %&gt;%\n  kable(col.names = c(\"Firm ID\", \"Total Tax (M)\", \"# Payments\", \"Avg Payment (K)\"),\n        format = \"html\") %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\"))\n\n\n\n\nFirm ID\nTotal Tax (M)\n# Payments\nAvg Payment (K)\n\n\n\n\nFIRM_0071\n0.40\n17\n23.8\n\n\nFIRM_0050\n0.39\n16\n24.5\n\n\nFIRM_0031\n0.37\n14\n26.6\n\n\nFIRM_0002\n0.37\n15\n24.7\n\n\nFIRM_0082\n0.37\n18\n20.3"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-1-all-together",
+    "href": "3_data_wrangling.html#challenge-1-all-together",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 1: All Together",
+    "text": "Challenge 1: All Together\n\n# The complete solution in one pipeline!\ntop_5_cit_final &lt;- panel_cit %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    total_tax_paid = sum(tax_paid, na.rm = TRUE),\n    n_payments = n(),\n    avg_payment = mean(tax_paid, na.rm = TRUE),\n    .groups = \"drop\"\n  ) %&gt;%\n  arrange(desc(total_tax_paid)) %&gt;%\n  slice_head(n = 5) %&gt;%\n  mutate(\n    rank = row_number(),\n    pct_of_total = total_tax_paid / sum(panel_cit$tax_paid, na.rm = TRUE) * 100\n  )\n\ntop_5_cit_final\n\n# A tibble: 5 × 6\n  firm_id   total_tax_paid n_payments avg_payment  rank pct_of_total\n  &lt;chr&gt;              &lt;int&gt;      &lt;int&gt;       &lt;dbl&gt; &lt;int&gt;        &lt;dbl&gt;\n1 FIRM_0071         404560         17      23798.     1         1.84\n2 FIRM_0050         391992         16      24500.     2         1.79\n3 FIRM_0031         372270         14      26591.     3         1.70\n4 FIRM_0002         370304         15      24687.     4         1.69\n5 FIRM_0082         366191         18      20344.     5         1.67"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-2-step-2---aggregate-by-firm",
+    "href": "3_data_wrangling.html#challenge-2-step-2---aggregate-by-firm",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 2: Step 2 - Aggregate by Firm",
+    "text": "Challenge 2: Step 2 - Aggregate by Firm\n\n# Sum VAT by firm\nfirm_vat_totals &lt;- panel_vat %&gt;%\n  mutate(vat_amount = (vat_outputs - vat_inputs) * 0.18) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    total_vat = sum(vat_amount, na.rm = TRUE),\n    n_transactions = n(),\n    avg_vat_base = mean(vat_outputs - vat_inputs, na.rm = TRUE)\n  ) %&gt;%\n  arrange(desc(total_vat))\n\nhead(firm_vat_totals)\n\n# A tibble: 6 × 4\n  firm_id   total_vat n_transactions avg_vat_base\n  &lt;chr&gt;         &lt;dbl&gt;          &lt;int&gt;        &lt;dbl&gt;\n1 FIRM_0067    32055.             10       17808.\n2 FIRM_0019    22614.             10       12563.\n3 FIRM_0022    20998.              7       16665.\n4 FIRM_0014    18973.             10       10541.\n5 FIRM_0002    16286.             11        8225.\n6 FIRM_0053    14548.              6       13471."
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-2-step-3---calculate-percentiles",
+    "href": "3_data_wrangling.html#challenge-2-step-3---calculate-percentiles",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge 2: Step 3 - Calculate Percentiles",
+    "text": "Challenge 2: Step 3 - Calculate Percentiles\n\n# Add rankings and percentiles\nvat_with_ranks &lt;- firm_vat_totals %&gt;%\n  mutate(\n    rank = row_number(),\n    n_firms = n(),\n    percentile = (rank / n_firms) * 100,\n    cumulative_vat = cumsum(total_vat),\n    cumulative_pct = (cumulative_vat / sum(total_vat)) * 100\n  )\n\n# Where is the 10% cutoff?\nvat_with_ranks %&gt;%\n  filter(percentile &gt;= 9.5, percentile &lt;= 10.5) %&gt;%\n  select(rank, percentile, cumulative_pct)\n\n# A tibble: 1 × 3\n   rank percentile cumulative_pct\n  &lt;int&gt;      &lt;dbl&gt;          &lt;dbl&gt;\n1    10         10           163."
+  },
+  {
+    "objectID": "3_data_wrangling.html#arrange-sorting-your-results",
+    "href": "3_data_wrangling.html#arrange-sorting-your-results",
+    "title": "Data Wrangling with dplyr",
+    "section": "arrange(): Sorting Your Results",
+    "text": "arrange(): Sorting Your Results\nThe fifth essential verb - order your data\n\n# Sort by tax paid (ascending - smallest first)\npanel_cit %&gt;%\n  arrange(tax_paid) %&gt;%\n  select(firm_id, tax_paid) %&gt;%\n  head(5)\n\n     firm_id tax_paid\n      &lt;char&gt;    &lt;int&gt;\n1: FIRM_0090     5020\n2: FIRM_0082     5049\n3: FIRM_0017     5079\n4: FIRM_0063     5084\n5: FIRM_0087     5086\n\n\n. . .\n\n# Sort descending - largest first\npanel_cit %&gt;%\n  arrange(desc(tax_paid)) %&gt;%\n  select(firm_id, tax_paid) %&gt;%\n  head(5)\n\n     firm_id tax_paid\n      &lt;char&gt;    &lt;int&gt;\n1: FIRM_0056    39965\n2: FIRM_0074    39896\n3: FIRM_0048    39893\n4: FIRM_0036    39884\n5: FIRM_0099    39829"
+  },
+  {
+    "objectID": "3_data_wrangling.html#arrange-with-grouped-data",
+    "href": "3_data_wrangling.html#arrange-with-grouped-data",
+    "title": "Data Wrangling with dplyr",
+    "section": "arrange(): With Grouped Data",
+    "text": "arrange(): With Grouped Data\nArrange within groups:\n\n# Top 3 taxpayers per year\nyearly_top3 &lt;- panel_cit %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  group_by(year) %&gt;%\n  arrange(desc(tax_paid)) %&gt;%\n  slice_head(n = 3) %&gt;%\n  select(year, firm_id, tax_paid)\n\nyearly_top3\n\n# A tibble: 9 × 3\n# Groups:   year [3]\n   year firm_id   tax_paid\n  &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;\n1  2021 FIRM_0056    39965\n2  2021 FIRM_0099    39829\n3  2021 FIRM_0099    39712\n4  2022 FIRM_0074    39896\n5  2022 FIRM_0048    39893\n6  2022 FIRM_0036    39884\n7  2023 FIRM_0023    39786\n8  2023 FIRM_0050    39783\n9  2023 FIRM_0058    39730"
+  },
+  {
+    "objectID": "3_data_wrangling.html#additional-useful-verbs",
+    "href": "3_data_wrangling.html#additional-useful-verbs",
+    "title": "Data Wrangling with dplyr",
+    "section": "Additional Useful Verbs",
+    "text": "Additional Useful Verbs\ncount() - Quick frequency tables:\n\n# Count by category\ndt_firms %&gt;%\n  count(industry, size) %&gt;%\n  arrange(desc(n))\n\n         industry   size     n\n           &lt;char&gt; &lt;char&gt; &lt;int&gt;\n 1:        Retail Medium    34\n 2:        Retail  Small    32\n 3: Manufacturing  Small    28\n 4: Manufacturing  Large    26\n 5:      Services Medium    25\n 6:    Technology  Small    25\n 7:        Retail  Large    24\n 8:      Services  Small    24\n 9:      Services  Large    22\n10:    Technology  Large    22\n11:    Technology Medium    21\n12: Manufacturing Medium    17"
+  },
+  {
+    "objectID": "3_data_wrangling.html#distinct---unique-values",
+    "href": "3_data_wrangling.html#distinct---unique-values",
+    "title": "Data Wrangling with dplyr",
+    "section": "distinct() - Unique Values",
+    "text": "distinct() - Unique Values\n\n# Unique firms in VAT data\nn_distinct(panel_vat$firm_id)\n\n[1] 100\n\n# Get unique combinations\npanel_vat %&gt;%\n  distinct(firm_id) %&gt;%\n  head(10)\n\n      firm_id\n       &lt;char&gt;\n 1: FIRM_0096\n 2: FIRM_0081\n 3: FIRM_0024\n 4: FIRM_0091\n 5: FIRM_0014\n 6: FIRM_0090\n 7: FIRM_0059\n 8: FIRM_0080\n 9: FIRM_0060\n10: FIRM_0015"
+  },
+  {
+    "objectID": "3_data_wrangling.html#slice-functions",
+    "href": "3_data_wrangling.html#slice-functions",
+    "title": "Data Wrangling with dplyr",
+    "section": "slice() Functions",
+    "text": "slice() Functions\nSelect rows by position:\n\n# Various slice functions\npanel_cit %&gt;%\n  group_by(year = year(declaration_date)) %&gt;%\n  arrange(desc(tax_paid)) %&gt;%\n  slice_max(tax_paid, n = 2) %&gt;%  # Top 2 by tax paid per year\n  select(year, firm_id, tax_paid)\n\n# A tibble: 6 × 3\n# Groups:   year [3]\n   year firm_id   tax_paid\n  &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;\n1  2021 FIRM_0056    39965\n2  2021 FIRM_0099    39829\n3  2022 FIRM_0074    39896\n4  2022 FIRM_0048    39893\n5  2023 FIRM_0023    39786\n6  2023 FIRM_0050    39783"
+  },
+  {
+    "objectID": "3_data_wrangling.html#combining-everything-complex-analysis",
+    "href": "3_data_wrangling.html#combining-everything-complex-analysis",
+    "title": "Data Wrangling with dplyr",
+    "section": "Combining Everything: Complex Analysis",
+    "text": "Combining Everything: Complex Analysis\nLet’s analyze tax compliance patterns:\n\ncompliance_analysis &lt;- panel_cit %&gt;%\n  # Add calculated fields\n  mutate(\n    year = year(declaration_date),\n    effective_rate = if_else(taxable_income &gt; 0,\n                            (tax_paid / taxable_income) * 100,\n                            NA_real_),\n    has_adjustments = adjustments != 0\n  ) %&gt;%\n  # Filter for valid data\n  filter(taxable_income &gt; 0) %&gt;%\n  # Group by year\n  group_by(year) %&gt;%\n  # Calculate statistics\n  summarize(\n    n_filings = n(),\n    avg_effective_rate = mean(effective_rate, na.rm = TRUE),\n    median_effective_rate = median(effective_rate, na.rm = TRUE),\n    pct_with_adjustments = mean(has_adjustments) * 100,\n    total_tax_collected = sum(tax_paid, na.rm = TRUE) / 1e6,  # Millions\n    .groups = \"drop\"\n  ) %&gt;%\n  # Sort by year\n  arrange(year)\n\ncompliance_analysis\n\n# A tibble: 3 × 6\n   year n_filings avg_effective_rate median_effective_rate pct_with_adjustments\n  &lt;dbl&gt;     &lt;int&gt;              &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;\n1  2021       347               19.4                  17.4                100  \n2  2022       322               21.6                  17.6                 99.7\n3  2023       331               20.6                  16.4                100  \n# ℹ 1 more variable: total_tax_collected &lt;dbl&gt;"
+  },
+  {
+    "objectID": "3_data_wrangling.html#window-functions-advanced-calculations",
+    "href": "3_data_wrangling.html#window-functions-advanced-calculations",
+    "title": "Data Wrangling with dplyr",
+    "section": "Window Functions: Advanced Calculations",
+    "text": "Window Functions: Advanced Calculations\nCalculate values within groups without collapsing:\n\n# Rank firms by tax paid within each year\nranked_taxpayers &lt;- panel_cit %&gt;%\n  mutate(year = year(declaration_date)) %&gt;%\n  group_by(year) %&gt;%\n  mutate(\n    rank = dense_rank(desc(tax_paid)),\n    percentile = percent_rank(tax_paid) * 100,\n    is_top5 = rank &lt;= 5\n  ) %&gt;%\n  filter(is_top5) %&gt;%\n  select(year, firm_id, tax_paid, rank, percentile) %&gt;%\n  arrange(year, rank)\n\nhead(ranked_taxpayers, 10)\n\n# A tibble: 10 × 5\n# Groups:   year [2]\n    year firm_id   tax_paid  rank percentile\n   &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;\n 1  2021 FIRM_0056    39965     1      100  \n 2  2021 FIRM_0099    39829     2       99.7\n 3  2021 FIRM_0099    39712     3       99.4\n 4  2021 FIRM_0076    39598     4       99.1\n 5  2021 FIRM_0075    39148     5       98.8\n 6  2022 FIRM_0074    39896     1      100  \n 7  2022 FIRM_0048    39893     2       99.7\n 8  2022 FIRM_0036    39884     3       99.4\n 9  2022 FIRM_0071    39765     4       99.1\n10  2022 FIRM_0002    39653     5       98.8"
+  },
+  {
+    "objectID": "3_data_wrangling.html#more-window-functions",
+    "href": "3_data_wrangling.html#more-window-functions",
+    "title": "Data Wrangling with dplyr",
+    "section": "More Window Functions",
+    "text": "More Window Functions\n\n# Running totals and moving averages\nvat_trends &lt;- panel_vat %&gt;%\n  mutate(month = floor_date(declaration_date, \"month\")) %&gt;%\n  group_by(month) %&gt;%\n  summarize(monthly_total = sum(vat_outputs - vat_inputs, na.rm = TRUE)) %&gt;%\n  arrange(month) %&gt;%\n  mutate(\n    # Cumulative sum\n    cumulative_total = cumsum(monthly_total),\n    # 3-month moving average\n    moving_avg_3m = (lag(monthly_total) + monthly_total + lead(monthly_total)) / 3,\n    # Month-over-month change\n    mom_change = monthly_total - lag(monthly_total),\n    mom_pct_change = (mom_change / lag(monthly_total)) * 100\n  )\n\ntail(vat_trends, 6)\n\n# A tibble: 6 × 6\n  month               monthly_total cumulative_total moving_avg_3m mom_change\n  &lt;dttm&gt;                      &lt;int&gt;            &lt;int&gt;         &lt;dbl&gt;      &lt;int&gt;\n1 2023-07-01 00:00:00        -77642           443971        -8761     -230791\n2 2023-08-01 00:00:00       -101790           342181       -34867.     -24148\n3 2023-09-01 00:00:00         74832           417013        25045.     176622\n4 2023-10-01 00:00:00        102094           519107        62077.      27262\n5 2023-11-01 00:00:00          9306           528413        59674.     -92788\n6 2023-12-01 00:00:00         67621           596034           NA       58315\n# ℹ 1 more variable: mom_pct_change &lt;dbl&gt;"
+  },
+  {
+    "objectID": "3_data_wrangling.html#handling-missing-values-properly",
+    "href": "3_data_wrangling.html#handling-missing-values-properly",
+    "title": "Data Wrangling with dplyr",
+    "section": "Handling Missing Values Properly",
+    "text": "Handling Missing Values Properly\nBe explicit about NA handling:\n\n# Demonstrate NA impact\ntest_data &lt;- tibble(\n  group = c(\"A\", \"A\", \"B\", \"B\"),\n  value = c(10, NA, 20, 30)\n)\n\ntest_data %&gt;%\n  group_by(group) %&gt;%\n  summarize(\n    mean_wrong = mean(value),           # Returns NA for group A\n    mean_right = mean(value, na.rm = TRUE),  # Calculates properly\n    n_total = n(),                      # Counts all rows\n    n_non_missing = sum(!is.na(value))  # Counts non-NA only\n  )\n\n# A tibble: 2 × 5\n  group mean_wrong mean_right n_total n_non_missing\n  &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;   &lt;int&gt;         &lt;int&gt;\n1 A             NA         10       2             1\n2 B             25         25       2             2"
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-turn-comprehensive-challenge",
+    "href": "3_data_wrangling.html#your-turn-comprehensive-challenge",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Turn: Comprehensive Challenge",
+    "text": "Your Turn: Comprehensive Challenge\n −+ 15:00 \nExercise: Build a Risk Scoring Dashboard\nCreate a comprehensive risk analysis that: 1. Combines VAT and CIT data for firms that file both 2. Calculates risk indicators: - VAT input ratio &gt; 0.9 - CIT effective rate &lt; 15% - Negative adjustments in CIT 3. Creates risk score (sum of flags) 4. Summarizes by risk level showing: - Number of firms - Total tax revenue at risk - Average days to VAT reimbursement\n\n# Your code here:\nrisk_dashboard &lt;- ..."
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-solution-part-1",
+    "href": "3_data_wrangling.html#challenge-solution-part-1",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge Solution (Part 1)",
+    "text": "Challenge Solution (Part 1)\n\n# Step 1: Prepare VAT risk indicators\nvat_risk &lt;- panel_vat %&gt;%\n  mutate(\n    input_ratio = vat_inputs / vat_outputs,\n    vat_amount = (vat_outputs - vat_inputs) * 0.18,\n    days_to_reimb = as.numeric(reimbursement_date - declaration_date)\n  ) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    high_input_risk = any(input_ratio &gt; 0.9, na.rm = TRUE),\n    total_vat = sum(vat_amount, na.rm = TRUE),\n    avg_reimb_days = mean(days_to_reimb, na.rm = TRUE),\n    .groups = \"drop\"\n  )\n\nhead(vat_risk)\n\n# A tibble: 6 × 4\n  firm_id   high_input_risk total_vat avg_reimb_days\n  &lt;chr&gt;     &lt;lgl&gt;               &lt;dbl&gt;          &lt;dbl&gt;\n1 FIRM_0001 TRUE                1703.     -14094000 \n2 FIRM_0002 TRUE               16286.      -4822691.\n3 FIRM_0003 TRUE               -8950.     -14805818.\n4 FIRM_0004 TRUE               -5149.       6714514.\n5 FIRM_0005 TRUE               -1351.       6023314.\n6 FIRM_0006 TRUE                 905.       8372160"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-solution-part-2",
+    "href": "3_data_wrangling.html#challenge-solution-part-2",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge Solution (Part 2)",
+    "text": "Challenge Solution (Part 2)\n\n# Step 2: Prepare CIT risk indicators\ncit_risk &lt;- panel_cit %&gt;%\n  filter(taxable_income &gt; 0) %&gt;%\n  mutate(effective_rate = (tax_paid / taxable_income) * 100) %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(\n    low_rate_risk = any(effective_rate &lt; 15, na.rm = TRUE),\n    negative_adj_risk = any(adjustments &lt; 0, na.rm = TRUE),\n    total_cit = sum(tax_paid, na.rm = TRUE),\n    .groups = \"drop\"\n  )\n\n# Step 3: Combine\ncommon_firms &lt;- intersect(vat_risk$firm_id, cit_risk$firm_id)\n\nrisk_combined &lt;- vat_risk %&gt;%\n  filter(firm_id %in% common_firms) %&gt;%\n  inner_join(cit_risk, by = \"firm_id\") %&gt;%\n  mutate(\n    risk_score = high_input_risk + low_rate_risk + negative_adj_risk,\n    total_tax = total_vat + total_cit,\n    risk_level = case_when(\n      risk_score == 0 ~ \"Low\",\n      risk_score == 1 ~ \"Medium\",\n      risk_score == 2 ~ \"High\",\n      risk_score &gt;= 3 ~ \"Critical\"\n    )\n  )"
+  },
+  {
+    "objectID": "3_data_wrangling.html#challenge-solution-part-3",
+    "href": "3_data_wrangling.html#challenge-solution-part-3",
+    "title": "Data Wrangling with dplyr",
+    "section": "Challenge Solution (Part 3)",
+    "text": "Challenge Solution (Part 3)\n\n# Step 4: Create dashboard summary\nrisk_dashboard &lt;- risk_combined %&gt;%\n  group_by(risk_level) %&gt;%\n  summarize(\n    n_firms = n(),\n    total_tax_revenue = sum(total_tax, na.rm = TRUE) / 1e6,  # Millions\n    avg_reimb_days = mean(avg_reimb_days, na.rm = TRUE),\n    pct_of_firms = n() / nrow(risk_combined) * 100\n  ) %&gt;%\n  mutate(risk_level = factor(risk_level, \n                             levels = c(\"Low\", \"Medium\", \"High\", \"Critical\"))) %&gt;%\n  arrange(risk_level)"
+  },
+  {
+    "objectID": "3_data_wrangling.html#best-practices-recap",
+    "href": "3_data_wrangling.html#best-practices-recap",
+    "title": "Data Wrangling with dplyr",
+    "section": "Best Practices Recap ⭐",
+    "text": "Best Practices Recap ⭐\n1. Always explore your data first\n\nglimpse(data)      # Structure\nsummary(data)      # Basic stats\ncount(data, var)   # Frequencies\n\n2. Build incrementally\n\n# Don't write everything at once\n# Build step by step and check results\nstep1 &lt;- data %&gt;% filter(...)\nstep1  # Check!\n\nstep2 &lt;- step1 %&gt;% mutate(...)\nstep2  # Check again!\n\n3. Handle NAs explicitly\n\n# Always use na.rm = TRUE in summary functions\nsummarize(mean_value = mean(value, na.rm = TRUE))"
+  },
+  {
+    "objectID": "3_data_wrangling.html#performance-optimization",
+    "href": "3_data_wrangling.html#performance-optimization",
+    "title": "Data Wrangling with dplyr",
+    "section": "Performance Optimization 🚀",
+    "text": "Performance Optimization 🚀\nFor large datasets (&gt;1M rows):\n\n\nOption 1: data.table\n\nlibrary(data.table)\ndt &lt;- as.data.table(panel_vat)\n\n# Super fast aggregation\ndt[, .(total_vat = sum(vat_outputs - vat_inputs)), \n   by = firm_id][order(-total_vat)]\n\n\nOption 2: dtplyr\n\nlibrary(dtplyr)\n\n# dplyr syntax, data.table speed\npanel_vat %&gt;%\n  lazy_dt() %&gt;%\n  group_by(firm_id) %&gt;%\n  summarize(total = sum(vat_outputs)) %&gt;%\n  as_tibble()\n\n\nFor moderate datasets: dplyr is perfect!"
+  },
+  {
+    "objectID": "3_data_wrangling.html#your-complete-data-wrangling-toolkit",
+    "href": "3_data_wrangling.html#your-complete-data-wrangling-toolkit",
+    "title": "Data Wrangling with dplyr",
+    "section": "Your Complete Data Wrangling Toolkit 🧰",
+    "text": "Your Complete Data Wrangling Toolkit 🧰\n\n\n\n\n\nCategory\nVerb\nPurpose\nExample\n\n\n\n\nSelecting\n\n\nSelect\nselect()\nChoose columns\nselect(firm_id, tax_paid)\n\n\nSelect\nrename()\nRename columns\nrename(company = firm_id)\n\n\nFiltering\n\n\nFilter\nfilter()\nChoose rows\nfilter(amount &gt; 1000)\n\n\nFilter\nslice()\nChoose rows by position\nslice_head(n = 10)\n\n\nCreating\n\n\nCreate\nmutate()\nAdd/modify columns\nmutate(rate = tax/income)\n\n\nCreate\ntransmute()\nCreate only new columns\ntransmute(rate = tax/income)\n\n\nAggregating\n\n\nAggregate\nsummarize()\nCollapse to summary\nsummarize(total = sum(tax))\n\n\nAggregate\ncount()\nCount by groups\ncount(industry, size)\n\n\nGrouping\n\n\nGroup\ngroup_by()\nDefine groups\ngroup_by(year, region)\n\n\nGroup\nungroup()\nRemove grouping\nungroup()\n\n\nOrdering\n\n\nOrder\narrange()\nSort rows\narrange(desc(amount))\n\n\nOrder\nrelocate()\nReorder columns\nrelocate(id, .before = 1)\n\n\nOther\n\n\nUnique\ndistinct()\nUnique rows\ndistinct(firm_id, year)\n\n\nWindow\nlag()/lead()\nPrevious/next values\nmutate(prev = lag(value))\n\n\nWindow\ncumsum()\nCumulative sum\nmutate(running = cumsum(amount))\n\n\nWindow\nrow_number()\nRow numbers\nmutate(rank = row_number())"
+  },
+  {
+    "objectID": "3_data_wrangling.html#final-thought",
+    "href": "3_data_wrangling.html#final-thought",
+    "title": "Data Wrangling with dplyr",
+    "section": "Final Thought",
+    "text": "Final Thought\n\nBefore this module: “This will take me all afternoon…”\nAfter this module: “Give me 5 minutes!”\n\n\nYou now have superpowers! 🦸\n\n✅ Answer urgent questions in seconds\n✅ Create analyses that update automatically\n✅ Handle millions of records effortlessly\n✅ Build complex metrics with simple code"
+  },
+  {
+    "objectID": "3_data_table.html#why-data.table",
+    "href": "3_data_table.html#why-data.table",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Why data.table?",
+    "text": "Why data.table?\nConcise Code\n\n# Traditional R approach: Calculate average VAT by firm size\n# Step 1: Merge data\nvat_firms &lt;- merge(panel_vat, dt_firms, by = \"firm_id\")\n# Step 2: Filter year\nvat_firms_2023 &lt;- vat_firms[vat_firms$year == 2023, ]\n# Step 3: Calculate averages manually...\n\n# data.table approach - one line!\npanel_vat[dt_firms, on = \"firm_id\"][year == 2023, mean(vat_outputs), by = size]\n\n\n\n\n\n\n\nNote\n\n\nDon’t worry if this syntax looks strange! We’ll learn each part step by step."
+  },
+  {
+    "objectID": "3_data_table.html#why-data.table-speed-comparison",
+    "href": "3_data_table.html#why-data.table-speed-comparison",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Why data.table? Speed Comparison",
+    "text": "Why data.table? Speed Comparison\nWhen processing tax data with millions of records:\n\nBase R: Processing 1 million records takes ~30 seconds\ndata.table: Same operation takes &lt;1 second ⚡\n\nThis matters when you’re analyzing: - All VAT declarations for the year - Multi-year compliance patterns - Real-time audit selection"
+  },
+  {
+    "objectID": "3_data_table.html#why-data.table-memory-efficiency",
+    "href": "3_data_table.html#why-data.table-memory-efficiency",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Why data.table? Memory Efficiency",
+    "text": "Why data.table? Memory Efficiency\nWhy memory matters for tax data:\nIf your computer runs out of memory, your analysis crashes. No result at all!\ndata.table uses 3-4x less memory than traditional R approaches: - Process larger datasets on regular computers - Run multiple analyses simultaneously - No need for expensive hardware upgrades"
+  },
+  {
+    "objectID": "3_data_table.html#why-data.table-simplicity",
+    "href": "3_data_table.html#why-data.table-simplicity",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Why data.table? Simplicity",
+    "text": "Why data.table? Simplicity\ndata.table has very few dependencies (only 1 other package).\nThis means: - Fewer things can break - Easier to install and maintain - More stable over time - Faster to load\nPerfect for production environments in tax administrations!"
+  },
+  {
+    "objectID": "3_data_table.html#installation-and-setup",
+    "href": "3_data_table.html#installation-and-setup",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Installation and Setup",
+    "text": "Installation and Setup\nFirst, let’s install and load data.table:\n\n# Install the package (only need to do this once)\ninstall.packages(\"data.table\")\n\n# Load the package (do this every time you start R)\nlibrary(data.table)\n\nLet’s check our tax data from previous modules:\n\n# Look at the structure of our VAT data\nstr(panel_vat)\n\nClasses 'data.table' and 'data.frame':  1000 obs. of  5 variables:\n $ firm_id           : chr  \"FIRM_0096\" \"FIRM_0081\" \"FIRM_0024\" \"FIRM_0091\" ...\n $ declaration_date  : POSIXct, format: \"2023-01-31\" \"2022-05-31\" ...\n $ vat_inputs        : int  45262 9225 15289 9347 47317 44471 23806 49071 45563 3741 ...\n $ vat_outputs       : int  45914 29661 10005 14410 33378 45639 19855 25070 18817 30824 ...\n $ reimbursement_date: POSIXct, format: \"2023-12-31\" \"2021-07-31\" ...\n - attr(*, \".internal.selfref\")=&lt;externalptr&gt; \n\n\n\n\n\n\n\n\nNote\n\n\nThe str() function shows the structure of your data - column names, types, and some values."
+  },
+  {
+    "objectID": "3_data_table.html#understanding-data.table-objects",
+    "href": "3_data_table.html#understanding-data.table-objects",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Understanding data.table Objects",
+    "text": "Understanding data.table Objects\nIn Module 1, we learned that R stores data in objects. In Module 2, we worked with data frames.\ndata.table is a special type of data frame - faster and more powerful:\n\n# Check what type of object panel_vat is\nclass(panel_vat)\n\n[1] \"data.table\" \"data.frame\"\n\n\nOur data is already a data.table! That’s because we used fread() to load it.\n\n\n\n\n\n\nTip\n\n\nfread() automatically creates data.tables when reading files - one less step for you!"
+  },
+  {
+    "objectID": "3_data_table.html#creating-data.table-objects",
+    "href": "3_data_table.html#creating-data.table-objects",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Creating data.table Objects",
+    "text": "Creating data.table Objects\nThere are 4 ways to create a data.table:\n\n# 1. Create from scratch (like making a small test dataset)\ntest_data &lt;- data.table(\n  firm_id = c(\"FIRM_001\", \"FIRM_002\", \"FIRM_003\"),\n  vat_amount = c(50000, 75000, 30000)\n)\n\n# 2. Read from file (BEST method for real data!)\nvat_data &lt;- fread(\"data/vat_declarations.csv\")\n\n# 3. Convert an existing data frame\nvat_dt &lt;- as.data.table(existing_dataframe)\n\n# 4. Convert \"in place\" (changes the original - be careful!)\nsetDT(existing_dataframe)\n\n\n\n\n\n\n\nWarning\n\n\nMethod 4 (setDT) permanently changes your original data frame. Only use it when you’re sure!"
+  },
+  {
+    "objectID": "3_data_table.html#the-data.table-syntax",
+    "href": "3_data_table.html#the-data.table-syntax",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "The data.table Syntax",
+    "text": "The data.table Syntax\nAll data.table operations follow this simple pattern:\n\nDT[i, j, by]\n\nThink of it like SQL:\n\n\n\ndata.table\nSQL Equivalent\nWhat it does\n\n\n\n\ni\nWHERE\nWhich rows to select\n\n\nj\nSELECT\nWhich columns or calculations\n\n\nby\nGROUP BY\nHow to group the data\n\n\n\nThis should feel familiar if you know SQL!\n\n\n\n\n\n\nTip\n\n\nYou can use any combination: just i, or i and j, or all three together."
+  },
+  {
+    "objectID": "3_data_table.html#selecting-rows-the-i-part",
+    "href": "3_data_table.html#selecting-rows-the-i-part",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Selecting Rows (the ‘i’ part)",
+    "text": "Selecting Rows (the ‘i’ part)\nLet’s start with selecting specific rows:\n\n# Select first 3 rows (like SQL: LIMIT 3)\npanel_vat[1:3]\n\n     firm_id declaration_date vat_inputs vat_outputs reimbursement_date\n      &lt;char&gt;           &lt;POSc&gt;      &lt;int&gt;       &lt;int&gt;             &lt;POSc&gt;\n1: FIRM_0096       2023-01-31      45262       45914         2023-12-31\n2: FIRM_0081       2022-05-31       9225       29661         2021-07-31\n3: FIRM_0024       2023-03-31      15289       10005         2023-09-30\n\n\n\n\n\n\n\n\nNote\n\n\nIn R, 1:3 means “numbers from 1 to 3” (1, 2, 3). We use this to select row numbers."
+  },
+  {
+    "objectID": "3_data_table.html#filtering-rows-with-conditions",
+    "href": "3_data_table.html#filtering-rows-with-conditions",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Filtering Rows with Conditions",
+    "text": "Filtering Rows with Conditions\nJust like SQL WHERE clauses:\n\n# Select high-value VAT outputs (like SQL: WHERE vat_outputs &gt; 100000)\nhigh_vat &lt;- panel_vat[vat_outputs &gt; 100000]\n\n# Show first 5 rows with specific columns\nhigh_vat[1:5, .(firm_id, vat_outputs)]\n\n   firm_id vat_outputs\n    &lt;char&gt;       &lt;int&gt;\n1:    &lt;NA&gt;          NA\n2:    &lt;NA&gt;          NA\n3:    &lt;NA&gt;          NA\n4:    &lt;NA&gt;          NA\n5:    &lt;NA&gt;          NA\n\n\n\n\n\n\n\n\nNote\n\n\n.(firm_id, vat_outputs) is data.table’s way of selecting columns. The dot . is shorthand for list()."
+  },
+  {
+    "objectID": "3_data_table.html#multiple-conditions",
+    "href": "3_data_table.html#multiple-conditions",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Multiple Conditions",
+    "text": "Multiple Conditions\nCombine conditions using: - & for AND - | for OR - ! for NOT\n\n# High outputs AND low inputs\npanel_vat[vat_outputs &gt; 100000 & vat_inputs &lt; 50000][1:3]\n\n   firm_id declaration_date vat_inputs vat_outputs reimbursement_date\n    &lt;char&gt;           &lt;POSc&gt;      &lt;int&gt;       &lt;int&gt;             &lt;POSc&gt;\n1:    &lt;NA&gt;             &lt;NA&gt;         NA          NA               &lt;NA&gt;\n2:    &lt;NA&gt;             &lt;NA&gt;         NA          NA               &lt;NA&gt;\n3:    &lt;NA&gt;             &lt;NA&gt;         NA          NA               &lt;NA&gt;\n\n# Using OR\npanel_vat[vat_outputs &gt; 200000 | vat_inputs &gt; 200000][1:3]\n\n   firm_id declaration_date vat_inputs vat_outputs reimbursement_date\n    &lt;char&gt;           &lt;POSc&gt;      &lt;int&gt;       &lt;int&gt;             &lt;POSc&gt;\n1:    &lt;NA&gt;             &lt;NA&gt;         NA          NA               &lt;NA&gt;\n2:    &lt;NA&gt;             &lt;NA&gt;         NA          NA               &lt;NA&gt;\n3:    &lt;NA&gt;             &lt;NA&gt;         NA          NA               &lt;NA&gt;"
+  },
+  {
+    "objectID": "3_data_table.html#ordering-data",
+    "href": "3_data_table.html#ordering-data",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Ordering Data",
+    "text": "Ordering Data\nSort your data (like SQL ORDER BY):\n\n# Order by VAT outputs (descending)\npanel_vat[order(-vat_outputs)][1:3, .(firm_id, vat_outputs)]\n\n     firm_id vat_outputs\n      &lt;char&gt;       &lt;int&gt;\n1: FIRM_0020       49969\n2: FIRM_0096       49844\n3: FIRM_0040       49806\n\n# Order by multiple columns\npanel_vat[order(firm_id, -vat_outputs)][1:5, .(firm_id, vat_outputs)]\n\n     firm_id vat_outputs\n      &lt;char&gt;       &lt;int&gt;\n1: FIRM_0001       49327\n2: FIRM_0001       43750\n3: FIRM_0001       42722\n4: FIRM_0001       26768\n5: FIRM_0001       24343\n\n\n\n\n\n\n\n\nTip\n\n\nThe minus sign - means descending order (highest to lowest)."
+  },
+  {
+    "objectID": "3_data_table.html#selecting-columns-the-j-part",
+    "href": "3_data_table.html#selecting-columns-the-j-part",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Selecting Columns (the ‘j’ part)",
+    "text": "Selecting Columns (the ‘j’ part)\nThree ways to select columns:\n\n# Method 1: Using .() notation\npanel_vat[, .(firm_id, vat_inputs, vat_outputs)][1:3]\n\n     firm_id vat_inputs vat_outputs\n      &lt;char&gt;      &lt;int&gt;       &lt;int&gt;\n1: FIRM_0096      45262       45914\n2: FIRM_0081       9225       29661\n3: FIRM_0024      15289       10005\n\n# Method 2: Using column numbers\npanel_vat[, c(1, 3, 4)][1:3]\n\n     firm_id vat_inputs vat_outputs\n      &lt;char&gt;      &lt;int&gt;       &lt;int&gt;\n1: FIRM_0096      45262       45914\n2: FIRM_0081       9225       29661\n3: FIRM_0024      15289       10005\n\n# Method 3: Using column names as character vector\ncols_wanted &lt;- c(\"firm_id\", \"vat_inputs\", \"vat_outputs\")\npanel_vat[, ..cols_wanted][1:3]\n\n     firm_id vat_inputs vat_outputs\n      &lt;char&gt;      &lt;int&gt;       &lt;int&gt;\n1: FIRM_0096      45262       45914\n2: FIRM_0081       9225       29661\n3: FIRM_0024      15289       10005\n\n\n\n\n\n\n\n\nNote\n\n\nThe .. prefix tells data.table to look for cols_wanted as a variable, not a column name."
+  },
+  {
+    "objectID": "3_data_table.html#creating-new-columns",
+    "href": "3_data_table.html#creating-new-columns",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Creating New Columns",
+    "text": "Creating New Columns\nAdd calculated columns using := (assignment operator):\n\n# Calculate net VAT (outputs minus inputs)\npanel_vat[, net_vat := vat_outputs - vat_inputs]\n\n# Check the result\npanel_vat[1:3, .(firm_id, vat_inputs, vat_outputs, net_vat)]\n\n     firm_id vat_inputs vat_outputs net_vat\n      &lt;char&gt;      &lt;int&gt;       &lt;int&gt;   &lt;int&gt;\n1: FIRM_0096      45262       45914     652\n2: FIRM_0081       9225       29661   20436\n3: FIRM_0024      15289       10005   -5284\n\n\n\n\n\n\n\n\nImportant\n\n\n:= modifies your data.table directly - no need to reassign like panel_vat &lt;- panel_vat[...]"
+  },
+  {
+    "objectID": "3_data_table.html#multiple-new-columns",
+    "href": "3_data_table.html#multiple-new-columns",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Multiple New Columns",
+    "text": "Multiple New Columns\nCreate several columns at once:\n\n# Extract date parts and calculate ratios\npanel_vat[, ':='(\n  year = year(declaration_date),\n  month = month(declaration_date),\n  quarter = quarter(declaration_date),\n  vat_ratio = vat_inputs / vat_outputs\n)]\n\n# View the new columns\npanel_vat[1:3, .(firm_id, year, month, quarter, vat_ratio)]\n\n     firm_id  year month quarter vat_ratio\n      &lt;char&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;     &lt;num&gt;\n1: FIRM_0096  2023     1       1 0.9857995\n2: FIRM_0081  2022     5       2 0.3110145\n3: FIRM_0024  2023     3       1 1.5281359\n\n\n\n\n\n\n\n\nNote\n\n\nyear(), month(), and quarter() are functions that extract parts of dates."
+  },
+  {
+    "objectID": "3_data_table.html#summary-statistics",
+    "href": "3_data_table.html#summary-statistics",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Summary Statistics",
+    "text": "Summary Statistics\nCalculate summary statistics (like SQL aggregation):\n\n# Calculate totals and averages\npanel_vat[, .(\n  total_inputs = sum(vat_inputs, na.rm = TRUE),\n  total_outputs = sum(vat_outputs, na.rm = TRUE),\n  avg_net_vat = mean(net_vat, na.rm = TRUE),\n  num_declarations = .N\n)]\n\n   total_inputs total_outputs avg_net_vat num_declarations\n          &lt;int&gt;         &lt;int&gt;       &lt;num&gt;            &lt;int&gt;\n1:     25287213      25883247     596.034             1000\n\n\n\n\n\n\n\n\nTip\n\n\n\nna.rm = TRUE tells R to ignore missing values\n.N is a special symbol meaning “count of rows”"
+  },
+  {
+    "objectID": "3_data_table.html#grouping-data-the-by-part",
+    "href": "3_data_table.html#grouping-data-the-by-part",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Grouping Data (the ‘by’ part)",
+    "text": "Grouping Data (the ‘by’ part)\nGroup operations (like SQL GROUP BY):\n\n# First, let's add firm data to our VAT data\nvat_with_firms &lt;- merge(panel_vat, dt_firms, by = c(\"firm_id\", \"year\"))\n\n# Average VAT by firm size\nvat_with_firms[, .(avg_net_vat = mean(net_vat, na.rm = TRUE)), by = size]\n\n     size avg_net_vat\n   &lt;char&gt;       &lt;num&gt;\n1:  Small    354.0574\n2:  Large    903.7025\n3: Medium    580.9302"
+  },
+  {
+    "objectID": "3_data_table.html#grouping-by-multiple-variables",
+    "href": "3_data_table.html#grouping-by-multiple-variables",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Grouping by Multiple Variables",
+    "text": "Grouping by Multiple Variables\n\n# Count firms by size and industry\nvat_with_firms[, .N, by = .(size, industry)][1:10]\n\n      size      industry     N\n    &lt;char&gt;        &lt;char&gt; &lt;int&gt;\n 1:  Small        Retail   107\n 2:  Small      Services    82\n 3:  Large        Retail    62\n 4:  Large      Services    61\n 5: Medium      Services    81\n 6:  Small Manufacturing    92\n 7:  Large Manufacturing    88\n 8:  Large    Technology   105\n 9: Medium    Technology    71\n10:  Small    Technology   102\n\n# Calculate averages by size and industry\nvat_with_firms[, .(\n  avg_vat = mean(net_vat, na.rm = TRUE),\n  num_firms = .N\n), by = .(size, industry)][1:5]\n\n     size industry    avg_vat num_firms\n   &lt;char&gt;   &lt;char&gt;      &lt;num&gt;     &lt;int&gt;\n1:  Small   Retail   614.6542       107\n2:  Small Services -1054.0732        82\n3:  Large   Retail  3085.1129        62\n4:  Large Services  -219.6066        61\n5: Medium Services  1605.4568        81"
+  },
+  {
+    "objectID": "3_data_table.html#adding-group-statistics-to-each-row",
+    "href": "3_data_table.html#adding-group-statistics-to-each-row",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Adding Group Statistics to Each Row",
+    "text": "Adding Group Statistics to Each Row\nSometimes you want to add group statistics without summarizing:\n\n# Add industry average to each firm\nvat_with_firms[, industry_avg := mean(net_vat, na.rm = TRUE), by = industry]\n\n# Compare firm to industry average\nvat_with_firms[, above_avg := net_vat &gt; industry_avg]\n\n# View results\nvat_with_firms[1:5, .(firm_id, industry, net_vat, industry_avg, above_avg)]\n\n     firm_id industry net_vat industry_avg above_avg\n      &lt;char&gt;   &lt;char&gt;   &lt;int&gt;        &lt;num&gt;    &lt;lgcl&gt;\n1: FIRM_0001   Retail   -3420     1218.603     FALSE\n2: FIRM_0001 Services  -37619      134.875     FALSE\n3: FIRM_0001 Services    -285      134.875     FALSE\n4: FIRM_0001 Services   31065      134.875      TRUE\n5: FIRM_0001 Services  -43326      134.875     FALSE"
+  },
+  {
+    "objectID": "3_data_table.html#combining-operations",
+    "href": "3_data_table.html#combining-operations",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Combining Operations",
+    "text": "Combining Operations\nUse all three parts together - this is where data.table shines!\n\n# For large firms in 2023, calculate average VAT by industry\nresult &lt;- vat_with_firms[\n  size == \"large\" & year == 2023,          # i: which rows\n  .(avg_vat = mean(net_vat), count = .N),  # j: what to calculate\n  by = industry                             # by: grouping\n]\n\nprint(result)\n\nEmpty data.table (0 rows and 3 cols): industry,avg_vat,count\n\n\nRead this as: “Take vat_with_firms, filter to large firms in 2023, calculate average VAT and count, grouped by industry”"
+  },
+  {
+    "objectID": "3_data_table.html#chaining-operations",
+    "href": "3_data_table.html#chaining-operations",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Chaining Operations",
+    "text": "Chaining Operations\nYou can chain multiple operations using ][:\n\n# Chain multiple steps\nvat_with_firms[\n  year == 2023                    # First: filter to 2023\n][\n  , .(total_vat = sum(net_vat)), by = size  # Then: sum by size\n][\n  order(-total_vat)               # Finally: order by total\n]\n\n     size total_vat\n   &lt;char&gt;     &lt;int&gt;\n1: Medium    215570\n2:  Small    193297\n3:  Large    123144\n\n\nThis is like using multiple SQL operations in sequence!"
+  },
+  {
+    "objectID": "3_data_table.html#exercise-1-basic-operations",
+    "href": "3_data_table.html#exercise-1-basic-operations",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Exercise 1: Basic Operations",
+    "text": "Exercise 1: Basic Operations\n −+ 10:00 \n\n# Exercise 1: Basic data.table Operations\n\n# 1. Row Selection\n# a) From panel_vat, select all records where vat_outputs &gt; 50000\n# b) Order the result by vat_outputs (highest first)\n\n# 2. Column Operations  \n# a) Create a new column 'vat_balance' = vat_outputs - vat_inputs\n# b) Create a column 'is_refund' that is TRUE when vat_balance is negative\n\n# 3. Summary Statistics\n# Calculate:\n# - Total VAT inputs\n# - Total VAT outputs  \n# - Number of refund cases\n# - Average VAT balance\n\n# 4. Grouping\n# Using the merged vat_with_firms data:\n# a) Calculate average VAT balance by firm size\n# b) Count number of firms by industry\n# c) Find the industry with highest total VAT"
+  },
+  {
+    "objectID": "3_data_table.html#exercise-1-solutions",
+    "href": "3_data_table.html#exercise-1-solutions",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Exercise 1: Solutions",
+    "text": "Exercise 1: Solutions\n\n# 1. Row Selection\n# a) High VAT outputs\nhigh_vat &lt;- panel_vat[vat_outputs &gt; 50000]\n\n# b) Order by vat_outputs\nhigh_vat_ordered &lt;- high_vat[order(-vat_outputs)]\n\n# 2. Column Operations\n# a) Create vat_balance\npanel_vat[, vat_balance := vat_outputs - vat_inputs]\n\n# b) Create is_refund flag\npanel_vat[, is_refund := vat_balance &lt; 0]\n\n# 3. Summary Statistics\npanel_vat[, .(\n  total_inputs = sum(vat_inputs, na.rm = TRUE),\n  total_outputs = sum(vat_outputs, na.rm = TRUE),\n  refund_cases = sum(is_refund, na.rm = TRUE),\n  avg_balance = mean(vat_balance, na.rm = TRUE)\n)]\n\n   total_inputs total_outputs refund_cases avg_balance\n          &lt;int&gt;         &lt;int&gt;        &lt;int&gt;       &lt;num&gt;\n1:     25287213      25883247          491     596.034\n\n# 4. Grouping\n# a) Average by size\nvat_with_firms[, .(avg_balance = mean(net_vat, na.rm = TRUE)), by = size]\n\n     size avg_balance\n   &lt;char&gt;       &lt;num&gt;\n1:  Small    354.0574\n2:  Large    903.7025\n3: Medium    580.9302\n\n# b) Count by industry\nvat_with_firms[, .N, by = industry]\n\n        industry     N\n          &lt;char&gt; &lt;int&gt;\n1:        Retail   262\n2:      Services   224\n3: Manufacturing   236\n4:    Technology   278\n\n# c) Industry with highest VAT\nvat_with_firms[, .(total_vat = sum(net_vat)), by = industry][order(-total_vat)][1]\n\n        industry total_vat\n          &lt;char&gt;     &lt;int&gt;\n1: Manufacturing    323537"
+  },
+  {
+    "objectID": "3_data_table.html#why-merge-data",
+    "href": "3_data_table.html#why-merge-data",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Why Merge Data?",
+    "text": "Why Merge Data?\nIn tax administration, data comes from multiple sources: - Firm registry (characteristics) - VAT system (declarations) - CIT system (corporate tax) - Payment systems\nWe need to combine these for complete analysis!\n\n\n\n\n\n\nNote\n\n\nMerging in R is like JOIN in SQL. If you know SQL joins, this will feel familiar."
+  },
+  {
+    "objectID": "3_data_table.html#basic-merge",
+    "href": "3_data_table.html#basic-merge",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Basic Merge",
+    "text": "Basic Merge\nThe simplest merge combines two tables by common columns:\n\n# Merge VAT data with firm characteristics\nvat_complete &lt;- merge(\n  panel_vat,\n  dt_firms,\n  by = c(\"firm_id\", \"year\")  # Common columns\n)\n\n# View result\nvat_complete[1:3, .(firm_id, year, net_vat, size, industry)]\n\nKey: &lt;firm_id, year&gt;\n     firm_id  year net_vat   size industry\n      &lt;char&gt; &lt;int&gt;   &lt;int&gt; &lt;char&gt;   &lt;char&gt;\n1: FIRM_0001  2021   -3420  Small   Retail\n2: FIRM_0001  2022  -37619  Small Services\n3: FIRM_0001  2022    -285  Small Services\n\n\nThis is like SQL: SELECT * FROM panel_vat JOIN dt_firms ON firm_id AND year"
+  },
+  {
+    "objectID": "3_data_table.html#types-of-merges",
+    "href": "3_data_table.html#types-of-merges",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Types of Merges",
+    "text": "Types of Merges\nJust like SQL joins, we have different types:\n\n# Inner join (default) - only matching records\ninner &lt;- merge(panel_vat, dt_firms, by = c(\"firm_id\", \"year\"))\n\n# Left join - keep all VAT records\nleft &lt;- merge(panel_vat, dt_firms, by = c(\"firm_id\", \"year\"), all.x = TRUE)\n\n# How many records in each?\ncat(\"Inner join:\", nrow(inner), \"rows\\n\")\n\nInner join: 1000 rows\n\ncat(\"Left join:\", nrow(left), \"rows\\n\")\n\nLeft join: 1000 rows\n\n\n\n\n\n\n\n\nTip\n\n\nUse all.x = TRUE for left join, all.y = TRUE for right join, all = TRUE for full outer join."
+  },
+  {
+    "objectID": "3_data_table.html#handling-missing-data-after-merges",
+    "href": "3_data_table.html#handling-missing-data-after-merges",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Handling Missing Data After Merges",
+    "text": "Handling Missing Data After Merges\nAfter merging, some fields might be missing:\n\n# Check for missing firm data after left join\nleft[is.na(size), .N]  # Count records with missing size\n\n[1] 0\n\n# Fill missing values\nleft[is.na(size), size := \"Unknown\"]\nleft[is.na(industry), industry := \"Unknown\"]\n\n# Verify\nleft[size == \"Unknown\", .N]\n\n[1] 0\n\n\n\n\n\n\n\n\nNote\n\n\nis.na() checks for missing values (NA = Not Available)."
+  },
+  {
+    "objectID": "3_data_table.html#exercise-2-merging",
+    "href": "3_data_table.html#exercise-2-merging",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Exercise 2: Merging",
+    "text": "Exercise 2: Merging\n −+ 10:00 \n\n# Exercise 2: Merging Tax Data\n\n# 1. Basic Merge\n# a) Create a left join of panel_vat and panel_cit by firm_id and year\n# b) How many VAT records don't have matching CIT records?\n\n# 2. Three-way Merge\n# a) Start with your VAT-CIT merge from question 1\n# b) Add firm characteristics (dt_firms)\n# c) Keep all records from the VAT-CIT merge\n\n# 3. Analysis After Merging\n# Using your three-way merge:\n# a) Calculate average VAT amount by firm size\n# b) Find firms that have VAT but no CIT records\n# c) Calculate the ratio of VAT to CIT for each firm (handle division by zero!)"
+  },
+  {
+    "objectID": "3_data_table.html#exercise-2-solutions",
+    "href": "3_data_table.html#exercise-2-solutions",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Exercise 2: Solutions",
+    "text": "Exercise 2: Solutions\n\n# Collapse VAT data to annual totals by firm\ncollapsed_vat &lt;- panel_vat[, .(\n  vat_amount = sum(net_vat, na.rm = TRUE),\n  vat_outputs = sum(vat_outputs, na.rm = TRUE)\n), by = .(firm_id, year)]\n\n# Compute CIT as 30% of VAT outputs\ncollapsed_vat[, cit_amount := vat_outputs * 0.3]\n\n# 1. Basic Merge\n# a) Left join VAT and CIT (in this case already computed in same table)\nvat_cit &lt;- collapsed_vat[, .(firm_id, year, vat_amount, cit_amount)]\n\n# b) Count missing CIT records (if any, e.g., vat_outputs was NA)\nmissing_cit_count &lt;- vat_cit[is.na(cit_amount), .N]\n\n# 2. Three-way Merge\n# Add firm characteristics\nfull_data &lt;- merge(\n  vat_cit,\n  dt_firms,\n  by = c(\"firm_id\", \"year\"),\n  all.x = TRUE\n)\n\n# 3. Analysis\n# a) Average VAT by size\navg_vat_by_size &lt;- full_data[, .(avg_vat = mean(vat_amount, na.rm = TRUE)), by = size]\n\n# b) Firms with VAT but no CIT\nvat_only &lt;- full_data[!is.na(vat_amount) & is.na(cit_amount)]\nfirms_vat_no_cit &lt;- unique(vat_only$firm_id)[1:10]\n\n# c) VAT to CIT ratio (safe division)\nfull_data[, vat_cit_ratio := ifelse(cit_amount &gt; 0, vat_amount / cit_amount, NA)]"
+  },
+  {
+    "objectID": "3_data_table.html#the-.sd-concept",
+    "href": "3_data_table.html#the-.sd-concept",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "The .SD Concept",
+    "text": "The .SD Concept\n.SD stands for “Subset of Data” - it represents the columns you’re working with:\n\n# Calculate mean of all numeric columns\nnumeric_means &lt;- panel_vat[, lapply(.SD, mean, na.rm = TRUE), \n                           .SDcols = c(\"vat_inputs\", \"vat_outputs\", \"net_vat\")]\n\nprint(numeric_means)\n\n   vat_inputs vat_outputs net_vat\n        &lt;num&gt;       &lt;num&gt;   &lt;num&gt;\n1:   25287.21    25883.25 596.034\n\n\n\n\n\n\n\n\nNote\n\n\nlapply() applies a function (like mean) to each column in .SD."
+  },
+  {
+    "objectID": "3_data_table.html#selecting-columns-with-.sdcols",
+    "href": "3_data_table.html#selecting-columns-with-.sdcols",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Selecting Columns with .SDcols",
+    "text": "Selecting Columns with .SDcols\nControl which columns to process:\n\n# Method 1: List specific columns\npanel_vat[, lapply(.SD, sum, na.rm = TRUE), \n         .SDcols = c(\"vat_inputs\", \"vat_outputs\")]\n\n   vat_inputs vat_outputs\n        &lt;int&gt;       &lt;int&gt;\n1:   25287213    25883247\n\n# Method 2: Use patterns (columns starting with \"vat\")\npanel_vat[, lapply(.SD, sum, na.rm = TRUE), \n         .SDcols = patterns(\"^vat\")]\n\n   vat_inputs vat_outputs vat_ratio vat_balance\n        &lt;int&gt;       &lt;int&gt;     &lt;num&gt;       &lt;int&gt;\n1:   25287213    25883247   2048.24      596034\n\n# Method 3: Select numeric columns only\nnumeric_cols &lt;- names(panel_vat)[sapply(panel_vat, is.numeric)]\npanel_vat[, lapply(.SD, mean, na.rm = TRUE), \n         .SDcols = numeric_cols]\n\n   vat_inputs vat_outputs net_vat    year month quarter vat_ratio vat_balance\n        &lt;num&gt;       &lt;num&gt;   &lt;num&gt;   &lt;num&gt; &lt;num&gt;   &lt;num&gt;     &lt;num&gt;       &lt;num&gt;\n1:   25287.21    25883.25 596.034 2022.01 6.498   2.501   2.04824     596.034"
+  },
+  {
+    "objectID": "3_data_table.html#practical-example-standardizing-data",
+    "href": "3_data_table.html#practical-example-standardizing-data",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Practical Example: Standardizing Data",
+    "text": "Practical Example: Standardizing Data\nStandardize multiple columns at once:\n\n# List columns to standardize\namount_cols &lt;- c(\"vat_inputs\", \"vat_outputs\", \"net_vat\")\n\n# Create standardized versions\npanel_vat[, paste0(amount_cols, \"_std\") := lapply(.SD, function(x) {\n  (x - mean(x, na.rm = TRUE)) / sd(x, na.rm = TRUE)\n}), .SDcols = amount_cols]\n\n# Check result\npanel_vat[1:3, .(firm_id, vat_inputs, vat_inputs_std)]\n\n     firm_id vat_inputs vat_inputs_std\n      &lt;char&gt;      &lt;int&gt;          &lt;num&gt;\n1: FIRM_0096      45262      1.3715645\n2: FIRM_0081       9225     -1.1029084\n3: FIRM_0024      15289     -0.6865252\n\n\n\n\n\n\n\n\nTip\n\n\nStandardizing means converting to a scale where mean = 0 and standard deviation = 1."
+  },
+  {
+    "objectID": "3_data_table.html#exercise-3-complete-analysis",
+    "href": "3_data_table.html#exercise-3-complete-analysis",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Exercise 3: Complete Analysis",
+    "text": "Exercise 3: Complete Analysis\n −+ 15:00 \n\n# Exercise 3: Complete Tax Analysis Workflow\n\n# Scenario: Identify firms for audit based on unusual patterns\n\n# 1. Data Preparation\n# a) Merge panel_vat with dt_firms\n# b) Calculate VAT efficiency (outputs/inputs) for each firm\n# c) Add a flag for efficiency &lt; 0.7 or &gt; 1.3 (unusual patterns)\n\n# 2. Industry Comparison\n# a) Calculate average VAT efficiency by industry\n# b) Add each firm's deviation from industry average\n# c) Flag firms that deviate by more than 20%\n\n# 3. Risk Scoring\n# Create a risk score (0-3) based on:\n# - Unusual efficiency: +1 point\n# - Large industry deviation: +1 point  \n# - Negative VAT balance: +1 point\n\n# 4. Final Report\n# Create a summary showing:\n# - Number of high-risk firms (score &gt;= 2) by industry\n# - Total VAT amount at risk\n# - Top 10 highest risk firms"
+  },
+  {
+    "objectID": "3_data_table.html#exercise-3-solutions",
+    "href": "3_data_table.html#exercise-3-solutions",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Exercise 3: Solutions",
+    "text": "Exercise 3: Solutions\n\n# 1. Data Preparation\n# a) Merge data\nanalysis_data &lt;- merge(panel_vat, dt_firms, by = c(\"firm_id\", \"year\"))\n\n# b) Calculate efficiency\nanalysis_data[, vat_efficiency := vat_outputs / vat_inputs]\n\n# c) Flag unusual efficiency\nanalysis_data[, unusual_efficiency := vat_efficiency &lt; 0.7 | vat_efficiency &gt; 1.3]\n\n# 2. Industry Comparison\n# a) Industry averages\nanalysis_data[, industry_avg_eff := mean(vat_efficiency, na.rm = TRUE), by = industry]\n\n# b) Deviation from average\nanalysis_data[, deviation := abs(vat_efficiency - industry_avg_eff) / industry_avg_eff]\n\n# c) Flag large deviations\nanalysis_data[, large_deviation := deviation &gt; 0.2]\n\n# 3. Risk Scoring\nanalysis_data[, risk_score := 0]\nanalysis_data[unusual_efficiency == TRUE, risk_score := risk_score + 1]\nanalysis_data[large_deviation == TRUE, risk_score := risk_score + 1]\nanalysis_data[net_vat &lt; 0, risk_score := risk_score + 1]\n\n# 4. Final Report\n# High-risk firms by industry\nrisk_summary &lt;- analysis_data[risk_score &gt;= 2, .(\n  high_risk_firms = .N,\n  vat_at_risk = sum(abs(net_vat), na.rm = TRUE)\n), by = industry][order(-high_risk_firms)]\n\nprint(risk_summary)\n\n        industry high_risk_firms vat_at_risk\n          &lt;char&gt;           &lt;int&gt;       &lt;int&gt;\n1:    Technology             223     4039236\n2:        Retail             204     3759225\n3: Manufacturing             187     3537940\n4:      Services             178     3389060\n\n# Top 10 highest risk\ntop_risks &lt;- analysis_data[order(-risk_score, -abs(net_vat))][1:10, \n  .(firm_id, industry, risk_score, net_vat, vat_efficiency)]\n\nprint(top_risks)\n\n      firm_id      industry risk_score net_vat vat_efficiency\n       &lt;char&gt;        &lt;char&gt;      &lt;num&gt;   &lt;int&gt;          &lt;num&gt;\n 1: FIRM_0076        Retail          3  -48138     0.02560573\n 2: FIRM_0072      Services          3  -46261     0.04618461\n 3: FIRM_0079      Services          3  -45974     0.06944641\n 4: FIRM_0069 Manufacturing          3  -45412     0.06971218\n 5: FIRM_0003 Manufacturing          3  -45368     0.02685543\n 6: FIRM_0055        Retail          3  -44978     0.05621420\n 7: FIRM_0069      Services          3  -44341     0.10886692\n 8: FIRM_0087    Technology          3  -43804     0.07850892\n 9: FIRM_0001      Services          3  -43326     0.04692140\n10: FIRM_0055 Manufacturing          3  -43171     0.06762127"
+  },
+  {
+    "objectID": "3_data_table.html#organizing-your-analysis",
+    "href": "3_data_table.html#organizing-your-analysis",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Organizing Your Analysis",
+    "text": "Organizing Your Analysis\nStructure your code for clarity and reusability:\n\n# 1. Load packages\nlibrary(data.table)\nlibrary(here)\n\n# 2. Read data\nvat_data &lt;- fread(here(\"data\", \"vat_declarations.csv\"))\nfirm_data &lt;- fread(here(\"data\", \"firm_registry.csv\"))\n\n# 3. Clean and prepare\n# - Fix data types\n# - Handle missing values\n# - Create derived columns\n\n# 4. Analysis\n# - Merge datasets\n# - Calculate metrics\n# - Generate reports\n\n# 5. Save results\nfwrite(results, here(\"outputs\", \"audit_candidates.csv\"))"
+  },
+  {
+    "objectID": "3_data_table.html#best-practices-for-tax-data",
+    "href": "3_data_table.html#best-practices-for-tax-data",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Best Practices for Tax Data",
+    "text": "Best Practices for Tax Data\n1. Always validate your data:\n\n# Check for duplicates\nduplicates &lt;- panel_vat[duplicated(panel_vat, by = c(\"firm_id\", \"declaration_date\"))]\nif(nrow(duplicates) &gt; 0) warning(\"Found duplicate declarations!\")\n\n# Check for negative values where they shouldn't exist\npanel_vat[vat_inputs &lt; 0, .N]  # Should be 0\n\n[1] 0\n\n\n2. Document your assumptions:\n\n# VAT efficiency between 0.5 and 2.0 is considered normal\n# Based on: tax administration guidelines 2023\nnormal_efficiency_range &lt;- c(0.5, 2.0)"
+  },
+  {
+    "objectID": "3_data_table.html#memory-efficient-operations",
+    "href": "3_data_table.html#memory-efficient-operations",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Memory-Efficient Operations",
+    "text": "Memory-Efficient Operations\nWhen working with large datasets:\n\n# Good: Modify in place\nlarge_data[, new_column := calculation]\n\n# Less efficient: Creating copies\nlarge_data &lt;- large_data[, new_column := calculation]\n\n# Delete columns you don't need\nlarge_data[, unnecessary_column := NULL]\n\n# Check memory usage\ntables()\n\n\n\n\n\n\n\nTip\n\n\nUse := to modify data in place - it saves memory!"
+  },
+  {
+    "objectID": "3_data_table.html#final-exercise-build-a-compliance-monitoring-system",
+    "href": "3_data_table.html#final-exercise-build-a-compliance-monitoring-system",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Final Exercise: Build a Compliance Monitoring System",
+    "text": "Final Exercise: Build a Compliance Monitoring System\n −+ 20:00 \n\n# Final Challenge: Build a Compliance Monitoring System\n\n# Your task: Create a system to identify compliance risks\n\n# Requirements:\n# 1. Data Integration\n#    - Merge VAT, CIT, and firm data\n#    - Handle missing data appropriately\n#    - Create a unified view of each taxpayer\n\n# 2. Risk Indicators (create at least 3)\n#    - Late filing indicator\n#    - Payment compliance rate\n#    - Cross-tax consistency\n#    - Size-appropriate tax amounts\n\n# 3. Reporting\n#    - Summary by industry and size\n#    - List of top 20 highest risk firms\n#    - Total tax revenue at risk\n\n# 4. Output\n#    - Save results as CSV files\n#    - Create a summary statistics table\n\n# Hint: Break this into smaller steps and test each part!"
+  },
+  {
+    "objectID": "3_data_table.html#common-pitfalls-and-solutions",
+    "href": "3_data_table.html#common-pitfalls-and-solutions",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Common Pitfalls and Solutions",
+    "text": "Common Pitfalls and Solutions\n1. Column names don’t exist:\n\n# Error: column 'VAT_Amount' not found\n# Solution: Check exact names\nnames(panel_vat)  # List all column names\n\n2. Forgetting na.rm = TRUE:\n\n# Returns NA if any value is missing\nmean(data$column)\n\n# Correctly handles missing values  \nmean(data$column, na.rm = TRUE)\n\n3. Merge produces too many/few rows:\n\n# Check your merge keys are unique\ndata[, .N, by = .(firm_id, year)][N &gt; 1]  # Find duplicates"
+  },
+  {
+    "objectID": "3_data_table.html#key-takeaways",
+    "href": "3_data_table.html#key-takeaways",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\nYou’ve learned to: - Use data.table’s powerful DT[i, j, by] syntax - Filter, select, and transform tax data efficiently - Merge multiple data sources - Create summary statistics and reports - Build complete analysis workflows\nRemember: - data.table is fast and memory-efficient - The syntax is similar to SQL - Use := for in-place modifications - Chain operations with ]["
+  },
+  {
+    "objectID": "3_data_table.html#resources-for-continued-learning",
+    "href": "3_data_table.html#resources-for-continued-learning",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Resources for Continued Learning",
+    "text": "Resources for Continued Learning\nOfficial Documentation: - data.table Introduction - FAQ with examples\nCheat Sheets: - data.table Cheat Sheet\nFor SQL Users: - data.table for SQL users\n\n\n\n\n\n\nTip\n\n\nPractice with small datasets first, then apply to your real tax data!"
+  },
+  {
+    "objectID": "3_data_table.html#thank-you",
+    "href": "3_data_table.html#thank-you",
+    "title": "Efficient Data Analysis with data.table",
+    "section": "Thank You!",
+    "text": "Thank You!\nYou’re now equipped to: - Process large tax datasets efficiently - Perform complex data operations - Create reproducible analyses - Build data-driven compliance systems\nNext steps: 1. Practice these techniques with your own data 2. Start with simple operations, build complexity gradually 3. Share your code with colleagues 4. Ask questions when stuck!\n\n\n\n\n\n\nRemember\n\n\nAlways follow your organization’s data privacy and security policies when working with taxpayer data.\n\n\n\nQuestions? ✋ ```"
   }
 ]
